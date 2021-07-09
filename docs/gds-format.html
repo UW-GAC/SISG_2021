@@ -4,26 +4,26 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>2 GDS format | SISG Module 17: Computational Pipeline for WGS Data</title>
-  <meta name="description" content="Course materials for SISG Module 17" />
-  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+  <title>2 GDS format | SISG Module 16: Computational Pipeline for WGS Data</title>
+  <meta name="description" content="Course materials for SISG Module 16" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="2 GDS format | SISG Module 17: Computational Pipeline for WGS Data" />
+  <meta property="og:title" content="2 GDS format | SISG Module 16: Computational Pipeline for WGS Data" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="Course materials for SISG Module 17" />
-  <meta name="github-repo" content="UW-GAC/SISG_2020" />
+  <meta property="og:description" content="Course materials for SISG Module 16" />
+  <meta name="github-repo" content="UW-GAC/SISG_2021" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="2 GDS format | SISG Module 17: Computational Pipeline for WGS Data" />
+  <meta name="twitter:title" content="2 GDS format | SISG Module 16: Computational Pipeline for WGS Data" />
   
-  <meta name="twitter:description" content="Course materials for SISG Module 17" />
+  <meta name="twitter:description" content="Course materials for SISG Module 16" />
   
 
 
 
-<meta name="date" content="2020-07-27" />
+<meta name="date" content="2021-07-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,6 +32,7 @@
   
 <link rel="prev" href="index.html"/>
 <link rel="next" href="gds-solutions.html"/>
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -49,45 +50,75 @@
 
 
 
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 </head>
 
@@ -101,63 +132,70 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
       <nav role="navigation">
 
 <ul class="summary">
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
 <li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#schedule"><i class="fa fa-check"></i><b>1.1</b> Schedule</a></li>
 <li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#r-packages-used"><i class="fa fa-check"></i><b>1.2</b> R packages used</a></li>
 <li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#resources"><i class="fa fa-check"></i><b>1.3</b> Resources</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="gds-format.html"><a href="gds-format.html"><i class="fa fa-check"></i><b>2</b> GDS format</a><ul>
-<li class="chapter" data-level="2.1" data-path="gds-format.html"><a href="gds-format.html#exploring-a-gds-file"><i class="fa fa-check"></i><b>2.1</b> Exploring a GDS file</a></li>
-<li class="chapter" data-level="2.2" data-path="gds-format.html"><a href="gds-format.html#exercises"><i class="fa fa-check"></i><b>2.2</b> Exercises</a></li>
+<li class="chapter" data-level="2" data-path="gds-format.html"><a href="gds-format.html"><i class="fa fa-check"></i><b>2</b> GDS format</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="gds-format.html"><a href="gds-format.html#convert-a-vcf-to-gds"><i class="fa fa-check"></i><b>2.1</b> Convert a VCF to GDS</a></li>
+<li class="chapter" data-level="2.2" data-path="gds-format.html"><a href="gds-format.html#exploring-a-gds-file"><i class="fa fa-check"></i><b>2.2</b> Exploring a GDS file</a></li>
+<li class="chapter" data-level="2.3" data-path="gds-format.html"><a href="gds-format.html#exercises"><i class="fa fa-check"></i><b>2.3</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="gds-solutions.html"><a href="gds-solutions.html"><i class="fa fa-check"></i><b>3</b> GDS - Solutions</a></li>
-<li class="chapter" data-level="4" data-path="phenotype-harmonization.html"><a href="phenotype-harmonization.html"><i class="fa fa-check"></i><b>4</b> Phenotype Harmonization</a><ul>
+<li class="chapter" data-level="4" data-path="phenotype-harmonization.html"><a href="phenotype-harmonization.html"><i class="fa fa-check"></i><b>4</b> Phenotype Harmonization</a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="phenotype-harmonization.html"><a href="phenotype-harmonization.html#inspect-individual-study-data-in-r"><i class="fa fa-check"></i><b>4.1</b> Inspect individual study data in R</a></li>
 <li class="chapter" data-level="4.2" data-path="phenotype-harmonization.html"><a href="phenotype-harmonization.html#compare-study-values"><i class="fa fa-check"></i><b>4.2</b> Compare study values</a></li>
-<li class="chapter" data-level="4.3" data-path="phenotype-harmonization.html"><a href="phenotype-harmonization.html#using-null-models-to-compare-studies"><i class="fa fa-check"></i><b>4.3</b> Using null models to compare studies</a><ul>
+<li class="chapter" data-level="4.3" data-path="phenotype-harmonization.html"><a href="phenotype-harmonization.html#using-null-models-to-compare-studies"><i class="fa fa-check"></i><b>4.3</b> Using null models to compare studies</a>
+<ul>
 <li class="chapter" data-level="4.3.1" data-path="phenotype-harmonization.html"><a href="phenotype-harmonization.html#create-an-annotated-data-frame"><i class="fa fa-check"></i><b>4.3.1</b> Create an Annotated Data Frame</a></li>
 <li class="chapter" data-level="4.3.2" data-path="phenotype-harmonization.html"><a href="phenotype-harmonization.html#fit-a-null-model-without-study"><i class="fa fa-check"></i><b>4.3.2</b> Fit a null model without study</a></li>
 <li class="chapter" data-level="4.3.3" data-path="phenotype-harmonization.html"><a href="phenotype-harmonization.html#fit-a-model-with-study"><i class="fa fa-check"></i><b>4.3.3</b> Fit a model with study</a></li>
 </ul></li>
 <li class="chapter" data-level="4.4" data-path="phenotype-harmonization.html"><a href="phenotype-harmonization.html#final-considerations"><i class="fa fa-check"></i><b>4.4</b> Final considerations</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="association-tests.html"><a href="association-tests.html"><i class="fa fa-check"></i><b>5</b> Association tests</a><ul>
+<li class="chapter" data-level="5" data-path="association-tests.html"><a href="association-tests.html"><i class="fa fa-check"></i><b>5</b> Association tests</a>
+<ul>
 <li class="chapter" data-level="5.1" data-path="association-tests.html"><a href="association-tests.html#null-model"><i class="fa fa-check"></i><b>5.1</b> Null model</a></li>
 <li class="chapter" data-level="5.2" data-path="association-tests.html"><a href="association-tests.html#single-variant-tests"><i class="fa fa-check"></i><b>5.2</b> Single-variant tests</a></li>
 <li class="chapter" data-level="5.3" data-path="association-tests.html"><a href="association-tests.html#exercises-1"><i class="fa fa-check"></i><b>5.3</b> Exercises</a></li>
 <li class="chapter" data-level="5.4" data-path="association-tests.html"><a href="association-tests.html#sliding-window-tests"><i class="fa fa-check"></i><b>5.4</b> Sliding window tests</a></li>
 <li class="chapter" data-level="5.5" data-path="association-tests.html"><a href="association-tests.html#exercise"><i class="fa fa-check"></i><b>5.5</b> Exercise</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="association-tests-solutions.html"><a href="association-tests-solutions.html"><i class="fa fa-check"></i><b>6</b> Association tests - Solutions</a></li>
-<li class="chapter" data-level="7" data-path="computing-a-grm.html"><a href="computing-a-grm.html"><i class="fa fa-check"></i><b>7</b> Computing a GRM</a></li>
-<li class="chapter" data-level="8" data-path="pc-relate.html"><a href="pc-relate.html"><i class="fa fa-check"></i><b>8</b> PC-Relate</a><ul>
-<li class="chapter" data-level="8.1" data-path="pc-relate.html"><a href="pc-relate.html#king"><i class="fa fa-check"></i><b>8.1</b> KING</a></li>
-<li class="chapter" data-level="8.2" data-path="pc-relate.html"><a href="pc-relate.html#pc-air"><i class="fa fa-check"></i><b>8.2</b> PC-AiR</a></li>
-<li class="chapter" data-level="8.3" data-path="pc-relate.html"><a href="pc-relate.html#pc-relate-1"><i class="fa fa-check"></i><b>8.3</b> PC-Relate</a></li>
-<li class="chapter" data-level="8.4" data-path="pc-relate.html"><a href="pc-relate.html#comparison-with-pedigree"><i class="fa fa-check"></i><b>8.4</b> Comparison with pedigree</a></li>
-<li class="chapter" data-level="8.5" data-path="pc-relate.html"><a href="pc-relate.html#exercise-1"><i class="fa fa-check"></i><b>8.5</b> Exercise</a></li>
+<li class="chapter" data-level="6" data-path="computing-a-grm.html"><a href="computing-a-grm.html"><i class="fa fa-check"></i><b>6</b> Computing a GRM</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="computing-a-grm.html"><a href="computing-a-grm.html#king"><i class="fa fa-check"></i><b>6.1</b> KING</a></li>
+<li class="chapter" data-level="6.2" data-path="computing-a-grm.html"><a href="computing-a-grm.html#pc-air"><i class="fa fa-check"></i><b>6.2</b> PC-AiR</a></li>
+<li class="chapter" data-level="6.3" data-path="computing-a-grm.html"><a href="computing-a-grm.html#pc-relate"><i class="fa fa-check"></i><b>6.3</b> PC-Relate</a></li>
+<li class="chapter" data-level="6.4" data-path="computing-a-grm.html"><a href="computing-a-grm.html#comparison-with-pedigree"><i class="fa fa-check"></i><b>6.4</b> Comparison with pedigree</a></li>
+<li class="chapter" data-level="6.5" data-path="computing-a-grm.html"><a href="computing-a-grm.html#exercise-1"><i class="fa fa-check"></i><b>6.5</b> Exercise</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="mixed-models.html"><a href="mixed-models.html"><i class="fa fa-check"></i><b>9</b> Mixed models</a><ul>
-<li class="chapter" data-level="9.1" data-path="mixed-models.html"><a href="mixed-models.html#null-model-1"><i class="fa fa-check"></i><b>9.1</b> Null model</a></li>
-<li class="chapter" data-level="9.2" data-path="mixed-models.html"><a href="mixed-models.html#single-variant-tests-1"><i class="fa fa-check"></i><b>9.2</b> Single-variant tests</a></li>
-<li class="chapter" data-level="9.3" data-path="mixed-models.html"><a href="mixed-models.html#exercise-2"><i class="fa fa-check"></i><b>9.3</b> Exercise</a></li>
+<li class="chapter" data-level="7" data-path="mixed-models.html"><a href="mixed-models.html"><i class="fa fa-check"></i><b>7</b> Mixed models</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="mixed-models.html"><a href="mixed-models.html#null-model-1"><i class="fa fa-check"></i><b>7.1</b> Null model</a></li>
+<li class="chapter" data-level="7.2" data-path="mixed-models.html"><a href="mixed-models.html#single-variant-tests-1"><i class="fa fa-check"></i><b>7.2</b> Single-variant tests</a></li>
+<li class="chapter" data-level="7.3" data-path="mixed-models.html"><a href="mixed-models.html#exercise-2"><i class="fa fa-check"></i><b>7.3</b> Exercise</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="mixed-models-solutions.html"><a href="mixed-models-solutions.html"><i class="fa fa-check"></i><b>10</b> Mixed models - Solutions</a></li>
-<li class="chapter" data-level="11" data-path="variant-annotation.html"><a href="variant-annotation.html"><i class="fa fa-check"></i><b>11</b> Variant annotation</a><ul>
-<li class="chapter" data-level="11.1" data-path="variant-annotation.html"><a href="variant-annotation.html#using-bioconductor-annotation-resources"><i class="fa fa-check"></i><b>11.1</b> Using Bioconductor annotation resources</a></li>
-<li class="chapter" data-level="11.2" data-path="variant-annotation.html"><a href="variant-annotation.html#aggregating-and-filtering-variants-using-annotation"><i class="fa fa-check"></i><b>11.2</b> Aggregating and filtering variants using annotation</a></li>
+<li class="chapter" data-level="8" data-path="variant-annotation.html"><a href="variant-annotation.html"><i class="fa fa-check"></i><b>8</b> Variant annotation</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="variant-annotation.html"><a href="variant-annotation.html#using-bioconductor-annotation-resources"><i class="fa fa-check"></i><b>8.1</b> Using Bioconductor annotation resources</a></li>
+<li class="chapter" data-level="8.2" data-path="variant-annotation.html"><a href="variant-annotation.html#aggregating-and-filtering-variants-using-annotation"><i class="fa fa-check"></i><b>8.2</b> Aggregating and filtering variants using annotation</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="aggregate-tests.html"><a href="aggregate-tests.html"><i class="fa fa-check"></i><b>12</b> Aggregate tests</a><ul>
-<li class="chapter" data-level="12.1" data-path="aggregate-tests.html"><a href="aggregate-tests.html#aggregate-unit-for-association-testing-exercise"><i class="fa fa-check"></i><b>12.1</b> Aggregate unit for association testing exercise</a></li>
-<li class="chapter" data-level="12.2" data-path="aggregate-tests.html"><a href="aggregate-tests.html#association-testing-with-aggregate-units"><i class="fa fa-check"></i><b>12.2</b> Association testing with aggregate units</a></li>
-<li class="chapter" data-level="12.3" data-path="aggregate-tests.html"><a href="aggregate-tests.html#exercise-3"><i class="fa fa-check"></i><b>12.3</b> Exercise</a></li>
+<li class="chapter" data-level="9" data-path="aggregate-tests.html"><a href="aggregate-tests.html"><i class="fa fa-check"></i><b>9</b> Aggregate tests</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="aggregate-tests.html"><a href="aggregate-tests.html#aggregate-unit-for-association-testing-exercise"><i class="fa fa-check"></i><b>9.1</b> Aggregate unit for association testing exercise</a></li>
+<li class="chapter" data-level="9.2" data-path="aggregate-tests.html"><a href="aggregate-tests.html#association-testing-with-aggregate-units"><i class="fa fa-check"></i><b>9.2</b> Association testing with aggregate units</a></li>
+<li class="chapter" data-level="9.3" data-path="aggregate-tests.html"><a href="aggregate-tests.html#exercise-3"><i class="fa fa-check"></i><b>9.3</b> Exercise</a></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="annotation-solutions.html"><a href="annotation-solutions.html"><i class="fa fa-check"></i><b>13</b> Annotation - Solutions</a></li>
-<li class="chapter" data-level="14" data-path="exercises-running-a-gwas-workflow.html"><a href="exercises-running-a-gwas-workflow.html"><i class="fa fa-check"></i><b>14</b> Exercises: Running a GWAS workflow</a><ul>
-<li class="chapter" data-level="14.1" data-path="exercises-running-a-gwas-workflow.html"><a href="exercises-running-a-gwas-workflow.html#vcf-to-gds"><i class="fa fa-check"></i><b>14.1</b> VCF to GDS</a></li>
-<li class="chapter" data-level="14.2" data-path="exercises-running-a-gwas-workflow.html"><a href="exercises-running-a-gwas-workflow.html#null-model-2"><i class="fa fa-check"></i><b>14.2</b> Null Model</a></li>
-<li class="chapter" data-level="14.3" data-path="exercises-running-a-gwas-workflow.html"><a href="exercises-running-a-gwas-workflow.html#single-variant-test"><i class="fa fa-check"></i><b>14.3</b> Single variant test</a></li>
-<li class="chapter" data-level="14.4" data-path="exercises-running-a-gwas-workflow.html"><a href="exercises-running-a-gwas-workflow.html#analysis-follow-up"><i class="fa fa-check"></i><b>14.4</b> Analysis follow-up</a></li>
+<li class="chapter" data-level="10" data-path="exercises-running-a-gwas-workflow.html"><a href="exercises-running-a-gwas-workflow.html"><i class="fa fa-check"></i><b>10</b> Exercises: Running a GWAS workflow</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="exercises-running-a-gwas-workflow.html"><a href="exercises-running-a-gwas-workflow.html#vcf-to-gds"><i class="fa fa-check"></i><b>10.1</b> VCF to GDS</a></li>
+<li class="chapter" data-level="10.2" data-path="exercises-running-a-gwas-workflow.html"><a href="exercises-running-a-gwas-workflow.html#null-model-2"><i class="fa fa-check"></i><b>10.2</b> Null Model</a></li>
+<li class="chapter" data-level="10.3" data-path="exercises-running-a-gwas-workflow.html"><a href="exercises-running-a-gwas-workflow.html#single-variant-test"><i class="fa fa-check"></i><b>10.3</b> Single variant test</a></li>
+<li class="chapter" data-level="10.4" data-path="exercises-running-a-gwas-workflow.html"><a href="exercises-running-a-gwas-workflow.html#analysis-follow-up"><i class="fa fa-check"></i><b>10.4</b> Analysis follow-up</a></li>
 </ul></li>
 </ul>
 
@@ -168,7 +206,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">SISG Module 17: Computational Pipeline for WGS Data</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">SISG Module 16: Computational Pipeline for WGS Data</a>
           </h1>
         </div>
 
@@ -176,24 +214,30 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="gds-format" class="section level1">
+<div id="gds-format" class="section level1" number="2">
 <h1><span class="header-section-number">2</span> GDS format</h1>
 <p>GDS is Genomic Data Structure, a storage format that can efficiently store genomic data and provide fast random access to subsets of the data. For more information on GDS for sequence data, read the <a href="https://github.com/zhengxwen/SeqArray/blob/master/vignettes/SeqArrayTutorial.Rmd">SeqArray package vignette</a>.</p>
-<div id="exploring-a-gds-file" class="section level2">
-<h2><span class="header-section-number">2.1</span> Exploring a GDS file</h2>
-<p>To use the R packages developed at the University of Washington for sequence data, we first need to convert a VCF file to GDS. (If the file is BCF, use <a href="bcftools">https://samtools.github.io/bcftools/bcftools.html</a> to convert to VCF.)</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(SeqArray)
-repo_path &lt;-<span class="st"> &quot;https://github.com/UW-GAC/SISG_2020/raw/master&quot;</span>
-<span class="cf">if</span> (<span class="op">!</span><span class="kw">dir.exists</span>(<span class="st">&quot;data&quot;</span>)) <span class="kw">dir.create</span>(<span class="st">&quot;data&quot;</span>)
-vcffile &lt;-<span class="st"> &quot;data/1KG_phase3_subset_chr1.vcf.gz&quot;</span>
-<span class="cf">if</span> (<span class="op">!</span><span class="kw">file.exists</span>(vcffile)) <span class="kw">download.file</span>(<span class="kw">file.path</span>(repo_path, vcffile), vcffile)
-gdsfile &lt;-<span class="st"> &quot;data/1KG_phase3_subset_chr1.gds&quot;</span>
-<span class="kw">seqVCF2GDS</span>(vcffile, gdsfile, <span class="dt">fmt.import=</span><span class="st">&quot;GT&quot;</span>, <span class="dt">storage.option=</span><span class="st">&quot;LZMA_RA&quot;</span>, <span class="dt">verbose=</span><span class="ot">FALSE</span>)</code></pre></div>
+<div id="convert-a-vcf-to-gds" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> Convert a VCF to GDS</h2>
+<p>To use the R packages developed at the University of Washington Genetic Analysis Center for sequence data, we first need to convert a VCF file to GDS. (If the file is BCF, use <a href="bcftools">https://samtools.github.io/bcftools/bcftools.html</a> to convert to VCF.)</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="gds-format.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(SeqArray)</span></code></pre></div>
+<pre><code>## Loading required package: gdsfmt</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="gds-format.html#cb3-1" aria-hidden="true" tabindex="-1"></a>repo_path <span class="ot">&lt;-</span> <span class="st">&quot;https://github.com/UW-GAC/SISG_2021/raw/master&quot;</span></span>
+<span id="cb3-2"><a href="gds-format.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">dir.exists</span>(<span class="st">&quot;data&quot;</span>)) <span class="fu">dir.create</span>(<span class="st">&quot;data&quot;</span>)</span>
+<span id="cb3-3"><a href="gds-format.html#cb3-3" aria-hidden="true" tabindex="-1"></a>vcffile <span class="ot">&lt;-</span> <span class="st">&quot;data/1KG_phase3_subset_chr1.vcf.gz&quot;</span></span>
+<span id="cb3-4"><a href="gds-format.html#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(vcffile)) <span class="fu">download.file</span>(<span class="fu">file.path</span>(repo_path, vcffile), vcffile)</span>
+<span id="cb3-5"><a href="gds-format.html#cb3-5" aria-hidden="true" tabindex="-1"></a>gdsfile <span class="ot">&lt;-</span> <span class="st">&quot;data/1KG_phase3_subset_chr1.gds&quot;</span></span>
+<span id="cb3-6"><a href="gds-format.html#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># convert the VCF to GDS</span></span>
+<span id="cb3-7"><a href="gds-format.html#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">seqVCF2GDS</span>(vcffile, gdsfile, <span class="at">fmt.import=</span><span class="st">&quot;GT&quot;</span>, <span class="at">storage.option=</span><span class="st">&quot;LZMA_RA&quot;</span>, <span class="at">verbose=</span><span class="cn">FALSE</span>)</span></code></pre></div>
+</div>
+<div id="exploring-a-gds-file" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> Exploring a GDS file</h2>
 <p>We can interact with the GDS file using the SeqArray package.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gds &lt;-<span class="st"> </span><span class="kw">seqOpen</span>(gdsfile)
-gds</code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="gds-format.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># open a connection to the GDS file</span></span>
+<span id="cb4-2"><a href="gds-format.html#cb4-2" aria-hidden="true" tabindex="-1"></a>gds <span class="ot">&lt;-</span> <span class="fu">seqOpen</span>(gdsfile)</span>
+<span id="cb4-3"><a href="gds-format.html#cb4-3" aria-hidden="true" tabindex="-1"></a>gds</span></code></pre></div>
 <pre><code>## Object of class &quot;SeqVarGDSClass&quot;
-## File: /Users/stephanie/SISG/SISG_2020/SISG_2020/data/1KG_phase3_subset_chr1.gds (70.6K)
+## File: /Users/mconomos/Documents/SISG_2021/data/1KG_phase3_subset_chr1.gds (70.5K)
 ## +    [  ] *
 ## |--+ description   [  ] *
 ## |--+ sample.id   { Str8 1126 LZMA_ra(9.66%), 877B } *
@@ -216,142 +260,161 @@ gds</code></pre></div>
 ## |  |--+ info   [  ]
 ## |  \--+ format   [  ]
 ## \--+ sample.annotation   [  ]</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># the unique sample identifier comes from the VCF header</span>
-sample.id &lt;-<span class="st"> </span><span class="kw">seqGetData</span>(gds, <span class="st">&quot;sample.id&quot;</span>)
-<span class="kw">length</span>(sample.id)</code></pre></div>
+<p>The <code>seqGetData</code> function is the basic function for reading in data from a GDS file</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="gds-format.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># the unique sample identifier comes from the VCF header</span></span>
+<span id="cb6-2"><a href="gds-format.html#cb6-2" aria-hidden="true" tabindex="-1"></a>sample.id <span class="ot">&lt;-</span> <span class="fu">seqGetData</span>(gds, <span class="st">&quot;sample.id&quot;</span>)</span>
+<span id="cb6-3"><a href="gds-format.html#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(sample.id)</span></code></pre></div>
 <pre><code>## [1] 1126</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(sample.id)</code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="gds-format.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(sample.id)</span></code></pre></div>
 <pre><code>## [1] &quot;HG00096&quot; &quot;HG00097&quot; &quot;HG00099&quot; &quot;HG00100&quot; &quot;HG00101&quot; &quot;HG00102&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># a unique integer ID is assigned to each variant</span>
-variant.id &lt;-<span class="st"> </span><span class="kw">seqGetData</span>(gds, <span class="st">&quot;variant.id&quot;</span>)
-<span class="kw">length</span>(variant.id)</code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="gds-format.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># a unique integer ID is assigned to each variant</span></span>
+<span id="cb10-2"><a href="gds-format.html#cb10-2" aria-hidden="true" tabindex="-1"></a>variant.id <span class="ot">&lt;-</span> <span class="fu">seqGetData</span>(gds, <span class="st">&quot;variant.id&quot;</span>)</span>
+<span id="cb10-3"><a href="gds-format.html#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(variant.id)</span></code></pre></div>
 <pre><code>## [1] 1120</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(variant.id)</code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="gds-format.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(variant.id)</span></code></pre></div>
 <pre><code>## [1] 1 2 3 4 5 6</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># reference allele frequency of each variant</span>
-afreq &lt;-<span class="st"> </span><span class="kw">seqAlleleFreq</span>(gds)
-<span class="kw">hist</span>(afreq, <span class="dt">breaks=</span><span class="dv">50</span>)</code></pre></div>
-<p><img src="_main_files/figure-html/seqarray-1.png" width="672" /></p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="gds-format.html#cb14-1" aria-hidden="true" tabindex="-1"></a>chr <span class="ot">&lt;-</span> <span class="fu">seqGetData</span>(gds, <span class="st">&quot;chromosome&quot;</span>)</span>
+<span id="cb14-2"><a href="gds-format.html#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(chr)</span></code></pre></div>
+<pre><code>## [1] &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot;</code></pre>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="gds-format.html#cb16-1" aria-hidden="true" tabindex="-1"></a>pos <span class="ot">&lt;-</span> <span class="fu">seqGetData</span>(gds, <span class="st">&quot;position&quot;</span>)</span>
+<span id="cb16-2"><a href="gds-format.html#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(pos)</span></code></pre></div>
+<pre><code>## [1]  970546  985900 1025045 1265550 1472676 1735725</code></pre>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="gds-format.html#cb18-1" aria-hidden="true" tabindex="-1"></a>id <span class="ot">&lt;-</span> <span class="fu">seqGetData</span>(gds, <span class="st">&quot;annotation/id&quot;</span>)</span>
+<span id="cb18-2"><a href="gds-format.html#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(id)</span></code></pre></div>
+<pre><code>## [1] &quot;&quot;           &quot;rs17160776&quot; &quot;&quot;           &quot;&quot;           &quot;rs78293298&quot;
+## [6] &quot;&quot;</code></pre>
+<p>There are additional useful functions for summary level data.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="gds-format.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># reference allele frequency of each variant</span></span>
+<span id="cb20-2"><a href="gds-format.html#cb20-2" aria-hidden="true" tabindex="-1"></a>afreq <span class="ot">&lt;-</span> <span class="fu">seqAlleleFreq</span>(gds)</span>
+<span id="cb20-3"><a href="gds-format.html#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(afreq)</span></code></pre></div>
+<pre><code>## [1] 0.9960036 0.9507105 0.9995560 0.9991119 0.9928952 0.9977798</code></pre>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="gds-format.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(afreq)</span></code></pre></div>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##  0.0000  0.9866  0.9987  0.9436  0.9996  1.0000</code></pre>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="gds-format.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(afreq, <span class="at">breaks=</span><span class="dv">50</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/ref_freq-1.png" width="672" /></p>
 <p>We can define a filter on the <code>gds</code> object. After using the <code>seqSetFilter</code> command, all subsequent reads from the <code>gds</code> object are restricted to the selected subset of data, until a new filter is defined or <code>seqResetFilter</code> is called.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">seqSetFilter</span>(gds, <span class="dt">variant.id=</span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dt">sample.id=</span>sample.id[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>])</code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="gds-format.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seqSetFilter</span>(gds, <span class="at">variant.id=</span><span class="dv">91</span><span class="sc">:</span><span class="dv">100</span>, <span class="at">sample.id=</span>sample.id[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>])</span></code></pre></div>
 <pre><code>## # of selected samples: 5
 ## # of selected variants: 10</code></pre>
-<p>Genotype data is stored in a 3-dimensional array, where the first dimension is always 2 for diploid genotypes. The second and third dimensions are samples and variants, respectively. The values of the array denote alleles: <code>0</code> is the reference allele and <code>1</code> is the alternate allele. For multiallelic variants, other alternate alleles are represented as integers <code>&gt; 1</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">geno &lt;-<span class="st"> </span><span class="kw">seqGetData</span>(gds, <span class="st">&quot;genotype&quot;</span>)
-<span class="kw">dim</span>(geno)</code></pre></div>
+<p>Genotype data is stored in a 3-dimensional array, where the first dimension is always length 2 for diploid genotypes. The second and third dimensions are samples and variants, respectively. The values of the array denote alleles: <code>0</code> is the reference allele and <code>1</code> is the alternate allele. For multiallelic variants, other alternate alleles are represented as integers <code>&gt; 1</code>.</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="gds-format.html#cb27-1" aria-hidden="true" tabindex="-1"></a>geno <span class="ot">&lt;-</span> <span class="fu">seqGetData</span>(gds, <span class="st">&quot;genotype&quot;</span>)</span>
+<span id="cb27-2"><a href="gds-format.html#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(geno)</span></code></pre></div>
 <pre><code>## [1]  2  5 10</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">geno[,,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]</code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="gds-format.html#cb29-1" aria-hidden="true" tabindex="-1"></a>geno[,,<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span></code></pre></div>
 <pre><code>## , , 1
 ## 
 ##       sample
 ## allele [,1] [,2] [,3] [,4] [,5]
-##   [1,]    0    0    0    0    0
-##   [2,]    0    0    0    0    0
+##   [1,]    1    1    1    1    1
+##   [2,]    1    1    1    1    1
 ## 
 ## , , 2
 ## 
 ##       sample
 ## allele [,1] [,2] [,3] [,4] [,5]
 ##   [1,]    0    0    0    0    0
-##   [2,]    0    0    0    0    0</code></pre>
-<p>The <a href="http://bioconductor.org/packages/SeqVarTools">SeqVarTools package</a> has some additional functions for interacting with SeqArray-format GDS files.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(SeqVarTools)
-
-<span class="co"># return genotypes in matrix format</span>
-<span class="kw">getGenotype</span>(gds)</code></pre></div>
+##   [2,]    0    1    0    0    1</code></pre>
+<p>The <a href="http://bioconductor.org/packages/SeqVarTools">SeqVarTools package</a> has some additional functions for interacting with SeqArray-format GDS files. There are functions providing more intuitive ways to read in genotypes.</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="gds-format.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(SeqVarTools)</span>
+<span id="cb31-2"><a href="gds-format.html#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="gds-format.html#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="co"># return genotypes in matrix format</span></span>
+<span id="cb31-4"><a href="gds-format.html#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="fu">getGenotype</span>(gds)</span></code></pre></div>
 <pre><code>##          variant
-## sample    1     2     3     4     5     6     7     8     9     10   
-##   HG00096 &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot;
-##   HG00097 &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot;
-##   HG00099 &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot;
-##   HG00100 &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot;
-##   HG00101 &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">getGenotypeAlleles</span>(gds)</code></pre></div>
+## sample    91    92    93    94    95    96    97    98    99    100  
+##   HG00096 &quot;1|1&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;1|1&quot; &quot;0|0&quot; &quot;0|0&quot;
+##   HG00097 &quot;1|1&quot; &quot;0|1&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;1|0&quot; &quot;0|0&quot; &quot;0|0&quot;
+##   HG00099 &quot;1|1&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;1|0&quot; &quot;0|0&quot; &quot;0|0&quot;
+##   HG00100 &quot;1|1&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot;
+##   HG00101 &quot;1|1&quot; &quot;0|1&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot;</code></pre>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="gds-format.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getGenotypeAlleles</span>(gds)</span></code></pre></div>
 <pre><code>##          variant
-## sample    1     2     3     4     5     6     7     8     9     10   
-##   HG00096 &quot;C|C&quot; &quot;C|C&quot; &quot;C|C&quot; &quot;C|C&quot; &quot;T|T&quot; &quot;G|G&quot; &quot;G|G&quot; &quot;A|A&quot; &quot;A|A&quot; &quot;C|C&quot;
-##   HG00097 &quot;C|C&quot; &quot;C|C&quot; &quot;C|C&quot; &quot;C|C&quot; &quot;T|T&quot; &quot;G|G&quot; &quot;G|G&quot; &quot;A|A&quot; &quot;A|A&quot; &quot;C|C&quot;
-##   HG00099 &quot;C|C&quot; &quot;C|C&quot; &quot;C|C&quot; &quot;C|C&quot; &quot;T|T&quot; &quot;G|G&quot; &quot;G|G&quot; &quot;A|A&quot; &quot;A|A&quot; &quot;C|C&quot;
-##   HG00100 &quot;C|C&quot; &quot;C|C&quot; &quot;C|C&quot; &quot;C|C&quot; &quot;T|T&quot; &quot;G|G&quot; &quot;G|G&quot; &quot;A|A&quot; &quot;A|A&quot; &quot;C|C&quot;
-##   HG00101 &quot;C|C&quot; &quot;C|C&quot; &quot;C|C&quot; &quot;C|C&quot; &quot;T|T&quot; &quot;G|G&quot; &quot;G|G&quot; &quot;A|A&quot; &quot;A|A&quot; &quot;C|C&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">refDosage</span>(gds)</code></pre></div>
+## sample    91    92    93    94    95    96    97    98    99    100  
+##   HG00096 &quot;G|G&quot; &quot;T|T&quot; &quot;G|G&quot; &quot;G|G&quot; &quot;G|G&quot; &quot;A|A&quot; &quot;C|C&quot; &quot;G|G&quot; &quot;C|C&quot; &quot;T|T&quot;
+##   HG00097 &quot;G|G&quot; &quot;T|C&quot; &quot;G|G&quot; &quot;G|G&quot; &quot;G|G&quot; &quot;A|A&quot; &quot;C|C&quot; &quot;G|C&quot; &quot;C|C&quot; &quot;T|T&quot;
+##   HG00099 &quot;G|G&quot; &quot;T|T&quot; &quot;G|G&quot; &quot;G|G&quot; &quot;G|G&quot; &quot;A|A&quot; &quot;C|C&quot; &quot;G|C&quot; &quot;C|C&quot; &quot;T|T&quot;
+##   HG00100 &quot;G|G&quot; &quot;T|T&quot; &quot;G|G&quot; &quot;G|G&quot; &quot;G|G&quot; &quot;A|A&quot; &quot;C|C&quot; &quot;C|C&quot; &quot;C|C&quot; &quot;T|T&quot;
+##   HG00101 &quot;G|G&quot; &quot;T|C&quot; &quot;G|G&quot; &quot;G|G&quot; &quot;G|G&quot; &quot;A|A&quot; &quot;C|C&quot; &quot;C|C&quot; &quot;C|C&quot; &quot;T|T&quot;</code></pre>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="gds-format.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">refDosage</span>(gds)</span></code></pre></div>
 <pre><code>##          variant
-## sample    1 2 3 4 5 6 7 8 9 10
-##   HG00096 2 2 2 2 2 2 2 2 2  2
-##   HG00097 2 2 2 2 2 2 2 2 2  2
-##   HG00099 2 2 2 2 2 2 2 2 2  2
-##   HG00100 2 2 2 2 2 2 2 2 2  2
-##   HG00101 2 2 2 2 2 2 2 2 2  2</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">altDosage</span>(gds)</code></pre></div>
+## sample    91 92 93 94 95 96 97 98 99 100
+##   HG00096  0  2  2  2  2  2  2  0  2   2
+##   HG00097  0  1  2  2  2  2  2  1  2   2
+##   HG00099  0  2  2  2  2  2  2  1  2   2
+##   HG00100  0  2  2  2  2  2  2  2  2   2
+##   HG00101  0  1  2  2  2  2  2  2  2   2</code></pre>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="gds-format.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">altDosage</span>(gds)</span></code></pre></div>
 <pre><code>##          variant
-## sample    1 2 3 4 5 6 7 8 9 10
-##   HG00096 0 0 0 0 0 0 0 0 0  0
-##   HG00097 0 0 0 0 0 0 0 0 0  0
-##   HG00099 0 0 0 0 0 0 0 0 0  0
-##   HG00100 0 0 0 0 0 0 0 0 0  0
-##   HG00101 0 0 0 0 0 0 0 0 0  0</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># look at reference and alternate alleles</span>
-<span class="kw">refChar</span>(gds)</code></pre></div>
-<pre><code>##  [1] &quot;C&quot; &quot;C&quot; &quot;C&quot; &quot;C&quot; &quot;T&quot; &quot;G&quot; &quot;G&quot; &quot;A&quot; &quot;A&quot; &quot;C&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">altChar</span>(gds)</code></pre></div>
-<pre><code>##  [1] &quot;G&quot; &quot;T&quot; &quot;T&quot; &quot;T&quot; &quot;C&quot; &quot;A&quot; &quot;A&quot; &quot;T&quot; &quot;C&quot; &quot;T&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># data.frame of variant information</span>
-<span class="kw">variantInfo</span>(gds)</code></pre></div>
-<pre><code>##    variant.id chr     pos ref alt
-## 1           1   1  970546   C   G
-## 2           2   1  985900   C   T
-## 3           3   1 1025045   C   T
-## 4           4   1 1265550   C   T
-## 5           5   1 1472676   T   C
-## 6           6   1 1735725   G   A
-## 7           7   1 2185887   G   A
-## 8           8   1 2283689   A   T
-## 9           9   1 2629401   A   C
-## 10         10   1 2710895   C   T</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># reset the filter to all variants and samples</span>
-<span class="kw">seqResetFilter</span>(gds)</code></pre></div>
+## sample    91 92 93 94 95 96 97 98 99 100
+##   HG00096  2  0  0  0  0  0  0  2  0   0
+##   HG00097  2  1  0  0  0  0  0  1  0   0
+##   HG00099  2  0  0  0  0  0  0  1  0   0
+##   HG00100  2  0  0  0  0  0  0  0  0   0
+##   HG00101  2  1  0  0  0  0  0  0  0   0</code></pre>
+<p>There are functions to extract variant information.</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="gds-format.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># look at reference and alternate alleles</span></span>
+<span id="cb39-2"><a href="gds-format.html#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">refChar</span>(gds)</span></code></pre></div>
+<pre><code>##  [1] &quot;A&quot; &quot;T&quot; &quot;G&quot; &quot;G&quot; &quot;G&quot; &quot;A&quot; &quot;C&quot; &quot;C&quot; &quot;C&quot; &quot;T&quot;</code></pre>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="gds-format.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">altChar</span>(gds)</span></code></pre></div>
+<pre><code>##  [1] &quot;G&quot; &quot;C&quot; &quot;A&quot; &quot;A&quot; &quot;A&quot; &quot;G&quot; &quot;T&quot; &quot;G&quot; &quot;A&quot; &quot;C&quot;</code></pre>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="gds-format.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># data.frame of variant information</span></span>
+<span id="cb43-2"><a href="gds-format.html#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">variantInfo</span>(gds)</span></code></pre></div>
+<pre><code>##    variant.id chr      pos ref alt
+## 1          91   1 15461365   A   G
+## 2          92   1 15817319   T   C
+## 3          93   1 16150840   G   A
+## 4          94   1 16272296   G   A
+## 5          95   1 16300899   G   A
+## 6          96   1 16353896   A   G
+## 7          97   1 16414772   C   T
+## 8          98   1 16446764   C   G
+## 9          99   1 16448267   C   A
+## 10        100   1 16699413   T   C</code></pre>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="gds-format.html#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># reset the filter to all variants and samples</span></span>
+<span id="cb45-2"><a href="gds-format.html#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">seqResetFilter</span>(gds)</span></code></pre></div>
 <pre><code>## # of selected samples: 1,126
 ## # of selected variants: 1,120</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># how many alleles for each variant?</span>
-n &lt;-<span class="st"> </span><span class="kw">seqNumAllele</span>(gds)
-<span class="kw">table</span>(n)</code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="gds-format.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># how many alleles for each variant?</span></span>
+<span id="cb47-2"><a href="gds-format.html#cb47-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">seqNumAllele</span>(gds)</span>
+<span id="cb47-3"><a href="gds-format.html#cb47-3" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(n)</span></code></pre></div>
 <pre><code>## n
 ##    2    3    4 
 ## 1099   20    1</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># some variants have more than one alternate allele</span>
-multi.allelic &lt;-<span class="st"> </span><span class="kw">which</span>(n <span class="op">&gt;</span><span class="st"> </span><span class="dv">2</span>)
-<span class="kw">altChar</span>(gds)[multi.allelic]</code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="gds-format.html#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># some variants have more than one alternate allele</span></span>
+<span id="cb49-2"><a href="gds-format.html#cb49-2" aria-hidden="true" tabindex="-1"></a>multi.allelic <span class="ot">&lt;-</span> <span class="fu">which</span>(n <span class="sc">&gt;</span> <span class="dv">2</span>)</span>
+<span id="cb49-3"><a href="gds-format.html#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="fu">altChar</span>(gds)[multi.allelic]</span></code></pre></div>
 <pre><code>##  [1] &quot;GT,G&quot;            &quot;G,T&quot;             &quot;A,T&quot;             &quot;A,T&quot;            
 ##  [5] &quot;ATG,ATGTG&quot;       &quot;C,G&quot;             &quot;A,T&quot;             &quot;C,T&quot;            
 ##  [9] &quot;A,C&quot;             &quot;TAA,T&quot;           &quot;GTTA,GTTT&quot;       &quot;GCC,GCCC,G&quot;     
 ## [13] &quot;A,C&quot;             &quot;A,C&quot;             &quot;A,C&quot;             &quot;CAAGCAT,CGAGCAT&quot;
 ## [17] &quot;CATTATT,C&quot;       &quot;AT,C&quot;            &quot;TGTGA,C&quot;         &quot;CCATT,CCATTCATT&quot;
 ## [21] &quot;C,G&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># extract a particular alternate allele</span>
-<span class="co"># first alternate</span>
-<span class="kw">altChar</span>(gds, <span class="dt">n=</span><span class="dv">1</span>)[multi.allelic]</code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="gds-format.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># extract a particular alternate allele</span></span>
+<span id="cb51-2"><a href="gds-format.html#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="co"># first alternate</span></span>
+<span id="cb51-3"><a href="gds-format.html#cb51-3" aria-hidden="true" tabindex="-1"></a><span class="fu">altChar</span>(gds, <span class="at">n=</span><span class="dv">1</span>)[multi.allelic]</span></code></pre></div>
 <pre><code>##  [1] &quot;GT&quot;      &quot;G&quot;       &quot;A&quot;       &quot;A&quot;       &quot;ATG&quot;     &quot;C&quot;       &quot;A&quot;      
 ##  [8] &quot;C&quot;       &quot;A&quot;       &quot;TAA&quot;     &quot;GTTA&quot;    &quot;GCC&quot;     &quot;A&quot;       &quot;A&quot;      
 ## [15] &quot;A&quot;       &quot;CAAGCAT&quot; &quot;CATTATT&quot; &quot;AT&quot;      &quot;TGTGA&quot;   &quot;CCATT&quot;   &quot;C&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># second alternate</span>
-<span class="kw">altChar</span>(gds, <span class="dt">n=</span><span class="dv">2</span>)[multi.allelic]</code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="gds-format.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># second alternate</span></span>
+<span id="cb53-2"><a href="gds-format.html#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="fu">altChar</span>(gds, <span class="at">n=</span><span class="dv">2</span>)[multi.allelic]</span></code></pre></div>
 <pre><code>##  [1] &quot;G&quot;         &quot;T&quot;         &quot;T&quot;         &quot;T&quot;         &quot;ATGTG&quot;     &quot;G&quot;        
 ##  [7] &quot;T&quot;         &quot;T&quot;         &quot;C&quot;         &quot;T&quot;         &quot;GTTT&quot;      &quot;GCCC&quot;     
 ## [13] &quot;C&quot;         &quot;C&quot;         &quot;C&quot;         &quot;CGAGCAT&quot;   &quot;C&quot;         &quot;C&quot;        
 ## [19] &quot;C&quot;         &quot;CCATTCATT&quot; &quot;G&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># how many variants are SNVs vs INDELs?</span>
-<span class="kw">table</span>(<span class="kw">isSNV</span>(gds, <span class="dt">biallelic=</span><span class="ot">TRUE</span>))</code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="gds-format.html#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co"># how many variants are biallelic SNVs?</span></span>
+<span id="cb55-2"><a href="gds-format.html#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">isSNV</span>(gds, <span class="at">biallelic=</span><span class="cn">TRUE</span>))</span></code></pre></div>
 <pre><code>## 
 ## FALSE  TRUE 
 ##   110  1010</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(<span class="kw">isSNV</span>(gds, <span class="dt">biallelic=</span><span class="ot">FALSE</span>))</code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="gds-format.html#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="co"># how many variants are SNVs vs INDELs?</span></span>
+<span id="cb57-2"><a href="gds-format.html#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">isSNV</span>(gds, <span class="at">biallelic=</span><span class="cn">FALSE</span>))</span></code></pre></div>
 <pre><code>## 
 ## FALSE  TRUE 
 ##    99  1021</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 11 SNVs are multi-allelic</span></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="gds-format.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 11 SNVs are multi-allelic</span></span></code></pre></div>
 <p>We can also return variant information as a <code>GRanges</code> object from the GenomicRanges package. This format for representing sequence data is common across many Bioconductor packages. Chromosome is stored in the <code>seqnames</code> column. The <code>ranges</code> column has variant position, which can be a single base pair or a range.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gr &lt;-<span class="st"> </span><span class="kw">granges</span>(gds)
-gr</code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="gds-format.html#cb60-1" aria-hidden="true" tabindex="-1"></a>gr <span class="ot">&lt;-</span> <span class="fu">granges</span>(gds)</span>
+<span id="cb60-2"><a href="gds-format.html#cb60-2" aria-hidden="true" tabindex="-1"></a>gr</span></code></pre></div>
 <pre><code>## GRanges object with 1120 ranges and 0 metadata columns:
 ##        seqnames              ranges strand
 ##           &lt;Rle&gt;           &lt;IRanges&gt;  &lt;Rle&gt;
@@ -369,8 +432,8 @@ gr</code></pre></div>
 ##   -------
 ##   seqinfo: 1 sequence from an unspecified genome; no seqlengths</code></pre>
 </div>
-<div id="exercises" class="section level2">
-<h2><span class="header-section-number">2.2</span> Exercises</h2>
+<div id="exercises" class="section level2" number="2.3">
+<h2><span class="header-section-number">2.3</span> Exercises</h2>
 <ol style="list-style-type: decimal">
 <li><p>Set a filter selecting only multi-allelic variants. Inspect their genotypes using the different methods you learned above. Use the <code>alleleDosage</code> method to find dosage for the second (and third, etc.) alternate allele.</p></li>
 <li><p>Use the <code>hwe</code> function in SeqVarTools to run a Hardy-Weinberg Equilibrium test on each variant. Identify a variant with low p-value and inspect its genotypes. (Note that the HWE test is only valid for biallelic variants, and will return <code>NA</code> for multiallelic variants.)</p></li>
@@ -406,6 +469,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {

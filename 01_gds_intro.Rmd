@@ -2,26 +2,33 @@
 
 GDS is Genomic Data Structure, a storage format that can efficiently store genomic data and provide fast random access to subsets of the data. For more information on GDS for sequence data, read the [SeqArray package vignette](https://github.com/zhengxwen/SeqArray/blob/master/vignettes/SeqArrayTutorial.Rmd).
 
-## Exploring a GDS file
+## Convert a VCF to GDS
 
-To use the R packages developed at the University of Washington for sequence data, we first need to convert a VCF file to GDS. (If the file is BCF, use [https://samtools.github.io/bcftools/bcftools.html](bcftools) to convert to VCF.)
+To use the R packages developed at the University of Washington Genetic Analysis Center for sequence data, we first need to convert a VCF file to GDS. (If the file is BCF, use [https://samtools.github.io/bcftools/bcftools.html](bcftools) to convert to VCF.)
 
 ```{r vcf2gds}
 library(SeqArray)
-repo_path <- "https://github.com/UW-GAC/SISG_2020/raw/master"
+repo_path <- "https://github.com/UW-GAC/SISG_2021/raw/master"
 if (!dir.exists("data")) dir.create("data")
 vcffile <- "data/1KG_phase3_subset_chr1.vcf.gz"
 if (!file.exists(vcffile)) download.file(file.path(repo_path, vcffile), vcffile)
 gdsfile <- "data/1KG_phase3_subset_chr1.gds"
+# convert the VCF to GDS
 seqVCF2GDS(vcffile, gdsfile, fmt.import="GT", storage.option="LZMA_RA", verbose=FALSE)
 ```
+
+## Exploring a GDS file
 
 We can interact with the GDS file using the SeqArray package.
 
 ```{r seqarray}
+# open a connection to the GDS file
 gds <- seqOpen(gdsfile)
 gds
+```
 
+The `seqGetData` function is the basic function for reading in data from a GDS file
+```{r seqGetData}
 # the unique sample identifier comes from the VCF header
 sample.id <- seqGetData(gds, "sample.id")
 length(sample.id)
@@ -32,15 +39,30 @@ variant.id <- seqGetData(gds, "variant.id")
 length(variant.id)
 head(variant.id)
 
+chr <- seqGetData(gds, "chromosome")
+head(chr)
+
+pos <- seqGetData(gds, "position")
+head(pos)
+
+id <- seqGetData(gds, "annotation/id")
+head(id)
+```
+
+There are additional useful functions for summary level data.
+
+```{r ref_freq}
 # reference allele frequency of each variant
 afreq <- seqAlleleFreq(gds)
+head(afreq)
+summary(afreq)
 hist(afreq, breaks=50)
 ```
 
 We can define a filter on the `gds` object. After using the `seqSetFilter` command, all subsequent reads from the `gds` object are restricted to the selected subset of data, until a new filter is defined or `seqResetFilter` is called.
 
 ```{r filter}
-seqSetFilter(gds, variant.id=1:10, sample.id=sample.id[1:5])
+seqSetFilter(gds, variant.id=91:100, sample.id=sample.id[1:5])
 ```
 
 Genotype data is stored in a 3-dimensional array, where the first dimension is always length 2 for diploid genotypes. The second and third dimensions are samples and variants, respectively. The values of the array denote alleles: `0` is the reference allele and `1` is the alternate allele. For multiallelic variants, other alternate alleles are represented as integers `> 1`.
@@ -51,9 +73,9 @@ dim(geno)
 geno[,,1:2]
 ```
 
-The [SeqVarTools package](http://bioconductor.org/packages/SeqVarTools) has some additional functions for interacting with SeqArray-format GDS files.
+The [SeqVarTools package](http://bioconductor.org/packages/SeqVarTools) has some additional functions for interacting with SeqArray-format GDS files. There are functions providing more intuitive ways to read in genotypes. 
 
-```{r seqvartools}
+```{r seqvartools_geno}
 library(SeqVarTools)
 
 # return genotypes in matrix format
@@ -61,7 +83,11 @@ getGenotype(gds)
 getGenotypeAlleles(gds)
 refDosage(gds)
 altDosage(gds)
+```
 
+There are functions to extract variant information. 
+
+```{r seqvartools_varinfo}
 # look at reference and alternate alleles
 refChar(gds)
 altChar(gds)
@@ -86,8 +112,9 @@ altChar(gds, n=1)[multi.allelic]
 # second alternate
 altChar(gds, n=2)[multi.allelic]
 
-# how many variants are SNVs vs INDELs?
+# how many variants are biallelic SNVs?
 table(isSNV(gds, biallelic=TRUE))
+# how many variants are SNVs vs INDELs?
 table(isSNV(gds, biallelic=FALSE))
 # 11 SNVs are multi-allelic
 ```
