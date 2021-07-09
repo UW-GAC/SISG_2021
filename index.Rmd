@@ -1,5 +1,5 @@
 ---
-title: "SISG Module 16: Computational Pipeline for WGS Data"
+title: "SISG 2021 Module 16: Computational Pipeline for WGS Data"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 output: bookdown::gitbook

@@ -1,5 +1,5 @@
 rmd_files: ["index.Rmd",
-    "01_gds_intro.Rmd", 
+    "gds_intro.Rmd", 
     "phenotype_harmonization.Rmd",
     "association.Rmd",
     "kinship.Rmd",
