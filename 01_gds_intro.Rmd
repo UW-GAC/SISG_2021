@@ -127,7 +127,6 @@ gr
 ```
 
 
-
 ## Exercises 
 
 1. Set a filter selecting only multi-allelic variants. Inspect their genotypes using the different methods you learned above. Use the `alleleDosage` method to find dosage for the second (and third, etc.) alternate allele.
@@ -135,7 +134,7 @@ gr
 2. Use the `hwe` function in SeqVarTools to run a Hardy-Weinberg Equilibrium test on each variant. Identify a variant with low p-value and inspect its genotypes. (Note that the HWE test is only valid for biallelic variants, and will return `NA` for multiallelic variants.)
 
 
-# GDS - Solutions
+## Solutions
 
 1. Set a filter selecting only multi-allelic variants. Inspect their genotypes using the different methods you learned above. Use the `alleleDosage` method to find dosage for the second (and third, etc.) alternate allele.
 
@@ -144,7 +143,7 @@ seqSetFilter(gds, variant.sel=multi.allelic)
 
 geno <- seqGetData(gds, "genotype")
 dim(geno)
-geno[,1:5,]
+geno[,1:5,1:5]
 
 geno <- getGenotype(gds)
 dim(geno)
@@ -153,16 +152,25 @@ head(geno)
 geno <- getGenotypeAlleles(gds)
 head(geno)
 
+# count of reference alleles
 dos <- refDosage(gds)
 head(dos)
 
+# count of *any* alternate alleles
 dos <- altDosage(gds)
 head(dos)
 
-dos <- alleleDosage(gds, n=2)
+# count of the first alternate allele 
+dos <- alleleDosage(gds, n=1)
 head(dos)
 
+# count of the third alternate allele
 dos <- alleleDosage(gds, n=3)
+head(dos)
+
+# count of *each* of the alternate alleles
+# returns multiple columns per variant
+dos <- expandedAltDosage(gds)
 head(dos)
 ```
 
@@ -170,14 +178,22 @@ head(dos)
 
 ```{r exercise_hwe}
 seqResetFilter(gds)
+# run HWE test
 hwe.res <- hwe(gds)
+# identify variants with small p-values
 lowp <- !is.na(hwe.res$p) & hwe.res$p < 1e-4
 head(hwe.res[lowp,])
 
-seqSetFilter(gds, variant.id=75)
+# look at the genotypes of the most significant variant
+minp <- which.min(hwe.res$p)
+hwe.res[minp,]
+
+seqSetFilter(gds, variant.id=minp)
 table(getGenotype(gds))
-table(refDosage(gds))
+table(altDosage(gds))
 ```
+
+Always use the `seqClose` command to close your connection to a GDS file when you are done working with it. Trying to open an already opened GDS will result in an error. 
 
 ```{r intro_close}
 seqClose(gds)
