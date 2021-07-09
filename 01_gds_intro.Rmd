@@ -43,7 +43,7 @@ We can define a filter on the `gds` object. After using the `seqSetFilter` comma
 seqSetFilter(gds, variant.id=1:10, sample.id=sample.id[1:5])
 ```
 
-Genotype data is stored in a 3-dimensional array, where the first dimension is always 2 for diploid genotypes. The second and third dimensions are samples and variants, respectively. The values of the array denote alleles: `0` is the reference allele and `1` is the alternate allele. For multiallelic variants, other alternate alleles are represented as integers `> 1`.
+Genotype data is stored in a 3-dimensional array, where the first dimension is always length 2 for diploid genotypes. The second and third dimensions are samples and variants, respectively. The values of the array denote alleles: `0` is the reference allele and `1` is the alternate allele. For multiallelic variants, other alternate alleles are represented as integers `> 1`.
 
 ```{r genotypes}
 geno <- seqGetData(gds, "genotype")
