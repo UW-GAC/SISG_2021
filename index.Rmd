@@ -1,12 +1,12 @@
 ---
-title: "SISG Module 17: Computational Pipeline for WGS Data"
+title: "SISG Module 16: Computational Pipeline for WGS Data"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
 documentclass: book
 link-citations: yes
-github-repo: UW-GAC/SISG_2020
-description: "Course materials for SISG Module 17"
+github-repo: UW-GAC/SISG_2021
+description: "Course materials for SISG Module 16"
 ---
 
 ```{r setup, include=FALSE}
@@ -15,8 +15,8 @@ knitr::opts_chunk$set(echo=TRUE, message=FALSE)
 
 # Introduction
 
-This site contains course materials for Course materials for SISG Module 17: Computational Pipeline for WGS Data, July 29-31, 2020.
-Data used is located in the [github repository](https://github.com/UW-GAC/SISG_2020) from which the site is built, as well as in the [TOPMed analysis pipeline](https://github.com/UW-GAC/analysis_pipeline).
+This site contains course materials for Course materials for SISG Module 16: Computational Pipeline for WGS Data, July 21-23, 2021.
+Data used is located in the [github repository](https://github.com/UW-GAC/SISG_2021) from which the site is built, as well as in the [TOPMed analysis pipeline](https://github.com/UW-GAC/analysis_pipeline).
 
 Videos and slides for lectures are linked below in the schedule. Links to live sessions can be found at https://si.biostat.washington.edu/suminst/sisg2020/modules/SM2017 (make sure to log in).
 
