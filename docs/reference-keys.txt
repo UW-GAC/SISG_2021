@@ -50,3 +50,6 @@ prepare-the-data
 fit-the-null-model
 solution
 exercise-4
+single-variant-association-tests
+solution-1
+exercise-5
