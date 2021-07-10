@@ -1,57 +1,144 @@
 # Association tests
 
-These exercises introduce association testing: how to find which genetic variants are associated with a phenotype.
+These exercises introduce genetic association testing: how to identify which genetic variants are associated with a phenotype.
 
 ## Null model
 
-The first step in an association test is to fit the null model. We will need an `AnnotatedDataFrame` with phenotypes. 
-We have a sample annotation with a `sample.id` column matched to the GDS file, and a phenotype file with `subject_id`. (In this example, we use the 1000 Genomes IDs for both sample and subject ID.) For TOPMed data, it is also important to match by study, as subject IDs are not unique across studies.
+The first step in our association testing procedure is to fit the "null model" -- i.e., a model fit under the null hypothesis of no individual variant association. Operationally, this is fitting a regression model with the desired outcome phenotype, fixed effect covariates, and random effects.   
 
+### Prepare the data
+
+To fit the null model, we will need to create an `AnnotatedDataFrame` with sample information and phenotype data. We will merge our sample annotation file, which is indexed by a `sample.id` column matched to the GDS file, with our phenotype file, which is indexed by a `subject_id` column. 
+
+NOTE: In this example, we use the 1000 Genomes IDs for both sample and subject IDs, though we would generally advise using separate IDs for samples (sequencing instances) and subjects (individuals).
 
 ```{r null_model}
 # sample annotation
-repo_path <- "https://github.com/UW-GAC/SISG_2020/raw/master"
+repo_path <- "https://github.com/UW-GAC/SISG_2021/raw/master"
 if (!dir.exists("data")) dir.create("data")
 sampfile <- "data/sample_annotation.RData"
 if (!file.exists(sampfile)) download.file(file.path(repo_path, sampfile), sampfile)
-annot <- TopmedPipeline::getobj(sampfile)
-library(Biobase)
-head(pData(annot))
+samp <- get(load(sampfile))
 
-# phenotypes by subject ID
+library(Biobase)
+# access the data with the pData() function
+head(pData(samp))
+
+# access the metadata with the varMetadata() function
+varMetadata(samp)
+
+# phenotype data
 phenfile <- "data/phenotype_annotation.RData"
 if (!file.exists(phenfile)) download.file(file.path(repo_path, phenfile), phenfile)
-phen <- TopmedPipeline::getobj(phenfile)
+phen <- get(load(phenfile))
 
 # access the data with the pData() function
 head(pData(phen))
+
 # access the metadata with the varMetadata() function
 varMetadata(phen)
 
-# merge sample annotation with phenotypes
+# merge sample annotation with phenotype data
 library(dplyr)
-dat <- pData(annot) %>%
+dat <- pData(samp) %>%
     left_join(pData(phen), by=c("subject.id"="subject_id", "sex"="sex"))
-meta <- bind_rows(varMetadata(annot), varMetadata(phen)[3:5,,drop=FALSE])
+head(dat)
+
+# merge the metadata
+meta <- bind_rows(varMetadata(samp), varMetadata(phen)[3:5,,drop=FALSE])
+
+# make an AnnotatedDataFrame
 annot <- AnnotatedDataFrame(dat, meta)
 save(annot, file="data/sample_phenotype_annotation.RData")
 ```
 
-We will test for an association between genotype and height, adjusting for sex, age, and study as covariates. If the sample set involves multiple distinct groups with different variances for the phenotype, we recommend allowing the model to use heterogeneous variance among groups with the parameter `group.var`. We saw in a previous exercise that the variance differs by study.
+### Fit the null model
+
+We will test for an association between variant genotypes and height, adjusting for sex, age, and study as fixed effect covariates. If the sample set involves multiple distinct groups with different variances for the phenotype, we recommend allowing for heterogeneous residual variance among groups with the `group.var` parameter. We saw in a previous exercise that the variance of height differs by study.
 
 ```{r null_model_fit}
 library(GENESIS)
-nullmod <- fitNullModel(annot, outcome="height", covars=c("sex", "age", "study"), 
-                        group.var="study", verbose=FALSE)
+
+# fit the null model
+nullmod <- fitNullModel(annot, 
+                        outcome="height", 
+                        covars=c("sex", "age", "study"), 
+                        group.var="study", 
+                        verbose=FALSE)
 save(nullmod, file="data/null_model.RData")
 ```
 
+The `fitNullModel` function returns a lot of information about the model that was fit. We examine some of that information below; to see all of the components, try `names(nullmod)`.
 
-We also recommend taking an inverse normal transform of the residuals and refitting the model. See the full procedure in the  
-[pipeline documentation](https://github.com/UW-GAC/analysis_pipeline#association-testing).
+```{r null_model_results}
+# description of the model we fit
+nullmod$model
+
+# fixed effect regression estimates
+nullmod$fixef
+
+# variance component estimates by group.var
+nullmod$varComp
+
+# model fit: fitted values, residuals
+head(nullmod$fit)
+
+library(ggplot2)
+ggplot(nullmod$fit, aes(x = fitted.values, y = resid.marginal)) + 
+    geom_point(alpha = 0.5) + 
+    geom_hline(yintercept = 0) + 
+    geom_smooth(method = 'lm')
+```
+
+### Exercise
+
+1. Inverse Normal transform. As discussed in the lecture, we recommend a fully adjusted two-stage inverse Normalization procedure for fitting the null model when phenotypes have non-Normal distributions. Using the `two.stage` option in `fitNullModel`, fit a two-stage null model. Compare these residuals with the residuals from the original null model.  
+
+### Solution
+
+To run the fully adjusted two.stage null model, we simply set the `two.stage` option to `TRUE`. The `norm.option` parameter determines if the inverse Normalization should be done with all samples together (`"all"`) or within each `group.var` group separately (`"by.group"`).
+
+```{r null_model_two_stage}
+nullmod.twostage <- fitNullModel(annot, 
+                                 outcome="height", 
+                                 covars=c("sex", "age", "study"), 
+                                 group.var="study", 
+                                 two.stage = TRUE,
+                                 norm.option = "by.group",
+                                 verbose=FALSE)
+save(nullmod.twostage, file="data/null_model_two_stage.RData")
+
+# description of the model we fit
+nullmod.twostage$model
+
+# compare the marginal residuals
+
+# merge the data for plotting
+pdat <- merge(nullmod$fit, nullmod.twostage$fit, 
+              by = 'sample.id', suffixes = c('.orig', '.twostage'))
+pdat <- merge(pdat, pData(annot), by = 'sample.id')
+
+# distribution of residuals - original null model
+ggplot(pdat, aes(x = resid.marginal.orig, color = study)) + 
+    geom_density()
+
+# distribution of residuals - two stage null model
+ggplot(pdat, aes(x = resid.marginal.twostage, color = study)) + 
+    geom_density()
+
+# compare residuals
+ggplot(pdat, aes(x = resid.marginal.orig, y = resid.marginal.twostage, color = study)) + 
+    geom_point() + 
+    geom_abline(intercept = 0, slope = 1)
+
+```
+
+See [Sofer et al.](https://onlinelibrary.wiley.com/doi/10.1002/gepi.22188) for more information on the fully adjusted two-stage model.
+
 
 ## Single-variant tests
 
+After fitting our null model, we can run association tests to look for a
 Now that we have a null model adjusting height for covariates, we can run an association test to look for genetic effects on height.
 
 Single-variant tests are the same as in GWAS. We use the `assocTestSingle` function in GENESIS. First, we have to create a `SeqVarData` object including both the GDS file and the sample annotation containing phenotypes. We then create a `SeqVarBlockIterator` object to iterate over blocks of variants.
@@ -98,7 +185,6 @@ qqPlot(assoc$Score.pval)
 
 1. Logistic regression: `fitNullModel` can use a binary phenotype as the outcome variable by specifying the argument `family=binomial`. Use the `status` column in the sample annotation to fit a null model for simulated case/control status, with `sex` and `Population` as covariates. Then run a single-variant test using this model.
 
-2. Inverse normal transform: use the function `nullModelInvNorm` to perform an inverse normal transform on the `height` variable. Compare these residuals with the residuals from the original null model.
 
 
 ## Sliding window tests
@@ -133,7 +219,7 @@ qqPlot(assoc$results$pval)
 3. Repeat the previous exercise on logistic regression, this time running a sliding-window test.
 
 
-# Association tests - Solutions
+### Association tests - Solutions
 
 1. Logistic regression: `fitNullModel` can use a binary phenotype as the outcome variable by specifying the argument `family=binomial`. Use the `status` column in the sample annotation to fit a null model for simulated case/control status, with `sex` and `Population` as covariates. Then run a single-variant test using this model.
 
@@ -143,15 +229,6 @@ nullmod.status <- fitNullModel(annot, outcome="status", covars=c("sex", "Populat
 resetIterator(iterator, verbose=FALSE)
 assoc <- assocTestSingle(iterator, nullmod.status, test="Score")
 head(assoc)
-```
-
-2. Inverse normal transform: use the function `nullModelInvNorm` to perform an inverse normal transform on the `height` variable. Compare these residuals with the residuals from the original null model.
-
-```{r exercise_invnorm}
-nullmod.norm <- nullModelInvNorm(nullmod, verbose=FALSE)
-
-summary(nullmod$resid.marginal)
-summary(nullmod.norm$resid.marginal)
 ```
 
 

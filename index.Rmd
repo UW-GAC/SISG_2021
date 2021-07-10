@@ -36,11 +36,11 @@ NOTE: All times are Pacific Daylight Time (GMT-07:00)
     - Pre-recorded lecture - Using BioData Catalyst for SISG exercises ([video - 11 min](https://washington.zoom.us/rec/share/z_BtN6jw5mVLQqfozUjyVKMtLLjvX6a8g3Qb8_YMnxnMNLbhANUyCVqRIROOytne?startTime=1595869554000))
     - Pre-recorded lecture - Sequencing data formats ([video - 15 min](https://washington.zoom.us/rec/share/3OZtIZX_7mZLXtLyuB35R7EEJI7GX6a8hiAYrKELyR27RU_39JyIFRL8b5w4UuhF?startTime=1594683337000)) ([slides](https://si.biostat.washington.edu/sites/default/files/modules/Sequencing_data_formats_1.pdf))
     - Pre-recorded lecture - Intro to Genomic Data Storage ([video - 17 min](https://washington.zoom.us/rec/share/ptwyaIrp83xJaZ3Cw3vEaq0sGNjEaaa8hiNN-PUNmU_BnBgez69k4oCz449iOgL4?startTime=1594840618000)) ([slides](https://si.biostat.washington.edu/sites/default/files/modules/GDS_intro_2.pdf))
-    - Exercises in breakout rooms - [GDS format in R](https://uw-gac.github.io/SISG_2020/gds-format.html)
+    - Exercises in breakout rooms - [GDS format in R](https://uw-gac.github.io/SISG_2021/gds-format.html)
     - Discussion ([video](https://washington.zoom.us/rec/share/2pB5Dej36mBJfKPk1Rz1AZ8nQ7rOX6a82yAf__EKxBwR9YbEVa5w9EQU0It8PXFv?startTime=1596053230000))
 - **Zoom session 13:45-14:30 PDT** - Phenotype harmonization
     - Pre-recorded lecture - Phenotype harmonization ([video - 19 min](https://washington.zoom.us/rec/share/5JV7ILH-1jNIE4Hc2gL1Yq48Br_vaaa8hnIb8_ELyUdlGBoRiHsdmGIpd5zz6kZn?startTime=1595370005000)) ([slides](https://si.biostat.washington.edu/sites/default/files/modules/pheno_harmonization.pdf))
-    - Exercises in breakout rooms - [Harmonization in R](https://uw-gac.github.io/SISG_2020/phenotype-harmonization.html)
+    - Exercises in breakout rooms - [Harmonization in R](https://uw-gac.github.io/SISG_2021/phenotype-harmonization.html)
     - Discussion ([video](https://washington.zoom.us/rec/share/2pB5Dej36mBJfKPk1Rz1AZ8nQ7rOX6a82yAf__EKxBwR9YbEVa5w9EQU0It8PXFv?startTime=1596057633000))
 
 **Thursday, July 30**
@@ -48,40 +48,40 @@ NOTE: All times are Pacific Daylight Time (GMT-07:00)
 - **Zoom session 8:00-9:45 PDT** - Association tests, Part I
     - Pre-recorded lecture - Association tests: Methods and motivation ([video - 57 min](https://drive.google.com/file/d/1ECge7BRjxzXTFqELaWK0yzcQK7gu8mlC/view?usp=sharing)) ([slides](https://si.biostat.washington.edu/sites/default/files/modules/SISG20AssocTests.pdf))
     - Pre-recorded lecture - GENESIS for association tests ([video - 11 min](https://washington.zoom.us/rec/share/3elQCuvU5jtOZ7fvyFnRaLYsJdu5X6a8g3dK8_YKnh4NQI_41ZS6bU1xORhZMPGO?startTime=1595363212000)) ([slides](https://si.biostat.washington.edu/sites/default/files/modules/R_assoc_tests_2.pdf))
-    - Exercises in breakout rooms - [Association tests in R](https://uw-gac.github.io/SISG_2020/association-tests.html)
+    - Exercises in breakout rooms - [Association tests in R](https://uw-gac.github.io/SISG_2021/association-tests.html)
     - Discussion ([video](https://washington.zoom.us/rec/share/2It5MZ_C2zJOR8_gxEjkcbYHLIC1T6a82idI-vZcmhlI6yqFOqXZ2sB70dx40myL?startTime=1596126935000))
 - **Zoom session 10:15-11:45 PDT** - Association tests, Part II
     - Pre-recorded lecture - Aggregate tests ([video - 46 min](https://drive.google.com/file/d/1L8JVcijItOwEhYIsVkOALFdeAigL1tTJ/view?usp=sharing)) ([slides](https://si.biostat.washington.edu/sites/default/files/modules/SISG20AssocTests.pdf))
-    - Exercises in breakout rooms - [Sliding window tests](https://uw-gac.github.io/SISG_2020/association-tests.html#sliding-window-tests)
+    - Exercises in breakout rooms - [Sliding window tests](https://uw-gac.github.io/SISG_2021/association-tests.html#sliding-window-tests)
     - Discussion ([video](https://washington.zoom.us/rec/share/2It5MZ_C2zJOR8_gxEjkcbYHLIC1T6a82idI-vZcmhlI6yqFOqXZ2sB70dx40myL?startTime=1596133607000))
 - **Zoom session 12:45-14:30 PDT** - Population Structure and Relatedness
     - Pre-recorded lecture - Population structure inference ([video - 33 min](https://drive.google.com/file/d/1hLtTP1b6aUDBbz9mQ2i9J9Yg3Zbfsvvm/view?usp=sharing)) ([slides](https://si.biostat.washington.edu/sites/default/files/modules/Population_Structure_Inference_2020.pdf))
     - Pre-recorded lecture - Relatedness inference ([video - 25 min](https://drive.google.com/file/d/1JMlVvEGU4x9u2UBIJiw7RRIFUrbNdj3f/view?usp=sharing)) ([slides](https://si.biostat.washington.edu/sites/default/files/modules/Relatedness_Inference_2020.pdf))
     - Pre-recorded lecture - R packages for PCA and relatedness ([video - 9 min](https://washington.zoom.us/rec/share/uup8C5Ts50VOWpWdxHDDWvUzE7nieaa8gHVP_qFcxUt1umphrSYNDW9yDt3q5M-n?startTime=1595442394000)) ([slides](https://si.biostat.washington.edu/sites/default/files/modules/R_kinship_pca_1.pdf))
-    - Exercises in breakout rooms - [Population structure and relatedness in R](https://uw-gac.github.io/SISG_2020/computing-a-grm.html)
+    - Exercises in breakout rooms - [Population structure and relatedness in R](https://uw-gac.github.io/SISG_2021/computing-a-grm.html)
     - Discussion ([video](https://washington.zoom.us/rec/share/2It5MZ_C2zJOR8_gxEjkcbYHLIC1T6a82idI-vZcmhlI6yqFOqXZ2sB70dx40myL?startTime=1596143849000))
 
 **Friday, July 31**
 
 - **Zoom session 8:00-9:30 PDT** - Mixed models
     - Pre-recorded lecture - Mixed model association testing ([video - 42 min](https://drive.google.com/file/d/1H01K3rhjsKiFCmIcXRRkPxoGF_a6DojL/view?usp=sharing)) ([slides](https://si.biostat.washington.edu/sites/default/files/modules/Mixed_Model_Association_Testing_2020.pdf))
-    - Exercises in breakout rooms - [Mixed models in R](https://uw-gac.github.io/SISG_2020/mixed-models.html)
+    - Exercises in breakout rooms - [Mixed models in R](https://uw-gac.github.io/SISG_2021/mixed-models.html)
     - Discussion ([video](https://washington.zoom.us/rec/share/1cFoKbPWyjxOboHtxEvNZ44qDLnYeaa81nMZqPtbzBtXA_Hv7mXPKXmSe_9BHeyb?startTime=1596212284000))
 - **Zoom session 9:45-11:30 PDT** - Variant annotation
     - Pre-recorded lecture - Variant annotation ([video - 21 min](https://washington.zoom.us/rec/share/5cpzcuntpklJW8_K7mKPZ7U4RY7-T6a81CZLqfcLmEZ4UtOvefz1dn05i3eFNAjJ?startTime=1595707556000)) ([slides](https://si.biostat.washington.edu/sites/default/files/modules/variant_annotation_0.pdf))
-    - Exercises in breakout rooms - [Using variant annotation](https://uw-gac.github.io/SISG_2020/variant-annotation.html)
+    - Exercises in breakout rooms - [Using variant annotation](https://uw-gac.github.io/SISG_2021/variant-annotation.html)
     - Discussion ([video](https://washington.zoom.us/rec/share/1cFoKbPWyjxOboHtxEvNZ44qDLnYeaa81nMZqPtbzBtXA_Hv7mXPKXmSe_9BHeyb?startTime=1596216918000)) - includes 30 min of open questions and discussion
 - **Zoom session 12:30-13:45 PDT** - Working in the cloud
     - Pre-recorded lecture - Analysis pipelines on the cloud  ([video - 24 min](https://washington.zoom.us/rec/share/4_1bI-3Q3UVLXJH07BmGSvUgTrz1eaa8hiceqPoPzUzd-fBH94rKeazO2iV8z6i6?startTime=1595875794000)) ([slides](https://si.biostat.washington.edu/sites/default/files/modules/Cloud_Computing.pdf))
     - Pre-recorded lecture - Running a workflow on BioData Catalyst ([video - 16 min](https://washington.zoom.us/rec/share/wtxcFZPgzF5LTZXHxVPiQ5weMtreX6a81SNMrPIEn0sVFKctNRBSuHnZR4Lx78Bg?startTime=1595882071000))
-    - Exercises in breakout rooms - [Running a GWAS workflow](https://uw-gac.github.io/SISG_2020/exercises-running-a-gwas-workflow.html)
+    - Exercises in breakout rooms - [Running a GWAS workflow](https://uw-gac.github.io/SISG_2021/exercises-running-a-gwas-workflow.html)
     - Discussion ([video](https://washington.zoom.us/rec/share/1cFoKbPWyjxOboHtxEvNZ44qDLnYeaa81nMZqPtbzBtXA_Hv7mXPKXmSe_9BHeyb?startTime=1596227666000))
 - **Zoom session 14:00-14:30 PDT** - Open session for questions/advice
     - Discussion ([video](https://washington.zoom.us/rec/share/1cFoKbPWyjxOboHtxEvNZ44qDLnYeaa81nMZqPtbzBtXA_Hv7mXPKXmSe_9BHeyb?startTime=1596229316000))
 
 
 
-Download the workshop data and exercises: https://github.com/UW-GAC/SISG_2020/archive/master.zip
+Download the workshop data and exercises: https://github.com/UW-GAC/SISG_2021/archive/master.zip
 
 ## R packages used
 

@@ -126,6 +126,12 @@ gr <- granges(gds)
 gr
 ```
 
+Always use the `seqClose` command to close your connection to a GDS file when you are done working with it. Trying to open an already opened GDS will result in an error. 
+
+```{r intro_close}
+seqClose(gds)
+```
+
 
 ## Exercises 
 
@@ -139,6 +145,10 @@ gr
 1. Set a filter selecting only multi-allelic variants. Inspect their genotypes using the different methods you learned above. Use the `alleleDosage` method to find dosage for the second (and third, etc.) alternate allele.
 
 ```{r exercise_gds}
+# open a connection to the GDS file again
+gds <- seqOpen(gdsfile)
+
+# set your filter
 seqSetFilter(gds, variant.sel=multi.allelic)
 
 geno <- seqGetData(gds, "genotype")
@@ -177,9 +187,12 @@ head(dos)
 2. Use the `hwe` function in SeqVarTools to run a Hardy-Weinberg Equilibrium test on each variant. Identify a variant with low p-value and inspect its genotypes. (Note that the HWE test is only valid for biallelic variants, and will return `NA` for multiallelic variants.)
 
 ```{r exercise_hwe}
+# reset the filter to all variants
 seqResetFilter(gds)
+
 # run HWE test
 hwe.res <- hwe(gds)
+
 # identify variants with small p-values
 lowp <- !is.na(hwe.res$p) & hwe.res$p < 1e-4
 head(hwe.res[lowp,])
@@ -193,8 +206,8 @@ table(getGenotype(gds))
 table(altDosage(gds))
 ```
 
-Always use the `seqClose` command to close your connection to a GDS file when you are done working with it. Trying to open an already opened GDS will result in an error. 
+Don't forget to close your connection to the GDS file when you're done!
 
-```{r intro_close}
+```{r exercise_close}
 seqClose(gds)
 ```

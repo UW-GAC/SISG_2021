@@ -44,3 +44,9 @@ analysis-follow-up
 convert-a-vcf-to-gds
 gds---solutions
 solutions
+association-tests---solutions
+association-tests-part-i
+prepare-the-data
+fit-the-null-model
+solution
+exercise-4
