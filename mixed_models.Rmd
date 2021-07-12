@@ -4,55 +4,81 @@ These exercises introduce relatedness to association testing with mixed models.
 
 ## Null model
 
-The first step in an association test is to fit the null model. In addition to the `AnnotatedDataFrame` with phenotypes we used previously, we will need the principal components and kinship. We will use the first five PCs to adjust for ancestry.
+Recall that the first step in our association testing procedure is to fit the null model. In addition to the `AnnotatedDataFrame` with phenotype data that we used previously, we will also use the ancestry principal components and kinship estimates we created in the previous session. We will use the first 4 PCs to adjust for ancestry.
 
 ```{r null_model_mm}
 # sample annotation
-repo_path <- "https://github.com/UW-GAC/SISG_2020/raw/master"
+repo_path <- "https://github.com/UW-GAC/SISG_2021/raw/master"
 if (!dir.exists("data")) dir.create("data")
 sampfile <- "data/sample_phenotype_annotation.RData"
 if (!file.exists(sampfile)) download.file(file.path(repo_path, sampfile), sampfile)
-annot <- TopmedPipeline::getobj(sampfile)
+annot <- get(load(sampfile))
 library(Biobase)
 head(pData(annot))
 
-# load the PCs
+# load the ancestry PCs
 pcfile <- "data/pcs.RData"
 if (!file.exists(pcfile)) download.file(file.path(repo_path, pcfile), pcfile)
-pcs <- TopmedPipeline::getobj(pcfile)
-pcs <- pcs[,c("sample.id", "PC1", "PC2", "PC3", "PC4", "PC5")]
+pcs <- get(load(pcfile))
+pcs <- pcs[,c("sample.id", "PC1", "PC2", "PC3", "PC4")]
 head(pcs)
 
-# add PCs to the sample annotation
+# merge PCs with the sample annotation
+library(dplyr)
 dat <- left_join(pData(annot), pcs, by="sample.id")
+# update the AnnotatedDataFrame
 pData(annot) <- dat
 save(annot, file="data/sample_phenotype_pcs.RData")
 ```
 
-We create a kinship matrix from the output of `pcrelate`. We multiply the kinship values by 2 to get values equivalent to a GRM. This matrix is represented in R as a symmetric matrix object from the Matrix package.
+We can create a kinship matrix from the output of `pcrelate`. We multiply the kinship values by 2 to get values on the same scale as the standard GRM. This matrix is represented in R as a symmetric matrix object from the Matrix package.
 
 ```{r load_kinship}
 kinfile <- "data/pcrelate_kinship.RData"
 if (!file.exists(kinfile)) download.file(file.path(repo_path, kinfile), kinfile)
-pcrel <- TopmedPipeline::getobj(kinfile)
+pcrel <- get(load(kinfile))
 library(GENESIS)
 kinship <- pcrelateToMatrix(pcrel, scaleKin=2, verbose=FALSE)
 dim(kinship)
 kinship[1:5,1:5]
 ```
 
-We fit the null model, adding the PCs to the list of covariates, and specifying the kinship as the covariance matrix with the `cov.mat` argument. As before, we use `study` as a grouping variable.
+When running a mixed model analysis, we still fit the null model using the `fitNullModel` function in GENESIS. Now, we include the kinship matrix in the model with the `cov.mat` argument -- the `cov.mat` argument is used to specify the random effect(s) in the model with covariance structure(s) proportional to the supplied matrix(s); in this case, the kinship matrix. The inclusion of these random effects is what makes this a mixed model, rather than a simple regression model. We also add the ancestry PCs to the list of covariates and allow for heterogeneous residual variance by `study` with the `group.var` argument, as before.
 
 ```{r null_model_fit_mm}
-nullmod <- fitNullModel(annot, outcome="height", 
-                        covars=c("sex", "age", "study", paste0("PC", 1:5)), 
-                        cov.mat=kinship, group.var="study", verbose=FALSE)
+nullmod <- fitNullModel(annot, 
+                        outcome="height", 
+                        covars=c("sex", "age", "study", paste0("PC", 1:4)), 
+                        cov.mat=kinship, 
+                        group.var="study", 
+                        verbose=FALSE)
 save(nullmod, file="data/null_mixed_model.RData")
+```
+
+Same as before, we can investigate the output from `fitNullModel`.
+```{r null_model_results}
+# description of the model we fit
+nullmod$model
+
+# fixed effect regression estimates
+nullmod$fixef
+
+# variance component estimates by group.var
+nullmod$varComp
+
+# model fit: fitted values, residuals
+head(nullmod$fit)
+
+library(ggplot2)
+ggplot(nullmod$fit, aes(x = fitted.values, y = resid.marginal)) + 
+    geom_point(alpha = 0.5) + 
+    geom_hline(yintercept = 0) + 
+    geom_smooth(method = 'lm')
 ```
 
 ## Single-variant tests
 
-Now we can run a single-variant test, accounting for relatedness between the subjects.
+Now we can run a single-variant test, accounting for genetic ancestry and genetic relatedness between the subjects. We use the same `assocTestSingle` function as before. The only difference is that we pass in our new null model. 
 
 ```{r assoc_single_mm}
 library(SeqVarTools)
@@ -60,33 +86,83 @@ gdsfile <- "data/1KG_phase3_subset_chr1.gds"
 if (!file.exists(gdsfile)) download.file(file.path(repo_path, gdsfile), gdsfile)
 gdsfmt::showfile.gds(closeall=TRUE) # make sure file is not already open
 gds <- seqOpen(gdsfile)
-seqData <- SeqVarData(gds, sampleData=annot)
-iterator <- SeqVarBlockIterator(seqData, verbose=FALSE)
-assoc <- assocTestSingle(iterator, nullmod)
-head(assoc)
 
-qqPlot(assoc$Score.pval)
+# make the seqVarData object
+seqData <- SeqVarData(gds, sampleData=annot)
+
+# make the iterator object
+iterator <- SeqVarBlockIterator(seqData, verbose=FALSE)
+
+# run the single-variant association test
+assoc <- assocTestSingle(iterator, nullmod)
+dim(assoc)
+head(assoc)
 ```
 
+We make our usual QQ plot, filtering to variants with minor allele count (MAC) >= 5. Notice that we observe much less inflation than before, when we did not adjust for ancestry and relatedness.
+
+```{r assoc_single_qq_mm}
+library(ggplot2)
+qqPlot <- function(pval) {
+    pval <- pval[!is.na(pval)]
+    n <- length(pval)
+    x <- 1:n
+    dat <- data.frame(obs=sort(pval),
+                      exp=x/n,
+                      upper=qbeta(0.025, x, rev(x)),
+                      lower=qbeta(0.975, x, rev(x)))
+    
+    ggplot(dat, aes(-log10(exp), -log10(obs))) +
+        geom_line(aes(-log10(exp), -log10(upper)), color="gray") +
+        geom_line(aes(-log10(exp), -log10(lower)), color="gray") +
+        geom_point() +
+        geom_abline(intercept=0, slope=1, color="red") +
+        xlab(expression(paste(-log[10], "(expected P)"))) +
+        ylab(expression(paste(-log[10], "(observed P)"))) +
+        theme_bw()
+}    
+
+qqPlot(assoc$Score.pval[assoc$MAC >= 5])
+```
 
 
 ## Exercise
 
-Run a sliding window test using the mixed model and make a QQ plot.
+Perform a single-variant association test for `status`. Adjust for sex, age, study, ancestry, and kinship in your model. Don't forget to consider the `family` parameter. Make a QQ plot of your p-values for all variants with MAC >= 5.
 
 
-# Mixed models - Solutions
+## Solution
 
-Run a sliding window test using the mixed model and make a QQ plot.
+The first step is to fit the null model. We include the first 4 PCs as covariates in our model to adjust for ancestry, and we include a random effect proportional to the kinship matrix to adjust for genetic relatedness. Recall that with a binary outcome, we set `family = binomial` -- because we have random effects, this will fit an approximate logistic mixed model using the [GMMAT method](https://www.cell.com/ajhg/fulltext/S0002-9297(16)00063-X).
 
-```{r exercise_mm}
-seqResetFilter(seqData, verbose=FALSE)
-iterator <- SeqVarWindowIterator(seqData, windowSize=5000, windowShift=2000, verbose=FALSE)
-assoc <- assocTestAggregate(iterator, nullmod, test="Burden", AF.max=0.1, weight.beta=c(1,1))
-head(assoc$results)
-head(assoc$variantInfo)
+```{r exercise_mm_nullmod}
+nullmod.status <- fitNullModel(annot, 
+                               outcome="status", 
+                               covars=c("sex", "age", "study", paste0("PC", 1:4)), 
+                               cov.mat=kinship, 
+                               family = binomial,
+                               verbose=FALSE)
 
-qqPlot(assoc$results$Score.pval)
+# description of the model we fit
+nullmod.status$model
+
+# fixed effect regression estimates
+nullmod.status$fixef
+
+# variance component estimates by group.var
+nullmod.status$varComp
+```
+
+Now that we have the null model, we perform the single-variant association tests and make the QQ plot the same way as before. 
+
+```{r exercise_mm_assoc}
+resetIterator(iterator, verbose=FALSE)
+# run the single-variant association test
+assoc.status <- assocTestSingle(iterator, nullmod.status, test="Score")
+dim(assoc.status)
+head(assoc.status)
+
+qqPlot(assoc.status$Score.pval[assoc.status$MAC >= 5])
 ```
 
 ```{r assoc_mm_close}

@@ -1,0 +1,160 @@
+# Association tests - Part II
+
+These exercises continue the introduction to genetic association testing. Here, we introduce multiple-variant association tests.
+
+## Sliding window tests
+
+For rare variants, we can perform burden, SKAT, and SMMAT tests using the GENESIS function `assocTestAggregate`. First, we need to load the null model and `AnnotatedDataFrame` (sample annotation + phenotype data) that we created in the previous session, and we need to create our `SeqVarData` object linking the GDS file to the `AnnotatedDataFrame`.
+
+```{r assoc_window_load}
+repo_path <- "https://github.com/UW-GAC/SISG_2021/raw/master"
+if (!dir.exists("data")) dir.create("data")
+
+# load our null model
+nullmodfile <- "data/null_model.RData"
+if (!file.exists(nullmodfile)) download.file(file.path(repo_path, nullmodfile), nullmodfile)
+nullmod <- get(load(nullmodfile))
+
+# load our sample annotation
+annotfile <- "data/sample_phenotype_annotation.RData"
+if (!file.exists(annotfile)) download.file(file.path(repo_path, annotfile), annotfile)
+annot <- get(load(annotfile))
+
+library(SeqVarTools)
+gdsfile <- "data/1KG_phase3_subset_chr1.gds"
+if (!file.exists(gdsfile)) download.file(file.path(repo_path, gdsfile), gdsfile)
+gdsfmt::showfile.gds(closeall=TRUE) # make sure file is not already open
+gds <- seqOpen(gdsfile)
+
+# make the seqVarData object
+seqData <- SeqVarData(gds, sampleData=annot)
+```
+
+### Burden test
+
+In this first example, we perform a burden test. We restrict the test to variants with alternate allele frequency < 0.1. (For real data, this threshold would be lower, perhaps 0.05 or 0.01.) We use a flat weighting scheme -- i.e. every variant gets the same weight. We define a sliding window across the genome using a `SeqVarWindowIterator` object.
+
+```{r assoc_window_burden}
+# make the window iterator object
+iterator <- SeqVarWindowIterator(seqData, windowSize=10000, windowShift=5000, verbose=FALSE)
+
+# run the burden test
+library(GENESIS)
+assoc <- assocTestAggregate(iterator, 
+                            nullmod, 
+                            test="Burden", 
+                            AF.max=0.1, 
+                            weight.beta=c(1,1), 
+                            verbose = FALSE)
+```
+
+The function returns the primary results for each window in one table. It also returns a list of tables that contain the variant details for each window tested.
+
+```{r assoc_window_output}
+names(assoc)
+
+# results for each window
+head(assoc$results)
+
+# how many variants in each window?
+table(assoc$results$n.site)
+
+# variant details for windows with > 1 variant
+idx <- which(assoc$results$n.site > 1)
+head(assoc$variantInfo[idx])
+```
+
+We can make a QQ plot of the burden p-values from the main results table. 
+
+```{r assoc_burden_qq}
+library(ggplot2)
+qqPlot <- function(pval) {
+    pval <- pval[!is.na(pval)]
+    n <- length(pval)
+    x <- 1:n
+    dat <- data.frame(obs=sort(pval),
+                      exp=x/n,
+                      upper=qbeta(0.025, x, rev(x)),
+                      lower=qbeta(0.975, x, rev(x)))
+    
+    ggplot(dat, aes(-log10(exp), -log10(obs))) +
+        geom_line(aes(-log10(exp), -log10(upper)), color="gray") +
+        geom_line(aes(-log10(exp), -log10(lower)), color="gray") +
+        geom_point() +
+        geom_abline(intercept=0, slope=1, color="red") +
+        xlab(expression(paste(-log[10], "(expected P)"))) +
+        ylab(expression(paste(-log[10], "(observed P)"))) +
+        theme_bw()
+}    
+
+# make a QQ plot of the burden test p-values
+qqPlot(assoc$results$Score.pval)
+```
+
+### SKAT test
+
+We can also perform a SKAT test using the Wu weights, which give larger weights to rarer variants.
+
+```{r assoc_window_skat}
+# reset the iterator to the first window
+resetIterator(iterator)
+assoc <- assocTestAggregate(iterator, 
+                            nullmod, 
+                            test="SKAT", 
+                            AF.max=0.1, 
+                            weight.beta=c(1,25), 
+                            verbose = FALSE)
+
+# results for each window
+head(assoc$results)
+
+# variant details for windows with > 1 variant
+idx <- which(assoc$results$n.site > 1)
+head(assoc$variantInfo[idx])
+
+# make a QQ plot of the SKAT test p-values
+qqPlot(assoc$results$pval)
+```
+
+## Exercise
+
+Perform a sliding window SKAT test for the outcome status. Adjust your model for the covariates sex and study. When performing your SKAT test, use all variants with alternate allele frequency < 20%, and use the Wu weights to give larger weights to rarer variants. Use the same `windowSize` and `windowShift` as in the examples. How many windows have >1 variant? Make a QQ plot of the SKAT p-values. 
+
+## Solution
+
+The first step is to fit our null model -- since our outcome, status, is a binary variable, we must fit a logistic regression null model using the `family = binomial` argument. The second step is to create our `SeqVarWindowIterator` object. The third step is to perform the SKAT test using `assocTestAggregate` -- we can set the maximum alternate allele frequency with the `AF.max` argument, and we can set the variant weights with the `weight.beta` argument.
+
+```{r exercise_sliding}
+nullmod.status <- fitNullModel(annot, 
+                               outcome="status", 
+                               covars=c("sex", "study"), 
+                               family=binomial, 
+                               verbose=FALSE)
+
+seqResetFilter(seqData, verbose=FALSE)
+iterator <- SeqVarWindowIterator(seqData, windowSize=10000, windowShift=5000, verbose=FALSE)
+
+assoc <- assocTestAggregate(iterator, 
+                            nullmod, 
+                            test="SKAT", 
+                            AF.max=0.2, 
+                            weight.beta=c(1,25),
+                            verbose = FALSE)
+
+# results for each window
+head(assoc$results)
+
+# how many variants in each window?
+table(assoc$results$n.site)
+
+# variant details for windows with > 1 variant
+idx <- which(assoc$results$n.site > 1)
+head(assoc$variantInfo[idx])
+
+# make a QQ plot of the SKAT test p-values
+qqPlot(assoc$results$pval)
+```
+
+```{r assoc_close}
+seqClose(gds)
+```

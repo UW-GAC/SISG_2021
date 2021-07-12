@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>5 Association tests - Part II | SISG 2021 Module 16: Computational Pipeline for WGS Data</title>
+  <meta name="description" content="Course materials for SISG Module 16" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="5 Association tests - Part II | SISG 2021 Module 16: Computational Pipeline for WGS Data" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Course materials for SISG Module 16" />
+  <meta name="github-repo" content="UW-GAC/SISG_2021" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="5 Association tests - Part II | SISG 2021 Module 16: Computational Pipeline for WGS Data" />
+  
+  <meta name="twitter:description" content="Course materials for SISG Module 16" />
+  
+
+
+
+<meta name="date" content="2021-07-12" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="association-tests-part-i.html"/>
+<link rel="next" href="ancestry-and-relatedness-inference.html"/>
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#schedule"><i class="fa fa-check"></i><b>1.1</b> Schedule</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#r-packages-used"><i class="fa fa-check"></i><b>1.2</b> R packages used</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#resources"><i class="fa fa-check"></i><b>1.3</b> Resources</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="gds-format.html"><a href="gds-format.html"><i class="fa fa-check"></i><b>2</b> GDS format</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="gds-format.html"><a href="gds-format.html#convert-a-vcf-to-gds"><i class="fa fa-check"></i><b>2.1</b> Convert a VCF to GDS</a></li>
+<li class="chapter" data-level="2.2" data-path="gds-format.html"><a href="gds-format.html#exploring-a-gds-file"><i class="fa fa-check"></i><b>2.2</b> Exploring a GDS file</a></li>
+<li class="chapter" data-level="2.3" data-path="gds-format.html"><a href="gds-format.html#exercises"><i class="fa fa-check"></i><b>2.3</b> Exercises</a></li>
+<li class="chapter" data-level="2.4" data-path="gds-format.html"><a href="gds-format.html#solutions"><i class="fa fa-check"></i><b>2.4</b> Solutions</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="phenotype-harmonization.html"><a href="phenotype-harmonization.html"><i class="fa fa-check"></i><b>3</b> Phenotype Harmonization</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="phenotype-harmonization.html"><a href="phenotype-harmonization.html#inspect-individual-study-data-in-r"><i class="fa fa-check"></i><b>3.1</b> Inspect individual study data in R</a></li>
+<li class="chapter" data-level="3.2" data-path="phenotype-harmonization.html"><a href="phenotype-harmonization.html#compare-study-values"><i class="fa fa-check"></i><b>3.2</b> Compare study values</a></li>
+<li class="chapter" data-level="3.3" data-path="phenotype-harmonization.html"><a href="phenotype-harmonization.html#using-null-models-to-compare-studies"><i class="fa fa-check"></i><b>3.3</b> Using null models to compare studies</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="phenotype-harmonization.html"><a href="phenotype-harmonization.html#create-an-annotated-data-frame"><i class="fa fa-check"></i><b>3.3.1</b> Create an Annotated Data Frame</a></li>
+<li class="chapter" data-level="3.3.2" data-path="phenotype-harmonization.html"><a href="phenotype-harmonization.html#fit-a-null-model-without-study"><i class="fa fa-check"></i><b>3.3.2</b> Fit a null model without study</a></li>
+<li class="chapter" data-level="3.3.3" data-path="phenotype-harmonization.html"><a href="phenotype-harmonization.html#fit-a-model-with-study"><i class="fa fa-check"></i><b>3.3.3</b> Fit a model with study</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="phenotype-harmonization.html"><a href="phenotype-harmonization.html#final-considerations"><i class="fa fa-check"></i><b>3.4</b> Final considerations</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="association-tests-part-i.html"><a href="association-tests-part-i.html"><i class="fa fa-check"></i><b>4</b> Association tests - Part I</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="association-tests-part-i.html"><a href="association-tests-part-i.html#null-model"><i class="fa fa-check"></i><b>4.1</b> Null model</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="association-tests-part-i.html"><a href="association-tests-part-i.html#prepare-the-data"><i class="fa fa-check"></i><b>4.1.1</b> Prepare the data</a></li>
+<li class="chapter" data-level="4.1.2" data-path="association-tests-part-i.html"><a href="association-tests-part-i.html#fit-the-null-model"><i class="fa fa-check"></i><b>4.1.2</b> Fit the null model</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="association-tests-part-i.html"><a href="association-tests-part-i.html#exercise"><i class="fa fa-check"></i><b>4.2</b> Exercise</a></li>
+<li class="chapter" data-level="4.3" data-path="association-tests-part-i.html"><a href="association-tests-part-i.html#solution"><i class="fa fa-check"></i><b>4.3</b> Solution</a></li>
+<li class="chapter" data-level="4.4" data-path="association-tests-part-i.html"><a href="association-tests-part-i.html#single-variant-association-tests"><i class="fa fa-check"></i><b>4.4</b> Single-variant association tests</a></li>
+<li class="chapter" data-level="4.5" data-path="association-tests-part-i.html"><a href="association-tests-part-i.html#exercise-1"><i class="fa fa-check"></i><b>4.5</b> Exercise</a></li>
+<li class="chapter" data-level="4.6" data-path="association-tests-part-i.html"><a href="association-tests-part-i.html#solution-1"><i class="fa fa-check"></i><b>4.6</b> Solution</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="association-tests-part-ii.html"><a href="association-tests-part-ii.html"><i class="fa fa-check"></i><b>5</b> Association tests - Part II</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="association-tests-part-ii.html"><a href="association-tests-part-ii.html#sliding-window-tests"><i class="fa fa-check"></i><b>5.1</b> Sliding window tests</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="association-tests-part-ii.html"><a href="association-tests-part-ii.html#burden-test"><i class="fa fa-check"></i><b>5.1.1</b> Burden test</a></li>
+<li class="chapter" data-level="5.1.2" data-path="association-tests-part-ii.html"><a href="association-tests-part-ii.html#skat-test"><i class="fa fa-check"></i><b>5.1.2</b> SKAT test</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="association-tests-part-ii.html"><a href="association-tests-part-ii.html#exercise-2"><i class="fa fa-check"></i><b>5.2</b> Exercise</a></li>
+<li class="chapter" data-level="5.3" data-path="association-tests-part-ii.html"><a href="association-tests-part-ii.html#solution-2"><i class="fa fa-check"></i><b>5.3</b> Solution</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="ancestry-and-relatedness-inference.html"><a href="ancestry-and-relatedness-inference.html"><i class="fa fa-check"></i><b>6</b> Ancestry and Relatedness Inference</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="ancestry-and-relatedness-inference.html"><a href="ancestry-and-relatedness-inference.html#ld-pruning"><i class="fa fa-check"></i><b>6.1</b> LD-pruning</a></li>
+<li class="chapter" data-level="6.2" data-path="ancestry-and-relatedness-inference.html"><a href="ancestry-and-relatedness-inference.html#computing-a-grm"><i class="fa fa-check"></i><b>6.2</b> Computing a GRM</a></li>
+<li class="chapter" data-level="6.3" data-path="ancestry-and-relatedness-inference.html"><a href="ancestry-and-relatedness-inference.html#de-convoluting-ancestry-and-relatedness"><i class="fa fa-check"></i><b>6.3</b> De-convoluting ancestry and relatedness</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="ancestry-and-relatedness-inference.html"><a href="ancestry-and-relatedness-inference.html#king"><i class="fa fa-check"></i><b>6.3.1</b> KING</a></li>
+<li class="chapter" data-level="6.3.2" data-path="ancestry-and-relatedness-inference.html"><a href="ancestry-and-relatedness-inference.html#pc-air"><i class="fa fa-check"></i><b>6.3.2</b> PC-AiR</a></li>
+<li class="chapter" data-level="6.3.3" data-path="ancestry-and-relatedness-inference.html"><a href="ancestry-and-relatedness-inference.html#pc-relate"><i class="fa fa-check"></i><b>6.3.3</b> PC-Relate</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="ancestry-and-relatedness-inference.html"><a href="ancestry-and-relatedness-inference.html#exercises-1"><i class="fa fa-check"></i><b>6.4</b> Exercises</a></li>
+<li class="chapter" data-level="6.5" data-path="ancestry-and-relatedness-inference.html"><a href="ancestry-and-relatedness-inference.html#solutions-1"><i class="fa fa-check"></i><b>6.5</b> Solutions</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="mixed-models.html"><a href="mixed-models.html"><i class="fa fa-check"></i><b>7</b> Mixed models</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="mixed-models.html"><a href="mixed-models.html#null-model-1"><i class="fa fa-check"></i><b>7.1</b> Null model</a></li>
+<li class="chapter" data-level="7.2" data-path="mixed-models.html"><a href="mixed-models.html#single-variant-tests"><i class="fa fa-check"></i><b>7.2</b> Single-variant tests</a></li>
+<li class="chapter" data-level="7.3" data-path="mixed-models.html"><a href="mixed-models.html#exercise-3"><i class="fa fa-check"></i><b>7.3</b> Exercise</a></li>
+<li class="chapter" data-level="7.4" data-path="mixed-models.html"><a href="mixed-models.html#solution-3"><i class="fa fa-check"></i><b>7.4</b> Solution</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="variant-annotation.html"><a href="variant-annotation.html"><i class="fa fa-check"></i><b>8</b> Variant annotation</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="variant-annotation.html"><a href="variant-annotation.html#using-bioconductor-annotation-resources"><i class="fa fa-check"></i><b>8.1</b> Using Bioconductor annotation resources</a></li>
+<li class="chapter" data-level="8.2" data-path="variant-annotation.html"><a href="variant-annotation.html#aggregating-and-filtering-variants-using-annotation"><i class="fa fa-check"></i><b>8.2</b> Aggregating and filtering variants using annotation</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="aggregate-tests.html"><a href="aggregate-tests.html"><i class="fa fa-check"></i><b>9</b> Aggregate tests</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="aggregate-tests.html"><a href="aggregate-tests.html#aggregate-unit-for-association-testing-exercise"><i class="fa fa-check"></i><b>9.1</b> Aggregate unit for association testing exercise</a></li>
+<li class="chapter" data-level="9.2" data-path="aggregate-tests.html"><a href="aggregate-tests.html#association-testing-with-aggregate-units"><i class="fa fa-check"></i><b>9.2</b> Association testing with aggregate units</a></li>
+<li class="chapter" data-level="9.3" data-path="aggregate-tests.html"><a href="aggregate-tests.html#exercise-4"><i class="fa fa-check"></i><b>9.3</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="exercises-running-a-gwas-workflow.html"><a href="exercises-running-a-gwas-workflow.html"><i class="fa fa-check"></i><b>10</b> Exercises: Running a GWAS workflow</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="exercises-running-a-gwas-workflow.html"><a href="exercises-running-a-gwas-workflow.html#vcf-to-gds"><i class="fa fa-check"></i><b>10.1</b> VCF to GDS</a></li>
+<li class="chapter" data-level="10.2" data-path="exercises-running-a-gwas-workflow.html"><a href="exercises-running-a-gwas-workflow.html#null-model-2"><i class="fa fa-check"></i><b>10.2</b> Null Model</a></li>
+<li class="chapter" data-level="10.3" data-path="exercises-running-a-gwas-workflow.html"><a href="exercises-running-a-gwas-workflow.html#single-variant-test"><i class="fa fa-check"></i><b>10.3</b> Single variant test</a></li>
+<li class="chapter" data-level="10.4" data-path="exercises-running-a-gwas-workflow.html"><a href="exercises-running-a-gwas-workflow.html#analysis-follow-up"><i class="fa fa-check"></i><b>10.4</b> Analysis follow-up</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">SISG 2021 Module 16: Computational Pipeline for WGS Data</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="association-tests---part-ii" class="section level1" number="5">
+<h1><span class="header-section-number">5</span> Association tests - Part II</h1>
+<p>These exercises continue the introduction to genetic association testing. Here, we introduce multiple-variant association tests.</p>
+<div id="sliding-window-tests" class="section level2" number="5.1">
+<h2><span class="header-section-number">5.1</span> Sliding window tests</h2>
+<p>For rare variants, we can perform burden, SKAT, and SMMAT tests using the GENESIS function <code>assocTestAggregate</code>. First, we need to load the null model and <code>AnnotatedDataFrame</code> (sample annotation + phenotype data) that we created in the previous session, and we need to create our <code>SeqVarData</code> object linking the GDS file to the <code>AnnotatedDataFrame</code>.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="association-tests-part-ii.html#cb1-1" aria-hidden="true" tabindex="-1"></a>repo_path <span class="ot">&lt;-</span> <span class="st">&quot;https://github.com/UW-GAC/SISG_2021/raw/master&quot;</span></span>
+<span id="cb1-2"><a href="association-tests-part-ii.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">dir.exists</span>(<span class="st">&quot;data&quot;</span>)) <span class="fu">dir.create</span>(<span class="st">&quot;data&quot;</span>)</span>
+<span id="cb1-3"><a href="association-tests-part-ii.html#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="association-tests-part-ii.html#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># load our null model</span></span>
+<span id="cb1-5"><a href="association-tests-part-ii.html#cb1-5" aria-hidden="true" tabindex="-1"></a>nullmodfile <span class="ot">&lt;-</span> <span class="st">&quot;data/null_model.RData&quot;</span></span>
+<span id="cb1-6"><a href="association-tests-part-ii.html#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(nullmodfile)) <span class="fu">download.file</span>(<span class="fu">file.path</span>(repo_path, nullmodfile), nullmodfile)</span>
+<span id="cb1-7"><a href="association-tests-part-ii.html#cb1-7" aria-hidden="true" tabindex="-1"></a>nullmod <span class="ot">&lt;-</span> <span class="fu">get</span>(<span class="fu">load</span>(nullmodfile))</span>
+<span id="cb1-8"><a href="association-tests-part-ii.html#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="association-tests-part-ii.html#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># load our sample annotation</span></span>
+<span id="cb1-10"><a href="association-tests-part-ii.html#cb1-10" aria-hidden="true" tabindex="-1"></a>annotfile <span class="ot">&lt;-</span> <span class="st">&quot;data/sample_phenotype_annotation.RData&quot;</span></span>
+<span id="cb1-11"><a href="association-tests-part-ii.html#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(annotfile)) <span class="fu">download.file</span>(<span class="fu">file.path</span>(repo_path, annotfile), annotfile)</span>
+<span id="cb1-12"><a href="association-tests-part-ii.html#cb1-12" aria-hidden="true" tabindex="-1"></a>annot <span class="ot">&lt;-</span> <span class="fu">get</span>(<span class="fu">load</span>(annotfile))</span>
+<span id="cb1-13"><a href="association-tests-part-ii.html#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="association-tests-part-ii.html#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(SeqVarTools)</span></code></pre></div>
+<pre><code>## Loading required package: SeqArray</code></pre>
+<pre><code>## Loading required package: gdsfmt</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="association-tests-part-ii.html#cb4-1" aria-hidden="true" tabindex="-1"></a>gdsfile <span class="ot">&lt;-</span> <span class="st">&quot;data/1KG_phase3_subset_chr1.gds&quot;</span></span>
+<span id="cb4-2"><a href="association-tests-part-ii.html#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(gdsfile)) <span class="fu">download.file</span>(<span class="fu">file.path</span>(repo_path, gdsfile), gdsfile)</span>
+<span id="cb4-3"><a href="association-tests-part-ii.html#cb4-3" aria-hidden="true" tabindex="-1"></a>gdsfmt<span class="sc">::</span><span class="fu">showfile.gds</span>(<span class="at">closeall=</span><span class="cn">TRUE</span>) <span class="co"># make sure file is not already open</span></span>
+<span id="cb4-4"><a href="association-tests-part-ii.html#cb4-4" aria-hidden="true" tabindex="-1"></a>gds <span class="ot">&lt;-</span> <span class="fu">seqOpen</span>(gdsfile)</span>
+<span id="cb4-5"><a href="association-tests-part-ii.html#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="association-tests-part-ii.html#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># make the seqVarData object</span></span>
+<span id="cb4-7"><a href="association-tests-part-ii.html#cb4-7" aria-hidden="true" tabindex="-1"></a>seqData <span class="ot">&lt;-</span> <span class="fu">SeqVarData</span>(gds, <span class="at">sampleData=</span>annot)</span></code></pre></div>
+<div id="burden-test" class="section level3" number="5.1.1">
+<h3><span class="header-section-number">5.1.1</span> Burden test</h3>
+<p>In this first example, we perform a burden test. We restrict the test to variants with alternate allele frequency &lt; 0.1. (For real data, this threshold would be lower, perhaps 0.05 or 0.01.) We use a flat weighting scheme – i.e. every variant gets the same weight. We define a sliding window across the genome using a <code>SeqVarWindowIterator</code> object.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="association-tests-part-ii.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make the window iterator object</span></span>
+<span id="cb5-2"><a href="association-tests-part-ii.html#cb5-2" aria-hidden="true" tabindex="-1"></a>iterator <span class="ot">&lt;-</span> <span class="fu">SeqVarWindowIterator</span>(seqData, <span class="at">windowSize=</span><span class="dv">10000</span>, <span class="at">windowShift=</span><span class="dv">5000</span>, <span class="at">verbose=</span><span class="cn">FALSE</span>)</span>
+<span id="cb5-3"><a href="association-tests-part-ii.html#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="association-tests-part-ii.html#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># run the burden test</span></span>
+<span id="cb5-5"><a href="association-tests-part-ii.html#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(GENESIS)</span>
+<span id="cb5-6"><a href="association-tests-part-ii.html#cb5-6" aria-hidden="true" tabindex="-1"></a>assoc <span class="ot">&lt;-</span> <span class="fu">assocTestAggregate</span>(iterator, </span>
+<span id="cb5-7"><a href="association-tests-part-ii.html#cb5-7" aria-hidden="true" tabindex="-1"></a>                            nullmod, </span>
+<span id="cb5-8"><a href="association-tests-part-ii.html#cb5-8" aria-hidden="true" tabindex="-1"></a>                            <span class="at">test=</span><span class="st">&quot;Burden&quot;</span>, </span>
+<span id="cb5-9"><a href="association-tests-part-ii.html#cb5-9" aria-hidden="true" tabindex="-1"></a>                            <span class="at">AF.max=</span><span class="fl">0.1</span>, </span>
+<span id="cb5-10"><a href="association-tests-part-ii.html#cb5-10" aria-hidden="true" tabindex="-1"></a>                            <span class="at">weight.beta=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>), </span>
+<span id="cb5-11"><a href="association-tests-part-ii.html#cb5-11" aria-hidden="true" tabindex="-1"></a>                            <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<p>The function returns the primary results for each window in one table. It also returns a list of tables that contain the variant details for each window tested.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="association-tests-part-ii.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(assoc)</span></code></pre></div>
+<pre><code>## [1] &quot;results&quot;     &quot;variantInfo&quot;</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="association-tests-part-ii.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># results for each window</span></span>
+<span id="cb8-2"><a href="association-tests-part-ii.html#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(assoc<span class="sc">$</span>results)</span></code></pre></div>
+<pre><code>##   chr   start     end n.site n.alt n.sample.alt      Score  Score.SE Score.Stat
+## 1   1  965001  975000      1     9            9 -0.1191236 0.2577712 -0.4621292
+## 2   1  980001  990000      1   111          107 -1.6707553 0.8841849 -1.8895996
+## 3   1 1020001 1030000      1     1            1 -0.2795838 0.1007173 -2.7759261
+## 4   1 1260001 1270000      1     2            2 -0.1105487 0.1085480 -1.0184319
+## 5   1 1465001 1475000      1    16           16  0.3630992 0.3456555  1.0504657
+## 6   1 1730001 1740000      1     5            5 -0.1300405 0.1973175 -0.6590420
+##    Score.pval        Est   Est.SE          PVE
+## 1 0.643988693  -1.792788 3.879410 0.0001905115
+## 2 0.058811535  -2.137109 1.130985 0.0031851797
+## 3 0.005504472 -27.561563 9.928781 0.0068740102
+## 4 0.308472744  -9.382319 9.212515 0.0009252485
+## 5 0.293504065   3.039054 2.893054 0.0009843694
+## 6 0.509868790  -3.340007 5.067973 0.0003874544</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="association-tests-part-ii.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># how many variants in each window?</span></span>
+<span id="cb10-2"><a href="association-tests-part-ii.html#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(assoc<span class="sc">$</span>results<span class="sc">$</span>n.site)</span></code></pre></div>
+<pre><code>## 
+##   0   1   2 
+## 143 963  16</code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="association-tests-part-ii.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># variant details for windows with &gt; 1 variant</span></span>
+<span id="cb12-2"><a href="association-tests-part-ii.html#cb12-2" aria-hidden="true" tabindex="-1"></a>idx <span class="ot">&lt;-</span> <span class="fu">which</span>(assoc<span class="sc">$</span>results<span class="sc">$</span>n.site <span class="sc">&gt;</span> <span class="dv">1</span>)</span>
+<span id="cb12-3"><a href="association-tests-part-ii.html#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(assoc<span class="sc">$</span>variantInfo[idx])</span></code></pre></div>
+<pre><code>## [[1]]
+##   variant.id chr      pos allele.index n.obs         freq MAC weight
+## 1        147   1 27443183            1  1126 0.0013321492   3      1
+## 2        148   1 27448645            1  1126 0.0004440497   1      1
+## 
+## [[2]]
+##   variant.id chr      pos allele.index n.obs         freq MAC weight
+## 1        207   1 41346174            1  1126 0.0004440497   1      1
+## 2        208   1 41352776            1  1126 0.0017761989   4      1
+## 
+## [[3]]
+##   variant.id chr      pos allele.index n.obs         freq MAC weight
+## 1        246   1 51376035            1  1126 0.0004440497   1      1
+## 2        247   1 51381953            1  1126 0.0013321492   3      1
+## 
+## [[4]]
+##   variant.id chr      pos allele.index n.obs         freq MAC weight
+## 1        279   1 57342828            1  1126 0.0062166963  14      1
+## 2        280   1 57344100            1  1126 0.0004440497   1      1
+## 
+## [[5]]
+##   variant.id chr      pos allele.index n.obs        freq MAC weight
+## 1        293   1 59912193            1  1126 0.001776199   4      1
+## 2        294   1 59917976            1  1126 0.003108348   7      1
+## 
+## [[6]]
+##   variant.id chr      pos allele.index n.obs         freq MAC weight
+## 1        356   1 73050313            1  1126 0.0368561279  83      1
+## 2        357   1 73050352            1  1126 0.0008880995   2      1</code></pre>
+<p>We can make a QQ plot of the burden p-values from the main results table.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="association-tests-part-ii.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb14-2"><a href="association-tests-part-ii.html#cb14-2" aria-hidden="true" tabindex="-1"></a>qqPlot <span class="ot">&lt;-</span> <span class="cf">function</span>(pval) {</span>
+<span id="cb14-3"><a href="association-tests-part-ii.html#cb14-3" aria-hidden="true" tabindex="-1"></a>    pval <span class="ot">&lt;-</span> pval[<span class="sc">!</span><span class="fu">is.na</span>(pval)]</span>
+<span id="cb14-4"><a href="association-tests-part-ii.html#cb14-4" aria-hidden="true" tabindex="-1"></a>    n <span class="ot">&lt;-</span> <span class="fu">length</span>(pval)</span>
+<span id="cb14-5"><a href="association-tests-part-ii.html#cb14-5" aria-hidden="true" tabindex="-1"></a>    x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span>n</span>
+<span id="cb14-6"><a href="association-tests-part-ii.html#cb14-6" aria-hidden="true" tabindex="-1"></a>    dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">obs=</span><span class="fu">sort</span>(pval),</span>
+<span id="cb14-7"><a href="association-tests-part-ii.html#cb14-7" aria-hidden="true" tabindex="-1"></a>                      <span class="at">exp=</span>x<span class="sc">/</span>n,</span>
+<span id="cb14-8"><a href="association-tests-part-ii.html#cb14-8" aria-hidden="true" tabindex="-1"></a>                      <span class="at">upper=</span><span class="fu">qbeta</span>(<span class="fl">0.025</span>, x, <span class="fu">rev</span>(x)),</span>
+<span id="cb14-9"><a href="association-tests-part-ii.html#cb14-9" aria-hidden="true" tabindex="-1"></a>                      <span class="at">lower=</span><span class="fu">qbeta</span>(<span class="fl">0.975</span>, x, <span class="fu">rev</span>(x)))</span>
+<span id="cb14-10"><a href="association-tests-part-ii.html#cb14-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb14-11"><a href="association-tests-part-ii.html#cb14-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(<span class="sc">-</span><span class="fu">log10</span>(exp), <span class="sc">-</span><span class="fu">log10</span>(obs))) <span class="sc">+</span></span>
+<span id="cb14-12"><a href="association-tests-part-ii.html#cb14-12" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="sc">-</span><span class="fu">log10</span>(exp), <span class="sc">-</span><span class="fu">log10</span>(upper)), <span class="at">color=</span><span class="st">&quot;gray&quot;</span>) <span class="sc">+</span></span>
+<span id="cb14-13"><a href="association-tests-part-ii.html#cb14-13" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="sc">-</span><span class="fu">log10</span>(exp), <span class="sc">-</span><span class="fu">log10</span>(lower)), <span class="at">color=</span><span class="st">&quot;gray&quot;</span>) <span class="sc">+</span></span>
+<span id="cb14-14"><a href="association-tests-part-ii.html#cb14-14" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb14-15"><a href="association-tests-part-ii.html#cb14-15" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_abline</span>(<span class="at">intercept=</span><span class="dv">0</span>, <span class="at">slope=</span><span class="dv">1</span>, <span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
+<span id="cb14-16"><a href="association-tests-part-ii.html#cb14-16" aria-hidden="true" tabindex="-1"></a>        <span class="fu">xlab</span>(<span class="fu">expression</span>(<span class="fu">paste</span>(<span class="sc">-</span>log[<span class="dv">10</span>], <span class="st">&quot;(expected P)&quot;</span>))) <span class="sc">+</span></span>
+<span id="cb14-17"><a href="association-tests-part-ii.html#cb14-17" aria-hidden="true" tabindex="-1"></a>        <span class="fu">ylab</span>(<span class="fu">expression</span>(<span class="fu">paste</span>(<span class="sc">-</span>log[<span class="dv">10</span>], <span class="st">&quot;(observed P)&quot;</span>))) <span class="sc">+</span></span>
+<span id="cb14-18"><a href="association-tests-part-ii.html#cb14-18" aria-hidden="true" tabindex="-1"></a>        <span class="fu">theme_bw</span>()</span>
+<span id="cb14-19"><a href="association-tests-part-ii.html#cb14-19" aria-hidden="true" tabindex="-1"></a>}    </span>
+<span id="cb14-20"><a href="association-tests-part-ii.html#cb14-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-21"><a href="association-tests-part-ii.html#cb14-21" aria-hidden="true" tabindex="-1"></a><span class="co"># make a QQ plot of the burden test p-values</span></span>
+<span id="cb14-22"><a href="association-tests-part-ii.html#cb14-22" aria-hidden="true" tabindex="-1"></a><span class="fu">qqPlot</span>(assoc<span class="sc">$</span>results<span class="sc">$</span>Score.pval)</span></code></pre></div>
+<p><img src="_main_files/figure-html/assoc_burden_qq-1.png" width="672" /></p>
+</div>
+<div id="skat-test" class="section level3" number="5.1.2">
+<h3><span class="header-section-number">5.1.2</span> SKAT test</h3>
+<p>We can also perform a SKAT test using the Wu weights, which give larger weights to rarer variants.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="association-tests-part-ii.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># reset the iterator to the first window</span></span>
+<span id="cb15-2"><a href="association-tests-part-ii.html#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">resetIterator</span>(iterator)</span></code></pre></div>
+<pre><code>## # of selected variants: 1</code></pre>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="association-tests-part-ii.html#cb17-1" aria-hidden="true" tabindex="-1"></a>assoc <span class="ot">&lt;-</span> <span class="fu">assocTestAggregate</span>(iterator, </span>
+<span id="cb17-2"><a href="association-tests-part-ii.html#cb17-2" aria-hidden="true" tabindex="-1"></a>                            nullmod, </span>
+<span id="cb17-3"><a href="association-tests-part-ii.html#cb17-3" aria-hidden="true" tabindex="-1"></a>                            <span class="at">test=</span><span class="st">&quot;SKAT&quot;</span>, </span>
+<span id="cb17-4"><a href="association-tests-part-ii.html#cb17-4" aria-hidden="true" tabindex="-1"></a>                            <span class="at">AF.max=</span><span class="fl">0.1</span>, </span>
+<span id="cb17-5"><a href="association-tests-part-ii.html#cb17-5" aria-hidden="true" tabindex="-1"></a>                            <span class="at">weight.beta=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">25</span>), </span>
+<span id="cb17-6"><a href="association-tests-part-ii.html#cb17-6" aria-hidden="true" tabindex="-1"></a>                            <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<pre><code>## Loading required namespace: survey</code></pre>
+<pre><code>## Loading required namespace: CompQuadForm</code></pre>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="association-tests-part-ii.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># results for each window</span></span>
+<span id="cb20-2"><a href="association-tests-part-ii.html#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(assoc<span class="sc">$</span>results)</span></code></pre></div>
+<pre><code>##   chr   start     end n.site n.alt n.sample.alt          Q        pval err
+## 1   1  965001  975000      1     9            9   7.318095 0.643988693   0
+## 2   1  980001  990000      1   111          107 154.178289 0.058811535   0
+## 3   1 1020001 1030000      1     1            1  47.823918 0.005504472   0
+## 4   1 1260001 1270000      1     2            2   7.319239 0.308472744   0
+## 5   1 1465001 1475000      1    16           16  58.518665 0.293504065   0
+## 6   1 1730001 1740000      1     5            5   9.499539 0.509868790   0
+##   pval.method
+## 1 integration
+## 2 integration
+## 3 integration
+## 4 integration
+## 5 integration
+## 6 integration</code></pre>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="association-tests-part-ii.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># variant details for windows with &gt; 1 variant</span></span>
+<span id="cb22-2"><a href="association-tests-part-ii.html#cb22-2" aria-hidden="true" tabindex="-1"></a>idx <span class="ot">&lt;-</span> <span class="fu">which</span>(assoc<span class="sc">$</span>results<span class="sc">$</span>n.site <span class="sc">&gt;</span> <span class="dv">1</span>)</span>
+<span id="cb22-3"><a href="association-tests-part-ii.html#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(assoc<span class="sc">$</span>variantInfo[idx])</span></code></pre></div>
+<pre><code>## [[1]]
+##   variant.id chr      pos allele.index n.obs         freq MAC   weight
+## 1        147   1 27443183            1  1126 0.0013321492   3 24.21284
+## 2        148   1 27448645            1  1126 0.0004440497   1 24.73493
+## 
+## [[2]]
+##   variant.id chr      pos allele.index n.obs         freq MAC   weight
+## 1        207   1 41346174            1  1126 0.0004440497   1 24.73493
+## 2        208   1 41352776            1  1126 0.0017761989   4 23.95577
+## 
+## [[3]]
+##   variant.id chr      pos allele.index n.obs         freq MAC   weight
+## 1        246   1 51376035            1  1126 0.0004440497   1 24.73493
+## 2        247   1 51381953            1  1126 0.0013321492   3 24.21284
+## 
+## [[4]]
+##   variant.id chr      pos allele.index n.obs         freq MAC   weight
+## 1        279   1 57342828            1  1126 0.0062166963  14 21.52488
+## 2        280   1 57344100            1  1126 0.0004440497   1 24.73493
+## 
+## [[5]]
+##   variant.id chr      pos allele.index n.obs        freq MAC   weight
+## 1        293   1 59912193            1  1126 0.001776199   4 23.95577
+## 2        294   1 59917976            1  1126 0.003108348   7 23.20016
+## 
+## [[6]]
+##   variant.id chr      pos allele.index n.obs         freq MAC   weight
+## 1        356   1 73050313            1  1126 0.0368561279  83 10.15145
+## 2        357   1 73050352            1  1126 0.0008880995   2 24.47255</code></pre>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="association-tests-part-ii.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make a QQ plot of the SKAT test p-values</span></span>
+<span id="cb24-2"><a href="association-tests-part-ii.html#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qqPlot</span>(assoc<span class="sc">$</span>results<span class="sc">$</span>pval)</span></code></pre></div>
+<p><img src="_main_files/figure-html/assoc_window_skat-1.png" width="672" /></p>
+</div>
+</div>
+<div id="exercise-2" class="section level2" number="5.2">
+<h2><span class="header-section-number">5.2</span> Exercise</h2>
+<p>Perform a sliding window SKAT test for the outcome status. Adjust your model for the covariates sex and study. When performing your SKAT test, use all variants with alternate allele frequency &lt; 20%, and use the Wu weights to give larger weights to rarer variants. Use the same <code>windowSize</code> and <code>windowShift</code> as in the examples. How many windows have &gt;1 variant? Make a QQ plot of the SKAT p-values.</p>
+</div>
+<div id="solution-2" class="section level2" number="5.3">
+<h2><span class="header-section-number">5.3</span> Solution</h2>
+<p>The first step is to fit our null model – since our outcome, status, is a binary variable, we must fit a logistic regression null model using the <code>family = binomial</code> argument. The second step is to create our <code>SeqVarWindowIterator</code> object. The third step is to perform the SKAT test using <code>assocTestAggregate</code> – we can set the maximum alternate allele frequency with the <code>AF.max</code> argument, and we can set the variant weights with the <code>weight.beta</code> argument.</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="association-tests-part-ii.html#cb25-1" aria-hidden="true" tabindex="-1"></a>nullmod.status <span class="ot">&lt;-</span> <span class="fu">fitNullModel</span>(annot, </span>
+<span id="cb25-2"><a href="association-tests-part-ii.html#cb25-2" aria-hidden="true" tabindex="-1"></a>                               <span class="at">outcome=</span><span class="st">&quot;status&quot;</span>, </span>
+<span id="cb25-3"><a href="association-tests-part-ii.html#cb25-3" aria-hidden="true" tabindex="-1"></a>                               <span class="at">covars=</span><span class="fu">c</span>(<span class="st">&quot;sex&quot;</span>, <span class="st">&quot;study&quot;</span>), </span>
+<span id="cb25-4"><a href="association-tests-part-ii.html#cb25-4" aria-hidden="true" tabindex="-1"></a>                               <span class="at">family=</span>binomial, </span>
+<span id="cb25-5"><a href="association-tests-part-ii.html#cb25-5" aria-hidden="true" tabindex="-1"></a>                               <span class="at">verbose=</span><span class="cn">FALSE</span>)</span>
+<span id="cb25-6"><a href="association-tests-part-ii.html#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-7"><a href="association-tests-part-ii.html#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="fu">seqResetFilter</span>(seqData, <span class="at">verbose=</span><span class="cn">FALSE</span>)</span>
+<span id="cb25-8"><a href="association-tests-part-ii.html#cb25-8" aria-hidden="true" tabindex="-1"></a>iterator <span class="ot">&lt;-</span> <span class="fu">SeqVarWindowIterator</span>(seqData, <span class="at">windowSize=</span><span class="dv">10000</span>, <span class="at">windowShift=</span><span class="dv">5000</span>, <span class="at">verbose=</span><span class="cn">FALSE</span>)</span>
+<span id="cb25-9"><a href="association-tests-part-ii.html#cb25-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-10"><a href="association-tests-part-ii.html#cb25-10" aria-hidden="true" tabindex="-1"></a>assoc <span class="ot">&lt;-</span> <span class="fu">assocTestAggregate</span>(iterator, </span>
+<span id="cb25-11"><a href="association-tests-part-ii.html#cb25-11" aria-hidden="true" tabindex="-1"></a>                            nullmod, </span>
+<span id="cb25-12"><a href="association-tests-part-ii.html#cb25-12" aria-hidden="true" tabindex="-1"></a>                            <span class="at">test=</span><span class="st">&quot;SKAT&quot;</span>, </span>
+<span id="cb25-13"><a href="association-tests-part-ii.html#cb25-13" aria-hidden="true" tabindex="-1"></a>                            <span class="at">AF.max=</span><span class="fl">0.2</span>, </span>
+<span id="cb25-14"><a href="association-tests-part-ii.html#cb25-14" aria-hidden="true" tabindex="-1"></a>                            <span class="at">weight.beta=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">25</span>),</span>
+<span id="cb25-15"><a href="association-tests-part-ii.html#cb25-15" aria-hidden="true" tabindex="-1"></a>                            <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb25-16"><a href="association-tests-part-ii.html#cb25-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-17"><a href="association-tests-part-ii.html#cb25-17" aria-hidden="true" tabindex="-1"></a><span class="co"># results for each window</span></span>
+<span id="cb25-18"><a href="association-tests-part-ii.html#cb25-18" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(assoc<span class="sc">$</span>results)</span></code></pre></div>
+<pre><code>##   chr   start     end n.site n.alt n.sample.alt          Q        pval err
+## 1   1  965001  975000      1     9            9   7.318095 0.643988693   0
+## 2   1  980001  990000      1   111          107 154.178289 0.058811535   0
+## 3   1 1020001 1030000      1     1            1  47.823918 0.005504472   0
+## 4   1 1260001 1270000      1     2            2   7.319239 0.308472744   0
+## 5   1 1465001 1475000      1    16           16  58.518665 0.293504065   0
+## 6   1 1730001 1740000      1     5            5   9.499539 0.509868790   0
+##   pval.method
+## 1 integration
+## 2 integration
+## 3 integration
+## 4 integration
+## 5 integration
+## 6 integration</code></pre>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="association-tests-part-ii.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># how many variants in each window?</span></span>
+<span id="cb27-2"><a href="association-tests-part-ii.html#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(assoc<span class="sc">$</span>results<span class="sc">$</span>n.site)</span></code></pre></div>
+<pre><code>## 
+##    0    1    2 
+##   95 1007   20</code></pre>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="association-tests-part-ii.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># variant details for windows with &gt; 1 variant</span></span>
+<span id="cb29-2"><a href="association-tests-part-ii.html#cb29-2" aria-hidden="true" tabindex="-1"></a>idx <span class="ot">&lt;-</span> <span class="fu">which</span>(assoc<span class="sc">$</span>results<span class="sc">$</span>n.site <span class="sc">&gt;</span> <span class="dv">1</span>)</span>
+<span id="cb29-3"><a href="association-tests-part-ii.html#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(assoc<span class="sc">$</span>variantInfo[idx])</span></code></pre></div>
+<pre><code>## [[1]]
+##   variant.id chr      pos allele.index n.obs         freq MAC   weight
+## 1        147   1 27443183            1  1126 0.0013321492   3 24.21284
+## 2        148   1 27448645            1  1126 0.0004440497   1 24.73493
+## 
+## [[2]]
+##   variant.id chr      pos allele.index n.obs         freq MAC   weight
+## 1        207   1 41346174            1  1126 0.0004440497   1 24.73493
+## 2        208   1 41352776            1  1126 0.0017761989   4 23.95577
+## 
+## [[3]]
+##   variant.id chr      pos allele.index n.obs         freq MAC   weight
+## 1        246   1 51376035            1  1126 0.0004440497   1 24.73493
+## 2        247   1 51381953            1  1126 0.0013321492   3 24.21284
+## 
+## [[4]]
+##   variant.id chr      pos allele.index n.obs         freq MAC   weight
+## 1        279   1 57342828            1  1126 0.0062166963  14 21.52488
+## 2        280   1 57344100            1  1126 0.0004440497   1 24.73493
+## 
+## [[5]]
+##   variant.id chr      pos allele.index n.obs        freq MAC   weight
+## 1        293   1 59912193            1  1126 0.001776199   4 23.95577
+## 2        294   1 59917976            1  1126 0.003108348   7 23.20016
+## 
+## [[6]]
+##   variant.id chr      pos allele.index n.obs         freq MAC   weight
+## 1        356   1 73050313            1  1126 0.0368561279  83 10.15145
+## 2        357   1 73050352            1  1126 0.0008880995   2 24.47255</code></pre>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="association-tests-part-ii.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make a QQ plot of the SKAT test p-values</span></span>
+<span id="cb31-2"><a href="association-tests-part-ii.html#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qqPlot</span>(assoc<span class="sc">$</span>results<span class="sc">$</span>pval)</span></code></pre></div>
+<p><img src="_main_files/figure-html/exercise_sliding-1.png" width="672" /></p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="association-tests-part-ii.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seqClose</span>(gds)</span></code></pre></div>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="association-tests-part-i.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="ancestry-and-relatedness-inference.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

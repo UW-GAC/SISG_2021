@@ -4,34 +4,35 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>9 Mixed models | SISG Module 17: Computational Pipeline for WGS Data</title>
-  <meta name="description" content="Course materials for SISG Module 17" />
-  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+  <title>7 Mixed models | SISG 2021 Module 16: Computational Pipeline for WGS Data</title>
+  <meta name="description" content="Course materials for SISG Module 16" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="9 Mixed models | SISG Module 17: Computational Pipeline for WGS Data" />
+  <meta property="og:title" content="7 Mixed models | SISG 2021 Module 16: Computational Pipeline for WGS Data" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="Course materials for SISG Module 17" />
-  <meta name="github-repo" content="UW-GAC/SISG_2020" />
+  <meta property="og:description" content="Course materials for SISG Module 16" />
+  <meta name="github-repo" content="UW-GAC/SISG_2021" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="9 Mixed models | SISG Module 17: Computational Pipeline for WGS Data" />
+  <meta name="twitter:title" content="7 Mixed models | SISG 2021 Module 16: Computational Pipeline for WGS Data" />
   
-  <meta name="twitter:description" content="Course materials for SISG Module 17" />
+  <meta name="twitter:description" content="Course materials for SISG Module 16" />
   
 
 
 
-<meta name="date" content="2020-07-27" />
+<meta name="date" content="2021-07-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="pc-relate.html"/>
-<link rel="next" href="mixed-models-solutions.html"/>
+<link rel="prev" href="ancestry-and-relatedness-inference.html"/>
+<link rel="next" href="variant-annotation.html"/>
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -49,45 +50,75 @@
 
 
 
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 </head>
 
@@ -101,63 +132,91 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
       <nav role="navigation">
 
 <ul class="summary">
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
 <li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#schedule"><i class="fa fa-check"></i><b>1.1</b> Schedule</a></li>
 <li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#r-packages-used"><i class="fa fa-check"></i><b>1.2</b> R packages used</a></li>
 <li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#resources"><i class="fa fa-check"></i><b>1.3</b> Resources</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="gds-format.html"><a href="gds-format.html"><i class="fa fa-check"></i><b>2</b> GDS format</a><ul>
-<li class="chapter" data-level="2.1" data-path="gds-format.html"><a href="gds-format.html#exploring-a-gds-file"><i class="fa fa-check"></i><b>2.1</b> Exploring a GDS file</a></li>
-<li class="chapter" data-level="2.2" data-path="gds-format.html"><a href="gds-format.html#exercises"><i class="fa fa-check"></i><b>2.2</b> Exercises</a></li>
+<li class="chapter" data-level="2" data-path="gds-format.html"><a href="gds-format.html"><i class="fa fa-check"></i><b>2</b> GDS format</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="gds-format.html"><a href="gds-format.html#convert-a-vcf-to-gds"><i class="fa fa-check"></i><b>2.1</b> Convert a VCF to GDS</a></li>
+<li class="chapter" data-level="2.2" data-path="gds-format.html"><a href="gds-format.html#exploring-a-gds-file"><i class="fa fa-check"></i><b>2.2</b> Exploring a GDS file</a></li>
+<li class="chapter" data-level="2.3" data-path="gds-format.html"><a href="gds-format.html#exercises"><i class="fa fa-check"></i><b>2.3</b> Exercises</a></li>
+<li class="chapter" data-level="2.4" data-path="gds-format.html"><a href="gds-format.html#solutions"><i class="fa fa-check"></i><b>2.4</b> Solutions</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="gds-solutions.html"><a href="gds-solutions.html"><i class="fa fa-check"></i><b>3</b> GDS - Solutions</a></li>
-<li class="chapter" data-level="4" data-path="phenotype-harmonization.html"><a href="phenotype-harmonization.html"><i class="fa fa-check"></i><b>4</b> Phenotype Harmonization</a><ul>
-<li class="chapter" data-level="4.1" data-path="phenotype-harmonization.html"><a href="phenotype-harmonization.html#inspect-individual-study-data-in-r"><i class="fa fa-check"></i><b>4.1</b> Inspect individual study data in R</a></li>
-<li class="chapter" data-level="4.2" data-path="phenotype-harmonization.html"><a href="phenotype-harmonization.html#compare-study-values"><i class="fa fa-check"></i><b>4.2</b> Compare study values</a></li>
-<li class="chapter" data-level="4.3" data-path="phenotype-harmonization.html"><a href="phenotype-harmonization.html#using-null-models-to-compare-studies"><i class="fa fa-check"></i><b>4.3</b> Using null models to compare studies</a><ul>
-<li class="chapter" data-level="4.3.1" data-path="phenotype-harmonization.html"><a href="phenotype-harmonization.html#create-an-annotated-data-frame"><i class="fa fa-check"></i><b>4.3.1</b> Create an Annotated Data Frame</a></li>
-<li class="chapter" data-level="4.3.2" data-path="phenotype-harmonization.html"><a href="phenotype-harmonization.html#fit-a-null-model-without-study"><i class="fa fa-check"></i><b>4.3.2</b> Fit a null model without study</a></li>
-<li class="chapter" data-level="4.3.3" data-path="phenotype-harmonization.html"><a href="phenotype-harmonization.html#fit-a-model-with-study"><i class="fa fa-check"></i><b>4.3.3</b> Fit a model with study</a></li>
+<li class="chapter" data-level="3" data-path="phenotype-harmonization.html"><a href="phenotype-harmonization.html"><i class="fa fa-check"></i><b>3</b> Phenotype Harmonization</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="phenotype-harmonization.html"><a href="phenotype-harmonization.html#inspect-individual-study-data-in-r"><i class="fa fa-check"></i><b>3.1</b> Inspect individual study data in R</a></li>
+<li class="chapter" data-level="3.2" data-path="phenotype-harmonization.html"><a href="phenotype-harmonization.html#compare-study-values"><i class="fa fa-check"></i><b>3.2</b> Compare study values</a></li>
+<li class="chapter" data-level="3.3" data-path="phenotype-harmonization.html"><a href="phenotype-harmonization.html#using-null-models-to-compare-studies"><i class="fa fa-check"></i><b>3.3</b> Using null models to compare studies</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="phenotype-harmonization.html"><a href="phenotype-harmonization.html#create-an-annotated-data-frame"><i class="fa fa-check"></i><b>3.3.1</b> Create an Annotated Data Frame</a></li>
+<li class="chapter" data-level="3.3.2" data-path="phenotype-harmonization.html"><a href="phenotype-harmonization.html#fit-a-null-model-without-study"><i class="fa fa-check"></i><b>3.3.2</b> Fit a null model without study</a></li>
+<li class="chapter" data-level="3.3.3" data-path="phenotype-harmonization.html"><a href="phenotype-harmonization.html#fit-a-model-with-study"><i class="fa fa-check"></i><b>3.3.3</b> Fit a model with study</a></li>
 </ul></li>
-<li class="chapter" data-level="4.4" data-path="phenotype-harmonization.html"><a href="phenotype-harmonization.html#final-considerations"><i class="fa fa-check"></i><b>4.4</b> Final considerations</a></li>
+<li class="chapter" data-level="3.4" data-path="phenotype-harmonization.html"><a href="phenotype-harmonization.html#final-considerations"><i class="fa fa-check"></i><b>3.4</b> Final considerations</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="association-tests.html"><a href="association-tests.html"><i class="fa fa-check"></i><b>5</b> Association tests</a><ul>
-<li class="chapter" data-level="5.1" data-path="association-tests.html"><a href="association-tests.html#null-model"><i class="fa fa-check"></i><b>5.1</b> Null model</a></li>
-<li class="chapter" data-level="5.2" data-path="association-tests.html"><a href="association-tests.html#single-variant-tests"><i class="fa fa-check"></i><b>5.2</b> Single-variant tests</a></li>
-<li class="chapter" data-level="5.3" data-path="association-tests.html"><a href="association-tests.html#exercises-1"><i class="fa fa-check"></i><b>5.3</b> Exercises</a></li>
-<li class="chapter" data-level="5.4" data-path="association-tests.html"><a href="association-tests.html#sliding-window-tests"><i class="fa fa-check"></i><b>5.4</b> Sliding window tests</a></li>
-<li class="chapter" data-level="5.5" data-path="association-tests.html"><a href="association-tests.html#exercise"><i class="fa fa-check"></i><b>5.5</b> Exercise</a></li>
+<li class="chapter" data-level="4" data-path="association-tests-part-i.html"><a href="association-tests-part-i.html"><i class="fa fa-check"></i><b>4</b> Association tests - Part I</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="association-tests-part-i.html"><a href="association-tests-part-i.html#null-model"><i class="fa fa-check"></i><b>4.1</b> Null model</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="association-tests-part-i.html"><a href="association-tests-part-i.html#prepare-the-data"><i class="fa fa-check"></i><b>4.1.1</b> Prepare the data</a></li>
+<li class="chapter" data-level="4.1.2" data-path="association-tests-part-i.html"><a href="association-tests-part-i.html#fit-the-null-model"><i class="fa fa-check"></i><b>4.1.2</b> Fit the null model</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="association-tests-solutions.html"><a href="association-tests-solutions.html"><i class="fa fa-check"></i><b>6</b> Association tests - Solutions</a></li>
-<li class="chapter" data-level="7" data-path="computing-a-grm.html"><a href="computing-a-grm.html"><i class="fa fa-check"></i><b>7</b> Computing a GRM</a></li>
-<li class="chapter" data-level="8" data-path="pc-relate.html"><a href="pc-relate.html"><i class="fa fa-check"></i><b>8</b> PC-Relate</a><ul>
-<li class="chapter" data-level="8.1" data-path="pc-relate.html"><a href="pc-relate.html#king"><i class="fa fa-check"></i><b>8.1</b> KING</a></li>
-<li class="chapter" data-level="8.2" data-path="pc-relate.html"><a href="pc-relate.html#pc-air"><i class="fa fa-check"></i><b>8.2</b> PC-AiR</a></li>
-<li class="chapter" data-level="8.3" data-path="pc-relate.html"><a href="pc-relate.html#pc-relate-1"><i class="fa fa-check"></i><b>8.3</b> PC-Relate</a></li>
-<li class="chapter" data-level="8.4" data-path="pc-relate.html"><a href="pc-relate.html#comparison-with-pedigree"><i class="fa fa-check"></i><b>8.4</b> Comparison with pedigree</a></li>
-<li class="chapter" data-level="8.5" data-path="pc-relate.html"><a href="pc-relate.html#exercise-1"><i class="fa fa-check"></i><b>8.5</b> Exercise</a></li>
+<li class="chapter" data-level="4.2" data-path="association-tests-part-i.html"><a href="association-tests-part-i.html#exercise"><i class="fa fa-check"></i><b>4.2</b> Exercise</a></li>
+<li class="chapter" data-level="4.3" data-path="association-tests-part-i.html"><a href="association-tests-part-i.html#solution"><i class="fa fa-check"></i><b>4.3</b> Solution</a></li>
+<li class="chapter" data-level="4.4" data-path="association-tests-part-i.html"><a href="association-tests-part-i.html#single-variant-association-tests"><i class="fa fa-check"></i><b>4.4</b> Single-variant association tests</a></li>
+<li class="chapter" data-level="4.5" data-path="association-tests-part-i.html"><a href="association-tests-part-i.html#exercise-1"><i class="fa fa-check"></i><b>4.5</b> Exercise</a></li>
+<li class="chapter" data-level="4.6" data-path="association-tests-part-i.html"><a href="association-tests-part-i.html#solution-1"><i class="fa fa-check"></i><b>4.6</b> Solution</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="mixed-models.html"><a href="mixed-models.html"><i class="fa fa-check"></i><b>9</b> Mixed models</a><ul>
-<li class="chapter" data-level="9.1" data-path="mixed-models.html"><a href="mixed-models.html#null-model-1"><i class="fa fa-check"></i><b>9.1</b> Null model</a></li>
-<li class="chapter" data-level="9.2" data-path="mixed-models.html"><a href="mixed-models.html#single-variant-tests-1"><i class="fa fa-check"></i><b>9.2</b> Single-variant tests</a></li>
-<li class="chapter" data-level="9.3" data-path="mixed-models.html"><a href="mixed-models.html#exercise-2"><i class="fa fa-check"></i><b>9.3</b> Exercise</a></li>
+<li class="chapter" data-level="5" data-path="association-tests-part-ii.html"><a href="association-tests-part-ii.html"><i class="fa fa-check"></i><b>5</b> Association tests - Part II</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="association-tests-part-ii.html"><a href="association-tests-part-ii.html#sliding-window-tests"><i class="fa fa-check"></i><b>5.1</b> Sliding window tests</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="association-tests-part-ii.html"><a href="association-tests-part-ii.html#burden-test"><i class="fa fa-check"></i><b>5.1.1</b> Burden test</a></li>
+<li class="chapter" data-level="5.1.2" data-path="association-tests-part-ii.html"><a href="association-tests-part-ii.html#skat-test"><i class="fa fa-check"></i><b>5.1.2</b> SKAT test</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="mixed-models-solutions.html"><a href="mixed-models-solutions.html"><i class="fa fa-check"></i><b>10</b> Mixed models - Solutions</a></li>
-<li class="chapter" data-level="11" data-path="variant-annotation.html"><a href="variant-annotation.html"><i class="fa fa-check"></i><b>11</b> Variant annotation</a><ul>
-<li class="chapter" data-level="11.1" data-path="variant-annotation.html"><a href="variant-annotation.html#using-bioconductor-annotation-resources"><i class="fa fa-check"></i><b>11.1</b> Using Bioconductor annotation resources</a></li>
-<li class="chapter" data-level="11.2" data-path="variant-annotation.html"><a href="variant-annotation.html#aggregating-and-filtering-variants-using-annotation"><i class="fa fa-check"></i><b>11.2</b> Aggregating and filtering variants using annotation</a></li>
+<li class="chapter" data-level="5.2" data-path="association-tests-part-ii.html"><a href="association-tests-part-ii.html#exercise-2"><i class="fa fa-check"></i><b>5.2</b> Exercise</a></li>
+<li class="chapter" data-level="5.3" data-path="association-tests-part-ii.html"><a href="association-tests-part-ii.html#solution-2"><i class="fa fa-check"></i><b>5.3</b> Solution</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="aggregate-tests.html"><a href="aggregate-tests.html"><i class="fa fa-check"></i><b>12</b> Aggregate tests</a><ul>
-<li class="chapter" data-level="12.1" data-path="aggregate-tests.html"><a href="aggregate-tests.html#aggregate-unit-for-association-testing-exercise"><i class="fa fa-check"></i><b>12.1</b> Aggregate unit for association testing exercise</a></li>
-<li class="chapter" data-level="12.2" data-path="aggregate-tests.html"><a href="aggregate-tests.html#association-testing-with-aggregate-units"><i class="fa fa-check"></i><b>12.2</b> Association testing with aggregate units</a></li>
-<li class="chapter" data-level="12.3" data-path="aggregate-tests.html"><a href="aggregate-tests.html#exercise-3"><i class="fa fa-check"></i><b>12.3</b> Exercise</a></li>
+<li class="chapter" data-level="6" data-path="ancestry-and-relatedness-inference.html"><a href="ancestry-and-relatedness-inference.html"><i class="fa fa-check"></i><b>6</b> Ancestry and Relatedness Inference</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="ancestry-and-relatedness-inference.html"><a href="ancestry-and-relatedness-inference.html#ld-pruning"><i class="fa fa-check"></i><b>6.1</b> LD-pruning</a></li>
+<li class="chapter" data-level="6.2" data-path="ancestry-and-relatedness-inference.html"><a href="ancestry-and-relatedness-inference.html#computing-a-grm"><i class="fa fa-check"></i><b>6.2</b> Computing a GRM</a></li>
+<li class="chapter" data-level="6.3" data-path="ancestry-and-relatedness-inference.html"><a href="ancestry-and-relatedness-inference.html#de-convoluting-ancestry-and-relatedness"><i class="fa fa-check"></i><b>6.3</b> De-convoluting ancestry and relatedness</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="ancestry-and-relatedness-inference.html"><a href="ancestry-and-relatedness-inference.html#king"><i class="fa fa-check"></i><b>6.3.1</b> KING</a></li>
+<li class="chapter" data-level="6.3.2" data-path="ancestry-and-relatedness-inference.html"><a href="ancestry-and-relatedness-inference.html#pc-air"><i class="fa fa-check"></i><b>6.3.2</b> PC-AiR</a></li>
+<li class="chapter" data-level="6.3.3" data-path="ancestry-and-relatedness-inference.html"><a href="ancestry-and-relatedness-inference.html#pc-relate"><i class="fa fa-check"></i><b>6.3.3</b> PC-Relate</a></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="annotation-solutions.html"><a href="annotation-solutions.html"><i class="fa fa-check"></i><b>13</b> Annotation - Solutions</a></li>
-<li class="chapter" data-level="14" data-path="exercises-running-a-gwas-workflow.html"><a href="exercises-running-a-gwas-workflow.html"><i class="fa fa-check"></i><b>14</b> Exercises: Running a GWAS workflow</a><ul>
-<li class="chapter" data-level="14.1" data-path="exercises-running-a-gwas-workflow.html"><a href="exercises-running-a-gwas-workflow.html#vcf-to-gds"><i class="fa fa-check"></i><b>14.1</b> VCF to GDS</a></li>
-<li class="chapter" data-level="14.2" data-path="exercises-running-a-gwas-workflow.html"><a href="exercises-running-a-gwas-workflow.html#null-model-2"><i class="fa fa-check"></i><b>14.2</b> Null Model</a></li>
-<li class="chapter" data-level="14.3" data-path="exercises-running-a-gwas-workflow.html"><a href="exercises-running-a-gwas-workflow.html#single-variant-test"><i class="fa fa-check"></i><b>14.3</b> Single variant test</a></li>
-<li class="chapter" data-level="14.4" data-path="exercises-running-a-gwas-workflow.html"><a href="exercises-running-a-gwas-workflow.html#analysis-follow-up"><i class="fa fa-check"></i><b>14.4</b> Analysis follow-up</a></li>
+<li class="chapter" data-level="6.4" data-path="ancestry-and-relatedness-inference.html"><a href="ancestry-and-relatedness-inference.html#exercises-1"><i class="fa fa-check"></i><b>6.4</b> Exercises</a></li>
+<li class="chapter" data-level="6.5" data-path="ancestry-and-relatedness-inference.html"><a href="ancestry-and-relatedness-inference.html#solutions-1"><i class="fa fa-check"></i><b>6.5</b> Solutions</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="mixed-models.html"><a href="mixed-models.html"><i class="fa fa-check"></i><b>7</b> Mixed models</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="mixed-models.html"><a href="mixed-models.html#null-model-1"><i class="fa fa-check"></i><b>7.1</b> Null model</a></li>
+<li class="chapter" data-level="7.2" data-path="mixed-models.html"><a href="mixed-models.html#single-variant-tests"><i class="fa fa-check"></i><b>7.2</b> Single-variant tests</a></li>
+<li class="chapter" data-level="7.3" data-path="mixed-models.html"><a href="mixed-models.html#exercise-3"><i class="fa fa-check"></i><b>7.3</b> Exercise</a></li>
+<li class="chapter" data-level="7.4" data-path="mixed-models.html"><a href="mixed-models.html#solution-3"><i class="fa fa-check"></i><b>7.4</b> Solution</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="variant-annotation.html"><a href="variant-annotation.html"><i class="fa fa-check"></i><b>8</b> Variant annotation</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="variant-annotation.html"><a href="variant-annotation.html#using-bioconductor-annotation-resources"><i class="fa fa-check"></i><b>8.1</b> Using Bioconductor annotation resources</a></li>
+<li class="chapter" data-level="8.2" data-path="variant-annotation.html"><a href="variant-annotation.html#aggregating-and-filtering-variants-using-annotation"><i class="fa fa-check"></i><b>8.2</b> Aggregating and filtering variants using annotation</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="aggregate-tests.html"><a href="aggregate-tests.html"><i class="fa fa-check"></i><b>9</b> Aggregate tests</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="aggregate-tests.html"><a href="aggregate-tests.html#aggregate-unit-for-association-testing-exercise"><i class="fa fa-check"></i><b>9.1</b> Aggregate unit for association testing exercise</a></li>
+<li class="chapter" data-level="9.2" data-path="aggregate-tests.html"><a href="aggregate-tests.html#association-testing-with-aggregate-units"><i class="fa fa-check"></i><b>9.2</b> Association testing with aggregate units</a></li>
+<li class="chapter" data-level="9.3" data-path="aggregate-tests.html"><a href="aggregate-tests.html#exercise-4"><i class="fa fa-check"></i><b>9.3</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="exercises-running-a-gwas-workflow.html"><a href="exercises-running-a-gwas-workflow.html"><i class="fa fa-check"></i><b>10</b> Exercises: Running a GWAS workflow</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="exercises-running-a-gwas-workflow.html"><a href="exercises-running-a-gwas-workflow.html#vcf-to-gds"><i class="fa fa-check"></i><b>10.1</b> VCF to GDS</a></li>
+<li class="chapter" data-level="10.2" data-path="exercises-running-a-gwas-workflow.html"><a href="exercises-running-a-gwas-workflow.html#null-model-2"><i class="fa fa-check"></i><b>10.2</b> Null Model</a></li>
+<li class="chapter" data-level="10.3" data-path="exercises-running-a-gwas-workflow.html"><a href="exercises-running-a-gwas-workflow.html#single-variant-test"><i class="fa fa-check"></i><b>10.3</b> Single variant test</a></li>
+<li class="chapter" data-level="10.4" data-path="exercises-running-a-gwas-workflow.html"><a href="exercises-running-a-gwas-workflow.html#analysis-follow-up"><i class="fa fa-check"></i><b>10.4</b> Analysis follow-up</a></li>
 </ul></li>
 </ul>
 
@@ -168,7 +227,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">SISG Module 17: Computational Pipeline for WGS Data</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">SISG 2021 Module 16: Computational Pipeline for WGS Data</a>
           </h1>
         </div>
 
@@ -176,20 +235,45 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="mixed-models" class="section level1">
-<h1><span class="header-section-number">9</span> Mixed models</h1>
+<div id="mixed-models" class="section level1" number="7">
+<h1><span class="header-section-number">7</span> Mixed models</h1>
 <p>These exercises introduce relatedness to association testing with mixed models.</p>
-<div id="null-model-1" class="section level2">
-<h2><span class="header-section-number">9.1</span> Null model</h2>
-<p>The first step in an association test is to fit the null model. In addition to the <code>AnnotatedDataFrame</code> with phenotypes we used previously, we will need the principal components and kinship. We will use the first five PCs to adjust for ancestry.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># sample annotation</span>
-repo_path &lt;-<span class="st"> &quot;https://github.com/UW-GAC/SISG_2020/raw/master&quot;</span>
-<span class="cf">if</span> (<span class="op">!</span><span class="kw">dir.exists</span>(<span class="st">&quot;data&quot;</span>)) <span class="kw">dir.create</span>(<span class="st">&quot;data&quot;</span>)
-sampfile &lt;-<span class="st"> &quot;data/sample_phenotype_annotation.RData&quot;</span>
-<span class="cf">if</span> (<span class="op">!</span><span class="kw">file.exists</span>(sampfile)) <span class="kw">download.file</span>(<span class="kw">file.path</span>(repo_path, sampfile), sampfile)
-annot &lt;-<span class="st"> </span>TopmedPipeline<span class="op">::</span><span class="kw">getobj</span>(sampfile)
-<span class="kw">library</span>(Biobase)
-<span class="kw">head</span>(<span class="kw">pData</span>(annot))</code></pre></div>
+<div id="null-model-1" class="section level2" number="7.1">
+<h2><span class="header-section-number">7.1</span> Null model</h2>
+<p>Recall that the first step in our association testing procedure is to fit the null model. In addition to the <code>AnnotatedDataFrame</code> with phenotype data that we used previously, we will also use the ancestry principal components and kinship estimates we created in the previous session. We will use the first 4 PCs to adjust for ancestry.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="mixed-models.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># sample annotation</span></span>
+<span id="cb1-2"><a href="mixed-models.html#cb1-2" aria-hidden="true" tabindex="-1"></a>repo_path <span class="ot">&lt;-</span> <span class="st">&quot;https://github.com/UW-GAC/SISG_2021/raw/master&quot;</span></span>
+<span id="cb1-3"><a href="mixed-models.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">dir.exists</span>(<span class="st">&quot;data&quot;</span>)) <span class="fu">dir.create</span>(<span class="st">&quot;data&quot;</span>)</span>
+<span id="cb1-4"><a href="mixed-models.html#cb1-4" aria-hidden="true" tabindex="-1"></a>sampfile <span class="ot">&lt;-</span> <span class="st">&quot;data/sample_phenotype_annotation.RData&quot;</span></span>
+<span id="cb1-5"><a href="mixed-models.html#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(sampfile)) <span class="fu">download.file</span>(<span class="fu">file.path</span>(repo_path, sampfile), sampfile)</span>
+<span id="cb1-6"><a href="mixed-models.html#cb1-6" aria-hidden="true" tabindex="-1"></a>annot <span class="ot">&lt;-</span> <span class="fu">get</span>(<span class="fu">load</span>(sampfile))</span>
+<span id="cb1-7"><a href="mixed-models.html#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Biobase)</span></code></pre></div>
+<pre><code>## Loading required package: BiocGenerics</code></pre>
+<pre><code>## Loading required package: parallel</code></pre>
+<pre><code>## 
+## Attaching package: &#39;BiocGenerics&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:parallel&#39;:
+## 
+##     clusterApply, clusterApplyLB, clusterCall, clusterEvalQ,
+##     clusterExport, clusterMap, parApply, parCapply, parLapply,
+##     parLapplyLB, parRapply, parSapply, parSapplyLB</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     IQR, mad, sd, var, xtabs</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     anyDuplicated, append, as.data.frame, basename, cbind, colnames,
+##     dirname, do.call, duplicated, eval, evalq, Filter, Find, get, grep,
+##     grepl, intersect, is.unsorted, lapply, Map, mapply, match, mget,
+##     order, paste, pmax, pmax.int, pmin, pmin.int, Position, rank,
+##     rbind, Reduce, rownames, sapply, setdiff, sort, table, tapply,
+##     union, unique, unsplit, which.max, which.min</code></pre>
+<pre><code>## Welcome to Bioconductor
+## 
+##     Vignettes contain introductory material; view with
+##     &#39;browseVignettes()&#39;. To cite Bioconductor, see
+##     &#39;citation(&quot;Biobase&quot;)&#39;, and for packages &#39;citation(&quot;pkgname&quot;)&#39;.</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="mixed-models.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">pData</span>(annot))</span></code></pre></div>
 <pre><code>##   sample.id subject.id Population          Population.Description sex status
 ## 1   HG00096    HG00096        GBR British in England and Scotland   M      0
 ## 2   HG00097    HG00097        GBR British in England and Scotland   F      1
@@ -204,78 +288,259 @@ annot &lt;-<span class="st"> </span>TopmedPipeline<span class="op">::</span><spa
 ## 4  45 150.622 study_3
 ## 5  40 177.800 study_3
 ## 6  49 169.100 study_1</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># load the PCs</span>
-pcfile &lt;-<span class="st"> &quot;data/pcs.RData&quot;</span>
-<span class="cf">if</span> (<span class="op">!</span><span class="kw">file.exists</span>(pcfile)) <span class="kw">download.file</span>(<span class="kw">file.path</span>(repo_path, pcfile), pcfile)
-pcs &lt;-<span class="st"> </span>TopmedPipeline<span class="op">::</span><span class="kw">getobj</span>(pcfile)
-pcs &lt;-<span class="st"> </span>pcs[,<span class="kw">c</span>(<span class="st">&quot;sample.id&quot;</span>, <span class="st">&quot;PC1&quot;</span>, <span class="st">&quot;PC2&quot;</span>, <span class="st">&quot;PC3&quot;</span>, <span class="st">&quot;PC4&quot;</span>, <span class="st">&quot;PC5&quot;</span>)]
-<span class="kw">head</span>(pcs)</code></pre></div>
-<pre><code>##   sample.id         PC1         PC2          PC3          PC4         PC5
-## 1   HG00096 -0.02098435 -0.03716014 -0.007539234 -0.004984352 -0.03920777
-## 2   HG00097 -0.01929295 -0.03289496 -0.009176117 -0.005328914 -0.03297778
-## 3   HG00099 -0.02042444 -0.03371227 -0.010983795 -0.004856350 -0.03208595
-## 4   HG00100 -0.01970348 -0.03978044 -0.013302258 -0.004340841 -0.04208343
-## 5   HG00101 -0.01959563 -0.03431033 -0.008571074 -0.002220712 -0.03260015
-## 6   HG00102 -0.02041573 -0.03941142 -0.010696762  0.001506639 -0.02913023</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># add PCs to the sample annotation</span>
-dat &lt;-<span class="st"> </span><span class="kw">left_join</span>(<span class="kw">pData</span>(annot), pcs, <span class="dt">by=</span><span class="st">&quot;sample.id&quot;</span>)
-<span class="kw">pData</span>(annot) &lt;-<span class="st"> </span>dat
-<span class="kw">save</span>(annot, <span class="dt">file=</span><span class="st">&quot;data/sample_phenotype_pcs.RData&quot;</span>)</code></pre></div>
-<p>We create a kinship matrix from the output of <code>pcrelate</code>. We multiply the kinship values by 2 to get values equivalent to a GRM. This matrix is represented in R as a symmetric matrix object from the Matrix package.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">kinfile &lt;-<span class="st"> &quot;data/pcrelate_kinship.RData&quot;</span>
-<span class="cf">if</span> (<span class="op">!</span><span class="kw">file.exists</span>(kinfile)) <span class="kw">download.file</span>(<span class="kw">file.path</span>(repo_path, kinfile), kinfile)
-pcrel &lt;-<span class="st"> </span>TopmedPipeline<span class="op">::</span><span class="kw">getobj</span>(kinfile)
-<span class="kw">library</span>(GENESIS)
-kinship &lt;-<span class="st"> </span><span class="kw">pcrelateToMatrix</span>(pcrel, <span class="dt">scaleKin=</span><span class="dv">2</span>, <span class="dt">verbose=</span><span class="ot">FALSE</span>)
-<span class="kw">dim</span>(kinship)</code></pre></div>
-<pre><code>## [1] 100 100</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">kinship[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>]</code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="mixed-models.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load the ancestry PCs</span></span>
+<span id="cb11-2"><a href="mixed-models.html#cb11-2" aria-hidden="true" tabindex="-1"></a>pcfile <span class="ot">&lt;-</span> <span class="st">&quot;data/pcs.RData&quot;</span></span>
+<span id="cb11-3"><a href="mixed-models.html#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(pcfile)) <span class="fu">download.file</span>(<span class="fu">file.path</span>(repo_path, pcfile), pcfile)</span>
+<span id="cb11-4"><a href="mixed-models.html#cb11-4" aria-hidden="true" tabindex="-1"></a>pcs <span class="ot">&lt;-</span> <span class="fu">get</span>(<span class="fu">load</span>(pcfile))</span>
+<span id="cb11-5"><a href="mixed-models.html#cb11-5" aria-hidden="true" tabindex="-1"></a>pcs <span class="ot">&lt;-</span> pcs[,<span class="fu">c</span>(<span class="st">&quot;sample.id&quot;</span>, <span class="st">&quot;PC1&quot;</span>, <span class="st">&quot;PC2&quot;</span>, <span class="st">&quot;PC3&quot;</span>, <span class="st">&quot;PC4&quot;</span>)]</span>
+<span id="cb11-6"><a href="mixed-models.html#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(pcs)</span></code></pre></div>
+<pre><code>##         sample.id         PC1         PC2         PC3          PC4
+## HG00096   HG00096 -0.02189121 -0.03637024 -0.01328390  0.005533490
+## HG00097   HG00097 -0.02002924 -0.03285711 -0.01207786  0.005390183
+## HG00099   HG00099 -0.02088688 -0.03330825 -0.01510526  0.004499776
+## HG00100   HG00100 -0.02031270 -0.03975678 -0.01908062  0.004291604
+## HG00101   HG00101 -0.02038482 -0.03437442 -0.01328870  0.002310498
+## HG00102   HG00102 -0.02144725 -0.03970277 -0.01391896 -0.001245155</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="mixed-models.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># merge PCs with the sample annotation</span></span>
+<span id="cb13-2"><a href="mixed-models.html#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code></pre></div>
+<pre><code>## 
+## Attaching package: &#39;dplyr&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:Biobase&#39;:
+## 
+##     combine</code></pre>
+<pre><code>## The following objects are masked from &#39;package:BiocGenerics&#39;:
+## 
+##     combine, intersect, setdiff, union</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     filter, lag</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     intersect, setdiff, setequal, union</code></pre>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="mixed-models.html#cb19-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">left_join</span>(<span class="fu">pData</span>(annot), pcs, <span class="at">by=</span><span class="st">&quot;sample.id&quot;</span>)</span>
+<span id="cb19-2"><a href="mixed-models.html#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co"># update the AnnotatedDataFrame</span></span>
+<span id="cb19-3"><a href="mixed-models.html#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">pData</span>(annot) <span class="ot">&lt;-</span> dat</span>
+<span id="cb19-4"><a href="mixed-models.html#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(annot, <span class="at">file=</span><span class="st">&quot;data/sample_phenotype_pcs.RData&quot;</span>)</span></code></pre></div>
+<p>We can create a kinship matrix from the output of <code>pcrelate</code>. We multiply the kinship values by 2 to get values on the same scale as the standard GRM. This matrix is represented in R as a symmetric matrix object from the Matrix package.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="mixed-models.html#cb20-1" aria-hidden="true" tabindex="-1"></a>kinfile <span class="ot">&lt;-</span> <span class="st">&quot;data/pcrelate_kinship.RData&quot;</span></span>
+<span id="cb20-2"><a href="mixed-models.html#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(kinfile)) <span class="fu">download.file</span>(<span class="fu">file.path</span>(repo_path, kinfile), kinfile)</span>
+<span id="cb20-3"><a href="mixed-models.html#cb20-3" aria-hidden="true" tabindex="-1"></a>pcrel <span class="ot">&lt;-</span> <span class="fu">get</span>(<span class="fu">load</span>(kinfile))</span>
+<span id="cb20-4"><a href="mixed-models.html#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(GENESIS)</span>
+<span id="cb20-5"><a href="mixed-models.html#cb20-5" aria-hidden="true" tabindex="-1"></a>kinship <span class="ot">&lt;-</span> <span class="fu">pcrelateToMatrix</span>(pcrel, <span class="at">scaleKin=</span><span class="dv">2</span>, <span class="at">verbose=</span><span class="cn">FALSE</span>)</span>
+<span id="cb20-6"><a href="mixed-models.html#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(kinship)</span></code></pre></div>
+<pre><code>## [1] 1126 1126</code></pre>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="mixed-models.html#cb22-1" aria-hidden="true" tabindex="-1"></a>kinship[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span></code></pre></div>
 <pre><code>## 5 x 5 Matrix of class &quot;dsyMatrix&quot;
-##              HG00110     HG00116     HG00120      HG00128      HG00136
-## HG00110  1.046618916  0.01896886 -0.01635266 -0.006769183 -0.022907033
-## HG00116  0.018968859  0.92512545  0.19178400  0.013529261 -0.018774460
-## HG00120 -0.016352656  0.19178400  0.96012109 -0.014849711 -0.046482113
-## HG00128 -0.006769183  0.01352926 -0.01484971  0.914741469 -0.003540016
-## HG00136 -0.022907033 -0.01877446 -0.04648211 -0.003540016  1.007541773</code></pre>
-<p>We fit the null model, adding the PCs to the list of covariates, and specifying the kinship as the covariance matrix with the <code>cov.mat</code> argument. As before, we use <code>study</code> as a grouping variable.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">nullmod &lt;-<span class="st"> </span><span class="kw">fitNullModel</span>(annot, <span class="dt">outcome=</span><span class="st">&quot;height&quot;</span>, 
-                        <span class="dt">covars=</span><span class="kw">c</span>(<span class="st">&quot;sex&quot;</span>, <span class="st">&quot;age&quot;</span>, <span class="st">&quot;study&quot;</span>, <span class="kw">paste0</span>(<span class="st">&quot;PC&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)), 
-                        <span class="dt">cov.mat=</span>kinship, <span class="dt">group.var=</span><span class="st">&quot;study&quot;</span>, <span class="dt">verbose=</span><span class="ot">FALSE</span>)
-<span class="kw">save</span>(nullmod, <span class="dt">file=</span><span class="st">&quot;data/null_mixed_model.RData&quot;</span>)</code></pre></div>
+##              HG00096      HG00097      HG00099      HG00100      HG00101
+## HG00096 0.9906231740  0.036922756  0.010409075 0.0005780419  0.016522827
+## HG00097 0.0369227560  1.001560563 -0.000653982 0.0035158297  0.007678616
+## HG00099 0.0104090751 -0.000653982  0.937748649 0.0556213201 -0.003235074
+## HG00100 0.0005780419  0.003515830  0.055621320 1.0111688406  0.017959707
+## HG00101 0.0165228269  0.007678616 -0.003235074 0.0179597069  0.965028548</code></pre>
+<p>When running a mixed model analysis, we still fit the null model using the <code>fitNullModel</code> function in GENESIS. Now, we include the kinship matrix in the model with the <code>cov.mat</code> argument – the <code>cov.mat</code> argument is used to specify the random effect(s) in the model with covariance structure(s) proportional to the supplied matrix(s); in this case, the kinship matrix. The inclusion of these random effects is what makes this a mixed model, rather than a simple regression model. We also add the ancestry PCs to the list of covariates and allow for heterogeneous residual variance by <code>study</code> with the <code>group.var</code> argument, as before.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="mixed-models.html#cb24-1" aria-hidden="true" tabindex="-1"></a>nullmod <span class="ot">&lt;-</span> <span class="fu">fitNullModel</span>(annot, </span>
+<span id="cb24-2"><a href="mixed-models.html#cb24-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">outcome=</span><span class="st">&quot;height&quot;</span>, </span>
+<span id="cb24-3"><a href="mixed-models.html#cb24-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">covars=</span><span class="fu">c</span>(<span class="st">&quot;sex&quot;</span>, <span class="st">&quot;age&quot;</span>, <span class="st">&quot;study&quot;</span>, <span class="fu">paste0</span>(<span class="st">&quot;PC&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>)), </span>
+<span id="cb24-4"><a href="mixed-models.html#cb24-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">cov.mat=</span>kinship, </span>
+<span id="cb24-5"><a href="mixed-models.html#cb24-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">group.var=</span><span class="st">&quot;study&quot;</span>, </span>
+<span id="cb24-6"><a href="mixed-models.html#cb24-6" aria-hidden="true" tabindex="-1"></a>                        <span class="at">verbose=</span><span class="cn">FALSE</span>)</span>
+<span id="cb24-7"><a href="mixed-models.html#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(nullmod, <span class="at">file=</span><span class="st">&quot;data/null_mixed_model.RData&quot;</span>)</span></code></pre></div>
+<p>Same as before, we can investigate the output from <code>fitNullModel</code>.</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="mixed-models.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># description of the model we fit</span></span>
+<span id="cb25-2"><a href="mixed-models.html#cb25-2" aria-hidden="true" tabindex="-1"></a>nullmod<span class="sc">$</span>model</span></code></pre></div>
+<pre><code>## $hetResid
+## [1] TRUE
+## 
+## $family
+## 
+## Family: gaussian 
+## Link function: identity 
+## 
+## 
+## $outcome
+## [1] &quot;height&quot;
+## 
+## $covars
+## [1] &quot;sex&quot;   &quot;age&quot;   &quot;study&quot; &quot;PC1&quot;   &quot;PC2&quot;   &quot;PC3&quot;   &quot;PC4&quot;  
+## 
+## $formula
+## [1] &quot;height ~ sex + age + study + PC1 + PC2 + PC3 + PC4 + (1|A) + var(study)&quot;</code></pre>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="mixed-models.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># fixed effect regression estimates</span></span>
+<span id="cb27-2"><a href="mixed-models.html#cb27-2" aria-hidden="true" tabindex="-1"></a>nullmod<span class="sc">$</span>fixef</span></code></pre></div>
+<pre><code>##                       Est          SE         Stat         pval
+## (Intercept)  163.74431361  3.15130038 2.699932e+03 0.000000e+00
+## sexM           6.27072759  0.67911122 8.526171e+01 2.613754e-20
+## age            0.07420444  0.06839188 1.177201e+00 2.779265e-01
+## studystudy_2  10.54243352  0.81122848 1.688867e+02 1.295192e-38
+## studystudy_3  -8.95546858  0.83932675 1.138451e+02 1.408933e-26
+## PC1            0.05117574 11.25310400 2.068158e-05 9.963715e-01
+## PC2          -61.24485338 11.22450534 2.977178e+01 4.860157e-08
+## PC3           -8.81351399 11.09566802 6.309447e-01 4.270090e-01
+## PC4           -5.61519972 11.19652394 2.515151e-01 6.160103e-01</code></pre>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="mixed-models.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># variance component estimates by group.var</span></span>
+<span id="cb29-2"><a href="mixed-models.html#cb29-2" aria-hidden="true" tabindex="-1"></a>nullmod<span class="sc">$</span>varComp</span></code></pre></div>
+<pre><code>##       V_A V_study_1 V_study_3 V_study_2 
+##   0.00000  93.61147 168.76021 152.37404</code></pre>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="mixed-models.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># model fit: fitted values, residuals</span></span>
+<span id="cb31-2"><a href="mixed-models.html#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(nullmod<span class="sc">$</span>fit)</span></code></pre></div>
+<pre><code>##         outcome workingY fitted.values resid.marginal resid.conditional
+## HG00096 165.300  165.300      175.8150    -10.5150254       -10.5150254
+## HG00097 144.780  144.780      160.3639    -15.5839388       -15.5839388
+## HG00099 185.500  185.500      179.4017      6.0983220         6.0983220
+## HG00100 150.622  150.622      160.7060    -10.0839725       -10.0839725
+## HG00101 177.800  177.800      166.2361     11.5638906        11.5638906
+## HG00102 169.100  169.100      169.9405     -0.8404905        -0.8404905
+##         linear.predictor     resid.PY resid.cholesky sample.id
+## HG00096         175.8150 -0.112326247    -1.08679039   HG00096
+## HG00097         160.3639 -0.092343679    -1.19961587   HG00097
+## HG00099         179.4017  0.040022053     0.49403175   HG00099
+## HG00100         160.7060 -0.059753258    -0.77624108   HG00100
+## HG00101         166.2361  0.068522613     0.89016178   HG00101
+## HG00102         169.9405 -0.008978499    -0.08686969   HG00102</code></pre>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="mixed-models.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb33-2"><a href="mixed-models.html#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(nullmod<span class="sc">$</span>fit, <span class="fu">aes</span>(<span class="at">x =</span> fitted.values, <span class="at">y =</span> resid.marginal)) <span class="sc">+</span> </span>
+<span id="cb33-3"><a href="mixed-models.html#cb33-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span> </span>
+<span id="cb33-4"><a href="mixed-models.html#cb33-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>) <span class="sc">+</span> </span>
+<span id="cb33-5"><a href="mixed-models.html#cb33-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&#39;lm&#39;</span>)</span></code></pre></div>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<p><img src="_main_files/figure-html/null_model_results-1.png" width="672" /></p>
 </div>
-<div id="single-variant-tests-1" class="section level2">
-<h2><span class="header-section-number">9.2</span> Single-variant tests</h2>
-<p>Now we can run a single-variant test, accounting for relatedness between the subjects.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(SeqVarTools)
-gdsfile &lt;-<span class="st"> &quot;data/1KG_phase3_subset_chr1.gds&quot;</span>
-<span class="cf">if</span> (<span class="op">!</span><span class="kw">file.exists</span>(gdsfile)) <span class="kw">download.file</span>(<span class="kw">file.path</span>(repo_path, gdsfile), gdsfile)
-gdsfmt<span class="op">::</span><span class="kw">showfile.gds</span>(<span class="dt">closeall=</span><span class="ot">TRUE</span>) <span class="co"># make sure file is not already open</span>
-gds &lt;-<span class="st"> </span><span class="kw">seqOpen</span>(gdsfile)
-seqData &lt;-<span class="st"> </span><span class="kw">SeqVarData</span>(gds, <span class="dt">sampleData=</span>annot)
-iterator &lt;-<span class="st"> </span><span class="kw">SeqVarBlockIterator</span>(seqData, <span class="dt">verbose=</span><span class="ot">FALSE</span>)
-assoc &lt;-<span class="st"> </span><span class="kw">assocTestSingle</span>(iterator, nullmod)</code></pre></div>
-<pre><code>## # of selected samples: 100</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(assoc)</code></pre></div>
-<pre><code>##    variant.id chr     pos allele.index n.obs  freq MAC       Score   Score.SE
-## 1           1   1  970546            1   100 0.015   3 -0.08539608 0.14196049
-## 2           2   1  985900            1   100 0.045   9 -0.22241847 0.23151042
-## 5           5   1 1472676            1   100 0.005   1 -0.08038066 0.08682407
-## 7           7   1 2185887            1   100 0.005   1  0.02490820 0.07345671
-## 9           9   1 2629401            1   100 0.025   5  0.16640336 0.18372179
-## 10         10   1 2710895            1   100 0.060  12  0.09145582 0.27222044
-##    Score.Stat Score.pval        Est    Est.SE         PVE
-## 1  -0.6015483  0.5474749  -4.237435  7.044214 0.004020670
-## 2  -0.9607277  0.3366891  -4.149825  4.319460 0.010255530
-## 5  -0.9257877  0.3545563 -10.662800 11.517543 0.009523144
-## 7   0.3390868  0.7345443   4.616145 13.613460 0.001277554
-## 9   0.9057356  0.3650758   4.929930  5.443013 0.009115077
-## 10  0.3359624  0.7368992   1.234156  3.673493 0.001254119</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">qqPlot</span>(assoc<span class="op">$</span>Score.pval)</code></pre></div>
-<p><img src="_main_files/figure-html/assoc_single_mm-1.png" width="672" /></p>
+<div id="single-variant-tests" class="section level2" number="7.2">
+<h2><span class="header-section-number">7.2</span> Single-variant tests</h2>
+<p>Now we can run a single-variant test, accounting for genetic ancestry and genetic relatedness between the subjects. We use the same <code>assocTestSingle</code> function as before. The only difference is that we pass in our new null model.</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="mixed-models.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(SeqVarTools)</span></code></pre></div>
+<pre><code>## Loading required package: SeqArray</code></pre>
+<pre><code>## Loading required package: gdsfmt</code></pre>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="mixed-models.html#cb38-1" aria-hidden="true" tabindex="-1"></a>gdsfile <span class="ot">&lt;-</span> <span class="st">&quot;data/1KG_phase3_subset_chr1.gds&quot;</span></span>
+<span id="cb38-2"><a href="mixed-models.html#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(gdsfile)) <span class="fu">download.file</span>(<span class="fu">file.path</span>(repo_path, gdsfile), gdsfile)</span>
+<span id="cb38-3"><a href="mixed-models.html#cb38-3" aria-hidden="true" tabindex="-1"></a>gdsfmt<span class="sc">::</span><span class="fu">showfile.gds</span>(<span class="at">closeall=</span><span class="cn">TRUE</span>) <span class="co"># make sure file is not already open</span></span>
+<span id="cb38-4"><a href="mixed-models.html#cb38-4" aria-hidden="true" tabindex="-1"></a>gds <span class="ot">&lt;-</span> <span class="fu">seqOpen</span>(gdsfile)</span>
+<span id="cb38-5"><a href="mixed-models.html#cb38-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-6"><a href="mixed-models.html#cb38-6" aria-hidden="true" tabindex="-1"></a><span class="co"># make the seqVarData object</span></span>
+<span id="cb38-7"><a href="mixed-models.html#cb38-7" aria-hidden="true" tabindex="-1"></a>seqData <span class="ot">&lt;-</span> <span class="fu">SeqVarData</span>(gds, <span class="at">sampleData=</span>annot)</span>
+<span id="cb38-8"><a href="mixed-models.html#cb38-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-9"><a href="mixed-models.html#cb38-9" aria-hidden="true" tabindex="-1"></a><span class="co"># make the iterator object</span></span>
+<span id="cb38-10"><a href="mixed-models.html#cb38-10" aria-hidden="true" tabindex="-1"></a>iterator <span class="ot">&lt;-</span> <span class="fu">SeqVarBlockIterator</span>(seqData, <span class="at">verbose=</span><span class="cn">FALSE</span>)</span>
+<span id="cb38-11"><a href="mixed-models.html#cb38-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-12"><a href="mixed-models.html#cb38-12" aria-hidden="true" tabindex="-1"></a><span class="co"># run the single-variant association test</span></span>
+<span id="cb38-13"><a href="mixed-models.html#cb38-13" aria-hidden="true" tabindex="-1"></a>assoc <span class="ot">&lt;-</span> <span class="fu">assocTestSingle</span>(iterator, nullmod)</span></code></pre></div>
+<pre><code>## # of selected samples: 1,126</code></pre>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="mixed-models.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(assoc)</span></code></pre></div>
+<pre><code>## [1] 1129   14</code></pre>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="mixed-models.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(assoc)</span></code></pre></div>
+<pre><code>##   variant.id chr     pos allele.index n.obs         freq MAC       Score
+## 1          1   1  970546            1  1126 0.0039964476   9 -0.17384025
+## 2          2   1  985900            1  1126 0.0492895204 111 -1.55598468
+## 3          3   1 1025045            1  1126 0.0004440497   1 -0.29433530
+## 4          4   1 1265550            1  1126 0.0008880995   2 -0.09940909
+## 5          5   1 1472676            1  1126 0.0071047957  16  0.14878210
+## 6          6   1 1735725            1  1126 0.0022202487   5 -0.13567249
+##    Score.SE Score.Stat  Score.pval        Est   Est.SE          PVE
+## 1 0.2592275 -0.6706088 0.502469798  -2.586950 3.857615 0.0004026103
+## 2 0.8183596 -1.9013460 0.057256708  -2.323363 1.221957 0.0032364488
+## 3 0.1029724 -2.8583911 0.004257953 -27.758817 9.711343 0.0073145856
+## 4 0.1078116 -0.9220633 0.356495581  -8.552545 9.275442 0.0007611458
+## 5 0.3468438  0.4289599 0.667952399   1.236752 2.883142 0.0001647327
+## 6 0.1982518 -0.6843443 0.493757749  -3.451895 5.044091 0.0004192719</code></pre>
+<p>We make our usual QQ plot, filtering to variants with minor allele count (MAC) &gt;= 5. Notice that we observe much less inflation than before, when we did not adjust for ancestry and relatedness.</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="mixed-models.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb44-2"><a href="mixed-models.html#cb44-2" aria-hidden="true" tabindex="-1"></a>qqPlot <span class="ot">&lt;-</span> <span class="cf">function</span>(pval) {</span>
+<span id="cb44-3"><a href="mixed-models.html#cb44-3" aria-hidden="true" tabindex="-1"></a>    pval <span class="ot">&lt;-</span> pval[<span class="sc">!</span><span class="fu">is.na</span>(pval)]</span>
+<span id="cb44-4"><a href="mixed-models.html#cb44-4" aria-hidden="true" tabindex="-1"></a>    n <span class="ot">&lt;-</span> <span class="fu">length</span>(pval)</span>
+<span id="cb44-5"><a href="mixed-models.html#cb44-5" aria-hidden="true" tabindex="-1"></a>    x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span>n</span>
+<span id="cb44-6"><a href="mixed-models.html#cb44-6" aria-hidden="true" tabindex="-1"></a>    dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">obs=</span><span class="fu">sort</span>(pval),</span>
+<span id="cb44-7"><a href="mixed-models.html#cb44-7" aria-hidden="true" tabindex="-1"></a>                      <span class="at">exp=</span>x<span class="sc">/</span>n,</span>
+<span id="cb44-8"><a href="mixed-models.html#cb44-8" aria-hidden="true" tabindex="-1"></a>                      <span class="at">upper=</span><span class="fu">qbeta</span>(<span class="fl">0.025</span>, x, <span class="fu">rev</span>(x)),</span>
+<span id="cb44-9"><a href="mixed-models.html#cb44-9" aria-hidden="true" tabindex="-1"></a>                      <span class="at">lower=</span><span class="fu">qbeta</span>(<span class="fl">0.975</span>, x, <span class="fu">rev</span>(x)))</span>
+<span id="cb44-10"><a href="mixed-models.html#cb44-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb44-11"><a href="mixed-models.html#cb44-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(<span class="sc">-</span><span class="fu">log10</span>(exp), <span class="sc">-</span><span class="fu">log10</span>(obs))) <span class="sc">+</span></span>
+<span id="cb44-12"><a href="mixed-models.html#cb44-12" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="sc">-</span><span class="fu">log10</span>(exp), <span class="sc">-</span><span class="fu">log10</span>(upper)), <span class="at">color=</span><span class="st">&quot;gray&quot;</span>) <span class="sc">+</span></span>
+<span id="cb44-13"><a href="mixed-models.html#cb44-13" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="sc">-</span><span class="fu">log10</span>(exp), <span class="sc">-</span><span class="fu">log10</span>(lower)), <span class="at">color=</span><span class="st">&quot;gray&quot;</span>) <span class="sc">+</span></span>
+<span id="cb44-14"><a href="mixed-models.html#cb44-14" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb44-15"><a href="mixed-models.html#cb44-15" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_abline</span>(<span class="at">intercept=</span><span class="dv">0</span>, <span class="at">slope=</span><span class="dv">1</span>, <span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
+<span id="cb44-16"><a href="mixed-models.html#cb44-16" aria-hidden="true" tabindex="-1"></a>        <span class="fu">xlab</span>(<span class="fu">expression</span>(<span class="fu">paste</span>(<span class="sc">-</span>log[<span class="dv">10</span>], <span class="st">&quot;(expected P)&quot;</span>))) <span class="sc">+</span></span>
+<span id="cb44-17"><a href="mixed-models.html#cb44-17" aria-hidden="true" tabindex="-1"></a>        <span class="fu">ylab</span>(<span class="fu">expression</span>(<span class="fu">paste</span>(<span class="sc">-</span>log[<span class="dv">10</span>], <span class="st">&quot;(observed P)&quot;</span>))) <span class="sc">+</span></span>
+<span id="cb44-18"><a href="mixed-models.html#cb44-18" aria-hidden="true" tabindex="-1"></a>        <span class="fu">theme_bw</span>()</span>
+<span id="cb44-19"><a href="mixed-models.html#cb44-19" aria-hidden="true" tabindex="-1"></a>}    </span>
+<span id="cb44-20"><a href="mixed-models.html#cb44-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-21"><a href="mixed-models.html#cb44-21" aria-hidden="true" tabindex="-1"></a><span class="fu">qqPlot</span>(assoc<span class="sc">$</span>Score.pval[assoc<span class="sc">$</span>MAC <span class="sc">&gt;=</span> <span class="dv">5</span>])</span></code></pre></div>
+<p><img src="_main_files/figure-html/assoc_single_qq_mm-1.png" width="672" /></p>
 </div>
-<div id="exercise-2" class="section level2">
-<h2><span class="header-section-number">9.3</span> Exercise</h2>
-<p>Run a sliding window test using the mixed model and make a QQ plot.</p>
+<div id="exercise-3" class="section level2" number="7.3">
+<h2><span class="header-section-number">7.3</span> Exercise</h2>
+<p>Perform a single-variant association test for <code>status</code>. Adjust for sex, age, study, ancestry, and kinship in your model. Don’t forget to consider the <code>family</code> parameter. Make a QQ plot of your p-values for all variants with MAC &gt;= 5.</p>
+</div>
+<div id="solution-3" class="section level2" number="7.4">
+<h2><span class="header-section-number">7.4</span> Solution</h2>
+<p>The first step is to fit the null model. We include the first 4 PCs as covariates in our model to adjust for ancestry, and we include a random effect proportional to the kinship matrix to adjust for genetic relatedness. Recall that with a binary outcome, we set <code>family = binomial</code> – because we have random effects, this will fit an approximate logistic mixed model using the <a href="https://www.cell.com/ajhg/fulltext/S0002-9297(16)00063-X">GMMAT method</a>.</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="mixed-models.html#cb45-1" aria-hidden="true" tabindex="-1"></a>nullmod.status <span class="ot">&lt;-</span> <span class="fu">fitNullModel</span>(annot, </span>
+<span id="cb45-2"><a href="mixed-models.html#cb45-2" aria-hidden="true" tabindex="-1"></a>                               <span class="at">outcome=</span><span class="st">&quot;status&quot;</span>, </span>
+<span id="cb45-3"><a href="mixed-models.html#cb45-3" aria-hidden="true" tabindex="-1"></a>                               <span class="at">covars=</span><span class="fu">c</span>(<span class="st">&quot;sex&quot;</span>, <span class="st">&quot;age&quot;</span>, <span class="st">&quot;study&quot;</span>, <span class="fu">paste0</span>(<span class="st">&quot;PC&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>)), </span>
+<span id="cb45-4"><a href="mixed-models.html#cb45-4" aria-hidden="true" tabindex="-1"></a>                               <span class="at">cov.mat=</span>kinship, </span>
+<span id="cb45-5"><a href="mixed-models.html#cb45-5" aria-hidden="true" tabindex="-1"></a>                               <span class="at">family =</span> binomial,</span>
+<span id="cb45-6"><a href="mixed-models.html#cb45-6" aria-hidden="true" tabindex="-1"></a>                               <span class="at">verbose=</span><span class="cn">FALSE</span>)</span>
+<span id="cb45-7"><a href="mixed-models.html#cb45-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-8"><a href="mixed-models.html#cb45-8" aria-hidden="true" tabindex="-1"></a><span class="co"># description of the model we fit</span></span>
+<span id="cb45-9"><a href="mixed-models.html#cb45-9" aria-hidden="true" tabindex="-1"></a>nullmod.status<span class="sc">$</span>model</span></code></pre></div>
+<pre><code>## $hetResid
+## [1] FALSE
+## 
+## $family
+## 
+## Family: binomial 
+## Link function: logit 
+## 
+## 
+## $outcome
+## [1] &quot;status&quot;
+## 
+## $covars
+## [1] &quot;sex&quot;   &quot;age&quot;   &quot;study&quot; &quot;PC1&quot;   &quot;PC2&quot;   &quot;PC3&quot;   &quot;PC4&quot;  
+## 
+## $formula
+## [1] &quot;status ~ sex + age + study + PC1 + PC2 + PC3 + PC4 + (1|A)&quot;</code></pre>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="mixed-models.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># fixed effect regression estimates</span></span>
+<span id="cb47-2"><a href="mixed-models.html#cb47-2" aria-hidden="true" tabindex="-1"></a>nullmod.status<span class="sc">$</span>fixef</span></code></pre></div>
+<pre><code>##                       Est         SE         Stat        pval
+## (Intercept)  -3.182182913 0.96998026 1.076278e+01 0.001035617
+## sexM          0.124463598 0.20598679 3.650951e-01 0.545690084
+## age           0.019985093 0.02075004 9.276289e-01 0.335479807
+## studystudy_2  0.003063956 0.24852285 1.519961e-04 0.990163394
+## studystudy_3 -0.145204949 0.25448616 3.255626e-01 0.568283747
+## PC1          -3.074068322 3.46894981 7.852917e-01 0.375527625
+## PC2           5.076675586 3.21042684 2.500537e+00 0.113807493
+## PC3          -0.236916365 3.45512128 4.701793e-03 0.945332199
+## PC4           1.946715491 3.41350477 3.252400e-01 0.568475488</code></pre>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="mixed-models.html#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># variance component estimates by group.var</span></span>
+<span id="cb49-2"><a href="mixed-models.html#cb49-2" aria-hidden="true" tabindex="-1"></a>nullmod.status<span class="sc">$</span>varComp</span></code></pre></div>
+<pre><code>##       V_A 
+## 0.2923299</code></pre>
+<p>Now that we have the null model, we perform the single-variant association tests and make the QQ plot the same way as before.</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="mixed-models.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">resetIterator</span>(iterator, <span class="at">verbose=</span><span class="cn">FALSE</span>)</span>
+<span id="cb51-2"><a href="mixed-models.html#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="co"># run the single-variant association test</span></span>
+<span id="cb51-3"><a href="mixed-models.html#cb51-3" aria-hidden="true" tabindex="-1"></a>assoc.status <span class="ot">&lt;-</span> <span class="fu">assocTestSingle</span>(iterator, nullmod.status, <span class="at">test=</span><span class="st">&quot;Score&quot;</span>)</span></code></pre></div>
+<pre><code>## # of selected samples: 1,126</code></pre>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="mixed-models.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(assoc.status)</span></code></pre></div>
+<pre><code>## [1] 1129   14</code></pre>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="mixed-models.html#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(assoc.status)</span></code></pre></div>
+<pre><code>##   variant.id chr     pos allele.index n.obs         freq MAC      Score
+## 1          1   1  970546            1  1126 0.0039964476   9  0.1975748
+## 2          2   1  985900            1  1126 0.0492895204 111 -2.5741449
+## 3          3   1 1025045            1  1126 0.0004440497   1 -0.0721219
+## 4          4   1 1265550            1  1126 0.0008880995   2  0.7862901
+## 5          5   1 1472676            1  1126 0.0071047957  16  0.6300877
+## 6          6   1 1735725            1  1126 0.0022202487   5 -0.4029747
+##    Score.SE Score.Stat Score.pval        Est    Est.SE          PVE
+## 1 0.8349756  0.2366235 0.81294892  0.2833897 1.1976398 6.097484e-05
+## 2 2.6188824 -0.9829173 0.32564813 -0.3753194 0.3818423 1.052129e-03
+## 3 0.2555958 -0.2821717 0.77781189 -1.1039760 3.9124270 8.670854e-05
+## 4 0.4237118  1.8557191 0.06349361  4.3796725 2.3600946 3.750244e-03
+## 5 1.0837470  0.5813974 0.56097266  0.5364696 0.9227246 3.681131e-04
+## 6 0.5941659 -0.6782191 0.49763280 -1.1414641 1.6830315 5.009278e-04</code></pre>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="mixed-models.html#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qqPlot</span>(assoc.status<span class="sc">$</span>Score.pval[assoc.status<span class="sc">$</span>MAC <span class="sc">&gt;=</span> <span class="dv">5</span>])</span></code></pre></div>
+<p><img src="_main_files/figure-html/exercise_mm_assoc-1.png" width="672" /></p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="mixed-models.html#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seqClose</span>(gds)</span></code></pre></div>
+
 </div>
 </div>
             </section>
@@ -283,8 +548,8 @@ assoc &lt;-<span class="st"> </span><span class="kw">assocTestSingle</span>(iter
           </div>
         </div>
       </div>
-<a href="pc-relate.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="mixed-models-solutions.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="ancestry-and-relatedness-inference.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="variant-annotation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -307,6 +572,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
