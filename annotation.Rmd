@@ -3,7 +3,7 @@
 
 ## Using Bioconductor annotation resources
 
-In this example, we illustrate defining aggregate units based on known genes. 
+In this example, we illustrate defining aggregate units based on known genes.
 
 First, we load the null mixed model and open the GDS file.
 
@@ -47,6 +47,7 @@ We run a burden test, setting a maximum alternate allele frequency to exclude co
 iterator <- SeqVarRangeIterator(seqData, variantRanges=genes, verbose=FALSE)
 
 # do a burden test on the rare variants in each gene
+library(GENESIS)
 assoc <- assocTestAggregate(iterator, nullmod, AF.max=0.05, test="Burden")
 head(assoc$results)
 head(assoc$variantInfo)
@@ -67,7 +68,7 @@ combined_annotation <- bind_rows(snv_annotation, indel_annotation)
 
 Here we remove variants that are not associated with a gene, group the variants by gene, and filter the variants for intron_variants with a CADD_phred score greater than 3 in just a few lines of code:
 ```{r}
-combined_annotation %>% 
+combined_annotation %>%
   filter(VEP_ensembl_Gene_ID != ".") %>% # remove variants not annotated with a Gene_ID
   group_by(VEP_ensembl_Gene_ID) %>% # aggregate by gene
   filter(CADD_phred > 3) %>% # filter variants to keep only CADD_phred greater than 3
@@ -97,5 +98,7 @@ length(unique(aggregates$group_id))
 We can look at the distribution of the number of variants per aggregation unit:
 ```{r plot_agg_units}
 counts <- aggregates %>% group_by(group_id) %>% summarize(n = n())
+
+library(ggplot2)
 ggplot(counts, aes(x = n)) + geom_bar()
 ```

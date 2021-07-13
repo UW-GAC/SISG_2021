@@ -41,7 +41,7 @@ annotfile <- "data/sample_phenotype_pcs.RData"
 if (!file.exists(annotfile)) download.file(file.path(repo_path, annotfile), aggfile)
 annot <- getobj(annotfile)
 seqData <- SeqVarData(gds, sampleData=annot)
-    
+
 # subset to chromosome 1
 aggunit1 <- filter(aggunit, chr == 1)
 aggVarList <- aggregateGRangesList(aggunit1)
@@ -67,7 +67,7 @@ head(assoc$results)
 head(names(assoc$variantInfo))
 assoc$variantInfo[[3]]
 
-qqPlot(assoc$results$Score.pval)
+GWASTools::qqPlot(assoc$results$Score.pval)
 ```
 
 
