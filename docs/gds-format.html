@@ -249,7 +249,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-6"><a href="gds-format.html#cb1-6" aria-hidden="true" tabindex="-1"></a>gdsfile <span class="ot">&lt;-</span> <span class="st">&quot;data/1KG_phase3_subset_chr1.gds&quot;</span></span>
 <span id="cb1-7"><a href="gds-format.html#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># convert the VCF to GDS</span></span>
 <span id="cb1-8"><a href="gds-format.html#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">seqVCF2GDS</span>(vcffile, gdsfile, <span class="at">fmt.import=</span><span class="st">&quot;GT&quot;</span>, <span class="at">storage.option=</span><span class="st">&quot;LZMA_RA&quot;</span>)</span></code></pre></div>
-<pre><code>## Mon Jul 12 21:53:32 2021
+<pre><code>## Mon Jul 12 22:20:56 2021
 ## Variant Call Format (VCF) Import:
 ##     file(s):
 ##         1KG_phase3_subset_chr1.vcf.gz (120.7K)
@@ -276,7 +276,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##     annotation/qual  [md5: d6b8ed9bd5cac7dd7898bb679675fc7c]
 ##     annotation/filter  [md5: 8294edaf60fffc1e9aa693b4bc423dd1]
 ## Done.
-## Mon Jul 12 21:53:33 2021
+## Mon Jul 12 22:20:57 2021
 ## Optimize the access efficiency ...
 ## Clean up the fragments of GDS file:
 ##     open the file &#39;data/1KG_phase3_subset_chr1.gds&#39; (71.3K)
@@ -284,7 +284,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##     save to &#39;data/1KG_phase3_subset_chr1.gds.tmp&#39;
 ##     rename &#39;data/1KG_phase3_subset_chr1.gds.tmp&#39; (70.5K, reduced: 744B)
 ##     # of fragments: 61
-## Mon Jul 12 21:53:33 2021</code></pre>
+## Mon Jul 12 22:20:57 2021</code></pre>
 </div>
 <div id="exploring-a-gds-file" class="section level2" number="2.2">
 <h2><span class="header-section-number">2.2</span> Exploring a GDS file</h2>
@@ -468,7 +468,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## FALSE  TRUE 
 ##    99  1021</code></pre>
 <div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="gds-format.html#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 11 SNVs are multi-allelic</span></span></code></pre></div>
-<p>We can also return variant information as a <code>GRanges</code> object from the GenomicRanges package. This format for representing sequence data is common across many Bioconductor packages. Chromosome is stored in the <code>seqnames</code> column. The <code>ranges</code> column has variant position, which can be a single base pair or a range.</p>
+<p>We can also return variant information as a <code>GRanges</code> object from the <a href="https://bioconductor.org/packages/release/bioc/manuals/GenomicRanges/man/GenomicRanges.pdf">GenomicRanges package</a>. This format for representing sequence data is common across many Bioconductor packages. Chromosome is stored in the <code>seqnames</code> column. The <code>ranges</code> column has variant position, which can be a single base pair or a range.</p>
 <div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="gds-format.html#cb59-1" aria-hidden="true" tabindex="-1"></a>gr <span class="ot">&lt;-</span> <span class="fu">granges</span>(gds)</span>
 <span id="cb59-2"><a href="gds-format.html#cb59-2" aria-hidden="true" tabindex="-1"></a>gr</span></code></pre></div>
 <pre><code>## GRanges object with 1120 ranges and 0 metadata columns:
