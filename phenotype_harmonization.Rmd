@@ -26,7 +26,7 @@ library(dplyr)
 The first step is to read the files into R for processing.
 
 ```{r}
-repo_path <- "https://github.com/UW-GAC/SISG_2020/raw/master"
+repo_path <- "https://github.com/UW-GAC/SISG_2021/raw/master"
 if (!dir.exists("data")) dir.create("data")
 pheno_files <- c("data/pheno_data_study_1.txt", "data/pheno_data_study_2.txt", "data/pheno_data_study_3.txt")
 for (pheno_file in pheno_files) {
