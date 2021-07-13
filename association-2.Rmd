@@ -157,6 +157,6 @@ head(assoc$variantInfo[idx])
 qqPlot(assoc$results$pval)
 ```
 
-```{r assoc_close}
+```{r assoc_close2}
 seqClose(gds)
 ```

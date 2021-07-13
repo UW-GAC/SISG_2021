@@ -70,7 +70,7 @@ save(nullmod, file="data/null_model.RData")
 
 The `fitNullModel` function returns a lot of information about the model that was fit. We examine some of that information below; to see all of the components, try `names(nullmod)`.
 
-```{r null_model_results}
+```{r assoc_null_model_results}
 # description of the model we fit
 nullmod$model
 
@@ -233,7 +233,7 @@ qqPlot(assoc.status$Score.pval[assoc.status$MAC >= 5])
 
 Extra: in samples with highly imbalanced case:control ratios, the Score test can perform poorly for low frequency variants. Saddlepoint approximation (SPA) can be used to improve p-value calculations, and is available in GENESIS by setting the argument `test=Score.SPA` in `assocTestSingle`. See [Dey et al.](https://www.cell.com/ajhg/fulltext/S0002-9297(17)30201-X) and [Zhou et al.](https://www.nature.com/articles/s41588-018-0184-y) for details on using SPA in GWAS.
 
-```{r close}
+```{r assoc_close1}
 # close the GDS file!
 seqClose(gds)
 ```
