@@ -1,12 +1,12 @@
 # Mixed models
 
-These exercises introduce relatedness to association testing with mixed models.
+These exercises extend what was previously introduced in the association tests from regression models to mixed models that account for genetic relatedness among samples.
 
 ## Null model
 
-Recall that the first step in our association testing procedure is to fit the null model. In addition to the `AnnotatedDataFrame` with phenotype data that we used previously, we will also use the ancestry principal components and kinship estimates we created in the previous session. We will use the first 4 PCs to adjust for ancestry.
+Recall that the first step in our association testing procedure is to fit the null model. In addition to the `AnnotatedDataFrame` with phenotype data that we used previously, we will also use the ancestry PCs and pairwise kinship estimates we created in the previous session. We will use the first 4 PCs to adjust for ancestry.
 
-```{r null_model_mm}
+```{r null_model_mm, message = FALSE}
 # sample annotation
 repo_path <- "https://github.com/UW-GAC/SISG_2021/raw/master"
 if (!dir.exists("data")) dir.create("data")
@@ -43,7 +43,7 @@ dim(kinship)
 kinship[1:5,1:5]
 ```
 
-When running a mixed model analysis, we still fit the null model using the `fitNullModel` function in GENESIS. Now, we include the kinship matrix in the model with the `cov.mat` argument -- the `cov.mat` argument is used to specify the random effect(s) in the model with covariance structure(s) proportional to the supplied matrix(s); in this case, the kinship matrix. The inclusion of these random effects is what makes this a mixed model, rather than a simple regression model. We also add the ancestry PCs to the list of covariates and allow for heterogeneous residual variance by `study` with the `group.var` argument, as before.
+When running a mixed model analysis, we still fit the null model using the `fitNullModel` function in GENESIS. Now, we include the kinship matrix in the model with the `cov.mat` argument, which is used to specify the random effect(s) in the model with covariance structure(s) proportional to the supplied matrix(s). The inclusion of these random effects is what makes this a mixed model, rather than a simple regression model. We also add the ancestry PCs to the list of covariates and allow for heterogeneous residual variance by `study` with the `group.var` argument, as before.
 
 ```{r null_model_fit_mm}
 nullmod <- fitNullModel(annot, 
@@ -55,7 +55,7 @@ nullmod <- fitNullModel(annot,
 save(nullmod, file="data/null_mixed_model.RData")
 ```
 
-Same as before, we can investigate the output from `fitNullModel`.
+We can investigate the output from `fitNullModel`.
 ```{r null_model_results}
 # description of the model we fit
 nullmod$model
@@ -78,9 +78,9 @@ ggplot(nullmod$fit, aes(x = fitted.values, y = resid.marginal)) +
 
 ## Single-variant tests
 
-Now we can run a single-variant test, accounting for genetic ancestry and genetic relatedness between the subjects. We use the same `assocTestSingle` function as before. The only difference is that we pass in our new null model. 
+Now we can run a single-variant test, accounting for genetic ancestry and genetic relatedness among the subjects. We use the same `assocTestSingle` function as before; the only difference is that we pass in our new null model. 
 
-```{r assoc_single_mm}
+```{r assoc_single_mm, message = FALSE}
 library(SeqVarTools)
 gdsfile <- "data/1KG_phase3_subset_chr1.gds"
 if (!file.exists(gdsfile)) download.file(file.path(repo_path, gdsfile), gdsfile)
@@ -99,7 +99,7 @@ dim(assoc)
 head(assoc)
 ```
 
-We make our usual QQ plot, filtering to variants with minor allele count (MAC) >= 5. Notice that we observe much less inflation than before, when we did not adjust for ancestry and relatedness.
+We make the usual QQ plot, filtering to variants with minor allele count (MAC) >= 5. Notice that we observe much less inflation than before, when we did not adjust for ancestry and relatedness.
 
 ```{r assoc_single_qq_mm}
 library(ggplot2)
@@ -128,12 +128,14 @@ qqPlot(assoc$Score.pval[assoc$MAC >= 5])
 
 ## Exercise
 
-Perform a single-variant association test for `status`. Adjust for sex, age, study, ancestry, and kinship in your model. Don't forget to consider the `family` parameter. Make a QQ plot of your p-values for all variants with MAC >= 5.
+1. Perform a single-variant association test for `status`. Adjust for sex, age, study, ancestry, and kinship in the model. Don't forget to consider the `family` parameter. Make a QQ plot of the p-values for all variants with MAC >= 5.
 
 
 ## Solution
 
-The first step is to fit the null model. We include the first 4 PCs as covariates in our model to adjust for ancestry, and we include a random effect proportional to the kinship matrix to adjust for genetic relatedness. Recall that with a binary outcome, we set `family = binomial` -- because we have random effects, this will fit an approximate logistic mixed model using the [GMMAT method](https://www.cell.com/ajhg/fulltext/S0002-9297(16)00063-X).
+1. Perform a single-variant association test for `status`. Adjust for sex, age, study, ancestry, and kinship in the model. Don't forget to consider the `family` parameter. Make a QQ plot of the p-values for all variants with MAC >= 5.
+
+The first step is to fit the null model. We include the first 4 PCs as covariates in our model to adjust for ancestry, and we include a random effect proportional to the kinship matrix to adjust for genetic relatedness. Recall that with a binary outcome, we set `family = binomial` -- because we have a random effect, this will fit an approximate logistic mixed model using the [GMMAT method](https://www.cell.com/ajhg/fulltext/S0002-9297(16)00063-X).
 
 ```{r exercise_mm_nullmod}
 nullmod.status <- fitNullModel(annot, 

@@ -4,7 +4,7 @@
 
 We generally advise that population structure and relatedness inference be performed using a set of (nearly) independent genetic variants. To find this set of variants, we perform linkage-disequilibrium (LD) pruning on the study sample set. We typically use an LD threshold of `r^2 < 0.1` to select variants.
 
-```{r ld-pruning}
+```{r ld-pruning, message = FALSE}
 library(SeqArray)
 repo_path <- "https://github.com/UW-GAC/SISG_2021/raw/master"
 
@@ -120,9 +120,9 @@ dim(pcs)
 head(pcs)
 ```
 
-We'd like to determine which PCs are ancestry informative. To do this we look at the PCs in conjunction with population information for the 1000 Genomes samples. This information is stored in an `AnnotatedDataFrame`. We make a parallel coordinates plot, color-coding by 1000 Genomes population. We load the [dplyr](http://dplyr.tidyverse.org) package for data.frame manipulation.
+We'd like to determine which PCs are ancestry informative. To do this we look at the PCs in conjunction with population information for the 1000 Genomes samples. This information is stored in an `AnnotatedDataFrame`. We make a parallel coordinates plot, color-coding by 1000 Genomes population.
 
-```{r pcair1_parcoord}
+```{r pcair1_parcoord, message = FALSE}
 library(Biobase)
 sampfile <- "data/sample_annotation.RData"
 if (!file.exists(sampfile)) download.file(file.path(repo_path, sampfile), sampfile)
@@ -178,7 +178,7 @@ We plot the pairwise kinship estimates againts the IBD0 (`k0`) estimates (the pr
 ggplot(pcrel$kinBtwn, aes(k0, kin)) +
     geom_hline(yintercept=2^(-seq(3,9,2)/2), linetype="dashed", color="grey") +
     geom_hex(bins = 100) +
-    geom_abline(intercept = 0.25, slope = -0.25)
+    geom_abline(intercept = 0.25, slope = -0.25) + 
     ylab("kinship estimate") +
     theme_bw()
 ```
@@ -208,7 +208,9 @@ In small samples (such as this one), we recommend performing a second iteration 
 
 ## Solutions
 
-1. We run the second PC-AiR analysis the same as the first, except using the PC-Relate kinship matrix we created above (`pcrelMat`) as the input to parameter `kinobj` -- this means that we are using the PC-Relate estimates instead of the KING estimates to identify related pairs of samples. In the solution shown here, we also demonstrate that a `SeqVarData` object can be used as input, but we need to specify the variants to use in the analysis using the `snp.include` parameter.
+1. Perform a second PC-AiR analysis, this time using the PC-Relate kinship matrix as the kinship estimates (you should still use the KING-robust matrix for the ancestry divergence estimates). How does the unrelated set compare to the first PC-AiR analysis?
+
+We run the second PC-AiR analysis the same as the first, except using the PC-Relate kinship matrix we created above (`pcrelMat`) as the input to parameter `kinobj` -- this means that we are using the PC-Relate estimates instead of the KING estimates to identify related pairs of samples. In the solution shown here, we also demonstrate that a `SeqVarData` object can be used as input, but we need to specify the variants to use in the analysis using the `snp.include` parameter.
 
 ```{r pcair2}
 seqResetFilter(seqData)
@@ -224,25 +226,24 @@ names(pca2)
 
 # the unrelated set of samples
 length(pca2$unrels)
-head(pca2$unrels)
 
 # the related set of samples
 length(pca2$rels)
-head(pca2$rels)
 
 # extract the top 10 PCs and make a data.frame
 pcs2 <- data.frame(pca2$vectors[,1:10])
 colnames(pcs2) <- paste0('PC', 1:10)
 pcs2$sample.id <- pca2$sample.id
 dim(pcs2)
-head(pcs2)
 
 save(pcs2, file="data/pcs.RData")
 ```
 
 We see that there are now 1,070 samples in the unrelated set, as opposed to 1,040 in the first PC-AiR analysis. This indicates that KING-robust likely overestimated relatedness for some pairs due to bias from ancestry admixture.
 
-2. We can reuse the code from above to make the parallel coordinates plot. 
+2. Make a parallel coordinates plot of the top 10 PC-AiR PCs. How does this compare to the plot from the first iteration? How many PCs seem to reflect ancestry?
+
+We can reuse the code from above to make the parallel coordinates plot. 
 
 ```{r pcair2_parcoord}
 library(Biobase)
@@ -270,17 +271,19 @@ ggparcoord(pc.df, columns=1:10, groupColumn="Population", scale="uniminmax") +
 
 The plot looks a bit cleaner than the one from the first PC-AiR analysis. Clearly, PCs 1-4 are reflective of ancestry here. In the prior analysis, PC7 also seemed to pick up some component of ancestry.
 
-3. We run the second PC-Relate analysis the same as the first, except using the new PC-AiR PCs that we just generated to adjust for ancestry, and using the new PC-AiR unrelated set as our `training.set`. 
+3. Perform a second PC-Relate analysis, this time using the new PC-AiR PCs to adjust for ancestry. Make a hexbin plot of estimated kinship vs IBD0. 
+
+We run the second PC-Relate analysis the same as the first, except using the new PC-AiR PCs that we just generated to adjust for ancestry, and using the new PC-AiR unrelated set as our `training.set`. 
 
 ```{r pcrelate2}
 # filter the GDS object to our LD-pruned variants
 seqSetFilter(seqData, variant.id=pruned)
 iterator <- SeqVarBlockIterator(seqData, verbose=FALSE)
 
+# run PC-Relate
 pcrel2 <- pcrelate(iterator, 
                   pcs=pca2$vectors[,1:4], 
                   training.set=pca2$unrels)
-names(pcrel2)
 save(pcrel2, file="data/pcrelate_kinship.RData")
 ```
 
@@ -288,7 +291,7 @@ save(pcrel2, file="data/pcrelate_kinship.RData")
 ggplot(pcrel2$kinBtwn, aes(k0, kin)) +
     geom_hline(yintercept=2^(-seq(3,9,2)/2), linetype="dashed", color="grey") +
     geom_hex(bins = 100) +
-    geom_abline(intercept = 0.25, slope = -0.25)
+    geom_abline(intercept = 0.25, slope = -0.25) + 
     ylab("kinship estimate") +
     theme_bw()
 ```

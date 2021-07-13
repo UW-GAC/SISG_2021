@@ -6,7 +6,7 @@ output: bookdown::gitbook
 documentclass: book
 link-citations: yes
 github-repo: UW-GAC/SISG_2021
-description: "Course materials for SISG Module 16"
+description: "Course materials for SISG 2021 Module 16"
 ---
 
 ```{r setup, include=FALSE}

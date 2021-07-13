@@ -6,7 +6,7 @@ GDS is Genomic Data Structure, a storage format that can efficiently store genom
 
 To use the R packages developed at the University of Washington Genetic Analysis Center for sequence data, we first need to convert a VCF file to GDS. (If the file is BCF, use [https://samtools.github.io/bcftools/bcftools.html](bcftools) to convert to VCF.)
 
-```{r vcf2gds}
+```{r vcf2gds, message = FALSE}
 library(SeqArray)
 repo_path <- "https://github.com/UW-GAC/SISG_2021/raw/master"
 if (!dir.exists("data")) dir.create("data")
@@ -14,7 +14,7 @@ vcffile <- "data/1KG_phase3_subset_chr1.vcf.gz"
 if (!file.exists(vcffile)) download.file(file.path(repo_path, vcffile), vcffile)
 gdsfile <- "data/1KG_phase3_subset_chr1.gds"
 # convert the VCF to GDS
-seqVCF2GDS(vcffile, gdsfile, fmt.import="GT", storage.option="LZMA_RA", verbose=FALSE)
+seqVCF2GDS(vcffile, gdsfile, fmt.import="GT", storage.option="LZMA_RA")
 ```
 
 ## Exploring a GDS file

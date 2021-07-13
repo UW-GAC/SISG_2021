@@ -1,12 +1,12 @@
 # Association tests - Part II
 
-These exercises continue the introduction to genetic association testing. Here, we introduce multiple-variant association tests.
+These exercises continue the introduction to genetic association testing. Here, we introduce multiple-variant association tests, which are commonly used for testing rare variants in aggregate.
 
 ## Sliding window tests
 
-For rare variants, we can perform burden, SKAT, and SMMAT tests using the GENESIS function `assocTestAggregate`. First, we need to load the null model and `AnnotatedDataFrame` (sample annotation + phenotype data) that we created in the previous session, and we need to create our `SeqVarData` object linking the GDS file to the `AnnotatedDataFrame`.
+We can perform burden, SKAT, SKAT-O, fastSKAT, and SMMAT tests using the GENESIS function `assocTestAggregate`. First, we need to load the null model and `AnnotatedDataFrame` (sample annotation + phenotype data) that we created in the previous session, and we need to create our `SeqVarData` object linking the GDS file to the `AnnotatedDataFrame`.
 
-```{r assoc_window_load}
+```{r assoc_window_load, message=FALSE}
 repo_path <- "https://github.com/UW-GAC/SISG_2021/raw/master"
 if (!dir.exists("data")) dir.create("data")
 
@@ -32,7 +32,7 @@ seqData <- SeqVarData(gds, sampleData=annot)
 
 ### Burden test
 
-In this first example, we perform a burden test. We restrict the test to variants with alternate allele frequency < 0.1. (For real data, this threshold would be lower, perhaps 0.05 or 0.01.) We use a flat weighting scheme -- i.e. every variant gets the same weight. We define a sliding window across the genome using a `SeqVarWindowIterator` object.
+First, we perform a burden test. We restrict the test to variants with alternate allele frequency < 0.1. (For real data, this threshold would be lower, perhaps 0.05 or 0.01.) We use a flat weighting scheme -- i.e. every variant gets the same weight. We define a sliding window across the genome using a `SeqVarWindowIterator` object.
 
 ```{r assoc_window_burden}
 # make the window iterator object
@@ -93,9 +93,9 @@ qqPlot(assoc$results$Score.pval)
 
 ### SKAT test
 
-We can also perform a SKAT test using the Wu weights, which give larger weights to rarer variants.
+We can also perform a SKAT test. This time, we will use the Wu weights, which give larger weights to rarer variants.
 
-```{r assoc_window_skat}
+```{r assoc_window_skat, message = FALSE}
 # reset the iterator to the first window
 resetIterator(iterator)
 assoc <- assocTestAggregate(iterator, 
@@ -118,9 +118,11 @@ qqPlot(assoc$results$pval)
 
 ## Exercise
 
-Perform a sliding window SKAT test for the outcome status. Adjust your model for the covariates sex and study. When performing your SKAT test, use all variants with alternate allele frequency < 20%, and use the Wu weights to give larger weights to rarer variants. Use the same `windowSize` and `windowShift` as in the examples. How many windows have >1 variant? Make a QQ plot of the SKAT p-values. 
+1. Perform a sliding window SKAT test for the outcome status. Adjust your model for the covariates sex and study. When performing your SKAT test, use all variants with alternate allele frequency < 20%, and use the Wu weights to give larger weights to rarer variants. Use the same `windowSize` and `windowShift` as in the examples. How many windows have >1 variant? Make a QQ plot of the SKAT p-values. 
 
 ## Solution
+
+1. Perform a sliding window SKAT test for the outcome status. Adjust your model for the covariates sex and study. When performing your SKAT test, use all variants with alternate allele frequency < 20%, and use the Wu weights to give larger weights to rarer variants. Use the same `windowSize` and `windowShift` as in the examples. How many windows have >1 variant? Make a QQ plot of the SKAT p-values. 
 
 The first step is to fit our null model -- since our outcome, status, is a binary variable, we must fit a logistic regression null model using the `family = binomial` argument. The second step is to create our `SeqVarWindowIterator` object. The third step is to perform the SKAT test using `assocTestAggregate` -- we can set the maximum alternate allele frequency with the `AF.max` argument, and we can set the variant weights with the `weight.beta` argument.
 
