@@ -4,7 +4,7 @@ To increase your sample set, you may need to combine phenotype data from differe
 The studies involved may have collected data in different ways, used different protocols or measurement units, or used different cutpoints to determine case status.
 The process of manipulating the phenotype data from different studies so that they can be analyzed together is called "phenotype harmonization".
 
-In this exercise, we assume that you have 
+In this exercise, we assume that you have
 created a phenotype harmonization plan for height,
 sent it to members from three studies to perform the harmonization,
 and
@@ -166,10 +166,10 @@ metadata <- data.frame(labelDescription = c(
 
 annot <- AnnotatedDataFrame(phen, metadata)
 
-# access the data with the pData() function
+# Access the data with the pData() function.
 head(pData(annot))
 
-# access the metadata with the varMetadata() function
+# Access the metadata with the varMetadata() function.
 varMetadata(annot)
 ```
 
