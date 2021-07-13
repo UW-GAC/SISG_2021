@@ -4,7 +4,7 @@ To increase your sample set, you may need to combine phenotype data from differe
 The studies involved may have collected data in different ways, used different protocols or measurement units, or used different cutpoints to determine case status.
 The process of manipulating the phenotype data from different studies so that they can be analyzed together is called "phenotype harmonization".
 
-In this exercise, we assume that you have 
+In this exercise, we assume that you have
 created a phenotype harmonization plan for height,
 sent it to members from three studies to perform the harmonization,
 and
@@ -26,7 +26,7 @@ library(dplyr)
 The first step is to read the files into R for processing.
 
 ```{r}
-repo_path <- "https://github.com/UW-GAC/SISG_2020/raw/master"
+repo_path <- "https://github.com/UW-GAC/SISG_2021/raw/master"
 if (!dir.exists("data")) dir.create("data")
 pheno_files <- c("data/pheno_data_study_1.txt", "data/pheno_data_study_2.txt", "data/pheno_data_study_3.txt")
 for (pheno_file in pheno_files) {
@@ -166,10 +166,10 @@ metadata <- data.frame(labelDescription = c(
 
 annot <- AnnotatedDataFrame(phen, metadata)
 
-# access the data with the pData() function
+# Access the data with the pData() function.
 head(pData(annot))
 
-# access the metadata with the varMetadata() function
+# Access the metadata with the varMetadata() function.
 varMetadata(annot)
 ```
 
@@ -212,7 +212,8 @@ The elements that we will work with in this exercise are:
 * `model.matrix`: The matrix of subject-covariate values used to fit the model
 * `fixef`: The fitted fixed effects
 * `betaCov`: The covariance of the fitted fixed effects
-* `resid.marginal`: The (marginal) residuals from the model, which have been adjusted for the fixed effects but not for the covariance structure
+* `fit`: A data frame containing information about the fit, in particular:
+    * `resid.marginal`: The (marginal) residuals from the model, which have been adjusted for the fixed effects but not for the covariance structure
 * `varComp`: The fitted variance components
 
 Make sure the model converged.
@@ -223,11 +224,11 @@ mod_1$converged
 Now, add the residuals to the phenotype data frame for plotting.
 We need to make sure that we are matching each residual value to the correct subject.
 In this case, `model.matrix` is already in the same order as the input AnnotatedDataFrame, but this may not always be the case (for example, if subjects are excluded due to missing phentoype data).
-To match the same subject's values together, we use the row names of the `model.matrix` element of the output, which are in the same order as the `residual` matrix, and the `subject_id` column of the annotated data frame.
+To match the same subject's values together, we use the rownames of the `fit` data frame to match to the `subject_id` column of the annotated data frame.
 We then match the row names (and therefore the residuals) to the sample identifier in the phenotype file using the base R function `match`.
 ```{r}
-j <- match(annot$sample.id, rownames(mod_1$model.matrix))
-annot$residuals <- mod_1$resid.marginal[j]
+j <- match(annot$sample.id, rownames(mod_1$fit))
+annot$residuals <- mod_1$fit$resid.marginal[j]
 ```
 
 Next, we want to check if the different studies have the same mean height after adjustment for other covariates (here, age and sex).
@@ -274,7 +275,7 @@ The fitted values of the variance components are different for the different stu
 We can also show the same information by plotting the residuals by study.
 We first have to add the residuals from this model to the AnnotatedDataFrame.
 ```{r}
-annot$residuals <- mod_2$resid.marginal
+annot$residuals <- mod_2$fit$resid.marginal[match(annot$sample.id, rownames(mod_2$fit))]
 ```
 
 Next make a boxplot of the residuals by study.
