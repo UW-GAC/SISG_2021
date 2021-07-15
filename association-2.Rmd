@@ -20,6 +20,7 @@ annotfile <- "data/sample_phenotype_annotation.RData"
 if (!file.exists(annotfile)) download.file(file.path(repo_path, annotfile), annotfile)
 annot <- get(load(annotfile))
 
+# open the GDS file
 library(SeqVarTools)
 gdsfile <- "data/1KG_phase3_subset_chr1.gds"
 if (!file.exists(gdsfile)) download.file(file.path(repo_path, gdsfile), gdsfile)
@@ -98,6 +99,8 @@ We can also perform a SKAT test. This time, we will use the Wu weights, which gi
 ```{r assoc_window_skat, message = FALSE}
 # reset the iterator to the first window
 resetIterator(iterator)
+
+# run the SKAT test
 assoc <- assocTestAggregate(iterator, 
                             nullmod, 
                             test="SKAT", 
@@ -158,5 +161,5 @@ qqPlot(assoc$results$pval)
 ```
 
 ```{r assoc_close2}
-seqClose(gds)
+seqClose(seqData)
 ```

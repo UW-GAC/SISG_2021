@@ -138,19 +138,18 @@ They can help you see if one study is vastly different from the others or detect
 Some of the differences could also be accounted for by covariates.
 
 
-## Using null models to compare studies
+## Using regression models to compare studies
 
 The quick diagnostics in the previous section let you see if the data from one study are completely different from the others, but such differences could be due to other factors that could be adjusted for in analysis.
 To account for these other factors, we need to fit a statistical model to the data.
-Because some of the studies in TOPMed have related individuals, we need to fit a null model to account for the correlation in the data.
-In this case, because the phenotype is quantitative, we will use a linear model.
+In this case, because the phenotype is quantitative, we will use a linear regression model.
 
-We use the `GENESIS` R package for fitting the null model.
+We use the `GENESIS` R package for fitting the regression model.
 It is also the same package that we use for the association analyses, so this exercise provides a brief introduction to the package and some of the associated data structures.
 
 ### Create an Annotated Data Frame
 
-The first step in fitting the null model is to create an AnnotatedDataFrame.
+The first step in fitting the regression model is to create an AnnotatedDataFrame.
 This data structure is provided by the Bioconductor `Biobase` package, and it contains both the data and metadata.
 You should include a description of each variable in the metadata.
 ```{r, message = FALSE}
@@ -180,7 +179,7 @@ save(annot, file = "data/phenotype_annotation.RData")
 ```
 
 
-The `GENESIS` code to fit the null model also requires a `sample.id` column.
+The `GENESIS` code to fit the regression model also requires a `sample.id` column.
 Typically the `sample.id` column represents a sample identifier, not a subject id.
 In this case, we are only working with subject-level data, so we can use the subject identifier as the sample identifier for model-fitting purposes.
 ```{r}
@@ -188,10 +187,10 @@ annot$sample.id <- annot$subject_id
 ```
 
 
-### Fit a null model without study
+### Fit a regression model without study
 
-We will first fit a null model that allows us to see if the mean of the height phenotype is different by study after adjusting for other covariates.
-In this case, we will adjust for age and sex, but not for study, because we are interested in seeing differences in mean height by study.
+We will first fit a regression model that allows us to see if the mean of the height phenotype is different by study after adjusting for other covariates.
+In this case, we will adjust for age and sex, but not for study, because we are interested in seeing differences in mean height by study. We use the `fitNullModel` function from the GENESIS package -- the name "null model" comes from association testing context and will be explained later.
 
 ```{r, message = FALSE}
 outcome <- "height"
@@ -261,7 +260,7 @@ The `fixef` element now includes effects for study:
 mod_2$fixef
 ```
 
-The null model also shows the differences in mean height by study.
+The regression model also shows the differences in mean height by study.
 
 Finally, we want to check if the height distributions from the different studies have the same variance.
 Start by looking at the variance components (`varComp`) element of the model.

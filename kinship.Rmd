@@ -297,6 +297,6 @@ ggplot(pcrel2$kinBtwn, aes(k0, kin)) +
 ```
 
 ```{r close}
-seqClose(gds)
+seqClose(seqData)
 ```
 
