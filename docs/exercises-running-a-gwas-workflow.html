@@ -4,34 +4,35 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>14 Exercises: Running a GWAS workflow | SISG Module 17: Computational Pipeline for WGS Data</title>
-  <meta name="description" content="Course materials for SISG Module 17" />
-  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+  <title>10 Exercises: Running a GWAS workflow | SISG 2021 Module 16: Computational Pipeline for WGS Data</title>
+  <meta name="description" content="Course materials for SISG 2021 Module 16" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="14 Exercises: Running a GWAS workflow | SISG Module 17: Computational Pipeline for WGS Data" />
+  <meta property="og:title" content="10 Exercises: Running a GWAS workflow | SISG 2021 Module 16: Computational Pipeline for WGS Data" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="Course materials for SISG Module 17" />
-  <meta name="github-repo" content="UW-GAC/SISG_2020" />
+  <meta property="og:description" content="Course materials for SISG 2021 Module 16" />
+  <meta name="github-repo" content="UW-GAC/SISG_2021" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="14 Exercises: Running a GWAS workflow | SISG Module 17: Computational Pipeline for WGS Data" />
+  <meta name="twitter:title" content="10 Exercises: Running a GWAS workflow | SISG 2021 Module 16: Computational Pipeline for WGS Data" />
   
-  <meta name="twitter:description" content="Course materials for SISG Module 17" />
+  <meta name="twitter:description" content="Course materials for SISG 2021 Module 16" />
   
 
 
 
-<meta name="date" content="2020-07-27" />
+<meta name="date" content="2021-07-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="annotation-solutions.html"/>
+<link rel="prev" href="aggregate-association-tests.html"/>
 
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -49,45 +50,75 @@
 
 
 
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 </head>
 
@@ -101,63 +132,92 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
       <nav role="navigation">
 
 <ul class="summary">
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
 <li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#schedule"><i class="fa fa-check"></i><b>1.1</b> Schedule</a></li>
 <li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#r-packages-used"><i class="fa fa-check"></i><b>1.2</b> R packages used</a></li>
 <li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#resources"><i class="fa fa-check"></i><b>1.3</b> Resources</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="gds-format.html"><a href="gds-format.html"><i class="fa fa-check"></i><b>2</b> GDS format</a><ul>
-<li class="chapter" data-level="2.1" data-path="gds-format.html"><a href="gds-format.html#exploring-a-gds-file"><i class="fa fa-check"></i><b>2.1</b> Exploring a GDS file</a></li>
-<li class="chapter" data-level="2.2" data-path="gds-format.html"><a href="gds-format.html#exercises"><i class="fa fa-check"></i><b>2.2</b> Exercises</a></li>
+<li class="chapter" data-level="2" data-path="gds-format.html"><a href="gds-format.html"><i class="fa fa-check"></i><b>2</b> GDS format</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="gds-format.html"><a href="gds-format.html#convert-a-vcf-to-gds"><i class="fa fa-check"></i><b>2.1</b> Convert a VCF to GDS</a></li>
+<li class="chapter" data-level="2.2" data-path="gds-format.html"><a href="gds-format.html#exploring-a-gds-file"><i class="fa fa-check"></i><b>2.2</b> Exploring a GDS file</a></li>
+<li class="chapter" data-level="2.3" data-path="gds-format.html"><a href="gds-format.html#exercises"><i class="fa fa-check"></i><b>2.3</b> Exercises</a></li>
+<li class="chapter" data-level="2.4" data-path="gds-format.html"><a href="gds-format.html#solutions"><i class="fa fa-check"></i><b>2.4</b> Solutions</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="gds-solutions.html"><a href="gds-solutions.html"><i class="fa fa-check"></i><b>3</b> GDS - Solutions</a></li>
-<li class="chapter" data-level="4" data-path="phenotype-harmonization.html"><a href="phenotype-harmonization.html"><i class="fa fa-check"></i><b>4</b> Phenotype Harmonization</a><ul>
-<li class="chapter" data-level="4.1" data-path="phenotype-harmonization.html"><a href="phenotype-harmonization.html#inspect-individual-study-data-in-r"><i class="fa fa-check"></i><b>4.1</b> Inspect individual study data in R</a></li>
-<li class="chapter" data-level="4.2" data-path="phenotype-harmonization.html"><a href="phenotype-harmonization.html#compare-study-values"><i class="fa fa-check"></i><b>4.2</b> Compare study values</a></li>
-<li class="chapter" data-level="4.3" data-path="phenotype-harmonization.html"><a href="phenotype-harmonization.html#using-null-models-to-compare-studies"><i class="fa fa-check"></i><b>4.3</b> Using null models to compare studies</a><ul>
-<li class="chapter" data-level="4.3.1" data-path="phenotype-harmonization.html"><a href="phenotype-harmonization.html#create-an-annotated-data-frame"><i class="fa fa-check"></i><b>4.3.1</b> Create an Annotated Data Frame</a></li>
-<li class="chapter" data-level="4.3.2" data-path="phenotype-harmonization.html"><a href="phenotype-harmonization.html#fit-a-null-model-without-study"><i class="fa fa-check"></i><b>4.3.2</b> Fit a null model without study</a></li>
-<li class="chapter" data-level="4.3.3" data-path="phenotype-harmonization.html"><a href="phenotype-harmonization.html#fit-a-model-with-study"><i class="fa fa-check"></i><b>4.3.3</b> Fit a model with study</a></li>
+<li class="chapter" data-level="3" data-path="phenotype-harmonization.html"><a href="phenotype-harmonization.html"><i class="fa fa-check"></i><b>3</b> Phenotype Harmonization</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="phenotype-harmonization.html"><a href="phenotype-harmonization.html#inspect-individual-study-data-in-r"><i class="fa fa-check"></i><b>3.1</b> Inspect individual study data in R</a></li>
+<li class="chapter" data-level="3.2" data-path="phenotype-harmonization.html"><a href="phenotype-harmonization.html#compare-study-values"><i class="fa fa-check"></i><b>3.2</b> Compare study values</a></li>
+<li class="chapter" data-level="3.3" data-path="phenotype-harmonization.html"><a href="phenotype-harmonization.html#using-regression-models-to-compare-studies"><i class="fa fa-check"></i><b>3.3</b> Using regression models to compare studies</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="phenotype-harmonization.html"><a href="phenotype-harmonization.html#create-an-annotated-data-frame"><i class="fa fa-check"></i><b>3.3.1</b> Create an Annotated Data Frame</a></li>
+<li class="chapter" data-level="3.3.2" data-path="phenotype-harmonization.html"><a href="phenotype-harmonization.html#fit-a-regression-model-without-study"><i class="fa fa-check"></i><b>3.3.2</b> Fit a regression model without study</a></li>
+<li class="chapter" data-level="3.3.3" data-path="phenotype-harmonization.html"><a href="phenotype-harmonization.html#fit-a-model-with-study"><i class="fa fa-check"></i><b>3.3.3</b> Fit a model with study</a></li>
 </ul></li>
-<li class="chapter" data-level="4.4" data-path="phenotype-harmonization.html"><a href="phenotype-harmonization.html#final-considerations"><i class="fa fa-check"></i><b>4.4</b> Final considerations</a></li>
+<li class="chapter" data-level="3.4" data-path="phenotype-harmonization.html"><a href="phenotype-harmonization.html#final-considerations"><i class="fa fa-check"></i><b>3.4</b> Final considerations</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="association-tests.html"><a href="association-tests.html"><i class="fa fa-check"></i><b>5</b> Association tests</a><ul>
-<li class="chapter" data-level="5.1" data-path="association-tests.html"><a href="association-tests.html#null-model"><i class="fa fa-check"></i><b>5.1</b> Null model</a></li>
-<li class="chapter" data-level="5.2" data-path="association-tests.html"><a href="association-tests.html#single-variant-tests"><i class="fa fa-check"></i><b>5.2</b> Single-variant tests</a></li>
-<li class="chapter" data-level="5.3" data-path="association-tests.html"><a href="association-tests.html#exercises-1"><i class="fa fa-check"></i><b>5.3</b> Exercises</a></li>
-<li class="chapter" data-level="5.4" data-path="association-tests.html"><a href="association-tests.html#sliding-window-tests"><i class="fa fa-check"></i><b>5.4</b> Sliding window tests</a></li>
-<li class="chapter" data-level="5.5" data-path="association-tests.html"><a href="association-tests.html#exercise"><i class="fa fa-check"></i><b>5.5</b> Exercise</a></li>
+<li class="chapter" data-level="4" data-path="association-tests-part-i.html"><a href="association-tests-part-i.html"><i class="fa fa-check"></i><b>4</b> Association tests - Part I</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="association-tests-part-i.html"><a href="association-tests-part-i.html#null-model"><i class="fa fa-check"></i><b>4.1</b> Null model</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="association-tests-part-i.html"><a href="association-tests-part-i.html#prepare-the-data"><i class="fa fa-check"></i><b>4.1.1</b> Prepare the data</a></li>
+<li class="chapter" data-level="4.1.2" data-path="association-tests-part-i.html"><a href="association-tests-part-i.html#fit-the-null-model"><i class="fa fa-check"></i><b>4.1.2</b> Fit the null model</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="association-tests-solutions.html"><a href="association-tests-solutions.html"><i class="fa fa-check"></i><b>6</b> Association tests - Solutions</a></li>
-<li class="chapter" data-level="7" data-path="computing-a-grm.html"><a href="computing-a-grm.html"><i class="fa fa-check"></i><b>7</b> Computing a GRM</a></li>
-<li class="chapter" data-level="8" data-path="pc-relate.html"><a href="pc-relate.html"><i class="fa fa-check"></i><b>8</b> PC-Relate</a><ul>
-<li class="chapter" data-level="8.1" data-path="pc-relate.html"><a href="pc-relate.html#king"><i class="fa fa-check"></i><b>8.1</b> KING</a></li>
-<li class="chapter" data-level="8.2" data-path="pc-relate.html"><a href="pc-relate.html#pc-air"><i class="fa fa-check"></i><b>8.2</b> PC-AiR</a></li>
-<li class="chapter" data-level="8.3" data-path="pc-relate.html"><a href="pc-relate.html#pc-relate-1"><i class="fa fa-check"></i><b>8.3</b> PC-Relate</a></li>
-<li class="chapter" data-level="8.4" data-path="pc-relate.html"><a href="pc-relate.html#comparison-with-pedigree"><i class="fa fa-check"></i><b>8.4</b> Comparison with pedigree</a></li>
-<li class="chapter" data-level="8.5" data-path="pc-relate.html"><a href="pc-relate.html#exercise-1"><i class="fa fa-check"></i><b>8.5</b> Exercise</a></li>
+<li class="chapter" data-level="4.2" data-path="association-tests-part-i.html"><a href="association-tests-part-i.html#exercise"><i class="fa fa-check"></i><b>4.2</b> Exercise</a></li>
+<li class="chapter" data-level="4.3" data-path="association-tests-part-i.html"><a href="association-tests-part-i.html#solution"><i class="fa fa-check"></i><b>4.3</b> Solution</a></li>
+<li class="chapter" data-level="4.4" data-path="association-tests-part-i.html"><a href="association-tests-part-i.html#single-variant-association-tests"><i class="fa fa-check"></i><b>4.4</b> Single-variant association tests</a></li>
+<li class="chapter" data-level="4.5" data-path="association-tests-part-i.html"><a href="association-tests-part-i.html#exercise-1"><i class="fa fa-check"></i><b>4.5</b> Exercise</a></li>
+<li class="chapter" data-level="4.6" data-path="association-tests-part-i.html"><a href="association-tests-part-i.html#solution-1"><i class="fa fa-check"></i><b>4.6</b> Solution</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="mixed-models.html"><a href="mixed-models.html"><i class="fa fa-check"></i><b>9</b> Mixed models</a><ul>
-<li class="chapter" data-level="9.1" data-path="mixed-models.html"><a href="mixed-models.html#null-model-1"><i class="fa fa-check"></i><b>9.1</b> Null model</a></li>
-<li class="chapter" data-level="9.2" data-path="mixed-models.html"><a href="mixed-models.html#single-variant-tests-1"><i class="fa fa-check"></i><b>9.2</b> Single-variant tests</a></li>
-<li class="chapter" data-level="9.3" data-path="mixed-models.html"><a href="mixed-models.html#exercise-2"><i class="fa fa-check"></i><b>9.3</b> Exercise</a></li>
+<li class="chapter" data-level="5" data-path="association-tests-part-ii.html"><a href="association-tests-part-ii.html"><i class="fa fa-check"></i><b>5</b> Association tests - Part II</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="association-tests-part-ii.html"><a href="association-tests-part-ii.html#sliding-window-tests"><i class="fa fa-check"></i><b>5.1</b> Sliding window tests</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="association-tests-part-ii.html"><a href="association-tests-part-ii.html#burden-test"><i class="fa fa-check"></i><b>5.1.1</b> Burden test</a></li>
+<li class="chapter" data-level="5.1.2" data-path="association-tests-part-ii.html"><a href="association-tests-part-ii.html#skat-test"><i class="fa fa-check"></i><b>5.1.2</b> SKAT test</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="mixed-models-solutions.html"><a href="mixed-models-solutions.html"><i class="fa fa-check"></i><b>10</b> Mixed models - Solutions</a></li>
-<li class="chapter" data-level="11" data-path="variant-annotation.html"><a href="variant-annotation.html"><i class="fa fa-check"></i><b>11</b> Variant annotation</a><ul>
-<li class="chapter" data-level="11.1" data-path="variant-annotation.html"><a href="variant-annotation.html#using-bioconductor-annotation-resources"><i class="fa fa-check"></i><b>11.1</b> Using Bioconductor annotation resources</a></li>
-<li class="chapter" data-level="11.2" data-path="variant-annotation.html"><a href="variant-annotation.html#aggregating-and-filtering-variants-using-annotation"><i class="fa fa-check"></i><b>11.2</b> Aggregating and filtering variants using annotation</a></li>
+<li class="chapter" data-level="5.2" data-path="association-tests-part-ii.html"><a href="association-tests-part-ii.html#exercise-2"><i class="fa fa-check"></i><b>5.2</b> Exercise</a></li>
+<li class="chapter" data-level="5.3" data-path="association-tests-part-ii.html"><a href="association-tests-part-ii.html#solution-2"><i class="fa fa-check"></i><b>5.3</b> Solution</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="aggregate-tests.html"><a href="aggregate-tests.html"><i class="fa fa-check"></i><b>12</b> Aggregate tests</a><ul>
-<li class="chapter" data-level="12.1" data-path="aggregate-tests.html"><a href="aggregate-tests.html#aggregate-unit-for-association-testing-exercise"><i class="fa fa-check"></i><b>12.1</b> Aggregate unit for association testing exercise</a></li>
-<li class="chapter" data-level="12.2" data-path="aggregate-tests.html"><a href="aggregate-tests.html#association-testing-with-aggregate-units"><i class="fa fa-check"></i><b>12.2</b> Association testing with aggregate units</a></li>
-<li class="chapter" data-level="12.3" data-path="aggregate-tests.html"><a href="aggregate-tests.html#exercise-3"><i class="fa fa-check"></i><b>12.3</b> Exercise</a></li>
+<li class="chapter" data-level="6" data-path="ancestry-and-relatedness-inference.html"><a href="ancestry-and-relatedness-inference.html"><i class="fa fa-check"></i><b>6</b> Ancestry and Relatedness Inference</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="ancestry-and-relatedness-inference.html"><a href="ancestry-and-relatedness-inference.html#ld-pruning"><i class="fa fa-check"></i><b>6.1</b> LD-pruning</a></li>
+<li class="chapter" data-level="6.2" data-path="ancestry-and-relatedness-inference.html"><a href="ancestry-and-relatedness-inference.html#computing-a-grm"><i class="fa fa-check"></i><b>6.2</b> Computing a GRM</a></li>
+<li class="chapter" data-level="6.3" data-path="ancestry-and-relatedness-inference.html"><a href="ancestry-and-relatedness-inference.html#de-convoluting-ancestry-and-relatedness"><i class="fa fa-check"></i><b>6.3</b> De-convoluting ancestry and relatedness</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="ancestry-and-relatedness-inference.html"><a href="ancestry-and-relatedness-inference.html#king"><i class="fa fa-check"></i><b>6.3.1</b> KING</a></li>
+<li class="chapter" data-level="6.3.2" data-path="ancestry-and-relatedness-inference.html"><a href="ancestry-and-relatedness-inference.html#pc-air"><i class="fa fa-check"></i><b>6.3.2</b> PC-AiR</a></li>
+<li class="chapter" data-level="6.3.3" data-path="ancestry-and-relatedness-inference.html"><a href="ancestry-and-relatedness-inference.html#pc-relate"><i class="fa fa-check"></i><b>6.3.3</b> PC-Relate</a></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="annotation-solutions.html"><a href="annotation-solutions.html"><i class="fa fa-check"></i><b>13</b> Annotation - Solutions</a></li>
-<li class="chapter" data-level="14" data-path="exercises-running-a-gwas-workflow.html"><a href="exercises-running-a-gwas-workflow.html"><i class="fa fa-check"></i><b>14</b> Exercises: Running a GWAS workflow</a><ul>
-<li class="chapter" data-level="14.1" data-path="exercises-running-a-gwas-workflow.html"><a href="exercises-running-a-gwas-workflow.html#vcf-to-gds"><i class="fa fa-check"></i><b>14.1</b> VCF to GDS</a></li>
-<li class="chapter" data-level="14.2" data-path="exercises-running-a-gwas-workflow.html"><a href="exercises-running-a-gwas-workflow.html#null-model-2"><i class="fa fa-check"></i><b>14.2</b> Null Model</a></li>
-<li class="chapter" data-level="14.3" data-path="exercises-running-a-gwas-workflow.html"><a href="exercises-running-a-gwas-workflow.html#single-variant-test"><i class="fa fa-check"></i><b>14.3</b> Single variant test</a></li>
-<li class="chapter" data-level="14.4" data-path="exercises-running-a-gwas-workflow.html"><a href="exercises-running-a-gwas-workflow.html#analysis-follow-up"><i class="fa fa-check"></i><b>14.4</b> Analysis follow-up</a></li>
+<li class="chapter" data-level="6.4" data-path="ancestry-and-relatedness-inference.html"><a href="ancestry-and-relatedness-inference.html#exercises-1"><i class="fa fa-check"></i><b>6.4</b> Exercises</a></li>
+<li class="chapter" data-level="6.5" data-path="ancestry-and-relatedness-inference.html"><a href="ancestry-and-relatedness-inference.html#solutions-1"><i class="fa fa-check"></i><b>6.5</b> Solutions</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="mixed-models.html"><a href="mixed-models.html"><i class="fa fa-check"></i><b>7</b> Mixed models</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="mixed-models.html"><a href="mixed-models.html#null-model-1"><i class="fa fa-check"></i><b>7.1</b> Null model</a></li>
+<li class="chapter" data-level="7.2" data-path="mixed-models.html"><a href="mixed-models.html#single-variant-tests"><i class="fa fa-check"></i><b>7.2</b> Single-variant tests</a></li>
+<li class="chapter" data-level="7.3" data-path="mixed-models.html"><a href="mixed-models.html#exercise-3"><i class="fa fa-check"></i><b>7.3</b> Exercise</a></li>
+<li class="chapter" data-level="7.4" data-path="mixed-models.html"><a href="mixed-models.html#solution-3"><i class="fa fa-check"></i><b>7.4</b> Solution</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="variant-annotation.html"><a href="variant-annotation.html"><i class="fa fa-check"></i><b>8</b> Variant annotation</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="variant-annotation.html"><a href="variant-annotation.html#using-bioconductor-annotation-resources"><i class="fa fa-check"></i><b>8.1</b> Using Bioconductor annotation resources</a></li>
+<li class="chapter" data-level="8.2" data-path="variant-annotation.html"><a href="variant-annotation.html#aggregating-and-filtering-variants-using-annotation"><i class="fa fa-check"></i><b>8.2</b> Aggregating and filtering variants using annotation</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="aggregate-association-tests.html"><a href="aggregate-association-tests.html"><i class="fa fa-check"></i><b>9</b> Aggregate association tests</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="aggregate-association-tests.html"><a href="aggregate-association-tests.html#aggregate-unit-for-association-testing-exercise"><i class="fa fa-check"></i><b>9.1</b> Aggregate unit for association testing exercise</a></li>
+<li class="chapter" data-level="9.2" data-path="aggregate-association-tests.html"><a href="aggregate-association-tests.html#association-testing-with-aggregate-units"><i class="fa fa-check"></i><b>9.2</b> Association testing with aggregate units</a></li>
+<li class="chapter" data-level="9.3" data-path="aggregate-association-tests.html"><a href="aggregate-association-tests.html#exercise-4"><i class="fa fa-check"></i><b>9.3</b> Exercise</a></li>
+<li class="chapter" data-level="9.4" data-path="aggregate-association-tests.html"><a href="aggregate-association-tests.html#solution-4"><i class="fa fa-check"></i><b>9.4</b> Solution</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="exercises-running-a-gwas-workflow.html"><a href="exercises-running-a-gwas-workflow.html"><i class="fa fa-check"></i><b>10</b> Exercises: Running a GWAS workflow</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="exercises-running-a-gwas-workflow.html"><a href="exercises-running-a-gwas-workflow.html#vcf-to-gds"><i class="fa fa-check"></i><b>10.1</b> VCF to GDS</a></li>
+<li class="chapter" data-level="10.2" data-path="exercises-running-a-gwas-workflow.html"><a href="exercises-running-a-gwas-workflow.html#null-model-2"><i class="fa fa-check"></i><b>10.2</b> Null Model</a></li>
+<li class="chapter" data-level="10.3" data-path="exercises-running-a-gwas-workflow.html"><a href="exercises-running-a-gwas-workflow.html#single-variant-test"><i class="fa fa-check"></i><b>10.3</b> Single variant test</a></li>
+<li class="chapter" data-level="10.4" data-path="exercises-running-a-gwas-workflow.html"><a href="exercises-running-a-gwas-workflow.html#analysis-follow-up"><i class="fa fa-check"></i><b>10.4</b> Analysis follow-up</a></li>
 </ul></li>
 </ul>
 
@@ -168,7 +228,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">SISG Module 17: Computational Pipeline for WGS Data</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">SISG 2021 Module 16: Computational Pipeline for WGS Data</a>
           </h1>
         </div>
 
@@ -176,23 +236,26 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="exercises-running-a-gwas-workflow" class="section level1">
-<h1><span class="header-section-number">14</span> Exercises: Running a GWAS workflow</h1>
-<p>On the BioData Catalyst platform, locate these GENESIS public apps and copy them to your project: 1. GENESIS VCF to GDS 2. GENESIS Null Model 3. GENESIS Single Variant association testing</p>
-<div id="vcf-to-gds" class="section level2">
-<h2><span class="header-section-number">14.1</span> VCF to GDS</h2>
+<div id="exercises-running-a-gwas-workflow" class="section level1" number="10">
+<h1><span class="header-section-number">10</span> Exercises: Running a GWAS workflow</h1>
+<p>On the BioData Catalyst platform, locate these GENESIS public apps and copy them to your project:
+1. GENESIS VCF to GDS
+2. GENESIS Null Model
+3. GENESIS Single Variant association testing</p>
+<div id="vcf-to-gds" class="section level2" number="10.1">
+<h2><span class="header-section-number">10.1</span> VCF to GDS</h2>
 <p>Run the VCF to GDS workflow to convert the 1000 Genomes VCF files to GDS files. Use the “view stats and logs” button to check on the status of your tasks.</p>
 </div>
-<div id="null-model-2" class="section level2">
-<h2><span class="header-section-number">14.2</span> Null Model</h2>
+<div id="null-model-2" class="section level2" number="10.2">
+<h2><span class="header-section-number">10.2</span> Null Model</h2>
 <p>Run a null model using “outcome” as the outcome variable and adjust for the first two PCs. Select a PCA file, a phenotype file, and a relatedness matrix file from the files available in the GENESIS tutorial project. Review the null model reports generated as html files.</p>
 </div>
-<div id="single-variant-test" class="section level2">
-<h2><span class="header-section-number">14.3</span> Single variant test</h2>
+<div id="single-variant-test" class="section level2" number="10.3">
+<h2><span class="header-section-number">10.3</span> Single variant test</h2>
 <p>Use the GDS files and null model file you created in the previous steps to run a single variant association test. Use the phenotype file generated by the Null Model workflow as the phenotype file input. Review the QQ and manhattan plots.</p>
 </div>
-<div id="analysis-follow-up" class="section level2">
-<h2><span class="header-section-number">14.4</span> Analysis follow-up</h2>
+<div id="analysis-follow-up" class="section level2" number="10.4">
+<h2><span class="header-section-number">10.4</span> Analysis follow-up</h2>
 <p>In RStudio, locate the results of your association test under <code>/sbgenomics/project-files/</code>. Load one of these results files into R and explore it.</p>
 
 </div>
@@ -202,7 +265,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           </div>
         </div>
       </div>
-<a href="annotation-solutions.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="aggregate-association-tests.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
     </div>
   </div>
@@ -226,6 +289,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {

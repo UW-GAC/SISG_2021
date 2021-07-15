@@ -70,7 +70,7 @@ save(nullmod, file="data/null_model.RData")
 
 The `fitNullModel` function returns a lot of information about the model that was fit. We examine some of that information below; to see all of the components, try `names(nullmod)`.
 
-```{r null_model_results}
+```{r assoc_null_model_results}
 # description of the model we fit
 nullmod$model
 
@@ -147,7 +147,7 @@ After fitting our null model, we can use score tests to test each variant across
 
 We use the `assocTestSingle` function in GENESIS. First, we have to create a `SeqVarData` object including both the GDS file and the sample annotation containing phenotype data. We then create a `SeqVarBlockIterator` object, which breaks the set of all variants in the `SeqVarData` object into blocks, allowing us to analyze genome-wide in manageable pieces. The `assocTestSingle` function iterates over all blocks of variants in the `SeqVarBlockIterator` object and then concatenates and returns the results.
 
-```{r assoc_single, message = FALSE}
+```{r, message = FALSE}
 library(SeqVarTools)
 gdsfile <- "data/1KG_phase3_subset_chr1.gds"
 if (!file.exists(gdsfile)) download.file(file.path(repo_path, gdsfile), gdsfile)
@@ -159,7 +159,10 @@ seqData <- SeqVarData(gds, sampleData=annot)
 
 # make the iterator object
 iterator <- SeqVarBlockIterator(seqData, verbose=FALSE)
+iterator
+```
 
+```{r assoc_single, message = FALSE}
 # run the single-variant association test
 assoc <- assocTestSingle(iterator, nullmod)
 dim(assoc)
@@ -205,11 +208,11 @@ We should expect the majority of variants to fall near the red `y=x` line in the
 
 ## Exercise
 
-1. GENESIS also supports testing binary (e.g. case/control) outcomes. We can fit a null model using logistic regression by specifying the argument `family=binomial` in the `fitNullModel` function. Use the `status` column in the sample annotation to fit a null model for simulated case/control status, with `sex` and `Population` as covariates. Run single-variant association tests using this model and make a QQ plot of all variants with MAC >= 5.
+2. GENESIS also supports testing binary (e.g. case/control) outcomes. We can fit a null model using logistic regression by specifying the argument `family=binomial` in the `fitNullModel` function. Use the `status` column in the sample annotation to fit a null model for simulated case/control status, with `sex` and `Population` as covariates. Run single-variant association tests using this model and make a QQ plot of all variants with MAC >= 5.
 
 ## Solution
 
-1. GENESIS also supports testing binary (e.g. case/control) outcomes. We can fit a null model using logistic regression by specifying the argument `family=binomial` in the `fitNullModel` function. Use the `status` column in the sample annotation to fit a null model for simulated case/control status, with `sex` and `Population` as covariates. Run single-variant association tests using this model and make a QQ plot of all variants with MAC >= 5.
+2. GENESIS also supports testing binary (e.g. case/control) outcomes. We can fit a null model using logistic regression by specifying the argument `family=binomial` in the `fitNullModel` function. Use the `status` column in the sample annotation to fit a null model for simulated case/control status, with `sex` and `Population` as covariates. Run single-variant association tests using this model and make a QQ plot of all variants with MAC >= 5.
 
 When testing binary outcomes, we should fit our null model using logistic regression. To do so, we simply set the argument `family=binomial` in `fitNullModel`. Note that the parameter `group.var` is no longer relevant here, as the logistic model specifies the mean-variance relationship. 
 
@@ -233,7 +236,7 @@ qqPlot(assoc.status$Score.pval[assoc.status$MAC >= 5])
 
 Extra: in samples with highly imbalanced case:control ratios, the Score test can perform poorly for low frequency variants. Saddlepoint approximation (SPA) can be used to improve p-value calculations, and is available in GENESIS by setting the argument `test=Score.SPA` in `assocTestSingle`. See [Dey et al.](https://www.cell.com/ajhg/fulltext/S0002-9297(17)30201-X) and [Zhou et al.](https://www.nature.com/articles/s41588-018-0184-y) for details on using SPA in GWAS.
 
-```{r close}
+```{r assoc_close1}
 # close the GDS file!
-seqClose(gds)
+seqClose(seqData)
 ```

@@ -3,33 +3,46 @@
 
 ## Using Bioconductor annotation resources
 
-In this example, we illustrate defining aggregate units based on known genes. 
+In this example, we illustrate defining aggregation units based on known genes.
 
-First, we load the null mixed model and open the GDS file.
+First, we load the null model and the `AnnotatedDataFrame` with sample data, and we open the GDS file.
 
-```{r}
-modfile <- "data/null_mixed_model.RData"
-nullmod <- TopmedPipeline::getobj(modfile)
+```{r, message = FALSE}
+repo_path <- "https://github.com/UW-GAC/SISG_2021/raw/master"
+if (!dir.exists("data")) dir.create("data")
 
+# load the null model
+nullmodfile <- "data/null_mixed_model.RData"
+if (!file.exists(nullmodfile)) download.file(file.path(repo_path, nullmodfile), nullmodfile)
+nullmod <- get(load(nullmodfile))
+
+# load the sample annotation
 sampfile <- "data/sample_phenotype_annotation.RData"
-annot <- TopmedPipeline::getobj(sampfile)
+if (!file.exists(sampfile)) download.file(file.path(repo_path, sampfile), sampfile)
+annot <- get(load(sampfile))
 
-gdsfile <- "data/1KG_phase3_subset_chr1.gds"
+# open the GDS file
 library(SeqVarTools)
+gdsfile <- "data/1KG_phase3_subset_chr1.gds"
+if (!file.exists(gdsfile)) download.file(file.path(repo_path, gdsfile), gdsfile)
+gdsfmt::showfile.gds(closeall=TRUE) # make sure file is not already open
 gds <- seqOpen(gdsfile)
+
+# make the seqVarData object
 seqData <- SeqVarData(gds, sampleData=annot)
 ```
 
 We use the human genome annotation from Bioconductor to identify genes.
 
-```{r}
+```{r, message = FALSE}
 library(GenomicRanges)
-library(TxDb.Hsapiens.UCSC.hg19.knownGene)
-
 # return the variants in seqData as a GRanges object
 gr <- granges(gds)
 gr
+```
 
+```{r}
+library(TxDb.Hsapiens.UCSC.hg19.knownGene)
 # find variants that overlap with each gene
 txdb <- TxDb.Hsapiens.UCSC.hg19.knownGene
 gr <- renameSeqlevels(gr, paste0("chr", seqlevels(gr)))
@@ -40,13 +53,14 @@ genes <- renameSeqlevels(genes, sub("chr", "", seqlevels(genes)))
 genes
 ```
 
-We run a burden test, setting a maximum alternate allele frequency to exclude common variants.
+We can run a burden test, setting a maximum alternate allele frequency of 0.05 to exclude common variants. We previously used the `SeqVarWindowIterator` function to create an iterator object with variants grouped in sliding windows. Here, we use the `SeqVarRangeIterator` function to create an iterator object with variants grouped by genes as we defined above. 
 
 ```{r}
 # create an iterator where each successive unit is a different gene
 iterator <- SeqVarRangeIterator(seqData, variantRanges=genes, verbose=FALSE)
 
-# do a burden test on the rare variants in each gene
+# run a burden test on the rare variants in each gene
+library(GENESIS)
 assoc <- assocTestAggregate(iterator, nullmod, AF.max=0.05, test="Burden")
 head(assoc$results)
 head(assoc$variantInfo)
@@ -58,16 +72,17 @@ head(assoc$variantInfo)
 
 Alternatively, we may want to import annotation from other software, such as ANNOVAR or WGSA. The output formats of variant annotation software can be quite complex, but for this exercise we use fairly simple tab-separated text files.
 
-```{r}
+```{r, message = FALSE}
 library(dplyr)
 snv_annotation <- read.table("data/snv_parsed.tsv", sep="\t", na.strings=".", header=TRUE, as.is=TRUE)
 indel_annotation <- read.table("data/indel_parsed.tsv", sep="\t", na.strings=".", header=TRUE, as.is=TRUE)
 combined_annotation <- bind_rows(snv_annotation, indel_annotation)
 ```
 
-Here we remove variants that are not associated with a gene, group the variants by gene, and filter the variants for intron_variants with a CADD_phred score greater than 3 in just a few lines of code:
+Here, we remove variants that are not associated with a gene, group the variants by gene, and filter to intron_variants with a CADD_phred score greater than 3 in just a few lines of code:
+
 ```{r}
-combined_annotation %>% 
+combined_annotation %>%
   filter(VEP_ensembl_Gene_ID != ".") %>% # remove variants not annotated with a Gene_ID
   group_by(VEP_ensembl_Gene_ID) %>% # aggregate by gene
   filter(CADD_phred > 3) %>% # filter variants to keep only CADD_phred greater than 3
@@ -75,7 +90,8 @@ combined_annotation %>%
   glimpse() # view the result - 592 variants
 ```
 
-Now that you've got a set of variants that you can aggregate into genic units, the data needs to be reformatted for input to the GENESIS analysis pipeline. The input to the GENESIS pipeline is a data frame with variables called `group_id`, `chr`, `pos`, `ref`, and `alt`. Prepare this data frame and save it for testing (You do not need to filter the variants for this exercise):
+Now that we have a set of variants that we can aggregate into genic units, the data needs to be reformatted for input to the GENESIS analysis pipeline. The input to the GENESIS pipeline is a data frame with variables called `group_id`, `chr`, `pos`, `ref`, and `alt`. Prepare this data frame and save it for testing (we do not need to filter the variants for this exercise):
+
 ```{r}
 aggregates <-
   combined_annotation %>%
@@ -85,17 +101,26 @@ aggregates <-
          chr = CHROM,
          pos = POS,
          ref = REF,
-         alt = ALT) %>%
-  glimpse # inspect the tibble
+         alt = ALT) # select and rename columns
+
+head(aggregates) # inspect the tibble
 ```
 
-You can also compute some summary information about these aggregates, such as counting how many genic units we're using:
+We can also compute some summary information about these aggregates, such as counting how many genic units we're using:
+
 ```{r}
 length(unique(aggregates$group_id))
 ```
 
 We can look at the distribution of the number of variants per aggregation unit:
+
 ```{r plot_agg_units}
 counts <- aggregates %>% group_by(group_id) %>% summarize(n = n())
+
+library(ggplot2)
 ggplot(counts, aes(x = n)) + geom_bar()
+```
+
+```{r}
+seqClose(seqData)
 ```

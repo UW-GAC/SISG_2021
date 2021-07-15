@@ -56,7 +56,7 @@ save(nullmod, file="data/null_mixed_model.RData")
 ```
 
 We can investigate the output from `fitNullModel`.
-```{r null_model_results}
+```{r}
 # description of the model we fit
 nullmod$model
 
@@ -99,7 +99,7 @@ dim(assoc)
 head(assoc)
 ```
 
-We make the usual QQ plot, filtering to variants with minor allele count (MAC) >= 5. Notice that we observe much less inflation than before, when we did not adjust for ancestry and relatedness.
+We make the usual QQ plot, filtering to variants with minor allele count (MAC) >= 5.
 
 ```{r assoc_single_qq_mm}
 library(ggplot2)
@@ -125,6 +125,7 @@ qqPlot <- function(pval) {
 qqPlot(assoc$Score.pval[assoc$MAC >= 5])
 ```
 
+Notice that we observe much less inflation than before, when we did not adjust for ancestry and relatedness.
 
 ## Exercise
 
@@ -168,5 +169,5 @@ qqPlot(assoc.status$Score.pval[assoc.status$MAC >= 5])
 ```
 
 ```{r assoc_mm_close}
-seqClose(gds)
+seqClose(seqData)
 ```
