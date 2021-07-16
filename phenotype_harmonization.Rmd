@@ -152,6 +152,7 @@ It is also the same package that we use for the association analyses, so this ex
 The first step in fitting the regression model is to create an AnnotatedDataFrame.
 This data structure is provided by the Bioconductor `Biobase` package, and it contains both the data and metadata.
 You should include a description of each variable in the metadata.
+
 ```{r, message = FALSE}
 library(Biobase)
 
@@ -178,10 +179,10 @@ Save the AnnotatedDataFrame for future use.
 save(annot, file = "data/phenotype_annotation.RData")
 ```
 
-
 The `GENESIS` code to fit the regression model also requires a `sample.id` column.
 Typically the `sample.id` column represents a sample identifier, not a subject id.
 In this case, we are only working with subject-level data, so we can use the subject identifier as the sample identifier for model-fitting purposes.
+
 ```{r}
 annot$sample.id <- annot$subject_id
 ```

@@ -23,7 +23,7 @@
 
 
 
-<meta name="date" content="2021-07-14" />
+<meta name="date" content="2021-07-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -212,12 +212,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.3" data-path="aggregate-association-tests.html"><a href="aggregate-association-tests.html#exercise-4"><i class="fa fa-check"></i><b>9.3</b> Exercise</a></li>
 <li class="chapter" data-level="9.4" data-path="aggregate-association-tests.html"><a href="aggregate-association-tests.html#solution-4"><i class="fa fa-check"></i><b>9.4</b> Solution</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="exercises-running-a-gwas-workflow.html"><a href="exercises-running-a-gwas-workflow.html"><i class="fa fa-check"></i><b>10</b> Exercises: Running a GWAS workflow</a>
+<li class="chapter" data-level="10" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html"><i class="fa fa-check"></i><b>10</b> Running a GWAS workflow on BioData Catalyst</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="exercises-running-a-gwas-workflow.html"><a href="exercises-running-a-gwas-workflow.html#vcf-to-gds"><i class="fa fa-check"></i><b>10.1</b> VCF to GDS</a></li>
-<li class="chapter" data-level="10.2" data-path="exercises-running-a-gwas-workflow.html"><a href="exercises-running-a-gwas-workflow.html#null-model-2"><i class="fa fa-check"></i><b>10.2</b> Null Model</a></li>
-<li class="chapter" data-level="10.3" data-path="exercises-running-a-gwas-workflow.html"><a href="exercises-running-a-gwas-workflow.html#single-variant-test"><i class="fa fa-check"></i><b>10.3</b> Single variant test</a></li>
-<li class="chapter" data-level="10.4" data-path="exercises-running-a-gwas-workflow.html"><a href="exercises-running-a-gwas-workflow.html#analysis-follow-up"><i class="fa fa-check"></i><b>10.4</b> Analysis follow-up</a></li>
+<li class="chapter" data-level="10.1" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html#preparing-the-genotype-data"><i class="fa fa-check"></i><b>10.1</b> Preparing the genotype data</a>
+<ul>
+<li class="chapter" data-level="10.1.1" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html#bcftools-merge-and-filter"><i class="fa fa-check"></i><b>10.1.1</b> Bcftools Merge and Filter</a></li>
+<li class="chapter" data-level="10.1.2" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html#vcf-to-gds-converter"><i class="fa fa-check"></i><b>10.1.2</b> VCF to GDS Converter</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html#ancestry-and-relatedness"><i class="fa fa-check"></i><b>10.2</b> Ancestry and Relatedness</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html#king-robust"><i class="fa fa-check"></i><b>10.2.1</b> KING robust</a></li>
+<li class="chapter" data-level="10.2.2" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html#pc-air-1"><i class="fa fa-check"></i><b>10.2.2</b> PC-AiR</a></li>
+<li class="chapter" data-level="10.2.3" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html#pc-relate-1"><i class="fa fa-check"></i><b>10.2.3</b> PC-Relate</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html#association-testing"><i class="fa fa-check"></i><b>10.3</b> Association Testing</a>
+<ul>
+<li class="chapter" data-level="10.3.1" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html#null-model-2"><i class="fa fa-check"></i><b>10.3.1</b> Null Model</a></li>
+<li class="chapter" data-level="10.3.2" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html#single-variant-association-test"><i class="fa fa-check"></i><b>10.3.2</b> Single variant association test</a></li>
+<li class="chapter" data-level="10.3.3" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html#aggregate-variant-test"><i class="fa fa-check"></i><b>10.3.3</b> Aggregate variant test</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html#analysis-follow-up"><i class="fa fa-check"></i><b>10.4</b> Analysis follow-up</a></li>
 </ul></li>
 </ul>
 
@@ -283,13 +297,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## [1] &quot;results&quot;     &quot;variantInfo&quot;</code></pre>
 <div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="association-tests-part-ii.html#cb204-1" aria-hidden="true" tabindex="-1"></a><span class="co"># results for each window</span></span>
 <span id="cb204-2"><a href="association-tests-part-ii.html#cb204-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(assoc<span class="sc">$</span>results)</span></code></pre></div>
-<pre><code>##   chr   start     end n.site n.alt n.sample.alt      Score  Score.SE Score.Stat  Score.pval        Est   Est.SE          PVE
-## 1   1  965001  975000      1     9            9 -0.1191236 0.2577712 -0.4621292 0.643988693  -1.792788 3.879410 0.0001905115
-## 2   1  980001  990000      1   111          107 -1.6707553 0.8841849 -1.8895996 0.058811535  -2.137109 1.130985 0.0031851797
-## 3   1 1020001 1030000      1     1            1 -0.2795838 0.1007173 -2.7759261 0.005504472 -27.561563 9.928781 0.0068740102
-## 4   1 1260001 1270000      1     2            2 -0.1105487 0.1085480 -1.0184319 0.308472744  -9.382319 9.212515 0.0009252485
-## 5   1 1465001 1475000      1    16           16  0.3630992 0.3456555  1.0504657 0.293504065   3.039054 2.893054 0.0009843694
-## 6   1 1730001 1740000      1     5            5 -0.1300405 0.1973175 -0.6590420 0.509868790  -3.340007 5.067973 0.0003874544</code></pre>
+<pre><code>##   chr   start     end n.site n.alt n.sample.alt      Score  Score.SE Score.Stat  Score.pval        Est   Est.SE
+## 1   1  965001  975000      1     9            9 -0.1191236 0.2577712 -0.4621292 0.643988693  -1.792788 3.879410
+## 2   1  980001  990000      1   111          107 -1.6707553 0.8841849 -1.8895996 0.058811535  -2.137109 1.130985
+## 3   1 1020001 1030000      1     1            1 -0.2795838 0.1007173 -2.7759261 0.005504472 -27.561563 9.928781
+## 4   1 1260001 1270000      1     2            2 -0.1105487 0.1085480 -1.0184319 0.308472744  -9.382319 9.212515
+## 5   1 1465001 1475000      1    16           16  0.3630992 0.3456555  1.0504657 0.293504065   3.039054 2.893054
+## 6   1 1730001 1740000      1     5            5 -0.1300405 0.1973175 -0.6590420 0.509868790  -3.340007 5.067973
+##            PVE
+## 1 0.0001905115
+## 2 0.0031851797
+## 3 0.0068740102
+## 4 0.0009252485
+## 5 0.0009843694
+## 6 0.0003874544</code></pre>
 <div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="association-tests-part-ii.html#cb206-1" aria-hidden="true" tabindex="-1"></a><span class="co"># how many variants in each window?</span></span>
 <span id="cb206-2"><a href="association-tests-part-ii.html#cb206-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(assoc<span class="sc">$</span>results<span class="sc">$</span>n.site)</span></code></pre></div>
 <pre><code>## 

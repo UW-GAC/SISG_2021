@@ -23,7 +23,7 @@
 
 
 
-<meta name="date" content="2021-07-14" />
+<meta name="date" content="2021-07-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -212,12 +212,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.3" data-path="aggregate-association-tests.html"><a href="aggregate-association-tests.html#exercise-4"><i class="fa fa-check"></i><b>9.3</b> Exercise</a></li>
 <li class="chapter" data-level="9.4" data-path="aggregate-association-tests.html"><a href="aggregate-association-tests.html#solution-4"><i class="fa fa-check"></i><b>9.4</b> Solution</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="exercises-running-a-gwas-workflow.html"><a href="exercises-running-a-gwas-workflow.html"><i class="fa fa-check"></i><b>10</b> Exercises: Running a GWAS workflow</a>
+<li class="chapter" data-level="10" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html"><i class="fa fa-check"></i><b>10</b> Running a GWAS workflow on BioData Catalyst</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="exercises-running-a-gwas-workflow.html"><a href="exercises-running-a-gwas-workflow.html#vcf-to-gds"><i class="fa fa-check"></i><b>10.1</b> VCF to GDS</a></li>
-<li class="chapter" data-level="10.2" data-path="exercises-running-a-gwas-workflow.html"><a href="exercises-running-a-gwas-workflow.html#null-model-2"><i class="fa fa-check"></i><b>10.2</b> Null Model</a></li>
-<li class="chapter" data-level="10.3" data-path="exercises-running-a-gwas-workflow.html"><a href="exercises-running-a-gwas-workflow.html#single-variant-test"><i class="fa fa-check"></i><b>10.3</b> Single variant test</a></li>
-<li class="chapter" data-level="10.4" data-path="exercises-running-a-gwas-workflow.html"><a href="exercises-running-a-gwas-workflow.html#analysis-follow-up"><i class="fa fa-check"></i><b>10.4</b> Analysis follow-up</a></li>
+<li class="chapter" data-level="10.1" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html#preparing-the-genotype-data"><i class="fa fa-check"></i><b>10.1</b> Preparing the genotype data</a>
+<ul>
+<li class="chapter" data-level="10.1.1" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html#bcftools-merge-and-filter"><i class="fa fa-check"></i><b>10.1.1</b> Bcftools Merge and Filter</a></li>
+<li class="chapter" data-level="10.1.2" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html#vcf-to-gds-converter"><i class="fa fa-check"></i><b>10.1.2</b> VCF to GDS Converter</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html#ancestry-and-relatedness"><i class="fa fa-check"></i><b>10.2</b> Ancestry and Relatedness</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html#king-robust"><i class="fa fa-check"></i><b>10.2.1</b> KING robust</a></li>
+<li class="chapter" data-level="10.2.2" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html#pc-air-1"><i class="fa fa-check"></i><b>10.2.2</b> PC-AiR</a></li>
+<li class="chapter" data-level="10.2.3" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html#pc-relate-1"><i class="fa fa-check"></i><b>10.2.3</b> PC-Relate</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html#association-testing"><i class="fa fa-check"></i><b>10.3</b> Association Testing</a>
+<ul>
+<li class="chapter" data-level="10.3.1" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html#null-model-2"><i class="fa fa-check"></i><b>10.3.1</b> Null Model</a></li>
+<li class="chapter" data-level="10.3.2" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html#single-variant-association-test"><i class="fa fa-check"></i><b>10.3.2</b> Single variant association test</a></li>
+<li class="chapter" data-level="10.3.3" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html#aggregate-variant-test"><i class="fa fa-check"></i><b>10.3.3</b> Aggregate variant test</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html#analysis-follow-up"><i class="fa fa-check"></i><b>10.4</b> Analysis follow-up</a></li>
 </ul></li>
 </ul>
 
@@ -250,7 +264,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-6"><a href="gds-format.html#cb1-6" aria-hidden="true" tabindex="-1"></a>gdsfile <span class="ot">&lt;-</span> <span class="st">&quot;data/1KG_phase3_subset_chr1.gds&quot;</span></span>
 <span id="cb1-7"><a href="gds-format.html#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># convert the VCF to GDS</span></span>
 <span id="cb1-8"><a href="gds-format.html#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">seqVCF2GDS</span>(vcffile, gdsfile, <span class="at">fmt.import=</span><span class="st">&quot;GT&quot;</span>, <span class="at">storage.option=</span><span class="st">&quot;LZMA_RA&quot;</span>)</span></code></pre></div>
-<pre><code>## Wed Jul 14 17:23:05 2021
+<pre><code>## Thu Jul 15 19:55:05 2021
 ## Variant Call Format (VCF) Import:
 ##     file(s):
 ##         1KG_phase3_subset_chr1.vcf.gz (120.7K)
@@ -277,7 +291,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##     annotation/qual  [md5: d6b8ed9bd5cac7dd7898bb679675fc7c]
 ##     annotation/filter  [md5: 8294edaf60fffc1e9aa693b4bc423dd1]
 ## Done.
-## Wed Jul 14 17:23:05 2021
+## Thu Jul 15 19:55:08 2021
 ## Optimize the access efficiency ...
 ## Clean up the fragments of GDS file:
 ##     open the file &#39;data/1KG_phase3_subset_chr1.gds&#39; (71.3K)
@@ -285,7 +299,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##     save to &#39;data/1KG_phase3_subset_chr1.gds.tmp&#39;
 ##     rename &#39;data/1KG_phase3_subset_chr1.gds.tmp&#39; (70.5K, reduced: 744B)
 ##     # of fragments: 61
-## Wed Jul 14 17:23:05 2021</code></pre>
+## Thu Jul 15 19:55:08 2021</code></pre>
 </div>
 <div id="exploring-a-gds-file" class="section level2" number="2.2">
 <h2><span class="header-section-number">2.2</span> Exploring a GDS file</h2>
@@ -439,18 +453,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="gds-format.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># some variants have more than one alternate allele</span></span>
 <span id="cb48-2"><a href="gds-format.html#cb48-2" aria-hidden="true" tabindex="-1"></a>multi.allelic <span class="ot">&lt;-</span> <span class="fu">which</span>(n <span class="sc">&gt;</span> <span class="dv">2</span>)</span>
 <span id="cb48-3"><a href="gds-format.html#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="fu">altChar</span>(gds)[multi.allelic]</span></code></pre></div>
-<pre><code>##  [1] &quot;GT,G&quot;            &quot;G,T&quot;             &quot;A,T&quot;             &quot;A,T&quot;             &quot;ATG,ATGTG&quot;       &quot;C,G&quot;             &quot;A,T&quot;             &quot;C,T&quot;             &quot;A,C&quot;            
-## [10] &quot;TAA,T&quot;           &quot;GTTA,GTTT&quot;       &quot;GCC,GCCC,G&quot;      &quot;A,C&quot;             &quot;A,C&quot;             &quot;A,C&quot;             &quot;CAAGCAT,CGAGCAT&quot; &quot;CATTATT,C&quot;       &quot;AT,C&quot;           
+<pre><code>##  [1] &quot;GT,G&quot;            &quot;G,T&quot;             &quot;A,T&quot;             &quot;A,T&quot;             &quot;ATG,ATGTG&quot;       &quot;C,G&quot;            
+##  [7] &quot;A,T&quot;             &quot;C,T&quot;             &quot;A,C&quot;             &quot;TAA,T&quot;           &quot;GTTA,GTTT&quot;       &quot;GCC,GCCC,G&quot;     
+## [13] &quot;A,C&quot;             &quot;A,C&quot;             &quot;A,C&quot;             &quot;CAAGCAT,CGAGCAT&quot; &quot;CATTATT,C&quot;       &quot;AT,C&quot;           
 ## [19] &quot;TGTGA,C&quot;         &quot;CCATT,CCATTCATT&quot; &quot;C,G&quot;</code></pre>
 <div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="gds-format.html#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># extract a particular alternate allele</span></span>
 <span id="cb50-2"><a href="gds-format.html#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="co"># first alternate</span></span>
 <span id="cb50-3"><a href="gds-format.html#cb50-3" aria-hidden="true" tabindex="-1"></a><span class="fu">altChar</span>(gds, <span class="at">n=</span><span class="dv">1</span>)[multi.allelic]</span></code></pre></div>
-<pre><code>##  [1] &quot;GT&quot;      &quot;G&quot;       &quot;A&quot;       &quot;A&quot;       &quot;ATG&quot;     &quot;C&quot;       &quot;A&quot;       &quot;C&quot;       &quot;A&quot;       &quot;TAA&quot;     &quot;GTTA&quot;    &quot;GCC&quot;     &quot;A&quot;       &quot;A&quot;       &quot;A&quot;       &quot;CAAGCAT&quot;
-## [17] &quot;CATTATT&quot; &quot;AT&quot;      &quot;TGTGA&quot;   &quot;CCATT&quot;   &quot;C&quot;</code></pre>
+<pre><code>##  [1] &quot;GT&quot;      &quot;G&quot;       &quot;A&quot;       &quot;A&quot;       &quot;ATG&quot;     &quot;C&quot;       &quot;A&quot;       &quot;C&quot;       &quot;A&quot;       &quot;TAA&quot;     &quot;GTTA&quot;   
+## [12] &quot;GCC&quot;     &quot;A&quot;       &quot;A&quot;       &quot;A&quot;       &quot;CAAGCAT&quot; &quot;CATTATT&quot; &quot;AT&quot;      &quot;TGTGA&quot;   &quot;CCATT&quot;   &quot;C&quot;</code></pre>
 <div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="gds-format.html#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># second alternate</span></span>
 <span id="cb52-2"><a href="gds-format.html#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="fu">altChar</span>(gds, <span class="at">n=</span><span class="dv">2</span>)[multi.allelic]</span></code></pre></div>
-<pre><code>##  [1] &quot;G&quot;         &quot;T&quot;         &quot;T&quot;         &quot;T&quot;         &quot;ATGTG&quot;     &quot;G&quot;         &quot;T&quot;         &quot;T&quot;         &quot;C&quot;         &quot;T&quot;         &quot;GTTT&quot;      &quot;GCCC&quot;      &quot;C&quot;        
-## [14] &quot;C&quot;         &quot;C&quot;         &quot;CGAGCAT&quot;   &quot;C&quot;         &quot;C&quot;         &quot;C&quot;         &quot;CCATTCATT&quot; &quot;G&quot;</code></pre>
+<pre><code>##  [1] &quot;G&quot;         &quot;T&quot;         &quot;T&quot;         &quot;T&quot;         &quot;ATGTG&quot;     &quot;G&quot;         &quot;T&quot;         &quot;T&quot;         &quot;C&quot;        
+## [10] &quot;T&quot;         &quot;GTTT&quot;      &quot;GCCC&quot;      &quot;C&quot;         &quot;C&quot;         &quot;C&quot;         &quot;CGAGCAT&quot;   &quot;C&quot;         &quot;C&quot;        
+## [19] &quot;C&quot;         &quot;CCATTCATT&quot; &quot;G&quot;</code></pre>
 <div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="gds-format.html#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="co"># how many variants are biallelic SNVs?</span></span>
 <span id="cb54-2"><a href="gds-format.html#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">isSNV</span>(gds, <span class="at">biallelic=</span><span class="cn">TRUE</span>))</span></code></pre></div>
 <pre><code>## 
@@ -545,31 +561,39 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## [1] 1126   21</code></pre>
 <div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="gds-format.html#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(geno)</span></code></pre></div>
 <pre><code>##          variant
-## sample    30    69    73    161   162   195   243   253   407   431   434   610   627   645   689   756   765   814   988   1014  1056 
-##   HG00096 &quot;1|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;1|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;1|0&quot; &quot;0|1&quot; &quot;3|3&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;2|0&quot; &quot;2|2&quot; &quot;2|2&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot;
-##   HG00097 &quot;1|1&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;2|2&quot; &quot;0|1&quot; &quot;1|3&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;2|2&quot; &quot;2|2&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot;
-##   HG00099 &quot;0|1&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;1|0&quot; &quot;1|3&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;2|2&quot; &quot;2|2&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot;
-##   HG00100 &quot;1|1&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;1|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|2&quot; &quot;0|1&quot; &quot;1|1&quot; &quot;2|0&quot; &quot;0|0&quot; &quot;0|2&quot; &quot;2|2&quot; &quot;2|2&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|2&quot;
-##   HG00101 &quot;1|1&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|1&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;2|0&quot; &quot;1|1&quot; &quot;0|0&quot; &quot;3|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;2|0&quot; &quot;2|2&quot; &quot;2|2&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;1|0&quot; &quot;0|0&quot;
-##   HG00102 &quot;0|1&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;1|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;2|2&quot; &quot;0|1&quot; &quot;3|3&quot; &quot;0|2&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;2|2&quot; &quot;1|2&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|1&quot; &quot;0|2&quot;</code></pre>
+## sample    30    69    73    161   162   195   243   253   407   431   434   610   627   645   689   756   765   814  
+##   HG00096 &quot;1|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;1|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;1|0&quot; &quot;0|1&quot; &quot;3|3&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;2|0&quot; &quot;2|2&quot; &quot;2|2&quot; &quot;0|0&quot;
+##   HG00097 &quot;1|1&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;2|2&quot; &quot;0|1&quot; &quot;1|3&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;2|2&quot; &quot;2|2&quot; &quot;0|0&quot;
+##   HG00099 &quot;0|1&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;1|0&quot; &quot;1|3&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;2|2&quot; &quot;2|2&quot; &quot;0|0&quot;
+##   HG00100 &quot;1|1&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;1|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|2&quot; &quot;0|1&quot; &quot;1|1&quot; &quot;2|0&quot; &quot;0|0&quot; &quot;0|2&quot; &quot;2|2&quot; &quot;2|2&quot; &quot;0|0&quot;
+##   HG00101 &quot;1|1&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|1&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;2|0&quot; &quot;1|1&quot; &quot;0|0&quot; &quot;3|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;2|0&quot; &quot;2|2&quot; &quot;2|2&quot; &quot;0|0&quot;
+##   HG00102 &quot;0|1&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;1|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;2|2&quot; &quot;0|1&quot; &quot;3|3&quot; &quot;0|2&quot; &quot;0|0&quot; &quot;0|0&quot; &quot;2|2&quot; &quot;1|2&quot; &quot;0|0&quot;
+##          variant
+## sample    988   1014  1056 
+##   HG00096 &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot;
+##   HG00097 &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot;
+##   HG00099 &quot;0|0&quot; &quot;0|0&quot; &quot;0|0&quot;
+##   HG00100 &quot;0|0&quot; &quot;0|0&quot; &quot;0|2&quot;
+##   HG00101 &quot;0|0&quot; &quot;1|0&quot; &quot;0|0&quot;
+##   HG00102 &quot;0|0&quot; &quot;0|1&quot; &quot;0|2&quot;</code></pre>
 <div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="gds-format.html#cb72-1" aria-hidden="true" tabindex="-1"></a>geno <span class="ot">&lt;-</span> <span class="fu">getGenotypeAlleles</span>(gds)</span>
 <span id="cb72-2"><a href="gds-format.html#cb72-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(geno)</span></code></pre></div>
 <pre><code>##          variant
-## sample    30       69    73    161   162   195   243   253   407   431       434      610       627   645   689   756               765         814     988          
-##   HG00096 &quot;GT|GTT&quot; &quot;A|A&quot; &quot;G|G&quot; &quot;A|G&quot; &quot;A|A&quot; &quot;A|A&quot; &quot;C|C&quot; &quot;G|G&quot; &quot;T|T&quot; &quot;TAA|TA&quot;  &quot;G|GTTA&quot; &quot;G|G&quot;     &quot;G|G&quot; &quot;G|G&quot; &quot;C|G&quot; &quot;CGAGCAT|CGAGCAT&quot; &quot;C|C&quot;       &quot;CT|CT&quot; &quot;CGTGA|CGTGA&quot;
-##   HG00097 &quot;GT|GT&quot;  &quot;A|A&quot; &quot;G|G&quot; &quot;G|G&quot; &quot;A|A&quot; &quot;A|A&quot; &quot;C|C&quot; &quot;G|G&quot; &quot;T|T&quot; &quot;T|T&quot;     &quot;G|GTTA&quot; &quot;GCC|G&quot;   &quot;G|G&quot; &quot;G|G&quot; &quot;G|G&quot; &quot;CGAGCAT|CGAGCAT&quot; &quot;C|C&quot;       &quot;CT|CT&quot; &quot;CGTGA|CGTGA&quot;
-##   HG00099 &quot;GTT|GT&quot; &quot;A|A&quot; &quot;G|G&quot; &quot;G|G&quot; &quot;A|A&quot; &quot;A|A&quot; &quot;C|C&quot; &quot;G|G&quot; &quot;T|T&quot; &quot;TA|TA&quot;   &quot;GTTA|G&quot; &quot;GCC|G&quot;   &quot;G|G&quot; &quot;G|G&quot; &quot;G|G&quot; &quot;CGAGCAT|CGAGCAT&quot; &quot;C|C&quot;       &quot;CT|CT&quot; &quot;CGTGA|CGTGA&quot;
-##   HG00100 &quot;GT|GT&quot;  &quot;A|A&quot; &quot;G|G&quot; &quot;A|G&quot; &quot;A|A&quot; &quot;A|A&quot; &quot;C|C&quot; &quot;G|G&quot; &quot;T|T&quot; &quot;TA|T&quot;    &quot;G|GTTA&quot; &quot;GCC|GCC&quot; &quot;C|G&quot; &quot;G|G&quot; &quot;G|C&quot; &quot;CGAGCAT|CGAGCAT&quot; &quot;C|C&quot;       &quot;CT|CT&quot; &quot;CGTGA|CGTGA&quot;
-##   HG00101 &quot;GT|GT&quot;  &quot;A|A&quot; &quot;G|G&quot; &quot;G|A&quot; &quot;A|A&quot; &quot;A|A&quot; &quot;C|C&quot; &quot;G|G&quot; &quot;C|T&quot; &quot;TAA|TAA&quot; &quot;G|G&quot;    &quot;G|GC&quot;    &quot;G|G&quot; &quot;G|G&quot; &quot;C|G&quot; &quot;CGAGCAT|CGAGCAT&quot; &quot;C|C&quot;       &quot;CT|CT&quot; &quot;CGTGA|CGTGA&quot;
-##   HG00102 &quot;GTT|GT&quot; &quot;A|A&quot; &quot;G|G&quot; &quot;A|G&quot; &quot;A|A&quot; &quot;A|A&quot; &quot;C|C&quot; &quot;G|G&quot; &quot;T|T&quot; &quot;T|T&quot;     &quot;G|GTTA&quot; &quot;G|G&quot;     &quot;G|C&quot; &quot;G|G&quot; &quot;G|G&quot; &quot;CGAGCAT|CGAGCAT&quot; &quot;CATTATT|C&quot; &quot;CT|CT&quot; &quot;CGTGA|CGTGA&quot;
+## sample    30       69    73    161   162   195   243   253   407   431       434      610       627   645   689  
+##   HG00096 &quot;GT|GTT&quot; &quot;A|A&quot; &quot;G|G&quot; &quot;A|G&quot; &quot;A|A&quot; &quot;A|A&quot; &quot;C|C&quot; &quot;G|G&quot; &quot;T|T&quot; &quot;TAA|TA&quot;  &quot;G|GTTA&quot; &quot;G|G&quot;     &quot;G|G&quot; &quot;G|G&quot; &quot;C|G&quot;
+##   HG00097 &quot;GT|GT&quot;  &quot;A|A&quot; &quot;G|G&quot; &quot;G|G&quot; &quot;A|A&quot; &quot;A|A&quot; &quot;C|C&quot; &quot;G|G&quot; &quot;T|T&quot; &quot;T|T&quot;     &quot;G|GTTA&quot; &quot;GCC|G&quot;   &quot;G|G&quot; &quot;G|G&quot; &quot;G|G&quot;
+##   HG00099 &quot;GTT|GT&quot; &quot;A|A&quot; &quot;G|G&quot; &quot;G|G&quot; &quot;A|A&quot; &quot;A|A&quot; &quot;C|C&quot; &quot;G|G&quot; &quot;T|T&quot; &quot;TA|TA&quot;   &quot;GTTA|G&quot; &quot;GCC|G&quot;   &quot;G|G&quot; &quot;G|G&quot; &quot;G|G&quot;
+##   HG00100 &quot;GT|GT&quot;  &quot;A|A&quot; &quot;G|G&quot; &quot;A|G&quot; &quot;A|A&quot; &quot;A|A&quot; &quot;C|C&quot; &quot;G|G&quot; &quot;T|T&quot; &quot;TA|T&quot;    &quot;G|GTTA&quot; &quot;GCC|GCC&quot; &quot;C|G&quot; &quot;G|G&quot; &quot;G|C&quot;
+##   HG00101 &quot;GT|GT&quot;  &quot;A|A&quot; &quot;G|G&quot; &quot;G|A&quot; &quot;A|A&quot; &quot;A|A&quot; &quot;C|C&quot; &quot;G|G&quot; &quot;C|T&quot; &quot;TAA|TAA&quot; &quot;G|G&quot;    &quot;G|GC&quot;    &quot;G|G&quot; &quot;G|G&quot; &quot;C|G&quot;
+##   HG00102 &quot;GTT|GT&quot; &quot;A|A&quot; &quot;G|G&quot; &quot;A|G&quot; &quot;A|A&quot; &quot;A|A&quot; &quot;C|C&quot; &quot;G|G&quot; &quot;T|T&quot; &quot;T|T&quot;     &quot;G|GTTA&quot; &quot;G|G&quot;     &quot;G|C&quot; &quot;G|G&quot; &quot;G|G&quot;
 ##          variant
-## sample    1014      1056 
-##   HG00096 &quot;C|C&quot;     &quot;A|A&quot;
-##   HG00097 &quot;C|C&quot;     &quot;A|A&quot;
-##   HG00099 &quot;C|C&quot;     &quot;A|A&quot;
-##   HG00100 &quot;C|C&quot;     &quot;A|G&quot;
-##   HG00101 &quot;CCATT|C&quot; &quot;A|A&quot;
-##   HG00102 &quot;C|CCATT&quot; &quot;A|G&quot;</code></pre>
+## sample    756               765         814     988           1014      1056 
+##   HG00096 &quot;CGAGCAT|CGAGCAT&quot; &quot;C|C&quot;       &quot;CT|CT&quot; &quot;CGTGA|CGTGA&quot; &quot;C|C&quot;     &quot;A|A&quot;
+##   HG00097 &quot;CGAGCAT|CGAGCAT&quot; &quot;C|C&quot;       &quot;CT|CT&quot; &quot;CGTGA|CGTGA&quot; &quot;C|C&quot;     &quot;A|A&quot;
+##   HG00099 &quot;CGAGCAT|CGAGCAT&quot; &quot;C|C&quot;       &quot;CT|CT&quot; &quot;CGTGA|CGTGA&quot; &quot;C|C&quot;     &quot;A|A&quot;
+##   HG00100 &quot;CGAGCAT|CGAGCAT&quot; &quot;C|C&quot;       &quot;CT|CT&quot; &quot;CGTGA|CGTGA&quot; &quot;C|C&quot;     &quot;A|G&quot;
+##   HG00101 &quot;CGAGCAT|CGAGCAT&quot; &quot;C|C&quot;       &quot;CT|CT&quot; &quot;CGTGA|CGTGA&quot; &quot;CCATT|C&quot; &quot;A|A&quot;
+##   HG00102 &quot;CGAGCAT|CGAGCAT&quot; &quot;CATTATT|C&quot; &quot;CT|CT&quot; &quot;CGTGA|CGTGA&quot; &quot;C|CCATT&quot; &quot;A|G&quot;</code></pre>
 <div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="gds-format.html#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="co"># count of reference alleles</span></span>
 <span id="cb74-2"><a href="gds-format.html#cb74-2" aria-hidden="true" tabindex="-1"></a>dos <span class="ot">&lt;-</span> <span class="fu">refDosage</span>(gds)</span>
 <span id="cb74-3"><a href="gds-format.html#cb74-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dos)</span></code></pre></div>
@@ -619,21 +643,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb82-3"><a href="gds-format.html#cb82-3" aria-hidden="true" tabindex="-1"></a>dos <span class="ot">&lt;-</span> <span class="fu">expandedAltDosage</span>(gds)</span>
 <span id="cb82-4"><a href="gds-format.html#cb82-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dos)</span></code></pre></div>
 <pre><code>##          variant
-## sample    30 30 69 69 73 73 161 161 162 162 195 195 243 243 253 253 407 407 431 431 434 434 610 610 610 627 627 645 645 689 689 756 756 765 765 814 814 988 988 1014
-##   HG00096  1  0  0  0  0  0   1   0   0   0   0   0   0   0   0   0   0   0   1   0   1   0   0   0   2   0   0   0   0   0   1   0   2   0   2   0   0   0   0    0
-##   HG00097  2  0  0  0  0  0   0   0   0   0   0   0   0   0   0   0   0   0   0   2   1   0   1   0   1   0   0   0   0   0   0   0   2   0   2   0   0   0   0    0
-##   HG00099  1  0  0  0  0  0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   1   0   1   0   1   0   0   0   0   0   0   0   2   0   2   0   0   0   0    0
-##   HG00100  2  0  0  0  0  0   1   0   0   0   0   0   0   0   0   0   0   0   0   1   1   0   2   0   0   0   1   0   0   0   1   0   2   0   2   0   0   0   0    0
-##   HG00101  2  0  0  0  0  0   1   0   0   0   0   0   0   0   0   0   0   1   2   0   0   0   0   0   1   0   0   0   0   0   1   0   2   0   2   0   0   0   0    1
-##   HG00102  1  0  0  0  0  0   1   0   0   0   0   0   0   0   0   0   0   0   0   2   1   0   0   0   2   0   1   0   0   0   0   0   2   1   1   0   0   0   0    1
+## sample    30 30 69 69 73 73 161 161 162 162 195 195 243 243 253 253 407 407 431 431 434 434 610 610 610 627 627 645 645
+##   HG00096  1  0  0  0  0  0   1   0   0   0   0   0   0   0   0   0   0   0   1   0   1   0   0   0   2   0   0   0   0
+##   HG00097  2  0  0  0  0  0   0   0   0   0   0   0   0   0   0   0   0   0   0   2   1   0   1   0   1   0   0   0   0
+##   HG00099  1  0  0  0  0  0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   1   0   1   0   1   0   0   0   0
+##   HG00100  2  0  0  0  0  0   1   0   0   0   0   0   0   0   0   0   0   0   0   1   1   0   2   0   0   0   1   0   0
+##   HG00101  2  0  0  0  0  0   1   0   0   0   0   0   0   0   0   0   0   1   2   0   0   0   0   0   1   0   0   0   0
+##   HG00102  1  0  0  0  0  0   1   0   0   0   0   0   0   0   0   0   0   0   0   2   1   0   0   0   2   0   1   0   0
 ##          variant
-## sample    1014 1056 1056
-##   HG00096    0    0    0
-##   HG00097    0    0    0
-##   HG00099    0    0    0
-##   HG00100    0    0    1
-##   HG00101    0    0    0
-##   HG00102    0    0    1</code></pre>
+## sample    689 689 756 756 765 765 814 814 988 988 1014 1014 1056 1056
+##   HG00096   0   1   0   2   0   2   0   0   0   0    0    0    0    0
+##   HG00097   0   0   0   2   0   2   0   0   0   0    0    0    0    0
+##   HG00099   0   0   0   2   0   2   0   0   0   0    0    0    0    0
+##   HG00100   0   1   0   2   0   2   0   0   0   0    0    0    0    1
+##   HG00101   0   1   0   2   0   2   0   0   0   0    1    0    0    0
+##   HG00102   0   0   0   2   1   1   0   0   0   0    1    0    0    1</code></pre>
 <ol start="2" style="list-style-type: decimal">
 <li>Use the <code>hwe</code> function in SeqVarTools to run a Hardy-Weinberg Equilibrium test on each variant. Identify a variant with low p-value and inspect its genotypes. (Note that the HWE test is only valid for biallelic variants, and will return <code>NA</code> for multiallelic variants.)</li>
 </ol>
