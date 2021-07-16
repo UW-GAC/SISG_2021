@@ -42,70 +42,70 @@ NOTE: All times are Pacific Daylight Time (GMT-07:00)
 
 - **Zoom session 11:30-13:15 PDT** - Introduction and Genomic Data Storage
     - **Lecture**
-        - Introduction ([slides](https://docs.google.com/presentation/d/17DFvIH97RhcY6gq-BRYsxL-0r2jgl_p1-EMsgGXIYoE/edit?usp=sharing)) (video coming soon)
+        - Introduction ([slides]()) (video coming soon)
         - Using BioData Catalyst for SISG exercises ([instructions](https://docs.google.com/document/d/1nLMjNRYffphWl89XVEPbH5NHLbUDW4SK7ikeEcHbixo/edit?usp=sharing)) (video coming soon)
         - Sequencing data formats ([slides](https://drive.google.com/file/d/1w_dEobxo6kzloQlIuHW_lUnwkPCYK-RP/view?usp=sharing)) (video coming soon)
         - Intro to Genomic Data Structure  ([slides](https://drive.google.com/file/d/1_p6-peb89ppi54gsDEapRdHcRVaq3IAX/view?usp=sharing)) (video coming soon)
     - **Interactive breakout rooms**
-        - GDS format ([Workbook](https://uw-gac.github.io/SISG_2021/gds-format.html)) ([Exercise](https://uw-gac.github.io/SISG_2021/gds-format.html#exercises)) ([Solution](https://uw-gac.github.io/SISG_2021/gds-format.html#solutions))
+        - GDS format ([Tutorial](https://uw-gac.github.io/SISG_2021/gds-format.html)) ([Exercise](https://uw-gac.github.io/SISG_2021/gds-format.html#exercises)) ([Solution](https://uw-gac.github.io/SISG_2021/gds-format.html#solutions))
         - Discussion (video coming soon)
         
 - **Zoom session 13:45-14:30 PDT** - Phenotype harmonization
     - **Lecture**
-        - Phenotype harmonization  ([slides](https://si.biostat.washington.edu/sites/default/files/modules/pheno_harmonization.pdf)) (video coming soon)
+        - Phenotype harmonization  ([slides]()) (video coming soon)
     - **Interactive breakout rooms**
-        - Harmonization in R ([Workbook](https://uw-gac.github.io/SISG_2021/phenotype-harmonization.html))
+        - Harmonization in R ([Tutorial](https://uw-gac.github.io/SISG_2021/phenotype-harmonization.html))
         - Discussion (video coming soon)
 
 **Thursday, July 22**
 
 - **Zoom session 8:00-9:45 PDT** - Association tests, Part I
     - **Lecture**
-        - Association tests: Methods and motivation  ([slides](https://si.biostat.washington.edu/sites/default/files/modules/SISG20AssocTests.pdf)) (video coming soon)
-        - GENESIS for association tests  ([slides](https://si.biostat.washington.edu/sites/default/files/modules/R_assoc_tests_2.pdf)) (video coming soon)
+        - Association tests: Methods and motivation  ([slides]()) (video coming soon)
+        - GENESIS for association tests  ([slides](https://drive.google.com/file/d/1LPGKgrhFb2Yzty-bTDsX9vlTxifsLcPl/view?usp=sharing)) (video coming soon)
     - **Interactive breakout rooms**
-        - Null model ([Workbook](https://uw-gac.github.io/SISG_2021/association-tests-part-i.html)) ([Exercise](https://uw-gac.github.io/SISG_2021/association-tests-part-i.html#exercise)) ([Solution](https://uw-gac.github.io/SISG_2021/association-tests-part-i.html#solution))
-        - Single-variant association tests ([Workbook](https://uw-gac.github.io/SISG_2021/association-tests-part-i.html#single-variant-association-tests)) ([Exercise](https://uw-gac.github.io/SISG_2021/association-tests-part-i.html#exercise-1)) ([Solution](https://uw-gac.github.io/SISG_2021/association-tests-part-i.html#solution-1))
+        - Null model ([Tutorial](https://uw-gac.github.io/SISG_2021/association-tests-part-i.html)) ([Exercise](https://uw-gac.github.io/SISG_2021/association-tests-part-i.html#exercise)) ([Solution](https://uw-gac.github.io/SISG_2021/association-tests-part-i.html#solution))
+        - Single-variant association tests ([Tutorial](https://uw-gac.github.io/SISG_2021/association-tests-part-i.html#single-variant-association-tests)) ([Exercise](https://uw-gac.github.io/SISG_2021/association-tests-part-i.html#exercise-1)) ([Solution](https://uw-gac.github.io/SISG_2021/association-tests-part-i.html#solution-1))
         - Discussion (video coming soon)
         
 - **Zoom session 10:15-11:45 PDT** - Association tests, Part II
     - **Lecture**
-        - Aggregate tests ([slides](https://si.biostat.washington.edu/sites/default/files/modules/SISG20AssocTests.pdf)) (video coming soon)
+        - Aggregate tests ([slides]()) (video coming soon)
     - **Interactive breakout rooms**
-        - Sliding window tests ([Workbook](https://uw-gac.github.io/SISG_2021/association-tests-part-ii.html)) ([Exercise](https://uw-gac.github.io/SISG_2021/association-tests-part-ii.html#exercise-2)) ([Solution](https://uw-gac.github.io/SISG_2021/association-tests-part-ii.html#solution-2))
+        - Sliding window tests ([Tutorial](https://uw-gac.github.io/SISG_2021/association-tests-part-ii.html)) ([Exercise](https://uw-gac.github.io/SISG_2021/association-tests-part-ii.html#exercise-2)) ([Solution](https://uw-gac.github.io/SISG_2021/association-tests-part-ii.html#solution-2))
         - Discussion (video coming soon)
         
 - **Zoom session 12:45-14:30 PDT** - Population Structure and Relatedness
     - **Lecture**
-        - Population structure inference  ([slides](https://si.biostat.washington.edu/sites/default/files/modules/Population_Structure_Inference_2020.pdf)) (video coming soon)
-        - Relatedness inference  ([slides](https://si.biostat.washington.edu/sites/default/files/modules/Relatedness_Inference_2020.pdf)) (video coming soon)
-        - R packages for PCA and relatedness  ([slides](https://si.biostat.washington.edu/sites/default/files/modules/R_kinship_pca_1.pdf)) (video coming soon)
+        - Population structure inference  ([slides]()) (video coming soon)
+        - Relatedness inference  ([slides]()) (video coming soon)
+        - R packages for PCA and relatedness  ([slides](https://drive.google.com/file/d/1RMHcoe3lrK02tZ2Vy_B7XQEZChSlgpTh/view?usp=sharing)) (video coming soon)
     - **Interactive breakout rooms**
-        - Ancestry and relatedness inference ([Workbook](https://uw-gac.github.io/SISG_2021/ancestry-and-relatedness-inference.html)) ([Exercises](https://uw-gac.github.io/SISG_2021/ancestry-and-relatedness-inference.html#exercises-1)) ([Solutions](https://uw-gac.github.io/SISG_2021/ancestry-and-relatedness-inference.html#solutions-1))
+        - Ancestry and relatedness inference ([Tutorial](https://uw-gac.github.io/SISG_2021/ancestry-and-relatedness-inference.html)) ([Exercises](https://uw-gac.github.io/SISG_2021/ancestry-and-relatedness-inference.html#exercises-1)) ([Solutions](https://uw-gac.github.io/SISG_2021/ancestry-and-relatedness-inference.html#solutions-1))
         - Discussion (video coming soon)
 
 **Friday, July 23**
 
 - **Zoom session 8:00-9:30 PDT** - Mixed models
     - **Lecture**
-        - Mixed model association testing  ([slides](https://si.biostat.washington.edu/sites/default/files/modules/Mixed_Model_Association_Testing_2020.pdf)) (video coming soon)
+        - Mixed model association testing  ([slides]()) (video coming soon)
     - **Interactive breakout rooms**
-        - Mixed models in R ([Workbook](https://uw-gac.github.io/SISG_2021/mixed-models.html)) ([Exercise](https://uw-gac.github.io/SISG_2021/mixed-models.html#exercise-3)) ([Solution](https://uw-gac.github.io/SISG_2021/mixed-models.html#solution-3))
+        - Mixed models in R ([Tutorial](https://uw-gac.github.io/SISG_2021/mixed-models.html)) ([Exercise](https://uw-gac.github.io/SISG_2021/mixed-models.html#exercise-3)) ([Solution](https://uw-gac.github.io/SISG_2021/mixed-models.html#solution-3))
         - Discussion (video coming soon)
         
 - **Zoom session 9:45-11:30 PDT** - Variant annotation
     - **Lecture**
-        - Variant annotation ([slides](https://si.biostat.washington.edu/sites/default/files/modules/variant_annotation_0.pdf)) (video coming soon)
+        - Variant annotation ([slides]()) (video coming soon)
     - **Interactive breakout rooms**
-        - Using variant annotation ([Workbook](https://uw-gac.github.io/SISG_2021/variant-annotation.html)) ([Exercise]()) ([Solution]())
+        - Using variant annotation ([Tutorial](https://uw-gac.github.io/SISG_2021/variant-annotation.html)) ([Exercise]()) ([Solution]())
         - Discussion (video coming soon)
         
 - **Zoom session 12:30-13:45 PDT** - Working in the cloud
     - **Lecture**
-        - Analysis pipelines on the cloud   ([slides](https://si.biostat.washington.edu/sites/default/files/modules/Cloud_Computing.pdf)) (video coming soon)
+        - Analysis pipelines on the cloud   ([slides]()) (video coming soon)
         - Running a workflow on BioData Catalyst (video coming soon)
     - **Interactive breakout rooms**
-        - Running a GWAS workflow ([Workbook](https://uw-gac.github.io/SISG_2021/exercises-running-a-gwas-workflow.html)) ([Exercise]()) ([Solution]())
+        - Running a GWAS workflow ([Tutorial](https://uw-gac.github.io/SISG_2021/exercises-running-a-gwas-workflow.html)) ([Exercise]()) ([Solution]())
         - Discussion (video coming soon)
         
 - **Zoom session 14:00-14:30 PDT** - Open session for questions/advice
@@ -131,5 +131,5 @@ Download the workshop data and exercises: https://github.com/UW-GAC/SISG_2021/ar
 If you are new to R, you might find the following material helpful:
 
 - [Introduction to R](http://faculty.washington.edu/kenrice/rintro/indexSEA15.shtml) materials from SISG Module 3
-- [Graphics with ggplot2](http://tutorials.iq.harvard.edu/R/Rgraphics/Rgraphics.html) tutorial
+- [Graphics with ggplot2](http://workbooks.iq.harvard.edu/R/Rgraphics/Rgraphics.html) tutorial
 - Data manipulation with [dplyr](http://dplyr.tidyverse.org/)

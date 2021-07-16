@@ -65,7 +65,7 @@ Run the `PC-AiR` workflow to compute ancestry principal components (see the task
   - Group: "Population"
   - Run PC-variant correlation: FALSE
   
-This will create a `1KG_phase3_subset_chr1_related.RData` file that contains the output PCs as well as several PC plots. Take a look at the `1KG_phase3_subset_chr1_pca_parcoord.pdf` -- how many PCs to adjust for in PC-Relate and the association analyses?
+This will create a `1KG_phase3_subset_chr1_pca.RData` file that contains the output PCs as well as several PC plots. Take a look at the `1KG_phase3_subset_chr1_pca_parcoord.pdf` -- how many PCs to adjust for in PC-Relate and the association analyses?
 
 ### PC-Relate
 
@@ -73,7 +73,7 @@ Run the `PC-Relate` workflow to compute ancestry adjusted relatedness estimates 
 
 - Inputs
   - GDS File: `1KG_phase3_subset_chr1.merged.gds`
-  - PCA File: `1KG_phase3_subset_chr1_related.RData`
+  - PCA File: `1KG_phase3_subset_chr1_pca.RData`
 - App Settings
   - Number of PCs: 2
   - Output prefix: `1KG_phase3_subset_chr1`
@@ -110,10 +110,10 @@ Use the `GENESIS Single Variant Association Testing` workflow to run a single va
   - Phenotype file: `height_phenotypes.RData` (it is recommended you use the file produced by the Null Model workflow)
 - App Settings
   - MAC threshold: 5
-  - Output prefix: `height`
-  - memory GB: 64
+  - Output prefix: `height_single`
+  - memory GB: 32
 
-Review the QQ and manhattan plots.
+This will create a `height_single_chr1.RData` file with the association test results as well as `height_single_manh.png` and `height_single_qq.png` files -- review the QQ and Manhattan plots.
 
 
 ### Aggregate variant test
@@ -128,9 +128,10 @@ Use the `GENESIS Aggregate Association Testing` workflow to run a burden associa
 - App Settings
   - Alt Freq Max: 0.1
   - Test: burden
-  - Output prefix: `height`
+  - Output prefix: `height_burden`
+  - Memory GB: 32
 
-Review the QQ and manhattan plots.
+This will create a `height_burden_chr1.RData` file with the association test results as well as `height_burden_manh.png` and `height_burden_qq.png` files -- review the QQ and Manhattan plots.
 
 
 ## Analysis follow-up
