@@ -43,9 +43,9 @@ NOTE: All times are Pacific Daylight Time (GMT-07:00)
 - **Zoom session 11:30-13:15 PDT** - Introduction and Genomic Data Storage
     - **Lecture**
         - Introduction ([slides](https://docs.google.com/presentation/d/17DFvIH97RhcY6gq-BRYsxL-0r2jgl_p1-EMsgGXIYoE/edit?usp=sharing)) (video coming soon)
-        - Using BioData Catalyst for SISG exercises (video coming soon)
-        - Sequencing data formats ([slides](https://si.biostat.washington.edu/sites/default/files/modules/Sequencing_data_formats_1.pdf)) (video coming soon)
-        - Intro to Genomic Data Storage  ([slides](https://si.biostat.washington.edu/sites/default/files/modules/GDS_intro_2.pdf)) (video coming soon)
+        - Using BioData Catalyst for SISG exercises ([instructions](https://docs.google.com/document/d/1nLMjNRYffphWl89XVEPbH5NHLbUDW4SK7ikeEcHbixo/edit?usp=sharing)) (video coming soon)
+        - Sequencing data formats ([slides](https://drive.google.com/file/d/1w_dEobxo6kzloQlIuHW_lUnwkPCYK-RP/view?usp=sharing)) (video coming soon)
+        - Intro to Genomic Data Structure  ([slides](https://drive.google.com/file/d/1_p6-peb89ppi54gsDEapRdHcRVaq3IAX/view?usp=sharing)) (video coming soon)
     - **Interactive breakout rooms**
         - GDS format ([Workbook](https://uw-gac.github.io/SISG_2021/gds-format.html)) ([Exercise](https://uw-gac.github.io/SISG_2021/gds-format.html#exercises)) ([Solution](https://uw-gac.github.io/SISG_2021/gds-format.html#solutions))
         - Discussion (video coming soon)
@@ -54,7 +54,7 @@ NOTE: All times are Pacific Daylight Time (GMT-07:00)
     - **Lecture**
         - Phenotype harmonization  ([slides](https://si.biostat.washington.edu/sites/default/files/modules/pheno_harmonization.pdf)) (video coming soon)
     - **Interactive breakout rooms**
-        - Harmonization in R ([Workbook](https://uw-gac.github.io/SISG_2021/phenotype-harmonization.html)) ([Exercise]()) ([Solution]())
+        - Harmonization in R ([Workbook](https://uw-gac.github.io/SISG_2021/phenotype-harmonization.html))
         - Discussion (video coming soon)
 
 **Thursday, July 22**

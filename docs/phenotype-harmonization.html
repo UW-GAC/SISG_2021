@@ -23,7 +23,7 @@
 
 
 
-<meta name="date" content="2021-07-14" />
+<meta name="date" content="2021-07-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -212,12 +212,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.3" data-path="aggregate-association-tests.html"><a href="aggregate-association-tests.html#exercise-4"><i class="fa fa-check"></i><b>9.3</b> Exercise</a></li>
 <li class="chapter" data-level="9.4" data-path="aggregate-association-tests.html"><a href="aggregate-association-tests.html#solution-4"><i class="fa fa-check"></i><b>9.4</b> Solution</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="exercises-running-a-gwas-workflow.html"><a href="exercises-running-a-gwas-workflow.html"><i class="fa fa-check"></i><b>10</b> Exercises: Running a GWAS workflow</a>
+<li class="chapter" data-level="10" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html"><i class="fa fa-check"></i><b>10</b> Running a GWAS workflow on BioData Catalyst</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="exercises-running-a-gwas-workflow.html"><a href="exercises-running-a-gwas-workflow.html#vcf-to-gds"><i class="fa fa-check"></i><b>10.1</b> VCF to GDS</a></li>
-<li class="chapter" data-level="10.2" data-path="exercises-running-a-gwas-workflow.html"><a href="exercises-running-a-gwas-workflow.html#null-model-2"><i class="fa fa-check"></i><b>10.2</b> Null Model</a></li>
-<li class="chapter" data-level="10.3" data-path="exercises-running-a-gwas-workflow.html"><a href="exercises-running-a-gwas-workflow.html#single-variant-test"><i class="fa fa-check"></i><b>10.3</b> Single variant test</a></li>
-<li class="chapter" data-level="10.4" data-path="exercises-running-a-gwas-workflow.html"><a href="exercises-running-a-gwas-workflow.html#analysis-follow-up"><i class="fa fa-check"></i><b>10.4</b> Analysis follow-up</a></li>
+<li class="chapter" data-level="10.1" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html#preparing-the-genotype-data"><i class="fa fa-check"></i><b>10.1</b> Preparing the genotype data</a>
+<ul>
+<li class="chapter" data-level="10.1.1" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html#bcftools-merge-and-filter"><i class="fa fa-check"></i><b>10.1.1</b> Bcftools Merge and Filter</a></li>
+<li class="chapter" data-level="10.1.2" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html#vcf-to-gds-converter"><i class="fa fa-check"></i><b>10.1.2</b> VCF to GDS Converter</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html#ancestry-and-relatedness"><i class="fa fa-check"></i><b>10.2</b> Ancestry and Relatedness</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html#king-robust"><i class="fa fa-check"></i><b>10.2.1</b> KING robust</a></li>
+<li class="chapter" data-level="10.2.2" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html#pc-air-1"><i class="fa fa-check"></i><b>10.2.2</b> PC-AiR</a></li>
+<li class="chapter" data-level="10.2.3" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html#pc-relate-1"><i class="fa fa-check"></i><b>10.2.3</b> PC-Relate</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html#association-testing"><i class="fa fa-check"></i><b>10.3</b> Association Testing</a>
+<ul>
+<li class="chapter" data-level="10.3.1" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html#null-model-2"><i class="fa fa-check"></i><b>10.3.1</b> Null Model</a></li>
+<li class="chapter" data-level="10.3.2" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html#single-variant-association-test"><i class="fa fa-check"></i><b>10.3.2</b> Single variant association test</a></li>
+<li class="chapter" data-level="10.3.3" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html#aggregate-variant-test"><i class="fa fa-check"></i><b>10.3.3</b> Aggregate variant test</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html#analysis-follow-up"><i class="fa fa-check"></i><b>10.4</b> Analysis follow-up</a></li>
 </ul></li>
 </ul>
 
@@ -422,8 +436,9 @@ In this case, we will adjust for age and sex, but not for study, because we are 
 <span id="cb138-5"><a href="phenotype-harmonization.html#cb138-5" aria-hidden="true" tabindex="-1"></a>mod_1 <span class="ot">&lt;-</span> GENESIS<span class="sc">::</span><span class="fu">fitNullModel</span>(annot, <span class="at">outcome =</span> outcome, <span class="at">covars =</span> covars)</span></code></pre></div>
 <p>The output of <code>fitNullModel</code> is a list with a number of named elements</p>
 <div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="phenotype-harmonization.html#cb139-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(mod_1)</span></code></pre></div>
-<pre><code>##  [1] &quot;model&quot;        &quot;varComp&quot;      &quot;varCompCov&quot;   &quot;fixef&quot;        &quot;betaCov&quot;      &quot;fit&quot;          &quot;logLik&quot;       &quot;AIC&quot;          &quot;model.matrix&quot; &quot;group.idx&quot;   
-## [11] &quot;cholSigmaInv&quot; &quot;converged&quot;    &quot;zeroFLAG&quot;     &quot;RSS&quot;          &quot;CX&quot;           &quot;CXCXI&quot;        &quot;RSS0&quot;</code></pre>
+<pre><code>##  [1] &quot;model&quot;        &quot;varComp&quot;      &quot;varCompCov&quot;   &quot;fixef&quot;        &quot;betaCov&quot;      &quot;fit&quot;          &quot;logLik&quot;      
+##  [8] &quot;AIC&quot;          &quot;model.matrix&quot; &quot;group.idx&quot;    &quot;cholSigmaInv&quot; &quot;converged&quot;    &quot;zeroFLAG&quot;     &quot;RSS&quot;         
+## [15] &quot;CX&quot;           &quot;CXCXI&quot;        &quot;RSS0&quot;</code></pre>
 <p>The elements that we will work with in this exercise are:</p>
 <ul>
 <li><code>converged</code>: an indicator of whether the model successfully converged</li>

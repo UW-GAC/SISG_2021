@@ -23,7 +23,7 @@
 
 
 
-<meta name="date" content="2021-07-14" />
+<meta name="date" content="2021-07-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -212,12 +212,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.3" data-path="aggregate-association-tests.html"><a href="aggregate-association-tests.html#exercise-4"><i class="fa fa-check"></i><b>9.3</b> Exercise</a></li>
 <li class="chapter" data-level="9.4" data-path="aggregate-association-tests.html"><a href="aggregate-association-tests.html#solution-4"><i class="fa fa-check"></i><b>9.4</b> Solution</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="exercises-running-a-gwas-workflow.html"><a href="exercises-running-a-gwas-workflow.html"><i class="fa fa-check"></i><b>10</b> Exercises: Running a GWAS workflow</a>
+<li class="chapter" data-level="10" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html"><i class="fa fa-check"></i><b>10</b> Running a GWAS workflow on BioData Catalyst</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="exercises-running-a-gwas-workflow.html"><a href="exercises-running-a-gwas-workflow.html#vcf-to-gds"><i class="fa fa-check"></i><b>10.1</b> VCF to GDS</a></li>
-<li class="chapter" data-level="10.2" data-path="exercises-running-a-gwas-workflow.html"><a href="exercises-running-a-gwas-workflow.html#null-model-2"><i class="fa fa-check"></i><b>10.2</b> Null Model</a></li>
-<li class="chapter" data-level="10.3" data-path="exercises-running-a-gwas-workflow.html"><a href="exercises-running-a-gwas-workflow.html#single-variant-test"><i class="fa fa-check"></i><b>10.3</b> Single variant test</a></li>
-<li class="chapter" data-level="10.4" data-path="exercises-running-a-gwas-workflow.html"><a href="exercises-running-a-gwas-workflow.html#analysis-follow-up"><i class="fa fa-check"></i><b>10.4</b> Analysis follow-up</a></li>
+<li class="chapter" data-level="10.1" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html#preparing-the-genotype-data"><i class="fa fa-check"></i><b>10.1</b> Preparing the genotype data</a>
+<ul>
+<li class="chapter" data-level="10.1.1" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html#bcftools-merge-and-filter"><i class="fa fa-check"></i><b>10.1.1</b> Bcftools Merge and Filter</a></li>
+<li class="chapter" data-level="10.1.2" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html#vcf-to-gds-converter"><i class="fa fa-check"></i><b>10.1.2</b> VCF to GDS Converter</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html#ancestry-and-relatedness"><i class="fa fa-check"></i><b>10.2</b> Ancestry and Relatedness</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html#king-robust"><i class="fa fa-check"></i><b>10.2.1</b> KING robust</a></li>
+<li class="chapter" data-level="10.2.2" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html#pc-air-1"><i class="fa fa-check"></i><b>10.2.2</b> PC-AiR</a></li>
+<li class="chapter" data-level="10.2.3" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html#pc-relate-1"><i class="fa fa-check"></i><b>10.2.3</b> PC-Relate</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html#association-testing"><i class="fa fa-check"></i><b>10.3</b> Association Testing</a>
+<ul>
+<li class="chapter" data-level="10.3.1" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html#null-model-2"><i class="fa fa-check"></i><b>10.3.1</b> Null Model</a></li>
+<li class="chapter" data-level="10.3.2" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html#single-variant-association-test"><i class="fa fa-check"></i><b>10.3.2</b> Single variant association test</a></li>
+<li class="chapter" data-level="10.3.3" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html#aggregate-variant-test"><i class="fa fa-check"></i><b>10.3.3</b> Aggregate variant test</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html#analysis-follow-up"><i class="fa fa-check"></i><b>10.4</b> Analysis follow-up</a></li>
 </ul></li>
 </ul>
 
@@ -375,13 +389,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## Rows: 592
 ## Columns: 7
 ## Groups: VEP_ensembl_Gene_ID [170]
-## $ CHROM                   [3m[38;5;246m&lt;int&gt;[39m[23m 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, …
-## $ POS                     [3m[38;5;246m&lt;int&gt;[39m[23m 15699830, 15699830, 16437047, 16445862, 16813769, 17005147, 17005147, 17005147, 17258770, 17258770, 17413973, 17413973, 17613844, 17…
-## $ REF                     [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;G&quot;, &quot;G&quot;, &quot;G&quot;, &quot;C&quot;, &quot;C&quot;, &quot;G&quot;, &quot;G&quot;, &quot;G&quot;, &quot;G&quot;, &quot;G&quot;, &quot;G&quot;, &quot;G&quot;, &quot;G&quot;, &quot;G&quot;, &quot;G&quot;, &quot;G&quot;, &quot;C&quot;, &quot;C&quot;, &quot;C&quot;, &quot;C&quot;, &quot;C&quot;, &quot;C&quot;, &quot;C&quot;, &quot;C&quot;, &quot;C&quot;, &quot;C&quot;, &quot;C…
-## $ ALT                     [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;T&quot;, &quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;T&quot;, &quot;A&quot;, &quot;T&quot;, &quot;C&quot;, &quot;C&quot;, &quot;T&quot;, &quot;T&quot;, &quot;T&quot;, &quot;T&quot;, &quot;G&quot;, &quot;G&quot;, &quot;A&quot;, &quot;G&quot;, &quot;T&quot;, &quot;T&quot;, &quot;T&quot;, &quot;T&quot;, &quot;T…
-## $ VEP_ensembl_Gene_ID     [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;ENSG00000198062&quot;, &quot;ENSG00000198062&quot;, &quot;ENSG00000227367&quot;, &quot;ENSG00000227367&quot;, &quot;ENSG00000172967&quot;, &quot;ENSG00000215568&quot;, &quot;ENSG00000215568&quot;,…
-## $ VEP_ensembl_Consequence [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;intron_variant,NMD_transcript_variant&quot;, &quot;intron_variant&quot;, &quot;intron_variant,non_coding_transcript_variant&quot;, &quot;intron_variant,non_codin…
-## $ CADD_phred              [3m[38;5;246m&lt;dbl&gt;[39m[23m 3.612, 3.612, 9.729, 3.895, 7.530, 5.332, 5.332, 5.332, 10.450, 9.329, 6.843, 5.353, 11.500, 11.500, 12.070, 12.070, 4.586, 4.586, 5…</code></pre>
+## $ CHROM                   &lt;int&gt; 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, …
+## $ POS                     &lt;int&gt; 15699830, 15699830, 16437047, 16445862, 16813769, 17005147, 17005147, 17005147, 17258770…
+## $ REF                     &lt;chr&gt; &quot;G&quot;, &quot;G&quot;, &quot;G&quot;, &quot;C&quot;, &quot;C&quot;, &quot;G&quot;, &quot;G&quot;, &quot;G&quot;, &quot;G&quot;, &quot;G&quot;, &quot;G&quot;, &quot;G&quot;, &quot;G&quot;, &quot;G&quot;, &quot;G&quot;, &quot;G&quot;, &quot;C&quot;, &quot;C&quot;…
+## $ ALT                     &lt;chr&gt; &quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;T&quot;, &quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;T&quot;, &quot;A&quot;, &quot;T&quot;, &quot;C&quot;, &quot;C&quot;, &quot;T&quot;, &quot;T&quot;, &quot;T&quot;, &quot;T&quot;…
+## $ VEP_ensembl_Gene_ID     &lt;chr&gt; &quot;ENSG00000198062&quot;, &quot;ENSG00000198062&quot;, &quot;ENSG00000227367&quot;, &quot;ENSG00000227367&quot;, &quot;ENSG0000017…
+## $ VEP_ensembl_Consequence &lt;chr&gt; &quot;intron_variant,NMD_transcript_variant&quot;, &quot;intron_variant&quot;, &quot;intron_variant,non_coding_tr…
+## $ CADD_phred              &lt;dbl&gt; 3.612, 3.612, 9.729, 3.895, 7.530, 5.332, 5.332, 5.332, 10.450, 9.329, 6.843, 5.353, 11.…</code></pre>
 <p>Now that we have a set of variants that we can aggregate into genic units, the data needs to be reformatted for input to the GENESIS analysis pipeline. The input to the GENESIS pipeline is a data frame with variables called <code>group_id</code>, <code>chr</code>, <code>pos</code>, <code>ref</code>, and <code>alt</code>. Prepare this data frame and save it for testing (we do not need to filter the variants for this exercise):</p>
 <div class="sourceCode" id="cb358"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb358-1"><a href="variant-annotation.html#cb358-1" aria-hidden="true" tabindex="-1"></a>aggregates <span class="ot">&lt;-</span></span>
 <span id="cb358-2"><a href="variant-annotation.html#cb358-2" aria-hidden="true" tabindex="-1"></a>  combined_annotation <span class="sc">%&gt;%</span></span>

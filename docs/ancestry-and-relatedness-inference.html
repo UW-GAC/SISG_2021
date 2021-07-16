@@ -23,7 +23,7 @@
 
 
 
-<meta name="date" content="2021-07-14" />
+<meta name="date" content="2021-07-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -212,12 +212,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.3" data-path="aggregate-association-tests.html"><a href="aggregate-association-tests.html#exercise-4"><i class="fa fa-check"></i><b>9.3</b> Exercise</a></li>
 <li class="chapter" data-level="9.4" data-path="aggregate-association-tests.html"><a href="aggregate-association-tests.html#solution-4"><i class="fa fa-check"></i><b>9.4</b> Solution</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="exercises-running-a-gwas-workflow.html"><a href="exercises-running-a-gwas-workflow.html"><i class="fa fa-check"></i><b>10</b> Exercises: Running a GWAS workflow</a>
+<li class="chapter" data-level="10" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html"><i class="fa fa-check"></i><b>10</b> Running a GWAS workflow on BioData Catalyst</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="exercises-running-a-gwas-workflow.html"><a href="exercises-running-a-gwas-workflow.html#vcf-to-gds"><i class="fa fa-check"></i><b>10.1</b> VCF to GDS</a></li>
-<li class="chapter" data-level="10.2" data-path="exercises-running-a-gwas-workflow.html"><a href="exercises-running-a-gwas-workflow.html#null-model-2"><i class="fa fa-check"></i><b>10.2</b> Null Model</a></li>
-<li class="chapter" data-level="10.3" data-path="exercises-running-a-gwas-workflow.html"><a href="exercises-running-a-gwas-workflow.html#single-variant-test"><i class="fa fa-check"></i><b>10.3</b> Single variant test</a></li>
-<li class="chapter" data-level="10.4" data-path="exercises-running-a-gwas-workflow.html"><a href="exercises-running-a-gwas-workflow.html#analysis-follow-up"><i class="fa fa-check"></i><b>10.4</b> Analysis follow-up</a></li>
+<li class="chapter" data-level="10.1" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html#preparing-the-genotype-data"><i class="fa fa-check"></i><b>10.1</b> Preparing the genotype data</a>
+<ul>
+<li class="chapter" data-level="10.1.1" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html#bcftools-merge-and-filter"><i class="fa fa-check"></i><b>10.1.1</b> Bcftools Merge and Filter</a></li>
+<li class="chapter" data-level="10.1.2" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html#vcf-to-gds-converter"><i class="fa fa-check"></i><b>10.1.2</b> VCF to GDS Converter</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html#ancestry-and-relatedness"><i class="fa fa-check"></i><b>10.2</b> Ancestry and Relatedness</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html#king-robust"><i class="fa fa-check"></i><b>10.2.1</b> KING robust</a></li>
+<li class="chapter" data-level="10.2.2" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html#pc-air-1"><i class="fa fa-check"></i><b>10.2.2</b> PC-AiR</a></li>
+<li class="chapter" data-level="10.2.3" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html#pc-relate-1"><i class="fa fa-check"></i><b>10.2.3</b> PC-Relate</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html#association-testing"><i class="fa fa-check"></i><b>10.3</b> Association Testing</a>
+<ul>
+<li class="chapter" data-level="10.3.1" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html#null-model-2"><i class="fa fa-check"></i><b>10.3.1</b> Null Model</a></li>
+<li class="chapter" data-level="10.3.2" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html#single-variant-association-test"><i class="fa fa-check"></i><b>10.3.2</b> Single variant association test</a></li>
+<li class="chapter" data-level="10.3.3" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html#aggregate-variant-test"><i class="fa fa-check"></i><b>10.3.3</b> Aggregate variant test</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html#analysis-follow-up"><i class="fa fa-check"></i><b>10.4</b> Analysis follow-up</a></li>
 </ul></li>
 </ul>
 
@@ -297,8 +311,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 21,287 markers are selected in total.</code></pre>
 <div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="ancestry-and-relatedness-inference.html#cb228-1" aria-hidden="true" tabindex="-1"></a><span class="co"># how many variants on each chr?</span></span>
 <span id="cb228-2"><a href="ancestry-and-relatedness-inference.html#cb228-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(snpset, length)</span></code></pre></div>
-<pre><code>##  chr1  chr2  chr3  chr4  chr5  chr6  chr7  chr8  chr9 chr10 chr11 chr12 chr13 chr14 chr15 chr16 chr17 chr18 chr19 chr20 chr21 chr22 
-##  1033  1021  1021  1021  1029   997  1014   997   993   973   972   989   967   946   942   940   951   946   918   919   841   857</code></pre>
+<pre><code>##  chr1  chr2  chr3  chr4  chr5  chr6  chr7  chr8  chr9 chr10 chr11 chr12 chr13 chr14 chr15 chr16 chr17 chr18 chr19 chr20 
+##  1033  1021  1021  1021  1029   997  1014   997   993   973   972   989   967   946   942   940   951   946   918   919 
+## chr21 chr22 
+##   841   857</code></pre>
 <div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="ancestry-and-relatedness-inference.html#cb230-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get the full list of LD-pruned variants </span></span>
 <span id="cb230-2"><a href="ancestry-and-relatedness-inference.html#cb230-2" aria-hidden="true" tabindex="-1"></a>pruned <span class="ot">&lt;-</span> <span class="fu">unlist</span>(snpset, <span class="at">use.names=</span><span class="cn">FALSE</span>)</span>
 <span id="cb230-3"><a href="ancestry-and-relatedness-inference.html#cb230-3" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(pruned)</span></code></pre></div>
@@ -321,11 +337,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##     # of SNVs: 21,287
 ##     using 1 thread
 ## CPU capabilities: Double-Precision SSE2
-## Wed Jul 14 17:25:12 2021    (internal increment: 896)
+## Thu Jul 15 19:57:27 2021    (internal increment: 896)
 ## 
 [..................................................]  0%, ETC: ---        
 [==================================================] 100%, completed, 5s
-## Wed Jul 14 17:25:17 2021    Done.</code></pre>
+## Thu Jul 15 19:57:32 2021    Done.</code></pre>
 <div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="ancestry-and-relatedness-inference.html#cb234-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(grm)</span></code></pre></div>
 <pre><code>## [1] &quot;sample.id&quot; &quot;snp.id&quot;    &quot;method&quot;    &quot;grm&quot;</code></pre>
 <div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="ancestry-and-relatedness-inference.html#cb236-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(grm<span class="sc">$</span>grm)</span></code></pre></div>
@@ -351,7 +367,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Calculating allele counts/frequencies ...
 ## 
 [..................................................]  0%, ETC: ---    
-[==================================================] 100%, completed, 0s
+[==================================================] 100%, completed, 1s
 ## # of selected variants: 21,287
 ##     # of samples: 1,126
 ##     # of SNVs: 21,287
@@ -359,11 +375,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## No family is specified, and all individuals are treated as singletons.
 ## Relationship inference in the presence of population stratification.
 ## CPU capabilities: Double-Precision SSE2
-## Wed Jul 14 17:25:17 2021    (internal increment: 28672)
+## Thu Jul 15 19:57:33 2021    (internal increment: 28672)
 ## 
 [..................................................]  0%, ETC: ---        
 [==================================================] 100%, completed, 1s
-## Wed Jul 14 17:25:18 2021    Done.</code></pre>
+## Thu Jul 15 19:57:34 2021    Done.</code></pre>
 <div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="ancestry-and-relatedness-inference.html#cb242-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(king)</span></code></pre></div>
 <pre><code>## [1] &quot;sample.id&quot; &quot;snp.id&quot;    &quot;afreq&quot;     &quot;IBS0&quot;      &quot;kinship&quot;</code></pre>
 <div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="ancestry-and-relatedness-inference.html#cb244-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(king<span class="sc">$</span>kinship)</span></code></pre></div>
@@ -423,34 +439,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##     using 1 thread
 ##     # of principal components: 32
 ## CPU capabilities: Double-Precision SSE2
-## Wed Jul 14 17:25:21 2021    (internal increment: 972)
+## Thu Jul 15 19:57:35 2021    (internal increment: 972)
 ## 
 [..................................................]  0%, ETC: ---        
-[==================================================] 100%, completed, 4s
-## Wed Jul 14 17:25:25 2021    Begin (eigenvalues and eigenvectors)
-## Wed Jul 14 17:25:26 2021    Done.
+[==================================================] 100%, completed, 5s
+## Thu Jul 15 19:57:40 2021    Begin (eigenvalues and eigenvectors)
+## Thu Jul 15 19:57:40 2021    Done.
 ## SNP Loading:
 ##     # of samples: 1,040
 ##     # of SNPs: 23,779
 ##     using 1 thread
 ##     using the top 32 eigenvectors
-## Wed Jul 14 17:25:26 2021    (internal increment: 7780)
+## Thu Jul 15 19:57:40 2021    (internal increment: 7780)
 ## 
 [..................................................]  0%, ETC: ---        
-[==================================================] 100%, completed, 0s
-## Wed Jul 14 17:25:26 2021    Done.
+[==================================================] 100%, completed, 1s
+## Thu Jul 15 19:57:41 2021    Done.
 ## Sample Loading:
 ##     # of samples: 86
 ##     # of SNPs: 23,779
 ##     using 1 thread
 ##     using the top 32 eigenvectors
-## Wed Jul 14 17:25:26 2021    (internal increment: 65536)
+## Thu Jul 15 19:57:41 2021    (internal increment: 65536)
 ## 
 [..................................................]  0%, ETC: ---        
 [==================================================] 100%, completed, 0s
-## Wed Jul 14 17:25:26 2021    Done.</code></pre>
+## Thu Jul 15 19:57:41 2021    Done.</code></pre>
 <div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="ancestry-and-relatedness-inference.html#cb253-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(pca)</span></code></pre></div>
-<pre><code>##  [1] &quot;vectors&quot;    &quot;values&quot;     &quot;rels&quot;       &quot;unrels&quot;     &quot;kin.thresh&quot; &quot;div.thresh&quot; &quot;sample.id&quot;  &quot;nsamp&quot;      &quot;nsnps&quot;      &quot;varprop&quot;    &quot;call&quot;       &quot;method&quot;</code></pre>
+<pre><code>##  [1] &quot;vectors&quot;    &quot;values&quot;     &quot;rels&quot;       &quot;unrels&quot;     &quot;kin.thresh&quot; &quot;div.thresh&quot; &quot;sample.id&quot;  &quot;nsamp&quot;      &quot;nsnps&quot;     
+## [10] &quot;varprop&quot;    &quot;call&quot;       &quot;method&quot;</code></pre>
 <div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="ancestry-and-relatedness-inference.html#cb255-1" aria-hidden="true" tabindex="-1"></a><span class="co"># the unrelated set of samples</span></span>
 <span id="cb255-2"><a href="ancestry-and-relatedness-inference.html#cb255-2" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(pca<span class="sc">$</span>unrels)</span></code></pre></div>
 <pre><code>## [1] 1040</code></pre>
@@ -468,13 +485,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb263-5"><a href="ancestry-and-relatedness-inference.html#cb263-5" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(pcs)</span></code></pre></div>
 <pre><code>## [1] 1126   11</code></pre>
 <div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="ancestry-and-relatedness-inference.html#cb265-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(pcs)</span></code></pre></div>
-<pre><code>##                 PC1         PC2         PC3          PC4           PC5           PC6         PC7           PC8           PC9          PC10 sample.id
-## HG00096 -0.02226416 -0.03706223 0.007784659 -0.006036777 -0.0002494770  0.0008316496 -0.03953455  6.079733e-05  0.0009154511  8.333681e-04   HG00096
-## HG00097 -0.02069118 -0.03316550 0.010648323 -0.006725514  0.0004179001 -0.0005008697 -0.03380661 -1.743989e-03 -0.0012662487 -2.869483e-03   HG00097
-## HG00099 -0.02102452 -0.03547247 0.009881201 -0.005776697  0.0005220132  0.0011478104 -0.03409698  6.145952e-07  0.0010956673 -2.258131e-04   HG00099
-## HG00100 -0.02120448 -0.04293781 0.014368290 -0.006435646  0.0004269673  0.0025670278 -0.04708289  1.140219e-03 -0.0007786959 -8.237878e-04   HG00100
-## HG00101 -0.02108916 -0.03594252 0.010240805 -0.003099693  0.0012105916  0.0028715482 -0.03505874  4.599234e-04  0.0068621094 -1.783242e-03   HG00101
-## HG00102 -0.02209371 -0.04086700 0.013113725 -0.001004959 -0.0014970887 -0.0008704542 -0.03083835 -1.097275e-03  0.0030383585  6.466877e-05   HG00102</code></pre>
+<pre><code>##                 PC1         PC2         PC3          PC4           PC5           PC6         PC7           PC8
+## HG00096 -0.02226416 -0.03706223 0.007784659 -0.006036777 -0.0002494770  0.0008316496 -0.03953455  6.079733e-05
+## HG00097 -0.02069118 -0.03316550 0.010648323 -0.006725514  0.0004179001 -0.0005008697 -0.03380661 -1.743989e-03
+## HG00099 -0.02102452 -0.03547247 0.009881201 -0.005776697  0.0005220132  0.0011478104 -0.03409698  6.145952e-07
+## HG00100 -0.02120448 -0.04293781 0.014368290 -0.006435646  0.0004269673  0.0025670278 -0.04708289  1.140219e-03
+## HG00101 -0.02108916 -0.03594252 0.010240805 -0.003099693  0.0012105916  0.0028715482 -0.03505874  4.599234e-04
+## HG00102 -0.02209371 -0.04086700 0.013113725 -0.001004959 -0.0014970887 -0.0008704542 -0.03083835 -1.097275e-03
+##                   PC9          PC10 sample.id
+## HG00096  0.0009154511  8.333681e-04   HG00096
+## HG00097 -0.0012662487 -2.869483e-03   HG00097
+## HG00099  0.0010956673 -2.258131e-04   HG00099
+## HG00100 -0.0007786959 -8.237878e-04   HG00100
+## HG00101  0.0068621094 -1.783242e-03   HG00101
+## HG00102  0.0030383585  6.466877e-05   HG00102</code></pre>
 <p>We’d like to determine which PCs are ancestry informative. To do this we look at the PCs in conjunction with population information for the 1000 Genomes samples. This information is stored in an <code>AnnotatedDataFrame</code>. We make a parallel coordinates plot, color-coding by 1000 Genomes population.</p>
 <div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb267-1"><a href="ancestry-and-relatedness-inference.html#cb267-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Biobase)</span>
 <span id="cb267-2"><a href="ancestry-and-relatedness-inference.html#cb267-2" aria-hidden="true" tabindex="-1"></a>sampfile <span class="ot">&lt;-</span> <span class="st">&quot;data/sample_annotation.RData&quot;</span></span>
@@ -596,34 +620,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##     using 1 thread
 ##     # of principal components: 32
 ## CPU capabilities: Double-Precision SSE2
-## Wed Jul 14 17:28:44 2021    (internal increment: 944)
+## Thu Jul 15 20:01:09 2021    (internal increment: 944)
 ## 
 [..................................................]  0%, ETC: ---        
 [==================================================] 100%, completed, 4s
-## Wed Jul 14 17:28:48 2021    Begin (eigenvalues and eigenvectors)
-## Wed Jul 14 17:28:48 2021    Done.
+## Thu Jul 15 20:01:13 2021    Begin (eigenvalues and eigenvectors)
+## Thu Jul 15 20:01:14 2021    Done.
 ## SNP Loading:
 ##     # of samples: 1,070
 ##     # of SNPs: 20,945
 ##     using 1 thread
 ##     using the top 32 eigenvectors
-## Wed Jul 14 17:28:48 2021    (internal increment: 7564)
+## Thu Jul 15 20:01:14 2021    (internal increment: 7564)
 ## 
 [..................................................]  0%, ETC: ---        
-[==================================================] 100%, completed, 1s
-## Wed Jul 14 17:28:49 2021    Done.
+[==================================================] 100%, completed, 0s
+## Thu Jul 15 20:01:14 2021    Done.
 ## Sample Loading:
 ##     # of samples: 56
 ##     # of SNPs: 20,945
 ##     using 1 thread
 ##     using the top 32 eigenvectors
-## Wed Jul 14 17:28:49 2021    (internal increment: 65536)
+## Thu Jul 15 20:01:14 2021    (internal increment: 65536)
 ## 
 [..................................................]  0%, ETC: ---        
 [==================================================] 100%, completed, 0s
-## Wed Jul 14 17:28:49 2021    Done.</code></pre>
+## Thu Jul 15 20:01:14 2021    Done.</code></pre>
 <div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb289-1"><a href="ancestry-and-relatedness-inference.html#cb289-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(pca2)</span></code></pre></div>
-<pre><code>##  [1] &quot;vectors&quot;    &quot;values&quot;     &quot;rels&quot;       &quot;unrels&quot;     &quot;kin.thresh&quot; &quot;div.thresh&quot; &quot;sample.id&quot;  &quot;nsamp&quot;      &quot;nsnps&quot;      &quot;varprop&quot;    &quot;call&quot;       &quot;method&quot;</code></pre>
+<pre><code>##  [1] &quot;vectors&quot;    &quot;values&quot;     &quot;rels&quot;       &quot;unrels&quot;     &quot;kin.thresh&quot; &quot;div.thresh&quot; &quot;sample.id&quot;  &quot;nsamp&quot;      &quot;nsnps&quot;     
+## [10] &quot;varprop&quot;    &quot;call&quot;       &quot;method&quot;</code></pre>
 <div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb291-1"><a href="ancestry-and-relatedness-inference.html#cb291-1" aria-hidden="true" tabindex="-1"></a><span class="co"># the unrelated set of samples</span></span>
 <span id="cb291-2"><a href="ancestry-and-relatedness-inference.html#cb291-2" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(pca2<span class="sc">$</span>unrels)</span></code></pre></div>
 <pre><code>## [1] 1070</code></pre>

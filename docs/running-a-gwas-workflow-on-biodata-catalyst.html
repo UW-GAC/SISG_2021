@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>SISG 2021 Module 16: Computational Pipeline for WGS Data</title>
+  <title>10 Running a GWAS workflow on BioData Catalyst | SISG 2021 Module 16: Computational Pipeline for WGS Data</title>
   <meta name="description" content="Course materials for SISG 2021 Module 16" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="SISG 2021 Module 16: Computational Pipeline for WGS Data" />
+  <meta property="og:title" content="10 Running a GWAS workflow on BioData Catalyst | SISG 2021 Module 16: Computational Pipeline for WGS Data" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="UW-GAC/SISG_2021" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="SISG 2021 Module 16: Computational Pipeline for WGS Data" />
+  <meta name="twitter:title" content="10 Running a GWAS workflow on BioData Catalyst | SISG 2021 Module 16: Computational Pipeline for WGS Data" />
   
   <meta name="twitter:description" content="Course materials for SISG 2021 Module 16" />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
+<link rel="prev" href="aggregate-association-tests.html"/>
 
-<link rel="next" href="gds-format.html"/>
 <script src="libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -54,6 +54,70 @@
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
 
 
 </head>
@@ -186,163 +250,174 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">SISG 2021 Module 16: Computational Pipeline for WGS Data</h1>
-<p class="date" style="margin-top: 1.5em;"><em>2021-07-15</em></p>
+<div id="running-a-gwas-workflow-on-biodata-catalyst" class="section level1" number="10">
+<h1><span class="header-section-number">10</span> Running a GWAS workflow on BioData Catalyst</h1>
+<p>On the BioData Catalyst platform, locate the following public apps and copy them to your project. To find the apps, go to Public Gallery &gt; Apps, and then use the search box. Click “copy”, select your project from the dropdown, and click “copy” again.</p>
+<ol style="list-style-type: decimal">
+<li>Bcftools Merge and Filter</li>
+<li>VCF to GDS Converter</li>
+<li>KING robust</li>
+<li>PC-AiR</li>
+<li>PC-Relate</li>
+<li>GENESIS Null Model</li>
+<li>GENESIS Single Variant Association Testing</li>
+<li>GENESIS Aggregate Association Testing</li>
+</ol>
+<div id="preparing-the-genotype-data" class="section level2" number="10.1">
+<h2><span class="header-section-number">10.1</span> Preparing the genotype data</h2>
+<div id="bcftools-merge-and-filter" class="section level3" number="10.1.1">
+<h3><span class="header-section-number">10.1.1</span> Bcftools Merge and Filter</h3>
+<p>Run the <code>Bcftools Merge and Filter</code> tool to combine two separate VCF files into one merged file (see the task “1. Bcftools merge chr 1 subsets”).</p>
+<ul>
+<li>Inputs
+<ul>
+<li>Input variant files: <code>1KG_phase3_chr1.subset1.vcf</code> and <code>1KG_phase3_chr1.subset2.vcf</code></li>
+</ul></li>
+<li>App Settings
+<ul>
+<li>Output name: <code>1KG_phase3_subset_chr1</code></li>
+</ul></li>
+</ul>
+<p>This will create a file named <code>1KG_phase3_subset_chr1.merged.vcf.gz</code> that contains all of the data from both input files.</p>
 </div>
-<div id="introduction" class="section level1" number="1">
-<h1><span class="header-section-number">1</span> Introduction</h1>
-<p>This site contains course materials for SISG Module 16: Computational Pipeline for WGS Data, July 21-23, 2021. The Summer Institutes web page can be found here: <a href="https://si.biostat.washington.edu/suminst/sisg2021/modules/SM2116" class="uri">https://si.biostat.washington.edu/suminst/sisg2021/modules/SM2116</a></p>
-<p><strong>Lectures</strong></p>
-<p>Slides for lectures are linked below in the schedule. Videos of lectures will be posted afterwards.</p>
-<p><strong>Exercises</strong></p>
-<p>To work through the exercises, log into <a href="https://platform.sb.biodatacatalyst.nhlbi.nih.gov" class="uri">https://platform.sb.biodatacatalyst.nhlbi.nih.gov</a> with your username and password.</p>
-<p><strong>Slack</strong></p>
-<p>Join the Slack channel here: <a href="https://uwbiostatisticssisg.slack.com" class="uri">https://uwbiostatisticssisg.slack.com</a></p>
-<p><strong>Data</strong></p>
-<p>Data used is located in the <a href="https://github.com/UW-GAC/SISG_2021">github repository</a> from which the site is built.</p>
-<div id="schedule" class="section level2" number="1.1">
-<h2><span class="header-section-number">1.1</span> Schedule</h2>
-<p>NOTE: All times are Pacific Daylight Time (GMT-07:00)</p>
-<p><strong>Wednesday, July 21</strong></p>
+<div id="vcf-to-gds-converter" class="section level3" number="10.1.2">
+<h3><span class="header-section-number">10.1.2</span> VCF to GDS Converter</h3>
+<p>Run the <code>VCF to GDS Converter</code> workflow to convert the 1000 Genomes VCF file you just created to a GDS file (see the task “2. Convert chr 1 VCF to GDS”).</p>
 <ul>
-<li><strong>Zoom session 11:30-13:15 PDT</strong> - Introduction and Genomic Data Storage
+<li>Inputs
 <ul>
-<li><strong>Lecture</strong>
-<ul>
-<li>Introduction (<a href="https://docs.google.com/presentation/d/17DFvIH97RhcY6gq-BRYsxL-0r2jgl_p1-EMsgGXIYoE/edit?usp=sharing">slides</a>) (video coming soon)</li>
-<li>Using BioData Catalyst for SISG exercises (<a href="https://docs.google.com/document/d/1nLMjNRYffphWl89XVEPbH5NHLbUDW4SK7ikeEcHbixo/edit?usp=sharing">instructions</a>) (video coming soon)</li>
-<li>Sequencing data formats (<a href="https://drive.google.com/file/d/1w_dEobxo6kzloQlIuHW_lUnwkPCYK-RP/view?usp=sharing">slides</a>) (video coming soon)</li>
-<li>Intro to Genomic Data Structure (<a href="https://drive.google.com/file/d/1_p6-peb89ppi54gsDEapRdHcRVaq3IAX/view?usp=sharing">slides</a>) (video coming soon)</li>
+<li>Variants Files: <code>1KG_phase3_subset_chr1.merged.vcf.gz</code></li>
 </ul></li>
-<li><strong>Interactive breakout rooms</strong>
+<li>App Settings
 <ul>
-<li>GDS format (<a href="https://uw-gac.github.io/SISG_2021/gds-format.html">Workbook</a>) (<a href="https://uw-gac.github.io/SISG_2021/gds-format.html#exercises">Exercise</a>) (<a href="https://uw-gac.github.io/SISG_2021/gds-format.html#solutions">Solution</a>)</li>
-<li>Discussion (video coming soon)</li>
-</ul></li>
-</ul></li>
-<li><strong>Zoom session 13:45-14:30 PDT</strong> - Phenotype harmonization
-<ul>
-<li><strong>Lecture</strong>
-<ul>
-<li>Phenotype harmonization (<a href="https://si.biostat.washington.edu/sites/default/files/modules/pheno_harmonization.pdf">slides</a>) (video coming soon)</li>
-</ul></li>
-<li><strong>Interactive breakout rooms</strong>
-<ul>
-<li>Harmonization in R (<a href="https://uw-gac.github.io/SISG_2021/phenotype-harmonization.html">Workbook</a>)</li>
-<li>Discussion (video coming soon)</li>
-</ul></li>
+<li>check GDS: No</li>
 </ul></li>
 </ul>
-<p><strong>Thursday, July 22</strong></p>
-<ul>
-<li><strong>Zoom session 8:00-9:45 PDT</strong> - Association tests, Part I
-<ul>
-<li><strong>Lecture</strong>
-<ul>
-<li>Association tests: Methods and motivation (<a href="https://si.biostat.washington.edu/sites/default/files/modules/SISG20AssocTests.pdf">slides</a>) (video coming soon)</li>
-<li>GENESIS for association tests (<a href="https://si.biostat.washington.edu/sites/default/files/modules/R_assoc_tests_2.pdf">slides</a>) (video coming soon)</li>
-</ul></li>
-<li><strong>Interactive breakout rooms</strong>
-<ul>
-<li>Null model (<a href="https://uw-gac.github.io/SISG_2021/association-tests-part-i.html">Workbook</a>) (<a href="https://uw-gac.github.io/SISG_2021/association-tests-part-i.html#exercise">Exercise</a>) (<a href="https://uw-gac.github.io/SISG_2021/association-tests-part-i.html#solution">Solution</a>)</li>
-<li>Single-variant association tests (<a href="https://uw-gac.github.io/SISG_2021/association-tests-part-i.html#single-variant-association-tests">Workbook</a>) (<a href="https://uw-gac.github.io/SISG_2021/association-tests-part-i.html#exercise-1">Exercise</a>) (<a href="https://uw-gac.github.io/SISG_2021/association-tests-part-i.html#solution-1">Solution</a>)</li>
-<li>Discussion (video coming soon)</li>
-</ul></li>
-</ul></li>
-<li><strong>Zoom session 10:15-11:45 PDT</strong> - Association tests, Part II
-<ul>
-<li><strong>Lecture</strong>
-<ul>
-<li>Aggregate tests (<a href="https://si.biostat.washington.edu/sites/default/files/modules/SISG20AssocTests.pdf">slides</a>) (video coming soon)</li>
-</ul></li>
-<li><strong>Interactive breakout rooms</strong>
-<ul>
-<li>Sliding window tests (<a href="https://uw-gac.github.io/SISG_2021/association-tests-part-ii.html">Workbook</a>) (<a href="https://uw-gac.github.io/SISG_2021/association-tests-part-ii.html#exercise-2">Exercise</a>) (<a href="https://uw-gac.github.io/SISG_2021/association-tests-part-ii.html#solution-2">Solution</a>)</li>
-<li>Discussion (video coming soon)</li>
-</ul></li>
-</ul></li>
-<li><strong>Zoom session 12:45-14:30 PDT</strong> - Population Structure and Relatedness
-<ul>
-<li><strong>Lecture</strong>
-<ul>
-<li>Population structure inference (<a href="https://si.biostat.washington.edu/sites/default/files/modules/Population_Structure_Inference_2020.pdf">slides</a>) (video coming soon)</li>
-<li>Relatedness inference (<a href="https://si.biostat.washington.edu/sites/default/files/modules/Relatedness_Inference_2020.pdf">slides</a>) (video coming soon)</li>
-<li>R packages for PCA and relatedness (<a href="https://si.biostat.washington.edu/sites/default/files/modules/R_kinship_pca_1.pdf">slides</a>) (video coming soon)</li>
-</ul></li>
-<li><strong>Interactive breakout rooms</strong>
-<ul>
-<li>Ancestry and relatedness inference (<a href="https://uw-gac.github.io/SISG_2021/ancestry-and-relatedness-inference.html">Workbook</a>) (<a href="https://uw-gac.github.io/SISG_2021/ancestry-and-relatedness-inference.html#exercises-1">Exercises</a>) (<a href="https://uw-gac.github.io/SISG_2021/ancestry-and-relatedness-inference.html#solutions-1">Solutions</a>)</li>
-<li>Discussion (video coming soon)</li>
-</ul></li>
-</ul></li>
-</ul>
-<p><strong>Friday, July 23</strong></p>
-<ul>
-<li><strong>Zoom session 8:00-9:30 PDT</strong> - Mixed models
-<ul>
-<li><strong>Lecture</strong>
-<ul>
-<li>Mixed model association testing (<a href="https://si.biostat.washington.edu/sites/default/files/modules/Mixed_Model_Association_Testing_2020.pdf">slides</a>) (video coming soon)</li>
-</ul></li>
-<li><strong>Interactive breakout rooms</strong>
-<ul>
-<li>Mixed models in R (<a href="https://uw-gac.github.io/SISG_2021/mixed-models.html">Workbook</a>) (<a href="https://uw-gac.github.io/SISG_2021/mixed-models.html#exercise-3">Exercise</a>) (<a href="https://uw-gac.github.io/SISG_2021/mixed-models.html#solution-3">Solution</a>)</li>
-<li>Discussion (video coming soon)</li>
-</ul></li>
-</ul></li>
-<li><strong>Zoom session 9:45-11:30 PDT</strong> - Variant annotation
-<ul>
-<li><strong>Lecture</strong>
-<ul>
-<li>Variant annotation (<a href="https://si.biostat.washington.edu/sites/default/files/modules/variant_annotation_0.pdf">slides</a>) (video coming soon)</li>
-</ul></li>
-<li><strong>Interactive breakout rooms</strong>
-<ul>
-<li>Using variant annotation (<a href="https://uw-gac.github.io/SISG_2021/variant-annotation.html">Workbook</a>) (<a href="">Exercise</a>) (<a href="">Solution</a>)</li>
-<li>Discussion (video coming soon)</li>
-</ul></li>
-</ul></li>
-<li><strong>Zoom session 12:30-13:45 PDT</strong> - Working in the cloud
-<ul>
-<li><strong>Lecture</strong>
-<ul>
-<li>Analysis pipelines on the cloud (<a href="https://si.biostat.washington.edu/sites/default/files/modules/Cloud_Computing.pdf">slides</a>) (video coming soon)</li>
-<li>Running a workflow on BioData Catalyst (video coming soon)</li>
-</ul></li>
-<li><strong>Interactive breakout rooms</strong>
-<ul>
-<li>Running a GWAS workflow (<a href="https://uw-gac.github.io/SISG_2021/exercises-running-a-gwas-workflow.html">Workbook</a>) (<a href="">Exercise</a>) (<a href="">Solution</a>)</li>
-<li>Discussion (video coming soon)</li>
-</ul></li>
-</ul></li>
-<li><strong>Zoom session 14:00-14:30 PDT</strong> - Open session for questions/advice
-<ul>
-<li>Discussion (video coming soon)</li>
-</ul></li>
-</ul>
-<p>Download the workshop data and exercises: <a href="https://github.com/UW-GAC/SISG_2021/archive/master.zip" class="uri">https://github.com/UW-GAC/SISG_2021/archive/master.zip</a></p>
+<p>This will create a GDS file named <code>1KG_phase3_subset_chr1.merged.gds</code> that contains the same information as the input VCF file. Use the “view stats and logs” button to check on the status of your tasks.</p>
 </div>
-<div id="r-packages-used" class="section level2" number="1.2">
-<h2><span class="header-section-number">1.2</span> R packages used</h2>
-<ul>
-<li><a href="http://bioconductor.org/packages/release/bioc/html/SeqArray.html">SeqArray</a></li>
-<li><a href="http://bioconductor.org/packages/release/bioc/html/SeqVarTools.html">SeqVarTools</a></li>
-<li><a href="http://bioconductor.org/packages/release/bioc/html/GENESIS.html">GENESIS</a></li>
-<li><a href="http://bioconductor.org/packages/release/bioc/html/SNPRelate.html">SNPRelate</a></li>
-<li><a href="https://github.com/UW-GAC/analysis_pipeline/tree/master/TopmedPipeline">TopmedPipeline</a></li>
-<li><a href="https://www.tidyverse.org">tidyverse</a></li>
-<li><a href="https://cran.r-project.org/web/packages/GGally">GGally</a></li>
-</ul>
 </div>
-<div id="resources" class="section level2" number="1.3">
-<h2><span class="header-section-number">1.3</span> Resources</h2>
-<p>If you are new to R, you might find the following material helpful:</p>
+<div id="ancestry-and-relatedness" class="section level2" number="10.2">
+<h2><span class="header-section-number">10.2</span> Ancestry and Relatedness</h2>
+<div id="king-robust" class="section level3" number="10.2.1">
+<h3><span class="header-section-number">10.2.1</span> KING robust</h3>
+<p>Run the <code>KING robust</code> workflow to compute initial kinship estimates for all pairs of samples (see the task “3. KING robust run”).</p>
 <ul>
-<li><a href="http://faculty.washington.edu/kenrice/rintro/indexSEA15.shtml">Introduction to R</a> materials from SISG Module 3</li>
-<li><a href="http://tutorials.iq.harvard.edu/R/Rgraphics/Rgraphics.html">Graphics with ggplot2</a> tutorial</li>
-<li>Data manipulation with <a href="http://dplyr.tidyverse.org/">dplyr</a></li>
+<li>Inputs
+<ul>
+<li>GDS file: <code>1KG_phase3_subset_chr1.merged.gds</code></li>
+</ul></li>
+<li>App Settings
+<ul>
+<li>Output prefix: <code>1KG_phase3_subset_chr1</code></li>
+</ul></li>
 </ul>
+<p>This will create a <code>1KG_phase3_subset_chr1_king_robust.gds</code> file that contains the KING estimates as well as a <code>1KG_phase3_subset_chr1_king_robust_all.pdf</code> with the plot of estimated kinship vs. IBS0.</p>
+<p>Use the “view stats and logs” button to check on the status of your tasks. Click on the bar that says “king_robust”, click “view logs”, and click the “king_robust” folder. In here you can see detailed logs of the job; take a look at the <code>job.out.log</code> and <code>job.err.log</code> – these can be useful for debugging issues.</p>
+</div>
+<div id="pc-air-1" class="section level3" number="10.2.2">
+<h3><span class="header-section-number">10.2.2</span> PC-AiR</h3>
+<p>Run the <code>PC-AiR</code> workflow to compute ancestry principal components (see the task “4. PC-AiR run”).</p>
+<ul>
+<li>Inputs
+<ul>
+<li>Full GDS File: <code>1KG_phase3_subset_chr1.merged.gds</code></li>
+<li>Kinship File: <code>1KG_phase3_subset_chr1_king_robust.gds</code></li>
+<li>Phenotype File: <code>sample_phenotype_pcs.RData</code></li>
+<li>Pruned GDS File: <code>1KG_phase3_subset_chr1.merged.gds</code></li>
+</ul></li>
+<li>App Settings
+<ul>
+<li>Output prefix: <code>1KG_phase3_subset_chr1</code></li>
+<li>Group: “Population”</li>
+<li>Run PC-variant correlation: FALSE</li>
+</ul></li>
+</ul>
+<p>This will create a <code>1KG_phase3_subset_chr1_related.RData</code> file that contains the output PCs as well as several PC plots. Take a look at the <code>1KG_phase3_subset_chr1_pca_parcoord.pdf</code> – how many PCs to adjust for in PC-Relate and the association analyses?</p>
+</div>
+<div id="pc-relate-1" class="section level3" number="10.2.3">
+<h3><span class="header-section-number">10.2.3</span> PC-Relate</h3>
+<p>Run the <code>PC-Relate</code> workflow to compute ancestry adjusted relatedness estimates (see the task “5. PC-Relate run”).</p>
+<ul>
+<li>Inputs
+<ul>
+<li>GDS File: <code>1KG_phase3_subset_chr1.merged.gds</code></li>
+<li>PCA File: <code>1KG_phase3_subset_chr1_related.RData</code></li>
+</ul></li>
+<li>App Settings
+<ul>
+<li>Number of PCs: 2</li>
+<li>Output prefix: <code>1KG_phase3_subset_chr1</code></li>
+</ul></li>
+</ul>
+<p>This will create a <code>1KG_phase3_subset_chr1_pcrelate.RData</code> file that contains the PC-Relate relatedness estimates as well as a <code>1KG_phase3_subset_chr1_pcrelate_all.pdf</code> with the plot of estimated kinship vs. k0. (Note that the estimates are very noisy because we are using so few variants in this toy example.)</p>
+<p>From the “view stats and logs” page, click “instance metrics” to see an overview of CPU, RAM, etc. usage; this will update as the process runs.</p>
+</div>
+</div>
+<div id="association-testing" class="section level2" number="10.3">
+<h2><span class="header-section-number">10.3</span> Association Testing</h2>
+<div id="null-model-2" class="section level3" number="10.3.1">
+<h3><span class="header-section-number">10.3.1</span> Null Model</h3>
+<p>Fit a null model using the <code>Null Model</code> workflow (see the task “6. GENESIS Null Model run”).</p>
+<ul>
+<li>Inputs
+<ul>
+<li>Phenotype File: <code>sample_phenotype_pcs.RData</code> (note that the PCs are included in this file)</li>
+<li>Relatedness matrix file: <code>kinship.RData</code></li>
+</ul></li>
+<li>App Settings
+<ul>
+<li>Outcome: height</li>
+<li>Covariates: age, sex, study, PC1, PC2, PC3, PC4</li>
+<li>Group variate: study</li>
+<li>Family: gaussian</li>
+<li>Output prefix: <code>height</code></li>
+</ul></li>
+</ul>
+<p>This will create a <code>height_null_model.RData</code> file that contains the null model fit and a <code>height_phenotypes.RData</code> file that contains the phenotype data used in the analysis. It also creates a <code>height_report.html</code> null model report – review this report.</p>
+</div>
+<div id="single-variant-association-test" class="section level3" number="10.3.2">
+<h3><span class="header-section-number">10.3.2</span> Single variant association test</h3>
+<p>Use the <code>GENESIS Single Variant Association Testing</code> workflow to run a single variant association test (see the task “7. GENESIS Single Variant Association Testing run”).</p>
+<ul>
+<li>Inputs
+<ul>
+<li>GDS files: <code>1KG_phase3_subset_chr1.merged.gds</code></li>
+<li>Null model file: <code>height_null_model.RData</code></li>
+<li>Phenotype file: <code>height_phenotypes.RData</code> (it is recommended you use the file produced by the Null Model workflow)</li>
+</ul></li>
+<li>App Settings
+<ul>
+<li>MAC threshold: 5</li>
+<li>Output prefix: <code>height</code></li>
+<li>memory GB: 64</li>
+</ul></li>
+</ul>
+<p>Review the QQ and manhattan plots.</p>
+</div>
+<div id="aggregate-variant-test" class="section level3" number="10.3.3">
+<h3><span class="header-section-number">10.3.3</span> Aggregate variant test</h3>
+<p>Use the <code>GENESIS Aggregate Association Testing</code> workflow to run a burden association test (see the task “8. GENESIS Aggregate Association Testing run”).</p>
+<ul>
+<li>Inputs
+<ul>
+<li>GDS files: <code>1KG_phase3_subset_chr1.merged.gds</code></li>
+<li>Null model file: <code>height_null_model.RData</code></li>
+<li>Phenotype file: <code>height_phenotypes.RData</code> (it is recommended you use the file produced by the Null Model workflow)</li>
+<li>Variant group files: <code>variants_by_gene_chr1.RData</code></li>
+</ul></li>
+<li>App Settings
+<ul>
+<li>Alt Freq Max: 0.1</li>
+<li>Test: burden</li>
+<li>Output prefix: <code>height</code></li>
+</ul></li>
+</ul>
+<p>Review the QQ and manhattan plots.</p>
+</div>
+</div>
+<div id="analysis-follow-up" class="section level2" number="10.4">
+<h2><span class="header-section-number">10.4</span> Analysis follow-up</h2>
+<p>In RStudio, locate the results of your association test under <code>/sbgenomics/project-files/</code>. Load one of these results files into R and explore it.</p>
 
 </div>
 </div>
@@ -351,8 +426,8 @@
           </div>
         </div>
       </div>
+<a href="aggregate-association-tests.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
-<a href="gds-format.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

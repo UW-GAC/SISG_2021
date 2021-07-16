@@ -23,7 +23,7 @@
 
 
 
-<meta name="date" content="2021-07-14" />
+<meta name="date" content="2021-07-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -212,12 +212,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.3" data-path="aggregate-association-tests.html"><a href="aggregate-association-tests.html#exercise-4"><i class="fa fa-check"></i><b>9.3</b> Exercise</a></li>
 <li class="chapter" data-level="9.4" data-path="aggregate-association-tests.html"><a href="aggregate-association-tests.html#solution-4"><i class="fa fa-check"></i><b>9.4</b> Solution</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="exercises-running-a-gwas-workflow.html"><a href="exercises-running-a-gwas-workflow.html"><i class="fa fa-check"></i><b>10</b> Exercises: Running a GWAS workflow</a>
+<li class="chapter" data-level="10" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html"><i class="fa fa-check"></i><b>10</b> Running a GWAS workflow on BioData Catalyst</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="exercises-running-a-gwas-workflow.html"><a href="exercises-running-a-gwas-workflow.html#vcf-to-gds"><i class="fa fa-check"></i><b>10.1</b> VCF to GDS</a></li>
-<li class="chapter" data-level="10.2" data-path="exercises-running-a-gwas-workflow.html"><a href="exercises-running-a-gwas-workflow.html#null-model-2"><i class="fa fa-check"></i><b>10.2</b> Null Model</a></li>
-<li class="chapter" data-level="10.3" data-path="exercises-running-a-gwas-workflow.html"><a href="exercises-running-a-gwas-workflow.html#single-variant-test"><i class="fa fa-check"></i><b>10.3</b> Single variant test</a></li>
-<li class="chapter" data-level="10.4" data-path="exercises-running-a-gwas-workflow.html"><a href="exercises-running-a-gwas-workflow.html#analysis-follow-up"><i class="fa fa-check"></i><b>10.4</b> Analysis follow-up</a></li>
+<li class="chapter" data-level="10.1" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html#preparing-the-genotype-data"><i class="fa fa-check"></i><b>10.1</b> Preparing the genotype data</a>
+<ul>
+<li class="chapter" data-level="10.1.1" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html#bcftools-merge-and-filter"><i class="fa fa-check"></i><b>10.1.1</b> Bcftools Merge and Filter</a></li>
+<li class="chapter" data-level="10.1.2" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html#vcf-to-gds-converter"><i class="fa fa-check"></i><b>10.1.2</b> VCF to GDS Converter</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html#ancestry-and-relatedness"><i class="fa fa-check"></i><b>10.2</b> Ancestry and Relatedness</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html#king-robust"><i class="fa fa-check"></i><b>10.2.1</b> KING robust</a></li>
+<li class="chapter" data-level="10.2.2" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html#pc-air-1"><i class="fa fa-check"></i><b>10.2.2</b> PC-AiR</a></li>
+<li class="chapter" data-level="10.2.3" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html#pc-relate-1"><i class="fa fa-check"></i><b>10.2.3</b> PC-Relate</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html#association-testing"><i class="fa fa-check"></i><b>10.3</b> Association Testing</a>
+<ul>
+<li class="chapter" data-level="10.3.1" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html#null-model-2"><i class="fa fa-check"></i><b>10.3.1</b> Null Model</a></li>
+<li class="chapter" data-level="10.3.2" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html#single-variant-association-test"><i class="fa fa-check"></i><b>10.3.2</b> Single variant association test</a></li>
+<li class="chapter" data-level="10.3.3" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html#aggregate-variant-test"><i class="fa fa-check"></i><b>10.3.3</b> Aggregate variant test</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html#analysis-follow-up"><i class="fa fa-check"></i><b>10.4</b> Analysis follow-up</a></li>
 </ul></li>
 </ul>
 
@@ -338,19 +352,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   0.00000  93.61147 168.76021 152.37404</code></pre>
 <div class="sourceCode" id="cb320"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb320-1"><a href="mixed-models.html#cb320-1" aria-hidden="true" tabindex="-1"></a><span class="co"># model fit: fitted values, residuals</span></span>
 <span id="cb320-2"><a href="mixed-models.html#cb320-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(nullmod<span class="sc">$</span>fit)</span></code></pre></div>
-<pre><code>##         outcome workingY fitted.values resid.marginal resid.conditional linear.predictor     resid.PY resid.cholesky sample.id
-## HG00096 165.300  165.300      175.8150    -10.5150254       -10.5150254         175.8150 -0.112326247    -1.08679039   HG00096
-## HG00097 144.780  144.780      160.3639    -15.5839388       -15.5839388         160.3639 -0.092343679    -1.19961587   HG00097
-## HG00099 185.500  185.500      179.4017      6.0983220         6.0983220         179.4017  0.040022053     0.49403175   HG00099
-## HG00100 150.622  150.622      160.7060    -10.0839725       -10.0839725         160.7060 -0.059753258    -0.77624108   HG00100
-## HG00101 177.800  177.800      166.2361     11.5638906        11.5638906         166.2361  0.068522613     0.89016178   HG00101
-## HG00102 169.100  169.100      169.9405     -0.8404905        -0.8404905         169.9405 -0.008978499    -0.08686969   HG00102</code></pre>
+<pre><code>##         outcome workingY fitted.values resid.marginal resid.conditional linear.predictor     resid.PY resid.cholesky
+## HG00096 165.300  165.300      175.8150    -10.5150254       -10.5150254         175.8150 -0.112326247    -1.08679039
+## HG00097 144.780  144.780      160.3639    -15.5839388       -15.5839388         160.3639 -0.092343679    -1.19961587
+## HG00099 185.500  185.500      179.4017      6.0983220         6.0983220         179.4017  0.040022053     0.49403175
+## HG00100 150.622  150.622      160.7060    -10.0839725       -10.0839725         160.7060 -0.059753258    -0.77624108
+## HG00101 177.800  177.800      166.2361     11.5638906        11.5638906         166.2361  0.068522613     0.89016178
+## HG00102 169.100  169.100      169.9405     -0.8404905        -0.8404905         169.9405 -0.008978499    -0.08686969
+##         sample.id
+## HG00096   HG00096
+## HG00097   HG00097
+## HG00099   HG00099
+## HG00100   HG00100
+## HG00101   HG00101
+## HG00102   HG00102</code></pre>
 <div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb322-1"><a href="mixed-models.html#cb322-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb322-2"><a href="mixed-models.html#cb322-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(nullmod<span class="sc">$</span>fit, <span class="fu">aes</span>(<span class="at">x =</span> fitted.values, <span class="at">y =</span> resid.marginal)) <span class="sc">+</span> </span>
 <span id="cb322-3"><a href="mixed-models.html#cb322-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span> </span>
 <span id="cb322-4"><a href="mixed-models.html#cb322-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>) <span class="sc">+</span> </span>
 <span id="cb322-5"><a href="mixed-models.html#cb322-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&#39;lm&#39;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-40-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
 </div>
 <div id="single-variant-tests" class="section level2" number="7.2">
 <h2><span class="header-section-number">7.2</span> Single-variant tests</h2>
@@ -373,13 +394,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb325"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb325-1"><a href="mixed-models.html#cb325-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(assoc)</span></code></pre></div>
 <pre><code>## [1] 1129   14</code></pre>
 <div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb327-1"><a href="mixed-models.html#cb327-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(assoc)</span></code></pre></div>
-<pre><code>##   variant.id chr     pos allele.index n.obs         freq MAC       Score  Score.SE Score.Stat  Score.pval        Est   Est.SE          PVE
-## 1          1   1  970546            1  1126 0.0039964476   9 -0.17384025 0.2592275 -0.6706088 0.502469798  -2.586950 3.857615 0.0004026103
-## 2          2   1  985900            1  1126 0.0492895204 111 -1.55598468 0.8183596 -1.9013460 0.057256708  -2.323363 1.221957 0.0032364488
-## 3          3   1 1025045            1  1126 0.0004440497   1 -0.29433530 0.1029724 -2.8583911 0.004257953 -27.758817 9.711343 0.0073145856
-## 4          4   1 1265550            1  1126 0.0008880995   2 -0.09940909 0.1078116 -0.9220633 0.356495581  -8.552545 9.275442 0.0007611458
-## 5          5   1 1472676            1  1126 0.0071047957  16  0.14878210 0.3468438  0.4289599 0.667952399   1.236752 2.883142 0.0001647327
-## 6          6   1 1735725            1  1126 0.0022202487   5 -0.13567249 0.1982518 -0.6843443 0.493757749  -3.451895 5.044091 0.0004192719</code></pre>
+<pre><code>##   variant.id chr     pos allele.index n.obs         freq MAC       Score  Score.SE Score.Stat  Score.pval        Est
+## 1          1   1  970546            1  1126 0.0039964476   9 -0.17384025 0.2592275 -0.6706088 0.502469798  -2.586950
+## 2          2   1  985900            1  1126 0.0492895204 111 -1.55598468 0.8183596 -1.9013460 0.057256708  -2.323363
+## 3          3   1 1025045            1  1126 0.0004440497   1 -0.29433530 0.1029724 -2.8583911 0.004257953 -27.758817
+## 4          4   1 1265550            1  1126 0.0008880995   2 -0.09940909 0.1078116 -0.9220633 0.356495581  -8.552545
+## 5          5   1 1472676            1  1126 0.0071047957  16  0.14878210 0.3468438  0.4289599 0.667952399   1.236752
+## 6          6   1 1735725            1  1126 0.0022202487   5 -0.13567249 0.1982518 -0.6843443 0.493757749  -3.451895
+##     Est.SE          PVE
+## 1 3.857615 0.0004026103
+## 2 1.221957 0.0032364488
+## 3 9.711343 0.0073145856
+## 4 9.275442 0.0007611458
+## 5 2.883142 0.0001647327
+## 6 5.044091 0.0004192719</code></pre>
 <p>We make the usual QQ plot, filtering to variants with minor allele count (MAC) &gt;= 5.</p>
 <div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb329-1"><a href="mixed-models.html#cb329-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb329-2"><a href="mixed-models.html#cb329-2" aria-hidden="true" tabindex="-1"></a>qqPlot <span class="ot">&lt;-</span> <span class="cf">function</span>(pval) {</span>
@@ -467,13 +495,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb338-1"><a href="mixed-models.html#cb338-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(assoc.status)</span></code></pre></div>
 <pre><code>## [1] 1129   14</code></pre>
 <div class="sourceCode" id="cb340"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb340-1"><a href="mixed-models.html#cb340-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(assoc.status)</span></code></pre></div>
-<pre><code>##   variant.id chr     pos allele.index n.obs         freq MAC      Score  Score.SE Score.Stat Score.pval        Est    Est.SE          PVE
-## 1          1   1  970546            1  1126 0.0039964476   9  0.1975748 0.8349756  0.2366235 0.81294892  0.2833897 1.1976398 6.097484e-05
-## 2          2   1  985900            1  1126 0.0492895204 111 -2.5741449 2.6188824 -0.9829173 0.32564813 -0.3753194 0.3818423 1.052129e-03
-## 3          3   1 1025045            1  1126 0.0004440497   1 -0.0721219 0.2555958 -0.2821717 0.77781189 -1.1039760 3.9124270 8.670854e-05
-## 4          4   1 1265550            1  1126 0.0008880995   2  0.7862901 0.4237118  1.8557191 0.06349361  4.3796725 2.3600946 3.750244e-03
-## 5          5   1 1472676            1  1126 0.0071047957  16  0.6300877 1.0837470  0.5813974 0.56097266  0.5364696 0.9227246 3.681131e-04
-## 6          6   1 1735725            1  1126 0.0022202487   5 -0.4029747 0.5941659 -0.6782191 0.49763280 -1.1414641 1.6830315 5.009278e-04</code></pre>
+<pre><code>##   variant.id chr     pos allele.index n.obs         freq MAC      Score  Score.SE Score.Stat Score.pval        Est
+## 1          1   1  970546            1  1126 0.0039964476   9  0.1975748 0.8349756  0.2366235 0.81294892  0.2833897
+## 2          2   1  985900            1  1126 0.0492895204 111 -2.5741449 2.6188824 -0.9829173 0.32564813 -0.3753194
+## 3          3   1 1025045            1  1126 0.0004440497   1 -0.0721219 0.2555958 -0.2821717 0.77781189 -1.1039760
+## 4          4   1 1265550            1  1126 0.0008880995   2  0.7862901 0.4237118  1.8557191 0.06349361  4.3796725
+## 5          5   1 1472676            1  1126 0.0071047957  16  0.6300877 1.0837470  0.5813974 0.56097266  0.5364696
+## 6          6   1 1735725            1  1126 0.0022202487   5 -0.4029747 0.5941659 -0.6782191 0.49763280 -1.1414641
+##      Est.SE          PVE
+## 1 1.1976398 6.097484e-05
+## 2 0.3818423 1.052129e-03
+## 3 3.9124270 8.670854e-05
+## 4 2.3600946 3.750244e-03
+## 5 0.9227246 3.681131e-04
+## 6 1.6830315 5.009278e-04</code></pre>
 <div class="sourceCode" id="cb342"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb342-1"><a href="mixed-models.html#cb342-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qqPlot</span>(assoc.status<span class="sc">$</span>Score.pval[assoc.status<span class="sc">$</span>MAC <span class="sc">&gt;=</span> <span class="dv">5</span>])</span></code></pre></div>
 <p><img src="_main_files/figure-html/exercise_mm_assoc-1.png" width="672" /></p>
 <div class="sourceCode" id="cb343"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb343-1"><a href="mixed-models.html#cb343-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seqClose</span>(seqData)</span></code></pre></div>

@@ -106,11 +106,11 @@ qqPlot(assoc$results$Score.pval)
 
 ## Exercise
 
-Since we are working with a subset of the data, many of the genes listed in `group_id` have a very small number of variants. Create a new set of aggregation units based on position, rather than gene name -- create 10 units that are 1MB long and span all of the chr1 variants by using the TopmedPipeline function `aggregateGRanges`. Run a SKAT test using those units and a `SeqVarRangeIterator` object.
+1. Since we are working with a subset of the data, many of the genes listed in `group_id` have a very small number of variants. Create a new set of aggregation units based on position, rather than gene name -- create 10 units that are 1MB long and span all of the chr1 variants by using the TopmedPipeline function `aggregateGRanges`. Run a SKAT test using those units and a `SeqVarRangeIterator` object.
 
 ## Solution
 
-Since we are working with a subset of the data, many of the genes listed in `group_id` have a very small number of variants. Create a new set of aggregation units based on position, rather than gene name -- create 10 units that are 1MB long and span all of the chr1 variants by using the TopmedPipeline function `aggregateGRanges`. Run a SKAT test with the Wu weights using those units and a `SeqVarRangeIterator` object.
+1. Since we are working with a subset of the data, many of the genes listed in `group_id` have a very small number of variants. Create a new set of aggregation units based on position, rather than gene name -- create 10 units that are 1MB long and span all of the chr1 variants by using the TopmedPipeline function `aggregateGRanges`. Run a SKAT test with the Wu weights using those units and a `SeqVarRangeIterator` object.
 
 ```{r exercise_aggregate}
 # minimum variant position
