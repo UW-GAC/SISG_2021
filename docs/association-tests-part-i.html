@@ -23,7 +23,7 @@
 
 
 
-<meta name="date" content="2021-07-15" />
+<meta name="date" content="2021-07-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -50,6 +50,7 @@
 
 
 
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
@@ -58,7 +59,6 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -202,15 +202,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="8" data-path="variant-annotation.html"><a href="variant-annotation.html"><i class="fa fa-check"></i><b>8</b> Variant annotation</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="variant-annotation.html"><a href="variant-annotation.html#using-bioconductor-annotation-resources"><i class="fa fa-check"></i><b>8.1</b> Using Bioconductor annotation resources</a></li>
-<li class="chapter" data-level="8.2" data-path="variant-annotation.html"><a href="variant-annotation.html#aggregating-and-filtering-variants-using-annotation"><i class="fa fa-check"></i><b>8.2</b> Aggregating and filtering variants using annotation</a></li>
+<li class="chapter" data-level="8.1" data-path="variant-annotation.html"><a href="variant-annotation.html#use-case-1"><i class="fa fa-check"></i><b>8.1</b> Use case 1</a></li>
+<li class="chapter" data-level="8.2" data-path="variant-annotation.html"><a href="variant-annotation.html#use-case-2"><i class="fa fa-check"></i><b>8.2</b> Use case 2</a></li>
+<li class="chapter" data-level="8.3" data-path="variant-annotation.html"><a href="variant-annotation.html#use-case-3"><i class="fa fa-check"></i><b>8.3</b> Use case 3</a></li>
+<li class="chapter" data-level="8.4" data-path="variant-annotation.html"><a href="variant-annotation.html#exercise-4"><i class="fa fa-check"></i><b>8.4</b> Exercise</a></li>
+<li class="chapter" data-level="8.5" data-path="variant-annotation.html"><a href="variant-annotation.html#solution-4"><i class="fa fa-check"></i><b>8.5</b> Solution</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="aggregate-association-tests.html"><a href="aggregate-association-tests.html"><i class="fa fa-check"></i><b>9</b> Aggregate association tests</a>
+<li class="chapter" data-level="9" data-path="annotation-informed-aggregate-association-tests.html"><a href="annotation-informed-aggregate-association-tests.html"><i class="fa fa-check"></i><b>9</b> Annotation informed aggregate association tests</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="aggregate-association-tests.html"><a href="aggregate-association-tests.html#aggregate-unit-for-association-testing-exercise"><i class="fa fa-check"></i><b>9.1</b> Aggregate unit for association testing exercise</a></li>
-<li class="chapter" data-level="9.2" data-path="aggregate-association-tests.html"><a href="aggregate-association-tests.html#association-testing-with-aggregate-units"><i class="fa fa-check"></i><b>9.2</b> Association testing with aggregate units</a></li>
-<li class="chapter" data-level="9.3" data-path="aggregate-association-tests.html"><a href="aggregate-association-tests.html#exercise-4"><i class="fa fa-check"></i><b>9.3</b> Exercise</a></li>
-<li class="chapter" data-level="9.4" data-path="aggregate-association-tests.html"><a href="aggregate-association-tests.html#solution-4"><i class="fa fa-check"></i><b>9.4</b> Solution</a></li>
+<li class="chapter" data-level="9.1" data-path="annotation-informed-aggregate-association-tests.html"><a href="annotation-informed-aggregate-association-tests.html#aggregate-unit-for-association-testing-exercise"><i class="fa fa-check"></i><b>9.1</b> Aggregate unit for association testing exercise</a></li>
+<li class="chapter" data-level="9.2" data-path="annotation-informed-aggregate-association-tests.html"><a href="annotation-informed-aggregate-association-tests.html#association-testing-with-aggregate-units"><i class="fa fa-check"></i><b>9.2</b> Association testing with aggregate units</a></li>
+<li class="chapter" data-level="9.3" data-path="annotation-informed-aggregate-association-tests.html"><a href="annotation-informed-aggregate-association-tests.html#exercise-5"><i class="fa fa-check"></i><b>9.3</b> Exercise</a></li>
+<li class="chapter" data-level="9.4" data-path="annotation-informed-aggregate-association-tests.html"><a href="annotation-informed-aggregate-association-tests.html#solution-5"><i class="fa fa-check"></i><b>9.4</b> Solution</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html"><i class="fa fa-check"></i><b>10</b> Running a GWAS workflow on BioData Catalyst</a>
 <ul>
@@ -260,16 +263,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">4.1.1</span> Prepare the data</h3>
 <p>To fit the null model, we will need to create an <code>AnnotatedDataFrame</code> with sample information and phenotype data; this class is defined in the Biobase package. We will merge our sample annotation file, which is indexed by a <code>sample.id</code> column matched to the GDS file, with our phenotype file, which is indexed by a <code>subject_id</code> column. We will use the <a href="http://dplyr.tidyverse.org">dplyr</a> package for data.frame manipulation.</p>
 <p>NOTE: In this example, we use the 1000 Genomes IDs for both sample and subject IDs, though we would generally advise using separate IDs for samples (sequencing instances) and subjects (individuals).</p>
-<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="association-tests-part-i.html#cb152-1" aria-hidden="true" tabindex="-1"></a><span class="co"># sample annotation</span></span>
-<span id="cb152-2"><a href="association-tests-part-i.html#cb152-2" aria-hidden="true" tabindex="-1"></a>repo_path <span class="ot">&lt;-</span> <span class="st">&quot;https://github.com/UW-GAC/SISG_2021/raw/master&quot;</span></span>
-<span id="cb152-3"><a href="association-tests-part-i.html#cb152-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">dir.exists</span>(<span class="st">&quot;data&quot;</span>)) <span class="fu">dir.create</span>(<span class="st">&quot;data&quot;</span>)</span>
-<span id="cb152-4"><a href="association-tests-part-i.html#cb152-4" aria-hidden="true" tabindex="-1"></a>sampfile <span class="ot">&lt;-</span> <span class="st">&quot;data/sample_annotation.RData&quot;</span></span>
-<span id="cb152-5"><a href="association-tests-part-i.html#cb152-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(sampfile)) <span class="fu">download.file</span>(<span class="fu">file.path</span>(repo_path, sampfile), sampfile)</span>
-<span id="cb152-6"><a href="association-tests-part-i.html#cb152-6" aria-hidden="true" tabindex="-1"></a>samp <span class="ot">&lt;-</span> <span class="fu">get</span>(<span class="fu">load</span>(sampfile))</span>
-<span id="cb152-7"><a href="association-tests-part-i.html#cb152-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb152-8"><a href="association-tests-part-i.html#cb152-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Biobase)</span>
-<span id="cb152-9"><a href="association-tests-part-i.html#cb152-9" aria-hidden="true" tabindex="-1"></a><span class="co"># access the data with the pData() function</span></span>
-<span id="cb152-10"><a href="association-tests-part-i.html#cb152-10" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">pData</span>(samp))</span></code></pre></div>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="association-tests-part-i.html#cb154-1"></a><span class="co"># sample annotation</span></span>
+<span id="cb154-2"><a href="association-tests-part-i.html#cb154-2"></a>repo_path &lt;-<span class="st"> &quot;https://github.com/UW-GAC/SISG_2021/raw/master&quot;</span></span>
+<span id="cb154-3"><a href="association-tests-part-i.html#cb154-3"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">dir.exists</span>(<span class="st">&quot;data&quot;</span>)) <span class="kw">dir.create</span>(<span class="st">&quot;data&quot;</span>)</span>
+<span id="cb154-4"><a href="association-tests-part-i.html#cb154-4"></a>sampfile &lt;-<span class="st"> &quot;data/sample_annotation.RData&quot;</span></span>
+<span id="cb154-5"><a href="association-tests-part-i.html#cb154-5"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">file.exists</span>(sampfile)) <span class="kw">download.file</span>(<span class="kw">file.path</span>(repo_path, sampfile), sampfile)</span>
+<span id="cb154-6"><a href="association-tests-part-i.html#cb154-6"></a>samp &lt;-<span class="st"> </span><span class="kw">get</span>(<span class="kw">load</span>(sampfile))</span>
+<span id="cb154-7"><a href="association-tests-part-i.html#cb154-7"></a></span>
+<span id="cb154-8"><a href="association-tests-part-i.html#cb154-8"></a><span class="kw">library</span>(Biobase)</span>
+<span id="cb154-9"><a href="association-tests-part-i.html#cb154-9"></a><span class="co"># access the data with the pData() function</span></span>
+<span id="cb154-10"><a href="association-tests-part-i.html#cb154-10"></a><span class="kw">head</span>(<span class="kw">pData</span>(samp))</span></code></pre></div>
 <pre><code>##   sample.id subject.id Population          Population.Description sex status
 ## 1   HG00096    HG00096        GBR British in England and Scotland   M      0
 ## 2   HG00097    HG00097        GBR British in England and Scotland   F      1
@@ -277,8 +280,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 4   HG00100    HG00100        GBR British in England and Scotland   F      1
 ## 5   HG00101    HG00101        GBR British in England and Scotland   M      0
 ## 6   HG00102    HG00102        GBR British in England and Scotland   F      0</code></pre>
-<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="association-tests-part-i.html#cb154-1" aria-hidden="true" tabindex="-1"></a><span class="co"># access the metadata with the varMetadata() function</span></span>
-<span id="cb154-2"><a href="association-tests-part-i.html#cb154-2" aria-hidden="true" tabindex="-1"></a><span class="fu">varMetadata</span>(samp)</span></code></pre></div>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="association-tests-part-i.html#cb156-1"></a><span class="co"># access the metadata with the varMetadata() function</span></span>
+<span id="cb156-2"><a href="association-tests-part-i.html#cb156-2"></a><span class="kw">varMetadata</span>(samp)</span></code></pre></div>
 <pre><code>##                                     labelDescription
 ## sample.id                          sample identifier
 ## subject.id                        subject identifier
@@ -286,13 +289,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Population.Description        population description
 ## sex                                              sex
 ## status                 simulated case/control status</code></pre>
-<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="association-tests-part-i.html#cb156-1" aria-hidden="true" tabindex="-1"></a><span class="co"># phenotype data</span></span>
-<span id="cb156-2"><a href="association-tests-part-i.html#cb156-2" aria-hidden="true" tabindex="-1"></a>phenfile <span class="ot">&lt;-</span> <span class="st">&quot;data/phenotype_annotation.RData&quot;</span></span>
-<span id="cb156-3"><a href="association-tests-part-i.html#cb156-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(phenfile)) <span class="fu">download.file</span>(<span class="fu">file.path</span>(repo_path, phenfile), phenfile)</span>
-<span id="cb156-4"><a href="association-tests-part-i.html#cb156-4" aria-hidden="true" tabindex="-1"></a>phen <span class="ot">&lt;-</span> <span class="fu">get</span>(<span class="fu">load</span>(phenfile))</span>
-<span id="cb156-5"><a href="association-tests-part-i.html#cb156-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb156-6"><a href="association-tests-part-i.html#cb156-6" aria-hidden="true" tabindex="-1"></a><span class="co"># access the data with the pData() function</span></span>
-<span id="cb156-7"><a href="association-tests-part-i.html#cb156-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">pData</span>(phen))</span></code></pre></div>
+<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="association-tests-part-i.html#cb158-1"></a><span class="co"># phenotype data</span></span>
+<span id="cb158-2"><a href="association-tests-part-i.html#cb158-2"></a>phenfile &lt;-<span class="st"> &quot;data/phenotype_annotation.RData&quot;</span></span>
+<span id="cb158-3"><a href="association-tests-part-i.html#cb158-3"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">file.exists</span>(phenfile)) <span class="kw">download.file</span>(<span class="kw">file.path</span>(repo_path, phenfile), phenfile)</span>
+<span id="cb158-4"><a href="association-tests-part-i.html#cb158-4"></a>phen &lt;-<span class="st"> </span><span class="kw">get</span>(<span class="kw">load</span>(phenfile))</span>
+<span id="cb158-5"><a href="association-tests-part-i.html#cb158-5"></a></span>
+<span id="cb158-6"><a href="association-tests-part-i.html#cb158-6"></a><span class="co"># access the data with the pData() function</span></span>
+<span id="cb158-7"><a href="association-tests-part-i.html#cb158-7"></a><span class="kw">head</span>(<span class="kw">pData</span>(phen))</span></code></pre></div>
 <pre><code>##   subject_id sex age height   study
 ## 1    HG00096   M  47  165.3 study_1
 ## 2    HG00102   F  49  169.1 study_1
@@ -300,48 +303,55 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 4    HG00114   M  49  169.5 study_1
 ## 5    HG00115   M  35  161.1 study_1
 ## 6    HG00116   M  37  182.2 study_1</code></pre>
-<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="association-tests-part-i.html#cb158-1" aria-hidden="true" tabindex="-1"></a><span class="co"># access the metadata with the varMetadata() function</span></span>
-<span id="cb158-2"><a href="association-tests-part-i.html#cb158-2" aria-hidden="true" tabindex="-1"></a><span class="fu">varMetadata</span>(phen)</span></code></pre></div>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="association-tests-part-i.html#cb160-1"></a><span class="co"># access the metadata with the varMetadata() function</span></span>
+<span id="cb160-2"><a href="association-tests-part-i.html#cb160-2"></a><span class="kw">varMetadata</span>(phen)</span></code></pre></div>
 <pre><code>##                        labelDescription
 ## subject_id           subject identifier
 ## sex                       subject&#39;s sex
 ## age        age at measurement of height
 ## height           subject&#39;s height in cm
 ## study                  study identifier</code></pre>
-<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="association-tests-part-i.html#cb160-1" aria-hidden="true" tabindex="-1"></a><span class="co"># merge sample annotation with phenotype data</span></span>
-<span id="cb160-2"><a href="association-tests-part-i.html#cb160-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb160-3"><a href="association-tests-part-i.html#cb160-3" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">pData</span>(samp) <span class="sc">%&gt;%</span></span>
-<span id="cb160-4"><a href="association-tests-part-i.html#cb160-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">left_join</span>(<span class="fu">pData</span>(phen), <span class="at">by=</span><span class="fu">c</span>(<span class="st">&quot;subject.id&quot;</span><span class="ot">=</span><span class="st">&quot;subject_id&quot;</span>, <span class="st">&quot;sex&quot;</span><span class="ot">=</span><span class="st">&quot;sex&quot;</span>))</span>
-<span id="cb160-5"><a href="association-tests-part-i.html#cb160-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dat)</span></code></pre></div>
-<pre><code>##   sample.id subject.id Population          Population.Description sex status age  height   study
-## 1   HG00096    HG00096        GBR British in England and Scotland   M      0  47 165.300 study_1
-## 2   HG00097    HG00097        GBR British in England and Scotland   F      1  47 144.780 study_3
-## 3   HG00099    HG00099        GBR British in England and Scotland   F      0  40 185.500 study_2
-## 4   HG00100    HG00100        GBR British in England and Scotland   F      1  45 150.622 study_3
-## 5   HG00101    HG00101        GBR British in England and Scotland   M      0  40 177.800 study_3
-## 6   HG00102    HG00102        GBR British in England and Scotland   F      0  49 169.100 study_1</code></pre>
-<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="association-tests-part-i.html#cb162-1" aria-hidden="true" tabindex="-1"></a><span class="co"># merge the metadata</span></span>
-<span id="cb162-2"><a href="association-tests-part-i.html#cb162-2" aria-hidden="true" tabindex="-1"></a>meta <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(<span class="fu">varMetadata</span>(samp), <span class="fu">varMetadata</span>(phen)[<span class="dv">3</span><span class="sc">:</span><span class="dv">5</span>,,<span class="at">drop=</span><span class="cn">FALSE</span>])</span>
-<span id="cb162-3"><a href="association-tests-part-i.html#cb162-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb162-4"><a href="association-tests-part-i.html#cb162-4" aria-hidden="true" tabindex="-1"></a><span class="co"># make an AnnotatedDataFrame</span></span>
-<span id="cb162-5"><a href="association-tests-part-i.html#cb162-5" aria-hidden="true" tabindex="-1"></a>annot <span class="ot">&lt;-</span> <span class="fu">AnnotatedDataFrame</span>(dat, meta)</span>
-<span id="cb162-6"><a href="association-tests-part-i.html#cb162-6" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(annot, <span class="at">file=</span><span class="st">&quot;data/sample_phenotype_annotation.RData&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="association-tests-part-i.html#cb162-1"></a><span class="co"># merge sample annotation with phenotype data</span></span>
+<span id="cb162-2"><a href="association-tests-part-i.html#cb162-2"></a><span class="kw">library</span>(dplyr)</span>
+<span id="cb162-3"><a href="association-tests-part-i.html#cb162-3"></a>dat &lt;-<span class="st"> </span><span class="kw">pData</span>(samp) <span class="op">%&gt;%</span></span>
+<span id="cb162-4"><a href="association-tests-part-i.html#cb162-4"></a><span class="st">    </span><span class="kw">left_join</span>(<span class="kw">pData</span>(phen), <span class="dt">by=</span><span class="kw">c</span>(<span class="st">&quot;subject.id&quot;</span>=<span class="st">&quot;subject_id&quot;</span>, <span class="st">&quot;sex&quot;</span>=<span class="st">&quot;sex&quot;</span>))</span>
+<span id="cb162-5"><a href="association-tests-part-i.html#cb162-5"></a><span class="kw">head</span>(dat)</span></code></pre></div>
+<pre><code>##   sample.id subject.id Population          Population.Description sex status
+## 1   HG00096    HG00096        GBR British in England and Scotland   M      0
+## 2   HG00097    HG00097        GBR British in England and Scotland   F      1
+## 3   HG00099    HG00099        GBR British in England and Scotland   F      0
+## 4   HG00100    HG00100        GBR British in England and Scotland   F      1
+## 5   HG00101    HG00101        GBR British in England and Scotland   M      0
+## 6   HG00102    HG00102        GBR British in England and Scotland   F      0
+##   age  height   study
+## 1  47 165.300 study_1
+## 2  47 144.780 study_3
+## 3  40 185.500 study_2
+## 4  45 150.622 study_3
+## 5  40 177.800 study_3
+## 6  49 169.100 study_1</code></pre>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="association-tests-part-i.html#cb164-1"></a><span class="co"># merge the metadata</span></span>
+<span id="cb164-2"><a href="association-tests-part-i.html#cb164-2"></a>meta &lt;-<span class="st"> </span><span class="kw">bind_rows</span>(<span class="kw">varMetadata</span>(samp), <span class="kw">varMetadata</span>(phen)[<span class="dv">3</span><span class="op">:</span><span class="dv">5</span>,,<span class="dt">drop=</span><span class="ot">FALSE</span>])</span>
+<span id="cb164-3"><a href="association-tests-part-i.html#cb164-3"></a></span>
+<span id="cb164-4"><a href="association-tests-part-i.html#cb164-4"></a><span class="co"># make an AnnotatedDataFrame</span></span>
+<span id="cb164-5"><a href="association-tests-part-i.html#cb164-5"></a>annot &lt;-<span class="st"> </span><span class="kw">AnnotatedDataFrame</span>(dat, meta)</span>
+<span id="cb164-6"><a href="association-tests-part-i.html#cb164-6"></a><span class="kw">save</span>(annot, <span class="dt">file=</span><span class="st">&quot;data/sample_phenotype_annotation.RData&quot;</span>)</span></code></pre></div>
 </div>
 <div id="fit-the-null-model" class="section level3" number="4.1.2">
 <h3><span class="header-section-number">4.1.2</span> Fit the null model</h3>
 <p>We use the <code>fitNullModel</code> function from the GENESIS package to fit the null model. We need to specify the outcome (height) and the fixed effect covariates (sex, age, and study). If the sample set involves multiple distinct groups with different variances for the phenotype, we recommend allowing for heterogeneous residual variance among groups with the <code>group.var</code> parameter. We saw in a previous exercise that the variance of height differs by study.</p>
-<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="association-tests-part-i.html#cb163-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(GENESIS)</span>
-<span id="cb163-2"><a href="association-tests-part-i.html#cb163-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb163-3"><a href="association-tests-part-i.html#cb163-3" aria-hidden="true" tabindex="-1"></a><span class="co"># fit the null model</span></span>
-<span id="cb163-4"><a href="association-tests-part-i.html#cb163-4" aria-hidden="true" tabindex="-1"></a>nullmod <span class="ot">&lt;-</span> <span class="fu">fitNullModel</span>(annot, </span>
-<span id="cb163-5"><a href="association-tests-part-i.html#cb163-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">outcome=</span><span class="st">&quot;height&quot;</span>, </span>
-<span id="cb163-6"><a href="association-tests-part-i.html#cb163-6" aria-hidden="true" tabindex="-1"></a>                        <span class="at">covars=</span><span class="fu">c</span>(<span class="st">&quot;sex&quot;</span>, <span class="st">&quot;age&quot;</span>, <span class="st">&quot;study&quot;</span>), </span>
-<span id="cb163-7"><a href="association-tests-part-i.html#cb163-7" aria-hidden="true" tabindex="-1"></a>                        <span class="at">group.var=</span><span class="st">&quot;study&quot;</span>, </span>
-<span id="cb163-8"><a href="association-tests-part-i.html#cb163-8" aria-hidden="true" tabindex="-1"></a>                        <span class="at">verbose=</span><span class="cn">FALSE</span>)</span>
-<span id="cb163-9"><a href="association-tests-part-i.html#cb163-9" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(nullmod, <span class="at">file=</span><span class="st">&quot;data/null_model.RData&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="association-tests-part-i.html#cb165-1"></a><span class="kw">library</span>(GENESIS)</span>
+<span id="cb165-2"><a href="association-tests-part-i.html#cb165-2"></a></span>
+<span id="cb165-3"><a href="association-tests-part-i.html#cb165-3"></a><span class="co"># fit the null model</span></span>
+<span id="cb165-4"><a href="association-tests-part-i.html#cb165-4"></a>nullmod &lt;-<span class="st"> </span><span class="kw">fitNullModel</span>(annot, </span>
+<span id="cb165-5"><a href="association-tests-part-i.html#cb165-5"></a>                        <span class="dt">outcome=</span><span class="st">&quot;height&quot;</span>, </span>
+<span id="cb165-6"><a href="association-tests-part-i.html#cb165-6"></a>                        <span class="dt">covars=</span><span class="kw">c</span>(<span class="st">&quot;sex&quot;</span>, <span class="st">&quot;age&quot;</span>, <span class="st">&quot;study&quot;</span>), </span>
+<span id="cb165-7"><a href="association-tests-part-i.html#cb165-7"></a>                        <span class="dt">group.var=</span><span class="st">&quot;study&quot;</span>, </span>
+<span id="cb165-8"><a href="association-tests-part-i.html#cb165-8"></a>                        <span class="dt">verbose=</span><span class="ot">FALSE</span>)</span>
+<span id="cb165-9"><a href="association-tests-part-i.html#cb165-9"></a><span class="kw">save</span>(nullmod, <span class="dt">file=</span><span class="st">&quot;data/null_model.RData&quot;</span>)</span></code></pre></div>
 <p>The <code>fitNullModel</code> function returns a lot of information about the model that was fit. We examine some of that information below; to see all of the components, try <code>names(nullmod)</code>.</p>
-<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="association-tests-part-i.html#cb164-1" aria-hidden="true" tabindex="-1"></a><span class="co"># description of the model we fit</span></span>
-<span id="cb164-2"><a href="association-tests-part-i.html#cb164-2" aria-hidden="true" tabindex="-1"></a>nullmod<span class="sc">$</span>model</span></code></pre></div>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="association-tests-part-i.html#cb166-1"></a><span class="co"># description of the model we fit</span></span>
+<span id="cb166-2"><a href="association-tests-part-i.html#cb166-2"></a>nullmod<span class="op">$</span>model</span></code></pre></div>
 <pre><code>## $hetResid
 ## [1] TRUE
 ## 
@@ -359,33 +369,40 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 
 ## $formula
 ## [1] &quot;height ~ sex + age + study + var(study)&quot;</code></pre>
-<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="association-tests-part-i.html#cb166-1" aria-hidden="true" tabindex="-1"></a><span class="co"># fixed effect regression estimates</span></span>
-<span id="cb166-2"><a href="association-tests-part-i.html#cb166-2" aria-hidden="true" tabindex="-1"></a>nullmod<span class="sc">$</span>fixef</span></code></pre></div>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="association-tests-part-i.html#cb168-1"></a><span class="co"># fixed effect regression estimates</span></span>
+<span id="cb168-2"><a href="association-tests-part-i.html#cb168-2"></a>nullmod<span class="op">$</span>fixef</span></code></pre></div>
 <pre><code>##                       Est         SE        Stat         pval
 ## (Intercept)  163.67175933 3.18936046 2633.542247 0.000000e+00
 ## sexM           6.28764509 0.68812251   83.491932 6.397653e-20
 ## age            0.07519782 0.06921691    1.180283 2.772984e-01
 ## studystudy_2  10.63152325 0.82176939  167.375182 2.769992e-38
 ## studystudy_3  -8.96183691 0.84479021  112.537257 2.724959e-26</code></pre>
-<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="association-tests-part-i.html#cb168-1" aria-hidden="true" tabindex="-1"></a><span class="co"># residual variance estimates by group.var</span></span>
-<span id="cb168-2"><a href="association-tests-part-i.html#cb168-2" aria-hidden="true" tabindex="-1"></a>nullmod<span class="sc">$</span>varComp</span></code></pre></div>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="association-tests-part-i.html#cb170-1"></a><span class="co"># residual variance estimates by group.var</span></span>
+<span id="cb170-2"><a href="association-tests-part-i.html#cb170-2"></a>nullmod<span class="op">$</span>varComp</span></code></pre></div>
 <pre><code>## V_study_1 V_study_3 V_study_2 
 ##  98.20191 168.82044 155.70722</code></pre>
-<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="association-tests-part-i.html#cb170-1" aria-hidden="true" tabindex="-1"></a><span class="co"># model fit: fitted values, residuals</span></span>
-<span id="cb170-2"><a href="association-tests-part-i.html#cb170-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(nullmod<span class="sc">$</span>fit)</span></code></pre></div>
-<pre><code>##         outcome workingY fitted.values resid.marginal    resid.PY resid.cholesky sample.id
-## HG00096 165.300  165.300      173.4937      -8.193702 -0.08343729     -0.8268376   HG00096
-## HG00097 144.780  144.780      158.2442     -13.464220 -0.07975468     -1.0362599   HG00097
-## HG00099 185.500  185.500      177.3112       8.188805  0.05259104      0.6562452   HG00099
-## HG00100 150.622  150.622      158.0938      -7.471824 -0.04425900     -0.5750613   HG00100
-## HG00101 177.800  177.800      164.0055      13.794520  0.08171119      1.0616810   HG00101
-## HG00102 169.100  169.100      167.3565       1.743547  0.01775472      0.1759437   HG00102</code></pre>
-<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="association-tests-part-i.html#cb172-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the residuals vs the fitted values</span></span>
-<span id="cb172-2"><a href="association-tests-part-i.html#cb172-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb172-3"><a href="association-tests-part-i.html#cb172-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(nullmod<span class="sc">$</span>fit, <span class="fu">aes</span>(<span class="at">x =</span> fitted.values, <span class="at">y =</span> resid.marginal)) <span class="sc">+</span> </span>
-<span id="cb172-4"><a href="association-tests-part-i.html#cb172-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span> </span>
-<span id="cb172-5"><a href="association-tests-part-i.html#cb172-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>) <span class="sc">+</span> </span>
-<span id="cb172-6"><a href="association-tests-part-i.html#cb172-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&#39;lm&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="association-tests-part-i.html#cb172-1"></a><span class="co"># model fit: fitted values, residuals</span></span>
+<span id="cb172-2"><a href="association-tests-part-i.html#cb172-2"></a><span class="kw">head</span>(nullmod<span class="op">$</span>fit)</span></code></pre></div>
+<pre><code>##         outcome workingY fitted.values resid.marginal    resid.PY
+## HG00096 165.300  165.300      173.4937      -8.193702 -0.08343729
+## HG00097 144.780  144.780      158.2442     -13.464220 -0.07975468
+## HG00099 185.500  185.500      177.3112       8.188805  0.05259104
+## HG00100 150.622  150.622      158.0938      -7.471824 -0.04425900
+## HG00101 177.800  177.800      164.0055      13.794520  0.08171119
+## HG00102 169.100  169.100      167.3565       1.743547  0.01775472
+##         resid.cholesky sample.id
+## HG00096     -0.8268376   HG00096
+## HG00097     -1.0362599   HG00097
+## HG00099      0.6562452   HG00099
+## HG00100     -0.5750613   HG00100
+## HG00101      1.0616810   HG00101
+## HG00102      0.1759437   HG00102</code></pre>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="association-tests-part-i.html#cb174-1"></a><span class="co"># plot the residuals vs the fitted values</span></span>
+<span id="cb174-2"><a href="association-tests-part-i.html#cb174-2"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb174-3"><a href="association-tests-part-i.html#cb174-3"></a><span class="kw">ggplot</span>(nullmod<span class="op">$</span>fit, <span class="kw">aes</span>(<span class="dt">x =</span> fitted.values, <span class="dt">y =</span> resid.marginal)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb174-4"><a href="association-tests-part-i.html#cb174-4"></a><span class="st">    </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb174-5"><a href="association-tests-part-i.html#cb174-5"></a><span class="st">    </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb174-6"><a href="association-tests-part-i.html#cb174-6"></a><span class="st">    </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&#39;lm&#39;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/assoc_null_model_results-1.png" width="672" /></p>
 </div>
 </div>
@@ -401,17 +418,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>As discussed in the lecture, we recommend a fully adjusted two-stage inverse Normalization procedure for fitting the null model when phenotypes have non-Normal distributions. Using the <code>two.stage</code> option in <code>fitNullModel</code>, fit a two-stage null model. Compare these residuals with the residuals from the original null model.</li>
 </ol>
 <p>To run the fully adjusted two.stage null model, we simply set the <code>two.stage</code> option to <code>TRUE</code>. The <code>norm.option</code> parameter determines if the inverse Normalization should be done with all samples together (<code>"all"</code>) or within each <code>group.var</code> group separately (<code>"by.group"</code>).</p>
-<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="association-tests-part-i.html#cb173-1" aria-hidden="true" tabindex="-1"></a>nullmod.twostage <span class="ot">&lt;-</span> <span class="fu">fitNullModel</span>(annot, </span>
-<span id="cb173-2"><a href="association-tests-part-i.html#cb173-2" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">outcome=</span><span class="st">&quot;height&quot;</span>, </span>
-<span id="cb173-3"><a href="association-tests-part-i.html#cb173-3" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">covars=</span><span class="fu">c</span>(<span class="st">&quot;sex&quot;</span>, <span class="st">&quot;age&quot;</span>, <span class="st">&quot;study&quot;</span>), </span>
-<span id="cb173-4"><a href="association-tests-part-i.html#cb173-4" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">group.var=</span><span class="st">&quot;study&quot;</span>, </span>
-<span id="cb173-5"><a href="association-tests-part-i.html#cb173-5" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">two.stage =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb173-6"><a href="association-tests-part-i.html#cb173-6" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">norm.option =</span> <span class="st">&quot;all&quot;</span>,</span>
-<span id="cb173-7"><a href="association-tests-part-i.html#cb173-7" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">verbose=</span><span class="cn">FALSE</span>)</span>
-<span id="cb173-8"><a href="association-tests-part-i.html#cb173-8" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(nullmod.twostage, <span class="at">file=</span><span class="st">&quot;data/null_model_two_stage.RData&quot;</span>)</span>
-<span id="cb173-9"><a href="association-tests-part-i.html#cb173-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb173-10"><a href="association-tests-part-i.html#cb173-10" aria-hidden="true" tabindex="-1"></a><span class="co"># description of the model we fit</span></span>
-<span id="cb173-11"><a href="association-tests-part-i.html#cb173-11" aria-hidden="true" tabindex="-1"></a>nullmod.twostage<span class="sc">$</span>model</span></code></pre></div>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="association-tests-part-i.html#cb175-1"></a>nullmod.twostage &lt;-<span class="st"> </span><span class="kw">fitNullModel</span>(annot, </span>
+<span id="cb175-2"><a href="association-tests-part-i.html#cb175-2"></a>                                 <span class="dt">outcome=</span><span class="st">&quot;height&quot;</span>, </span>
+<span id="cb175-3"><a href="association-tests-part-i.html#cb175-3"></a>                                 <span class="dt">covars=</span><span class="kw">c</span>(<span class="st">&quot;sex&quot;</span>, <span class="st">&quot;age&quot;</span>, <span class="st">&quot;study&quot;</span>), </span>
+<span id="cb175-4"><a href="association-tests-part-i.html#cb175-4"></a>                                 <span class="dt">group.var=</span><span class="st">&quot;study&quot;</span>, </span>
+<span id="cb175-5"><a href="association-tests-part-i.html#cb175-5"></a>                                 <span class="dt">two.stage =</span> <span class="ot">TRUE</span>,</span>
+<span id="cb175-6"><a href="association-tests-part-i.html#cb175-6"></a>                                 <span class="dt">norm.option =</span> <span class="st">&quot;all&quot;</span>,</span>
+<span id="cb175-7"><a href="association-tests-part-i.html#cb175-7"></a>                                 <span class="dt">verbose=</span><span class="ot">FALSE</span>)</span>
+<span id="cb175-8"><a href="association-tests-part-i.html#cb175-8"></a><span class="kw">save</span>(nullmod.twostage, <span class="dt">file=</span><span class="st">&quot;data/null_model_two_stage.RData&quot;</span>)</span>
+<span id="cb175-9"><a href="association-tests-part-i.html#cb175-9"></a></span>
+<span id="cb175-10"><a href="association-tests-part-i.html#cb175-10"></a><span class="co"># description of the model we fit</span></span>
+<span id="cb175-11"><a href="association-tests-part-i.html#cb175-11"></a>nullmod.twostage<span class="op">$</span>model</span></code></pre></div>
 <pre><code>## $hetResid
 ## [1] TRUE
 ## 
@@ -429,27 +446,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 
 ## $formula
 ## [1] &quot;rankInvNorm(resid(height)) ~ sex + age + study + var(study)&quot;</code></pre>
-<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="association-tests-part-i.html#cb175-1" aria-hidden="true" tabindex="-1"></a><span class="co"># compare the marginal residuals</span></span>
-<span id="cb175-2"><a href="association-tests-part-i.html#cb175-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb175-3"><a href="association-tests-part-i.html#cb175-3" aria-hidden="true" tabindex="-1"></a><span class="co"># merge the data for plotting</span></span>
-<span id="cb175-4"><a href="association-tests-part-i.html#cb175-4" aria-hidden="true" tabindex="-1"></a>pdat <span class="ot">&lt;-</span> <span class="fu">merge</span>(nullmod<span class="sc">$</span>fit, nullmod.twostage<span class="sc">$</span>fit, </span>
-<span id="cb175-5"><a href="association-tests-part-i.html#cb175-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">by =</span> <span class="st">&#39;sample.id&#39;</span>, <span class="at">suffixes =</span> <span class="fu">c</span>(<span class="st">&#39;.orig&#39;</span>, <span class="st">&#39;.twostage&#39;</span>))</span>
-<span id="cb175-6"><a href="association-tests-part-i.html#cb175-6" aria-hidden="true" tabindex="-1"></a>pdat <span class="ot">&lt;-</span> <span class="fu">merge</span>(pdat, <span class="fu">pData</span>(annot), <span class="at">by =</span> <span class="st">&#39;sample.id&#39;</span>)</span>
-<span id="cb175-7"><a href="association-tests-part-i.html#cb175-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb175-8"><a href="association-tests-part-i.html#cb175-8" aria-hidden="true" tabindex="-1"></a><span class="co"># distribution of residuals - original null model</span></span>
-<span id="cb175-9"><a href="association-tests-part-i.html#cb175-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(pdat, <span class="fu">aes</span>(<span class="at">x =</span> resid.marginal.orig)) <span class="sc">+</span> </span>
-<span id="cb175-10"><a href="association-tests-part-i.html#cb175-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">color =</span> study)) <span class="sc">+</span> </span>
-<span id="cb175-11"><a href="association-tests-part-i.html#cb175-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_density</span>(<span class="at">size =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="association-tests-part-i.html#cb177-1"></a><span class="co"># compare the marginal residuals</span></span>
+<span id="cb177-2"><a href="association-tests-part-i.html#cb177-2"></a></span>
+<span id="cb177-3"><a href="association-tests-part-i.html#cb177-3"></a><span class="co"># merge the data for plotting</span></span>
+<span id="cb177-4"><a href="association-tests-part-i.html#cb177-4"></a>pdat &lt;-<span class="st"> </span><span class="kw">merge</span>(nullmod<span class="op">$</span>fit, nullmod.twostage<span class="op">$</span>fit, </span>
+<span id="cb177-5"><a href="association-tests-part-i.html#cb177-5"></a>              <span class="dt">by =</span> <span class="st">&#39;sample.id&#39;</span>, <span class="dt">suffixes =</span> <span class="kw">c</span>(<span class="st">&#39;.orig&#39;</span>, <span class="st">&#39;.twostage&#39;</span>))</span>
+<span id="cb177-6"><a href="association-tests-part-i.html#cb177-6"></a>pdat &lt;-<span class="st"> </span><span class="kw">merge</span>(pdat, <span class="kw">pData</span>(annot), <span class="dt">by =</span> <span class="st">&#39;sample.id&#39;</span>)</span>
+<span id="cb177-7"><a href="association-tests-part-i.html#cb177-7"></a></span>
+<span id="cb177-8"><a href="association-tests-part-i.html#cb177-8"></a><span class="co"># distribution of residuals - original null model</span></span>
+<span id="cb177-9"><a href="association-tests-part-i.html#cb177-9"></a><span class="kw">ggplot</span>(pdat, <span class="kw">aes</span>(<span class="dt">x =</span> resid.marginal.orig)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb177-10"><a href="association-tests-part-i.html#cb177-10"></a><span class="st">    </span><span class="kw">geom_density</span>(<span class="kw">aes</span>(<span class="dt">color =</span> study)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb177-11"><a href="association-tests-part-i.html#cb177-11"></a><span class="st">    </span><span class="kw">geom_density</span>(<span class="dt">size =</span> <span class="dv">2</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/null_model_two_stage-1.png" width="672" /></p>
-<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="association-tests-part-i.html#cb176-1" aria-hidden="true" tabindex="-1"></a><span class="co"># distribution of residuals - two stage null model</span></span>
-<span id="cb176-2"><a href="association-tests-part-i.html#cb176-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(pdat, <span class="fu">aes</span>(<span class="at">x =</span> resid.marginal.twostage)) <span class="sc">+</span> </span>
-<span id="cb176-3"><a href="association-tests-part-i.html#cb176-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">color =</span> study)) <span class="sc">+</span> </span>
-<span id="cb176-4"><a href="association-tests-part-i.html#cb176-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_density</span>(<span class="at">size =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="association-tests-part-i.html#cb178-1"></a><span class="co"># distribution of residuals - two stage null model</span></span>
+<span id="cb178-2"><a href="association-tests-part-i.html#cb178-2"></a><span class="kw">ggplot</span>(pdat, <span class="kw">aes</span>(<span class="dt">x =</span> resid.marginal.twostage)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb178-3"><a href="association-tests-part-i.html#cb178-3"></a><span class="st">    </span><span class="kw">geom_density</span>(<span class="kw">aes</span>(<span class="dt">color =</span> study)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb178-4"><a href="association-tests-part-i.html#cb178-4"></a><span class="st">    </span><span class="kw">geom_density</span>(<span class="dt">size =</span> <span class="dv">2</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/null_model_two_stage-2.png" width="672" /></p>
-<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="association-tests-part-i.html#cb177-1" aria-hidden="true" tabindex="-1"></a><span class="co"># compare residuals</span></span>
-<span id="cb177-2"><a href="association-tests-part-i.html#cb177-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(pdat, <span class="fu">aes</span>(<span class="at">x =</span> resid.marginal.orig, <span class="at">y =</span> resid.marginal.twostage, <span class="at">color =</span> study)) <span class="sc">+</span> </span>
-<span id="cb177-3"><a href="association-tests-part-i.html#cb177-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb177-4"><a href="association-tests-part-i.html#cb177-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_abline</span>(<span class="at">intercept =</span> <span class="dv">0</span>, <span class="at">slope =</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="association-tests-part-i.html#cb179-1"></a><span class="co"># compare residuals</span></span>
+<span id="cb179-2"><a href="association-tests-part-i.html#cb179-2"></a><span class="kw">ggplot</span>(pdat, <span class="kw">aes</span>(<span class="dt">x =</span> resid.marginal.orig, <span class="dt">y =</span> resid.marginal.twostage, <span class="dt">color =</span> study)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb179-3"><a href="association-tests-part-i.html#cb179-3"></a><span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb179-4"><a href="association-tests-part-i.html#cb179-4"></a><span class="st">    </span><span class="kw">geom_abline</span>(<span class="dt">intercept =</span> <span class="dv">0</span>, <span class="dt">slope =</span> <span class="dv">1</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/null_model_two_stage-3.png" width="672" /></p>
 <p>There is not much difference in the residual here because the distribution of height is not far from Normal to begin. See <a href="https://onlinelibrary.wiley.com/doi/10.1002/gepi.22188">Sofer et al.</a> for more information on the fully adjusted two-stage model.</p>
 </div>
@@ -457,21 +474,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">4.4</span> Single-variant association tests</h2>
 <p>After fitting our null model, we can use score tests to test each variant across the genome individually for association with the outcome phenotype (i.e. height in our example). Performing these single-variant tests genome-wide is commonly referred to as a GWAS (Genome-Wide Association Study).</p>
 <p>We use the <code>assocTestSingle</code> function in GENESIS. First, we have to create a <code>SeqVarData</code> object including both the GDS file and the sample annotation containing phenotype data. We then create a <code>SeqVarBlockIterator</code> object, which breaks the set of all variants in the <code>SeqVarData</code> object into blocks, allowing us to analyze genome-wide in manageable pieces. The <code>assocTestSingle</code> function iterates over all blocks of variants in the <code>SeqVarBlockIterator</code> object and then concatenates and returns the results.</p>
-<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="association-tests-part-i.html#cb178-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(SeqVarTools)</span>
-<span id="cb178-2"><a href="association-tests-part-i.html#cb178-2" aria-hidden="true" tabindex="-1"></a>gdsfile <span class="ot">&lt;-</span> <span class="st">&quot;data/1KG_phase3_subset_chr1.gds&quot;</span></span>
-<span id="cb178-3"><a href="association-tests-part-i.html#cb178-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(gdsfile)) <span class="fu">download.file</span>(<span class="fu">file.path</span>(repo_path, gdsfile), gdsfile)</span>
-<span id="cb178-4"><a href="association-tests-part-i.html#cb178-4" aria-hidden="true" tabindex="-1"></a>gdsfmt<span class="sc">::</span><span class="fu">showfile.gds</span>(<span class="at">closeall=</span><span class="cn">TRUE</span>) <span class="co"># make sure file is not already open</span></span>
-<span id="cb178-5"><a href="association-tests-part-i.html#cb178-5" aria-hidden="true" tabindex="-1"></a>gds <span class="ot">&lt;-</span> <span class="fu">seqOpen</span>(gdsfile)</span>
-<span id="cb178-6"><a href="association-tests-part-i.html#cb178-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb178-7"><a href="association-tests-part-i.html#cb178-7" aria-hidden="true" tabindex="-1"></a><span class="co"># make the seqVarData object</span></span>
-<span id="cb178-8"><a href="association-tests-part-i.html#cb178-8" aria-hidden="true" tabindex="-1"></a>seqData <span class="ot">&lt;-</span> <span class="fu">SeqVarData</span>(gds, <span class="at">sampleData=</span>annot)</span>
-<span id="cb178-9"><a href="association-tests-part-i.html#cb178-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb178-10"><a href="association-tests-part-i.html#cb178-10" aria-hidden="true" tabindex="-1"></a><span class="co"># make the iterator object</span></span>
-<span id="cb178-11"><a href="association-tests-part-i.html#cb178-11" aria-hidden="true" tabindex="-1"></a>iterator <span class="ot">&lt;-</span> <span class="fu">SeqVarBlockIterator</span>(seqData, <span class="at">verbose=</span><span class="cn">FALSE</span>)</span>
-<span id="cb178-12"><a href="association-tests-part-i.html#cb178-12" aria-hidden="true" tabindex="-1"></a>iterator</span></code></pre></div>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="association-tests-part-i.html#cb180-1"></a><span class="kw">library</span>(SeqVarTools)</span>
+<span id="cb180-2"><a href="association-tests-part-i.html#cb180-2"></a>gdsfile &lt;-<span class="st"> &quot;data/1KG_phase3_subset_chr1.gds&quot;</span></span>
+<span id="cb180-3"><a href="association-tests-part-i.html#cb180-3"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">file.exists</span>(gdsfile)) <span class="kw">download.file</span>(<span class="kw">file.path</span>(repo_path, gdsfile), gdsfile)</span>
+<span id="cb180-4"><a href="association-tests-part-i.html#cb180-4"></a>gdsfmt<span class="op">::</span><span class="kw">showfile.gds</span>(<span class="dt">closeall=</span><span class="ot">TRUE</span>) <span class="co"># make sure file is not already open</span></span>
+<span id="cb180-5"><a href="association-tests-part-i.html#cb180-5"></a>gds &lt;-<span class="st"> </span><span class="kw">seqOpen</span>(gdsfile)</span>
+<span id="cb180-6"><a href="association-tests-part-i.html#cb180-6"></a></span>
+<span id="cb180-7"><a href="association-tests-part-i.html#cb180-7"></a><span class="co"># make the seqVarData object</span></span>
+<span id="cb180-8"><a href="association-tests-part-i.html#cb180-8"></a>seqData &lt;-<span class="st"> </span><span class="kw">SeqVarData</span>(gds, <span class="dt">sampleData=</span>annot)</span>
+<span id="cb180-9"><a href="association-tests-part-i.html#cb180-9"></a></span>
+<span id="cb180-10"><a href="association-tests-part-i.html#cb180-10"></a><span class="co"># make the iterator object</span></span>
+<span id="cb180-11"><a href="association-tests-part-i.html#cb180-11"></a>iterator &lt;-<span class="st"> </span><span class="kw">SeqVarBlockIterator</span>(seqData, <span class="dt">verbose=</span><span class="ot">FALSE</span>)</span>
+<span id="cb180-12"><a href="association-tests-part-i.html#cb180-12"></a>iterator</span></code></pre></div>
 <pre><code>## SeqVarBlockIterator object; on iteration 1 of 1 
 ##  | GDS:
-## File: /Users/mconomos/Documents/SISG_2021/data/1KG_phase3_subset_chr1.gds (70.5K)
+## File: /Users/adrienne/Desktop/SISG_2021/SISG_2021/data/1KG_phase3_subset_chr1.gds (70.5K)
 ## +    [  ] *
 ## |--+ description   [  ] *
 ## |--+ sample.id   { Str8 1126 LZMA_ra(9.66%), 877B } *
@@ -501,56 +518,56 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   varMetadata: labelDescription
 ##  | variantData:
 ## An object of class &#39;AnnotatedDataFrame&#39;: none</code></pre>
-<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="association-tests-part-i.html#cb180-1" aria-hidden="true" tabindex="-1"></a><span class="co"># run the single-variant association test</span></span>
-<span id="cb180-2"><a href="association-tests-part-i.html#cb180-2" aria-hidden="true" tabindex="-1"></a>assoc <span class="ot">&lt;-</span> <span class="fu">assocTestSingle</span>(iterator, nullmod)</span></code></pre></div>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="association-tests-part-i.html#cb182-1"></a><span class="co"># run the single-variant association test</span></span>
+<span id="cb182-2"><a href="association-tests-part-i.html#cb182-2"></a>assoc &lt;-<span class="st"> </span><span class="kw">assocTestSingle</span>(iterator, nullmod)</span></code></pre></div>
 <pre><code>## # of selected samples: 1,126</code></pre>
-<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="association-tests-part-i.html#cb182-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(assoc)</span></code></pre></div>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="association-tests-part-i.html#cb184-1"></a><span class="kw">dim</span>(assoc)</span></code></pre></div>
 <pre><code>## [1] 1129   14</code></pre>
-<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="association-tests-part-i.html#cb184-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(assoc)</span></code></pre></div>
-<pre><code>##   variant.id chr     pos allele.index n.obs         freq MAC      Score  Score.SE Score.Stat  Score.pval        Est
-## 1          1   1  970546            1  1126 0.0039964476   9 -0.1191236 0.2577712 -0.4621292 0.643988693  -1.792788
-## 2          2   1  985900            1  1126 0.0492895204 111 -1.6707553 0.8841849 -1.8895996 0.058811535  -2.137109
-## 3          3   1 1025045            1  1126 0.0004440497   1 -0.2795838 0.1007173 -2.7759261 0.005504472 -27.561563
-## 4          4   1 1265550            1  1126 0.0008880995   2 -0.1105487 0.1085480 -1.0184319 0.308472744  -9.382319
-## 5          5   1 1472676            1  1126 0.0071047957  16  0.3630992 0.3456555  1.0504657 0.293504065   3.039054
-## 6          6   1 1735725            1  1126 0.0022202487   5 -0.1300405 0.1973175 -0.6590420 0.509868790  -3.340007
-##     Est.SE          PVE
-## 1 3.879410 0.0001905115
-## 2 1.130985 0.0031851797
-## 3 9.928781 0.0068740102
-## 4 9.212515 0.0009252485
-## 5 2.893054 0.0009843694
-## 6 5.067973 0.0003874544</code></pre>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="association-tests-part-i.html#cb186-1"></a><span class="kw">head</span>(assoc)</span></code></pre></div>
+<pre><code>##   variant.id chr     pos allele.index n.obs         freq MAC      Score
+## 1          1   1  970546            1  1126 0.0039964476   9 -0.1191236
+## 2          2   1  985900            1  1126 0.0492895204 111 -1.6707553
+## 3          3   1 1025045            1  1126 0.0004440497   1 -0.2795838
+## 4          4   1 1265550            1  1126 0.0008880995   2 -0.1105487
+## 5          5   1 1472676            1  1126 0.0071047957  16  0.3630992
+## 6          6   1 1735725            1  1126 0.0022202487   5 -0.1300405
+##    Score.SE Score.Stat  Score.pval        Est   Est.SE          PVE
+## 1 0.2577712 -0.4621292 0.643988693  -1.792788 3.879410 0.0001905115
+## 2 0.8841849 -1.8895996 0.058811535  -2.137109 1.130985 0.0031851797
+## 3 0.1007173 -2.7759261 0.005504472 -27.561563 9.928781 0.0068740102
+## 4 0.1085480 -1.0184319 0.308472744  -9.382319 9.212515 0.0009252485
+## 5 0.3456555  1.0504657 0.293504065   3.039054 2.893054 0.0009843694
+## 6 0.1973175 -0.6590420 0.509868790  -3.340007 5.067973 0.0003874544</code></pre>
 <p>We make a QQ plot to examine the results.</p>
-<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="association-tests-part-i.html#cb186-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb186-2"><a href="association-tests-part-i.html#cb186-2" aria-hidden="true" tabindex="-1"></a>qqPlot <span class="ot">&lt;-</span> <span class="cf">function</span>(pval) {</span>
-<span id="cb186-3"><a href="association-tests-part-i.html#cb186-3" aria-hidden="true" tabindex="-1"></a>    pval <span class="ot">&lt;-</span> pval[<span class="sc">!</span><span class="fu">is.na</span>(pval)]</span>
-<span id="cb186-4"><a href="association-tests-part-i.html#cb186-4" aria-hidden="true" tabindex="-1"></a>    n <span class="ot">&lt;-</span> <span class="fu">length</span>(pval)</span>
-<span id="cb186-5"><a href="association-tests-part-i.html#cb186-5" aria-hidden="true" tabindex="-1"></a>    x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span>n</span>
-<span id="cb186-6"><a href="association-tests-part-i.html#cb186-6" aria-hidden="true" tabindex="-1"></a>    dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">obs=</span><span class="fu">sort</span>(pval),</span>
-<span id="cb186-7"><a href="association-tests-part-i.html#cb186-7" aria-hidden="true" tabindex="-1"></a>                      <span class="at">exp=</span>x<span class="sc">/</span>n,</span>
-<span id="cb186-8"><a href="association-tests-part-i.html#cb186-8" aria-hidden="true" tabindex="-1"></a>                      <span class="at">upper=</span><span class="fu">qbeta</span>(<span class="fl">0.025</span>, x, <span class="fu">rev</span>(x)),</span>
-<span id="cb186-9"><a href="association-tests-part-i.html#cb186-9" aria-hidden="true" tabindex="-1"></a>                      <span class="at">lower=</span><span class="fu">qbeta</span>(<span class="fl">0.975</span>, x, <span class="fu">rev</span>(x)))</span>
-<span id="cb186-10"><a href="association-tests-part-i.html#cb186-10" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb186-11"><a href="association-tests-part-i.html#cb186-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(<span class="sc">-</span><span class="fu">log10</span>(exp), <span class="sc">-</span><span class="fu">log10</span>(obs))) <span class="sc">+</span></span>
-<span id="cb186-12"><a href="association-tests-part-i.html#cb186-12" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="sc">-</span><span class="fu">log10</span>(exp), <span class="sc">-</span><span class="fu">log10</span>(upper)), <span class="at">color=</span><span class="st">&quot;gray&quot;</span>) <span class="sc">+</span></span>
-<span id="cb186-13"><a href="association-tests-part-i.html#cb186-13" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="sc">-</span><span class="fu">log10</span>(exp), <span class="sc">-</span><span class="fu">log10</span>(lower)), <span class="at">color=</span><span class="st">&quot;gray&quot;</span>) <span class="sc">+</span></span>
-<span id="cb186-14"><a href="association-tests-part-i.html#cb186-14" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb186-15"><a href="association-tests-part-i.html#cb186-15" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_abline</span>(<span class="at">intercept=</span><span class="dv">0</span>, <span class="at">slope=</span><span class="dv">1</span>, <span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
-<span id="cb186-16"><a href="association-tests-part-i.html#cb186-16" aria-hidden="true" tabindex="-1"></a>        <span class="fu">xlab</span>(<span class="fu">expression</span>(<span class="fu">paste</span>(<span class="sc">-</span>log[<span class="dv">10</span>], <span class="st">&quot;(expected P)&quot;</span>))) <span class="sc">+</span></span>
-<span id="cb186-17"><a href="association-tests-part-i.html#cb186-17" aria-hidden="true" tabindex="-1"></a>        <span class="fu">ylab</span>(<span class="fu">expression</span>(<span class="fu">paste</span>(<span class="sc">-</span>log[<span class="dv">10</span>], <span class="st">&quot;(observed P)&quot;</span>))) <span class="sc">+</span></span>
-<span id="cb186-18"><a href="association-tests-part-i.html#cb186-18" aria-hidden="true" tabindex="-1"></a>        <span class="fu">theme_bw</span>()</span>
-<span id="cb186-19"><a href="association-tests-part-i.html#cb186-19" aria-hidden="true" tabindex="-1"></a>}    </span>
-<span id="cb186-20"><a href="association-tests-part-i.html#cb186-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb186-21"><a href="association-tests-part-i.html#cb186-21" aria-hidden="true" tabindex="-1"></a><span class="fu">qqPlot</span>(assoc<span class="sc">$</span>Score.pval)</span></code></pre></div>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="association-tests-part-i.html#cb188-1"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb188-2"><a href="association-tests-part-i.html#cb188-2"></a>qqPlot &lt;-<span class="st"> </span><span class="cf">function</span>(pval) {</span>
+<span id="cb188-3"><a href="association-tests-part-i.html#cb188-3"></a>    pval &lt;-<span class="st"> </span>pval[<span class="op">!</span><span class="kw">is.na</span>(pval)]</span>
+<span id="cb188-4"><a href="association-tests-part-i.html#cb188-4"></a>    n &lt;-<span class="st"> </span><span class="kw">length</span>(pval)</span>
+<span id="cb188-5"><a href="association-tests-part-i.html#cb188-5"></a>    x &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span>n</span>
+<span id="cb188-6"><a href="association-tests-part-i.html#cb188-6"></a>    dat &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">obs=</span><span class="kw">sort</span>(pval),</span>
+<span id="cb188-7"><a href="association-tests-part-i.html#cb188-7"></a>                      <span class="dt">exp=</span>x<span class="op">/</span>n,</span>
+<span id="cb188-8"><a href="association-tests-part-i.html#cb188-8"></a>                      <span class="dt">upper=</span><span class="kw">qbeta</span>(<span class="fl">0.025</span>, x, <span class="kw">rev</span>(x)),</span>
+<span id="cb188-9"><a href="association-tests-part-i.html#cb188-9"></a>                      <span class="dt">lower=</span><span class="kw">qbeta</span>(<span class="fl">0.975</span>, x, <span class="kw">rev</span>(x)))</span>
+<span id="cb188-10"><a href="association-tests-part-i.html#cb188-10"></a>    </span>
+<span id="cb188-11"><a href="association-tests-part-i.html#cb188-11"></a>    <span class="kw">ggplot</span>(dat, <span class="kw">aes</span>(<span class="op">-</span><span class="kw">log10</span>(exp), <span class="op">-</span><span class="kw">log10</span>(obs))) <span class="op">+</span></span>
+<span id="cb188-12"><a href="association-tests-part-i.html#cb188-12"></a><span class="st">        </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="op">-</span><span class="kw">log10</span>(exp), <span class="op">-</span><span class="kw">log10</span>(upper)), <span class="dt">color=</span><span class="st">&quot;gray&quot;</span>) <span class="op">+</span></span>
+<span id="cb188-13"><a href="association-tests-part-i.html#cb188-13"></a><span class="st">        </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="op">-</span><span class="kw">log10</span>(exp), <span class="op">-</span><span class="kw">log10</span>(lower)), <span class="dt">color=</span><span class="st">&quot;gray&quot;</span>) <span class="op">+</span></span>
+<span id="cb188-14"><a href="association-tests-part-i.html#cb188-14"></a><span class="st">        </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
+<span id="cb188-15"><a href="association-tests-part-i.html#cb188-15"></a><span class="st">        </span><span class="kw">geom_abline</span>(<span class="dt">intercept=</span><span class="dv">0</span>, <span class="dt">slope=</span><span class="dv">1</span>, <span class="dt">color=</span><span class="st">&quot;red&quot;</span>) <span class="op">+</span></span>
+<span id="cb188-16"><a href="association-tests-part-i.html#cb188-16"></a><span class="st">        </span><span class="kw">xlab</span>(<span class="kw">expression</span>(<span class="kw">paste</span>(<span class="op">-</span>log[<span class="dv">10</span>], <span class="st">&quot;(expected P)&quot;</span>))) <span class="op">+</span></span>
+<span id="cb188-17"><a href="association-tests-part-i.html#cb188-17"></a><span class="st">        </span><span class="kw">ylab</span>(<span class="kw">expression</span>(<span class="kw">paste</span>(<span class="op">-</span>log[<span class="dv">10</span>], <span class="st">&quot;(observed P)&quot;</span>))) <span class="op">+</span></span>
+<span id="cb188-18"><a href="association-tests-part-i.html#cb188-18"></a><span class="st">        </span><span class="kw">theme_bw</span>()</span>
+<span id="cb188-19"><a href="association-tests-part-i.html#cb188-19"></a>}    </span>
+<span id="cb188-20"><a href="association-tests-part-i.html#cb188-20"></a></span>
+<span id="cb188-21"><a href="association-tests-part-i.html#cb188-21"></a><span class="kw">qqPlot</span>(assoc<span class="op">$</span>Score.pval)</span></code></pre></div>
 <p><img src="_main_files/figure-html/assoc_single_qq-1.png" width="672" /></p>
 <p>A lot of the variants we tested are very rare – the alternate allele is not observed for many samples. Single-variant tests do not perform well for very rare variants (we will discuss testing rare variants in more detail in the next session). We can use the minor allele count (MAC) observed in the sample to filter rare variants that we may expect to have unreliable test results.</p>
-<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="association-tests-part-i.html#cb187-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(assoc<span class="sc">$</span>MAC)</span></code></pre></div>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="association-tests-part-i.html#cb189-1"></a><span class="kw">summary</span>(assoc<span class="op">$</span>MAC)</span></code></pre></div>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##    1.00    1.00    3.00   86.62   30.00 1123.00</code></pre>
-<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="association-tests-part-i.html#cb189-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(assoc<span class="sc">$</span>MAC <span class="sc">&lt;</span> <span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="association-tests-part-i.html#cb191-1"></a><span class="kw">sum</span>(assoc<span class="op">$</span>MAC <span class="op">&lt;</span><span class="st"> </span><span class="dv">5</span>)</span></code></pre></div>
 <pre><code>## [1] 619</code></pre>
-<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="association-tests-part-i.html#cb191-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qqPlot</span>(assoc<span class="sc">$</span>Score.pval[assoc<span class="sc">$</span>MAC <span class="sc">&gt;=</span> <span class="dv">5</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="association-tests-part-i.html#cb193-1"></a><span class="kw">qqPlot</span>(assoc<span class="op">$</span>Score.pval[assoc<span class="op">$</span>MAC <span class="op">&gt;=</span><span class="st"> </span><span class="dv">5</span>])</span></code></pre></div>
 <p><img src="_main_files/figure-html/mac-1.png" width="672" /></p>
 <p>We should expect the majority of variants to fall near the red <code>y=x</code> line in the QQ plot. The deviation above the line, commonly referred to as “inflation” is indicative of some model issue. In this example, the issue is likely driven by the fact that we’ve ignored genetic ancestry and relatedness among these subjects – more to come later when we discuss mixed models.</p>
 </div>
@@ -566,40 +583,40 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>GENESIS also supports testing binary (e.g. case/control) outcomes. We can fit a null model using logistic regression by specifying the argument <code>family=binomial</code> in the <code>fitNullModel</code> function. Use the <code>status</code> column in the sample annotation to fit a null model for simulated case/control status, with <code>sex</code> and <code>Population</code> as covariates. Run single-variant association tests using this model and make a QQ plot of all variants with MAC &gt;= 5.</li>
 </ol>
 <p>When testing binary outcomes, we should fit our null model using logistic regression. To do so, we simply set the argument <code>family=binomial</code> in <code>fitNullModel</code>. Note that the parameter <code>group.var</code> is no longer relevant here, as the logistic model specifies the mean-variance relationship.</p>
-<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="association-tests-part-i.html#cb192-1" aria-hidden="true" tabindex="-1"></a><span class="co"># fit the null model with logistic regression</span></span>
-<span id="cb192-2"><a href="association-tests-part-i.html#cb192-2" aria-hidden="true" tabindex="-1"></a>nullmod.status <span class="ot">&lt;-</span> <span class="fu">fitNullModel</span>(annot, </span>
-<span id="cb192-3"><a href="association-tests-part-i.html#cb192-3" aria-hidden="true" tabindex="-1"></a>                               <span class="at">outcome=</span><span class="st">&quot;status&quot;</span>, </span>
-<span id="cb192-4"><a href="association-tests-part-i.html#cb192-4" aria-hidden="true" tabindex="-1"></a>                               <span class="at">covars=</span><span class="fu">c</span>(<span class="st">&quot;sex&quot;</span>, <span class="st">&quot;Population&quot;</span>), </span>
-<span id="cb192-5"><a href="association-tests-part-i.html#cb192-5" aria-hidden="true" tabindex="-1"></a>                               <span class="at">family=</span>binomial, </span>
-<span id="cb192-6"><a href="association-tests-part-i.html#cb192-6" aria-hidden="true" tabindex="-1"></a>                               <span class="at">verbose=</span><span class="cn">FALSE</span>)</span>
-<span id="cb192-7"><a href="association-tests-part-i.html#cb192-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb192-8"><a href="association-tests-part-i.html#cb192-8" aria-hidden="true" tabindex="-1"></a><span class="fu">resetIterator</span>(iterator, <span class="at">verbose=</span><span class="cn">FALSE</span>)</span>
-<span id="cb192-9"><a href="association-tests-part-i.html#cb192-9" aria-hidden="true" tabindex="-1"></a><span class="co"># run the single-variant association test</span></span>
-<span id="cb192-10"><a href="association-tests-part-i.html#cb192-10" aria-hidden="true" tabindex="-1"></a>assoc.status <span class="ot">&lt;-</span> <span class="fu">assocTestSingle</span>(iterator, nullmod.status, <span class="at">test=</span><span class="st">&quot;Score&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="association-tests-part-i.html#cb194-1"></a><span class="co"># fit the null model with logistic regression</span></span>
+<span id="cb194-2"><a href="association-tests-part-i.html#cb194-2"></a>nullmod.status &lt;-<span class="st"> </span><span class="kw">fitNullModel</span>(annot, </span>
+<span id="cb194-3"><a href="association-tests-part-i.html#cb194-3"></a>                               <span class="dt">outcome=</span><span class="st">&quot;status&quot;</span>, </span>
+<span id="cb194-4"><a href="association-tests-part-i.html#cb194-4"></a>                               <span class="dt">covars=</span><span class="kw">c</span>(<span class="st">&quot;sex&quot;</span>, <span class="st">&quot;Population&quot;</span>), </span>
+<span id="cb194-5"><a href="association-tests-part-i.html#cb194-5"></a>                               <span class="dt">family=</span>binomial, </span>
+<span id="cb194-6"><a href="association-tests-part-i.html#cb194-6"></a>                               <span class="dt">verbose=</span><span class="ot">FALSE</span>)</span>
+<span id="cb194-7"><a href="association-tests-part-i.html#cb194-7"></a></span>
+<span id="cb194-8"><a href="association-tests-part-i.html#cb194-8"></a><span class="kw">resetIterator</span>(iterator, <span class="dt">verbose=</span><span class="ot">FALSE</span>)</span>
+<span id="cb194-9"><a href="association-tests-part-i.html#cb194-9"></a><span class="co"># run the single-variant association test</span></span>
+<span id="cb194-10"><a href="association-tests-part-i.html#cb194-10"></a>assoc.status &lt;-<span class="st"> </span><span class="kw">assocTestSingle</span>(iterator, nullmod.status, <span class="dt">test=</span><span class="st">&quot;Score&quot;</span>)</span></code></pre></div>
 <pre><code>## # of selected samples: 1,126</code></pre>
-<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="association-tests-part-i.html#cb194-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(assoc.status)</span></code></pre></div>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="association-tests-part-i.html#cb196-1"></a><span class="kw">dim</span>(assoc.status)</span></code></pre></div>
 <pre><code>## [1] 1129   14</code></pre>
-<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="association-tests-part-i.html#cb196-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(assoc.status)</span></code></pre></div>
-<pre><code>##   variant.id chr     pos allele.index n.obs         freq MAC       Score  Score.SE Score.Stat Score.pval        Est
-## 1          1   1  970546            1  1126 0.0039964476   9  0.20256722 0.8351783  0.2425437 0.80835892  0.2904095
-## 2          2   1  985900            1  1126 0.0492895204 111 -2.64169956 2.6522412 -0.9960254 0.31923781 -0.3755410
-## 3          3   1 1025045            1  1126 0.0004440497   1 -0.09916904 0.2972472 -0.3336248 0.73866267 -1.1223819
-## 4          4   1 1265550            1  1126 0.0008880995   2  0.81717324 0.4033577  2.0259271 0.04277226  5.0226565
-## 5          5   1 1472676            1  1126 0.0071047957  16  0.64418361 1.0778277  0.5976685 0.55006117  0.5545121
-## 6          6   1 1735725            1  1126 0.0022202487   5 -0.46319177 0.6396675 -0.7241134 0.46899613 -1.1320153
-##      Est.SE          PVE
-## 1 1.1973491 5.242118e-05
-## 2 0.3770396 8.840314e-04
-## 3 3.3642035 9.918446e-05
-## 4 2.4791892 3.657417e-03
-## 5 0.9277921 3.183080e-04
-## 6 1.5633123 4.672400e-04</code></pre>
-<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="association-tests-part-i.html#cb198-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make a QQ plot</span></span>
-<span id="cb198-2"><a href="association-tests-part-i.html#cb198-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qqPlot</span>(assoc.status<span class="sc">$</span>Score.pval[assoc.status<span class="sc">$</span>MAC <span class="sc">&gt;=</span> <span class="dv">5</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="association-tests-part-i.html#cb198-1"></a><span class="kw">head</span>(assoc.status)</span></code></pre></div>
+<pre><code>##   variant.id chr     pos allele.index n.obs         freq MAC       Score
+## 1          1   1  970546            1  1126 0.0039964476   9  0.20256722
+## 2          2   1  985900            1  1126 0.0492895204 111 -2.64169956
+## 3          3   1 1025045            1  1126 0.0004440497   1 -0.09916904
+## 4          4   1 1265550            1  1126 0.0008880995   2  0.81717324
+## 5          5   1 1472676            1  1126 0.0071047957  16  0.64418361
+## 6          6   1 1735725            1  1126 0.0022202487   5 -0.46319177
+##    Score.SE Score.Stat Score.pval        Est    Est.SE          PVE
+## 1 0.8351783  0.2425437 0.80835892  0.2904095 1.1973491 5.242118e-05
+## 2 2.6522412 -0.9960254 0.31923781 -0.3755410 0.3770396 8.840314e-04
+## 3 0.2972472 -0.3336248 0.73866267 -1.1223819 3.3642035 9.918446e-05
+## 4 0.4033577  2.0259271 0.04277226  5.0226565 2.4791892 3.657417e-03
+## 5 1.0778277  0.5976685 0.55006117  0.5545121 0.9277921 3.183080e-04
+## 6 0.6396675 -0.7241134 0.46899613 -1.1320153 1.5633123 4.672400e-04</code></pre>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="association-tests-part-i.html#cb200-1"></a><span class="co"># make a QQ plot</span></span>
+<span id="cb200-2"><a href="association-tests-part-i.html#cb200-2"></a><span class="kw">qqPlot</span>(assoc.status<span class="op">$</span>Score.pval[assoc.status<span class="op">$</span>MAC <span class="op">&gt;=</span><span class="st"> </span><span class="dv">5</span>])</span></code></pre></div>
 <p><img src="_main_files/figure-html/exercise_logistic-1.png" width="672" /></p>
 <p>Extra: in samples with highly imbalanced case:control ratios, the Score test can perform poorly for low frequency variants. Saddlepoint approximation (SPA) can be used to improve p-value calculations, and is available in GENESIS by setting the argument <code>test=Score.SPA</code> in <code>assocTestSingle</code>. See <a href="https://www.cell.com/ajhg/fulltext/S0002-9297(17)30201-X">Dey et al.</a> and <a href="https://www.nature.com/articles/s41588-018-0184-y">Zhou et al.</a> for details on using SPA in GWAS.</p>
-<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="association-tests-part-i.html#cb199-1" aria-hidden="true" tabindex="-1"></a><span class="co"># close the GDS file!</span></span>
-<span id="cb199-2"><a href="association-tests-part-i.html#cb199-2" aria-hidden="true" tabindex="-1"></a><span class="fu">seqClose</span>(seqData)</span></code></pre></div>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="association-tests-part-i.html#cb201-1"></a><span class="co"># close the GDS file!</span></span>
+<span id="cb201-2"><a href="association-tests-part-i.html#cb201-2"></a><span class="kw">seqClose</span>(seqData)</span></code></pre></div>
 
 </div>
 </div>

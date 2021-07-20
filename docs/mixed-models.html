@@ -23,7 +23,7 @@
 
 
 
-<meta name="date" content="2021-07-15" />
+<meta name="date" content="2021-07-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -50,6 +50,7 @@
 
 
 
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
@@ -58,7 +59,6 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -202,15 +202,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="8" data-path="variant-annotation.html"><a href="variant-annotation.html"><i class="fa fa-check"></i><b>8</b> Variant annotation</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="variant-annotation.html"><a href="variant-annotation.html#using-bioconductor-annotation-resources"><i class="fa fa-check"></i><b>8.1</b> Using Bioconductor annotation resources</a></li>
-<li class="chapter" data-level="8.2" data-path="variant-annotation.html"><a href="variant-annotation.html#aggregating-and-filtering-variants-using-annotation"><i class="fa fa-check"></i><b>8.2</b> Aggregating and filtering variants using annotation</a></li>
+<li class="chapter" data-level="8.1" data-path="variant-annotation.html"><a href="variant-annotation.html#use-case-1"><i class="fa fa-check"></i><b>8.1</b> Use case 1</a></li>
+<li class="chapter" data-level="8.2" data-path="variant-annotation.html"><a href="variant-annotation.html#use-case-2"><i class="fa fa-check"></i><b>8.2</b> Use case 2</a></li>
+<li class="chapter" data-level="8.3" data-path="variant-annotation.html"><a href="variant-annotation.html#use-case-3"><i class="fa fa-check"></i><b>8.3</b> Use case 3</a></li>
+<li class="chapter" data-level="8.4" data-path="variant-annotation.html"><a href="variant-annotation.html#exercise-4"><i class="fa fa-check"></i><b>8.4</b> Exercise</a></li>
+<li class="chapter" data-level="8.5" data-path="variant-annotation.html"><a href="variant-annotation.html#solution-4"><i class="fa fa-check"></i><b>8.5</b> Solution</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="aggregate-association-tests.html"><a href="aggregate-association-tests.html"><i class="fa fa-check"></i><b>9</b> Aggregate association tests</a>
+<li class="chapter" data-level="9" data-path="annotation-informed-aggregate-association-tests.html"><a href="annotation-informed-aggregate-association-tests.html"><i class="fa fa-check"></i><b>9</b> Annotation informed aggregate association tests</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="aggregate-association-tests.html"><a href="aggregate-association-tests.html#aggregate-unit-for-association-testing-exercise"><i class="fa fa-check"></i><b>9.1</b> Aggregate unit for association testing exercise</a></li>
-<li class="chapter" data-level="9.2" data-path="aggregate-association-tests.html"><a href="aggregate-association-tests.html#association-testing-with-aggregate-units"><i class="fa fa-check"></i><b>9.2</b> Association testing with aggregate units</a></li>
-<li class="chapter" data-level="9.3" data-path="aggregate-association-tests.html"><a href="aggregate-association-tests.html#exercise-4"><i class="fa fa-check"></i><b>9.3</b> Exercise</a></li>
-<li class="chapter" data-level="9.4" data-path="aggregate-association-tests.html"><a href="aggregate-association-tests.html#solution-4"><i class="fa fa-check"></i><b>9.4</b> Solution</a></li>
+<li class="chapter" data-level="9.1" data-path="annotation-informed-aggregate-association-tests.html"><a href="annotation-informed-aggregate-association-tests.html#aggregate-unit-for-association-testing-exercise"><i class="fa fa-check"></i><b>9.1</b> Aggregate unit for association testing exercise</a></li>
+<li class="chapter" data-level="9.2" data-path="annotation-informed-aggregate-association-tests.html"><a href="annotation-informed-aggregate-association-tests.html#association-testing-with-aggregate-units"><i class="fa fa-check"></i><b>9.2</b> Association testing with aggregate units</a></li>
+<li class="chapter" data-level="9.3" data-path="annotation-informed-aggregate-association-tests.html"><a href="annotation-informed-aggregate-association-tests.html#exercise-5"><i class="fa fa-check"></i><b>9.3</b> Exercise</a></li>
+<li class="chapter" data-level="9.4" data-path="annotation-informed-aggregate-association-tests.html"><a href="annotation-informed-aggregate-association-tests.html#solution-5"><i class="fa fa-check"></i><b>9.4</b> Solution</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="running-a-gwas-workflow-on-biodata-catalyst.html"><a href="running-a-gwas-workflow-on-biodata-catalyst.html"><i class="fa fa-check"></i><b>10</b> Running a GWAS workflow on BioData Catalyst</a>
 <ul>
@@ -256,27 +259,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="null-model-1" class="section level2" number="7.1">
 <h2><span class="header-section-number">7.1</span> Null model</h2>
 <p>Recall that the first step in our association testing procedure is to fit the null model. In addition to the <code>AnnotatedDataFrame</code> with phenotype data that we used previously, we will also use the ancestry PCs and pairwise kinship estimates we created in the previous session. We will use the first 4 PCs to adjust for ancestry.</p>
-<div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb304-1"><a href="mixed-models.html#cb304-1" aria-hidden="true" tabindex="-1"></a><span class="co"># sample annotation</span></span>
-<span id="cb304-2"><a href="mixed-models.html#cb304-2" aria-hidden="true" tabindex="-1"></a>repo_path <span class="ot">&lt;-</span> <span class="st">&quot;https://github.com/UW-GAC/SISG_2021/raw/master&quot;</span></span>
-<span id="cb304-3"><a href="mixed-models.html#cb304-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">dir.exists</span>(<span class="st">&quot;data&quot;</span>)) <span class="fu">dir.create</span>(<span class="st">&quot;data&quot;</span>)</span>
-<span id="cb304-4"><a href="mixed-models.html#cb304-4" aria-hidden="true" tabindex="-1"></a>sampfile <span class="ot">&lt;-</span> <span class="st">&quot;data/sample_phenotype_annotation.RData&quot;</span></span>
-<span id="cb304-5"><a href="mixed-models.html#cb304-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(sampfile)) <span class="fu">download.file</span>(<span class="fu">file.path</span>(repo_path, sampfile), sampfile)</span>
-<span id="cb304-6"><a href="mixed-models.html#cb304-6" aria-hidden="true" tabindex="-1"></a>annot <span class="ot">&lt;-</span> <span class="fu">get</span>(<span class="fu">load</span>(sampfile))</span>
-<span id="cb304-7"><a href="mixed-models.html#cb304-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Biobase)</span>
-<span id="cb304-8"><a href="mixed-models.html#cb304-8" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">pData</span>(annot))</span></code></pre></div>
-<pre><code>##   sample.id subject.id Population          Population.Description sex status age  height   study
-## 1   HG00096    HG00096        GBR British in England and Scotland   M      0  47 165.300 study_1
-## 2   HG00097    HG00097        GBR British in England and Scotland   F      1  47 144.780 study_3
-## 3   HG00099    HG00099        GBR British in England and Scotland   F      0  40 185.500 study_2
-## 4   HG00100    HG00100        GBR British in England and Scotland   F      1  45 150.622 study_3
-## 5   HG00101    HG00101        GBR British in England and Scotland   M      0  40 177.800 study_3
-## 6   HG00102    HG00102        GBR British in England and Scotland   F      0  49 169.100 study_1</code></pre>
-<div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb306-1"><a href="mixed-models.html#cb306-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load the ancestry PCs</span></span>
-<span id="cb306-2"><a href="mixed-models.html#cb306-2" aria-hidden="true" tabindex="-1"></a>pcfile <span class="ot">&lt;-</span> <span class="st">&quot;data/pcs.RData&quot;</span></span>
-<span id="cb306-3"><a href="mixed-models.html#cb306-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(pcfile)) <span class="fu">download.file</span>(<span class="fu">file.path</span>(repo_path, pcfile), pcfile)</span>
-<span id="cb306-4"><a href="mixed-models.html#cb306-4" aria-hidden="true" tabindex="-1"></a>pcs <span class="ot">&lt;-</span> <span class="fu">get</span>(<span class="fu">load</span>(pcfile))</span>
-<span id="cb306-5"><a href="mixed-models.html#cb306-5" aria-hidden="true" tabindex="-1"></a>pcs <span class="ot">&lt;-</span> pcs[,<span class="fu">c</span>(<span class="st">&quot;sample.id&quot;</span>, <span class="st">&quot;PC1&quot;</span>, <span class="st">&quot;PC2&quot;</span>, <span class="st">&quot;PC3&quot;</span>, <span class="st">&quot;PC4&quot;</span>)]</span>
-<span id="cb306-6"><a href="mixed-models.html#cb306-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(pcs)</span></code></pre></div>
+<div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb306-1"><a href="mixed-models.html#cb306-1"></a><span class="co"># sample annotation</span></span>
+<span id="cb306-2"><a href="mixed-models.html#cb306-2"></a>repo_path &lt;-<span class="st"> &quot;https://github.com/UW-GAC/SISG_2021/raw/master&quot;</span></span>
+<span id="cb306-3"><a href="mixed-models.html#cb306-3"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">dir.exists</span>(<span class="st">&quot;data&quot;</span>)) <span class="kw">dir.create</span>(<span class="st">&quot;data&quot;</span>)</span>
+<span id="cb306-4"><a href="mixed-models.html#cb306-4"></a>sampfile &lt;-<span class="st"> &quot;data/sample_phenotype_annotation.RData&quot;</span></span>
+<span id="cb306-5"><a href="mixed-models.html#cb306-5"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">file.exists</span>(sampfile)) <span class="kw">download.file</span>(<span class="kw">file.path</span>(repo_path, sampfile), sampfile)</span>
+<span id="cb306-6"><a href="mixed-models.html#cb306-6"></a>annot &lt;-<span class="st"> </span><span class="kw">get</span>(<span class="kw">load</span>(sampfile))</span>
+<span id="cb306-7"><a href="mixed-models.html#cb306-7"></a><span class="kw">library</span>(Biobase)</span>
+<span id="cb306-8"><a href="mixed-models.html#cb306-8"></a><span class="kw">head</span>(<span class="kw">pData</span>(annot))</span></code></pre></div>
+<pre><code>##   sample.id subject.id Population          Population.Description sex status
+## 1   HG00096    HG00096        GBR British in England and Scotland   M      0
+## 2   HG00097    HG00097        GBR British in England and Scotland   F      1
+## 3   HG00099    HG00099        GBR British in England and Scotland   F      0
+## 4   HG00100    HG00100        GBR British in England and Scotland   F      1
+## 5   HG00101    HG00101        GBR British in England and Scotland   M      0
+## 6   HG00102    HG00102        GBR British in England and Scotland   F      0
+##   age  height   study
+## 1  47 165.300 study_1
+## 2  47 144.780 study_3
+## 3  40 185.500 study_2
+## 4  45 150.622 study_3
+## 5  40 177.800 study_3
+## 6  49 169.100 study_1</code></pre>
+<div class="sourceCode" id="cb308"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb308-1"><a href="mixed-models.html#cb308-1"></a><span class="co"># load the ancestry PCs</span></span>
+<span id="cb308-2"><a href="mixed-models.html#cb308-2"></a>pcfile &lt;-<span class="st"> &quot;data/pcs.RData&quot;</span></span>
+<span id="cb308-3"><a href="mixed-models.html#cb308-3"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">file.exists</span>(pcfile)) <span class="kw">download.file</span>(<span class="kw">file.path</span>(repo_path, pcfile), pcfile)</span>
+<span id="cb308-4"><a href="mixed-models.html#cb308-4"></a>pcs &lt;-<span class="st"> </span><span class="kw">get</span>(<span class="kw">load</span>(pcfile))</span>
+<span id="cb308-5"><a href="mixed-models.html#cb308-5"></a>pcs &lt;-<span class="st"> </span>pcs[,<span class="kw">c</span>(<span class="st">&quot;sample.id&quot;</span>, <span class="st">&quot;PC1&quot;</span>, <span class="st">&quot;PC2&quot;</span>, <span class="st">&quot;PC3&quot;</span>, <span class="st">&quot;PC4&quot;</span>)]</span>
+<span id="cb308-6"><a href="mixed-models.html#cb308-6"></a><span class="kw">head</span>(pcs)</span></code></pre></div>
 <pre><code>##         sample.id         PC1         PC2         PC3          PC4
 ## HG00096   HG00096 -0.02189121 -0.03637024 -0.01328390  0.005533490
 ## HG00097   HG00097 -0.02002924 -0.03285711 -0.01207786  0.005390183
@@ -284,21 +294,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## HG00100   HG00100 -0.02031270 -0.03975678 -0.01908062  0.004291604
 ## HG00101   HG00101 -0.02038482 -0.03437442 -0.01328870  0.002310498
 ## HG00102   HG00102 -0.02144725 -0.03970277 -0.01391896 -0.001245155</code></pre>
-<div class="sourceCode" id="cb308"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb308-1"><a href="mixed-models.html#cb308-1" aria-hidden="true" tabindex="-1"></a><span class="co"># merge PCs with the sample annotation</span></span>
-<span id="cb308-2"><a href="mixed-models.html#cb308-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb308-3"><a href="mixed-models.html#cb308-3" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">left_join</span>(<span class="fu">pData</span>(annot), pcs, <span class="at">by=</span><span class="st">&quot;sample.id&quot;</span>)</span>
-<span id="cb308-4"><a href="mixed-models.html#cb308-4" aria-hidden="true" tabindex="-1"></a><span class="co"># update the AnnotatedDataFrame</span></span>
-<span id="cb308-5"><a href="mixed-models.html#cb308-5" aria-hidden="true" tabindex="-1"></a><span class="fu">pData</span>(annot) <span class="ot">&lt;-</span> dat</span>
-<span id="cb308-6"><a href="mixed-models.html#cb308-6" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(annot, <span class="at">file=</span><span class="st">&quot;data/sample_phenotype_pcs.RData&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb310-1"><a href="mixed-models.html#cb310-1"></a><span class="co"># merge PCs with the sample annotation</span></span>
+<span id="cb310-2"><a href="mixed-models.html#cb310-2"></a><span class="kw">library</span>(dplyr)</span>
+<span id="cb310-3"><a href="mixed-models.html#cb310-3"></a>dat &lt;-<span class="st"> </span><span class="kw">left_join</span>(<span class="kw">pData</span>(annot), pcs, <span class="dt">by=</span><span class="st">&quot;sample.id&quot;</span>)</span>
+<span id="cb310-4"><a href="mixed-models.html#cb310-4"></a><span class="co"># update the AnnotatedDataFrame</span></span>
+<span id="cb310-5"><a href="mixed-models.html#cb310-5"></a><span class="kw">pData</span>(annot) &lt;-<span class="st"> </span>dat</span>
+<span id="cb310-6"><a href="mixed-models.html#cb310-6"></a><span class="kw">save</span>(annot, <span class="dt">file=</span><span class="st">&quot;data/sample_phenotype_pcs.RData&quot;</span>)</span></code></pre></div>
 <p>We can create a kinship matrix from the output of <code>pcrelate</code>. We multiply the kinship values by 2 to get values on the same scale as the standard GRM. This matrix is represented in R as a symmetric matrix object from the Matrix package.</p>
-<div class="sourceCode" id="cb309"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb309-1"><a href="mixed-models.html#cb309-1" aria-hidden="true" tabindex="-1"></a>kinfile <span class="ot">&lt;-</span> <span class="st">&quot;data/pcrelate_kinship.RData&quot;</span></span>
-<span id="cb309-2"><a href="mixed-models.html#cb309-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(kinfile)) <span class="fu">download.file</span>(<span class="fu">file.path</span>(repo_path, kinfile), kinfile)</span>
-<span id="cb309-3"><a href="mixed-models.html#cb309-3" aria-hidden="true" tabindex="-1"></a>pcrel <span class="ot">&lt;-</span> <span class="fu">get</span>(<span class="fu">load</span>(kinfile))</span>
-<span id="cb309-4"><a href="mixed-models.html#cb309-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(GENESIS)</span>
-<span id="cb309-5"><a href="mixed-models.html#cb309-5" aria-hidden="true" tabindex="-1"></a>kinship <span class="ot">&lt;-</span> <span class="fu">pcrelateToMatrix</span>(pcrel, <span class="at">scaleKin=</span><span class="dv">2</span>, <span class="at">verbose=</span><span class="cn">FALSE</span>)</span>
-<span id="cb309-6"><a href="mixed-models.html#cb309-6" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(kinship)</span></code></pre></div>
+<div class="sourceCode" id="cb311"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb311-1"><a href="mixed-models.html#cb311-1"></a>kinfile &lt;-<span class="st"> &quot;data/pcrelate_kinship.RData&quot;</span></span>
+<span id="cb311-2"><a href="mixed-models.html#cb311-2"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">file.exists</span>(kinfile)) <span class="kw">download.file</span>(<span class="kw">file.path</span>(repo_path, kinfile), kinfile)</span>
+<span id="cb311-3"><a href="mixed-models.html#cb311-3"></a>pcrel &lt;-<span class="st"> </span><span class="kw">get</span>(<span class="kw">load</span>(kinfile))</span>
+<span id="cb311-4"><a href="mixed-models.html#cb311-4"></a><span class="kw">library</span>(GENESIS)</span>
+<span id="cb311-5"><a href="mixed-models.html#cb311-5"></a>kinship &lt;-<span class="st"> </span><span class="kw">pcrelateToMatrix</span>(pcrel, <span class="dt">scaleKin=</span><span class="dv">2</span>, <span class="dt">verbose=</span><span class="ot">FALSE</span>)</span>
+<span id="cb311-6"><a href="mixed-models.html#cb311-6"></a><span class="kw">dim</span>(kinship)</span></code></pre></div>
 <pre><code>## [1] 1126 1126</code></pre>
-<div class="sourceCode" id="cb311"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb311-1"><a href="mixed-models.html#cb311-1" aria-hidden="true" tabindex="-1"></a>kinship[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb313"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb313-1"><a href="mixed-models.html#cb313-1"></a>kinship[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>]</span></code></pre></div>
 <pre><code>## 5 x 5 Matrix of class &quot;dsyMatrix&quot;
 ##              HG00096      HG00097      HG00099      HG00100      HG00101
 ## HG00096 0.9906231740  0.036922756  0.010409075 0.0005780419  0.016522827
@@ -307,16 +317,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## HG00100 0.0005780419  0.003515830  0.055621320 1.0111688406  0.017959707
 ## HG00101 0.0165228269  0.007678616 -0.003235074 0.0179597069  0.965028548</code></pre>
 <p>When running a mixed model analysis, we still fit the null model using the <code>fitNullModel</code> function in GENESIS. Now, we include the kinship matrix in the model with the <code>cov.mat</code> argument, which is used to specify the random effect(s) in the model with covariance structure(s) proportional to the supplied matrix(s). The inclusion of these random effects is what makes this a mixed model, rather than a simple regression model. We also add the ancestry PCs to the list of covariates and allow for heterogeneous residual variance by <code>study</code> with the <code>group.var</code> argument, as before.</p>
-<div class="sourceCode" id="cb313"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb313-1"><a href="mixed-models.html#cb313-1" aria-hidden="true" tabindex="-1"></a>nullmod <span class="ot">&lt;-</span> <span class="fu">fitNullModel</span>(annot, </span>
-<span id="cb313-2"><a href="mixed-models.html#cb313-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">outcome=</span><span class="st">&quot;height&quot;</span>, </span>
-<span id="cb313-3"><a href="mixed-models.html#cb313-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">covars=</span><span class="fu">c</span>(<span class="st">&quot;sex&quot;</span>, <span class="st">&quot;age&quot;</span>, <span class="st">&quot;study&quot;</span>, <span class="fu">paste0</span>(<span class="st">&quot;PC&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>)), </span>
-<span id="cb313-4"><a href="mixed-models.html#cb313-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">cov.mat=</span>kinship, </span>
-<span id="cb313-5"><a href="mixed-models.html#cb313-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">group.var=</span><span class="st">&quot;study&quot;</span>, </span>
-<span id="cb313-6"><a href="mixed-models.html#cb313-6" aria-hidden="true" tabindex="-1"></a>                        <span class="at">verbose=</span><span class="cn">FALSE</span>)</span>
-<span id="cb313-7"><a href="mixed-models.html#cb313-7" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(nullmod, <span class="at">file=</span><span class="st">&quot;data/null_mixed_model.RData&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb315"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb315-1"><a href="mixed-models.html#cb315-1"></a>nullmod &lt;-<span class="st"> </span><span class="kw">fitNullModel</span>(annot, </span>
+<span id="cb315-2"><a href="mixed-models.html#cb315-2"></a>                        <span class="dt">outcome=</span><span class="st">&quot;height&quot;</span>, </span>
+<span id="cb315-3"><a href="mixed-models.html#cb315-3"></a>                        <span class="dt">covars=</span><span class="kw">c</span>(<span class="st">&quot;sex&quot;</span>, <span class="st">&quot;age&quot;</span>, <span class="st">&quot;study&quot;</span>, <span class="kw">paste0</span>(<span class="st">&quot;PC&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>)), </span>
+<span id="cb315-4"><a href="mixed-models.html#cb315-4"></a>                        <span class="dt">cov.mat=</span>kinship, </span>
+<span id="cb315-5"><a href="mixed-models.html#cb315-5"></a>                        <span class="dt">group.var=</span><span class="st">&quot;study&quot;</span>, </span>
+<span id="cb315-6"><a href="mixed-models.html#cb315-6"></a>                        <span class="dt">verbose=</span><span class="ot">FALSE</span>)</span>
+<span id="cb315-7"><a href="mixed-models.html#cb315-7"></a><span class="kw">save</span>(nullmod, <span class="dt">file=</span><span class="st">&quot;data/null_mixed_model.RData&quot;</span>)</span></code></pre></div>
 <p>We can investigate the output from <code>fitNullModel</code>.</p>
-<div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb314-1"><a href="mixed-models.html#cb314-1" aria-hidden="true" tabindex="-1"></a><span class="co"># description of the model we fit</span></span>
-<span id="cb314-2"><a href="mixed-models.html#cb314-2" aria-hidden="true" tabindex="-1"></a>nullmod<span class="sc">$</span>model</span></code></pre></div>
+<div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb316-1"><a href="mixed-models.html#cb316-1"></a><span class="co"># description of the model we fit</span></span>
+<span id="cb316-2"><a href="mixed-models.html#cb316-2"></a>nullmod<span class="op">$</span>model</span></code></pre></div>
 <pre><code>## $hetResid
 ## [1] TRUE
 ## 
@@ -334,10 +344,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 
 ## $formula
 ## [1] &quot;height ~ sex + age + study + PC1 + PC2 + PC3 + PC4 + (1|A) + var(study)&quot;</code></pre>
-<div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb316-1"><a href="mixed-models.html#cb316-1" aria-hidden="true" tabindex="-1"></a><span class="co"># fixed effect regression estimates</span></span>
-<span id="cb316-2"><a href="mixed-models.html#cb316-2" aria-hidden="true" tabindex="-1"></a>nullmod<span class="sc">$</span>fixef</span></code></pre></div>
+<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb318-1"><a href="mixed-models.html#cb318-1"></a><span class="co"># fixed effect regression estimates</span></span>
+<span id="cb318-2"><a href="mixed-models.html#cb318-2"></a>nullmod<span class="op">$</span>fixef</span></code></pre></div>
 <pre><code>##                       Est          SE         Stat         pval
-## (Intercept)  163.74431361  3.15130038 2.699932e+03 0.000000e+00
+## (Intercept)  163.74431362  3.15130038 2.699932e+03 0.000000e+00
 ## sexM           6.27072759  0.67911122 8.526171e+01 2.613754e-20
 ## age            0.07420444  0.06839188 1.177201e+00 2.779265e-01
 ## studystudy_2  10.54243352  0.81122848 1.688867e+02 1.295192e-38
@@ -346,90 +356,90 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## PC2          -61.24485338 11.22450534 2.977178e+01 4.860157e-08
 ## PC3           -8.81351399 11.09566802 6.309447e-01 4.270090e-01
 ## PC4           -5.61519972 11.19652394 2.515151e-01 6.160103e-01</code></pre>
-<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb318-1"><a href="mixed-models.html#cb318-1" aria-hidden="true" tabindex="-1"></a><span class="co"># variance component estimates by group.var</span></span>
-<span id="cb318-2"><a href="mixed-models.html#cb318-2" aria-hidden="true" tabindex="-1"></a>nullmod<span class="sc">$</span>varComp</span></code></pre></div>
+<div class="sourceCode" id="cb320"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb320-1"><a href="mixed-models.html#cb320-1"></a><span class="co"># variance component estimates by group.var</span></span>
+<span id="cb320-2"><a href="mixed-models.html#cb320-2"></a>nullmod<span class="op">$</span>varComp</span></code></pre></div>
 <pre><code>##       V_A V_study_1 V_study_3 V_study_2 
 ##   0.00000  93.61147 168.76021 152.37404</code></pre>
-<div class="sourceCode" id="cb320"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb320-1"><a href="mixed-models.html#cb320-1" aria-hidden="true" tabindex="-1"></a><span class="co"># model fit: fitted values, residuals</span></span>
-<span id="cb320-2"><a href="mixed-models.html#cb320-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(nullmod<span class="sc">$</span>fit)</span></code></pre></div>
-<pre><code>##         outcome workingY fitted.values resid.marginal resid.conditional linear.predictor     resid.PY resid.cholesky
-## HG00096 165.300  165.300      175.8150    -10.5150254       -10.5150254         175.8150 -0.112326247    -1.08679039
-## HG00097 144.780  144.780      160.3639    -15.5839388       -15.5839388         160.3639 -0.092343679    -1.19961587
-## HG00099 185.500  185.500      179.4017      6.0983220         6.0983220         179.4017  0.040022053     0.49403175
-## HG00100 150.622  150.622      160.7060    -10.0839725       -10.0839725         160.7060 -0.059753258    -0.77624108
-## HG00101 177.800  177.800      166.2361     11.5638906        11.5638906         166.2361  0.068522613     0.89016178
-## HG00102 169.100  169.100      169.9405     -0.8404905        -0.8404905         169.9405 -0.008978499    -0.08686969
-##         sample.id
-## HG00096   HG00096
-## HG00097   HG00097
-## HG00099   HG00099
-## HG00100   HG00100
-## HG00101   HG00101
-## HG00102   HG00102</code></pre>
-<div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb322-1"><a href="mixed-models.html#cb322-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb322-2"><a href="mixed-models.html#cb322-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(nullmod<span class="sc">$</span>fit, <span class="fu">aes</span>(<span class="at">x =</span> fitted.values, <span class="at">y =</span> resid.marginal)) <span class="sc">+</span> </span>
-<span id="cb322-3"><a href="mixed-models.html#cb322-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span> </span>
-<span id="cb322-4"><a href="mixed-models.html#cb322-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>) <span class="sc">+</span> </span>
-<span id="cb322-5"><a href="mixed-models.html#cb322-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&#39;lm&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb322-1"><a href="mixed-models.html#cb322-1"></a><span class="co"># model fit: fitted values, residuals</span></span>
+<span id="cb322-2"><a href="mixed-models.html#cb322-2"></a><span class="kw">head</span>(nullmod<span class="op">$</span>fit)</span></code></pre></div>
+<pre><code>##         outcome workingY fitted.values resid.marginal resid.conditional
+## HG00096 165.300  165.300      175.8150    -10.5150254       -10.5150254
+## HG00097 144.780  144.780      160.3639    -15.5839388       -15.5839388
+## HG00099 185.500  185.500      179.4017      6.0983220         6.0983220
+## HG00100 150.622  150.622      160.7060    -10.0839725       -10.0839725
+## HG00101 177.800  177.800      166.2361     11.5638906        11.5638906
+## HG00102 169.100  169.100      169.9405     -0.8404905        -0.8404905
+##         linear.predictor     resid.PY resid.cholesky sample.id
+## HG00096         175.8150 -0.112326247    -1.08679039   HG00096
+## HG00097         160.3639 -0.092343679    -1.19961587   HG00097
+## HG00099         179.4017  0.040022053     0.49403175   HG00099
+## HG00100         160.7060 -0.059753258    -0.77624108   HG00100
+## HG00101         166.2361  0.068522613     0.89016178   HG00101
+## HG00102         169.9405 -0.008978499    -0.08686969   HG00102</code></pre>
+<div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb324-1"><a href="mixed-models.html#cb324-1"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb324-2"><a href="mixed-models.html#cb324-2"></a><span class="kw">ggplot</span>(nullmod<span class="op">$</span>fit, <span class="kw">aes</span>(<span class="dt">x =</span> fitted.values, <span class="dt">y =</span> resid.marginal)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb324-3"><a href="mixed-models.html#cb324-3"></a><span class="st">    </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb324-4"><a href="mixed-models.html#cb324-4"></a><span class="st">    </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb324-5"><a href="mixed-models.html#cb324-5"></a><span class="st">    </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&#39;lm&#39;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
 </div>
 <div id="single-variant-tests" class="section level2" number="7.2">
 <h2><span class="header-section-number">7.2</span> Single-variant tests</h2>
 <p>Now we can run a single-variant test, accounting for genetic ancestry and genetic relatedness among the subjects. We use the same <code>assocTestSingle</code> function as before; the only difference is that we pass in our new null model.</p>
-<div class="sourceCode" id="cb323"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb323-1"><a href="mixed-models.html#cb323-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(SeqVarTools)</span>
-<span id="cb323-2"><a href="mixed-models.html#cb323-2" aria-hidden="true" tabindex="-1"></a>gdsfile <span class="ot">&lt;-</span> <span class="st">&quot;data/1KG_phase3_subset_chr1.gds&quot;</span></span>
-<span id="cb323-3"><a href="mixed-models.html#cb323-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(gdsfile)) <span class="fu">download.file</span>(<span class="fu">file.path</span>(repo_path, gdsfile), gdsfile)</span>
-<span id="cb323-4"><a href="mixed-models.html#cb323-4" aria-hidden="true" tabindex="-1"></a>gdsfmt<span class="sc">::</span><span class="fu">showfile.gds</span>(<span class="at">closeall=</span><span class="cn">TRUE</span>) <span class="co"># make sure file is not already open</span></span>
-<span id="cb323-5"><a href="mixed-models.html#cb323-5" aria-hidden="true" tabindex="-1"></a>gds <span class="ot">&lt;-</span> <span class="fu">seqOpen</span>(gdsfile)</span>
-<span id="cb323-6"><a href="mixed-models.html#cb323-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb323-7"><a href="mixed-models.html#cb323-7" aria-hidden="true" tabindex="-1"></a><span class="co"># make the seqVarData object</span></span>
-<span id="cb323-8"><a href="mixed-models.html#cb323-8" aria-hidden="true" tabindex="-1"></a>seqData <span class="ot">&lt;-</span> <span class="fu">SeqVarData</span>(gds, <span class="at">sampleData=</span>annot)</span>
-<span id="cb323-9"><a href="mixed-models.html#cb323-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb323-10"><a href="mixed-models.html#cb323-10" aria-hidden="true" tabindex="-1"></a><span class="co"># make the iterator object</span></span>
-<span id="cb323-11"><a href="mixed-models.html#cb323-11" aria-hidden="true" tabindex="-1"></a>iterator <span class="ot">&lt;-</span> <span class="fu">SeqVarBlockIterator</span>(seqData, <span class="at">verbose=</span><span class="cn">FALSE</span>)</span>
-<span id="cb323-12"><a href="mixed-models.html#cb323-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb323-13"><a href="mixed-models.html#cb323-13" aria-hidden="true" tabindex="-1"></a><span class="co"># run the single-variant association test</span></span>
-<span id="cb323-14"><a href="mixed-models.html#cb323-14" aria-hidden="true" tabindex="-1"></a>assoc <span class="ot">&lt;-</span> <span class="fu">assocTestSingle</span>(iterator, nullmod)</span></code></pre></div>
+<div class="sourceCode" id="cb325"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb325-1"><a href="mixed-models.html#cb325-1"></a><span class="kw">library</span>(SeqVarTools)</span>
+<span id="cb325-2"><a href="mixed-models.html#cb325-2"></a>gdsfile &lt;-<span class="st"> &quot;data/1KG_phase3_subset_chr1.gds&quot;</span></span>
+<span id="cb325-3"><a href="mixed-models.html#cb325-3"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">file.exists</span>(gdsfile)) <span class="kw">download.file</span>(<span class="kw">file.path</span>(repo_path, gdsfile), gdsfile)</span>
+<span id="cb325-4"><a href="mixed-models.html#cb325-4"></a>gdsfmt<span class="op">::</span><span class="kw">showfile.gds</span>(<span class="dt">closeall=</span><span class="ot">TRUE</span>) <span class="co"># make sure file is not already open</span></span>
+<span id="cb325-5"><a href="mixed-models.html#cb325-5"></a>gds &lt;-<span class="st"> </span><span class="kw">seqOpen</span>(gdsfile)</span>
+<span id="cb325-6"><a href="mixed-models.html#cb325-6"></a></span>
+<span id="cb325-7"><a href="mixed-models.html#cb325-7"></a><span class="co"># make the seqVarData object</span></span>
+<span id="cb325-8"><a href="mixed-models.html#cb325-8"></a>seqData &lt;-<span class="st"> </span><span class="kw">SeqVarData</span>(gds, <span class="dt">sampleData=</span>annot)</span>
+<span id="cb325-9"><a href="mixed-models.html#cb325-9"></a></span>
+<span id="cb325-10"><a href="mixed-models.html#cb325-10"></a><span class="co"># make the iterator object</span></span>
+<span id="cb325-11"><a href="mixed-models.html#cb325-11"></a>iterator &lt;-<span class="st"> </span><span class="kw">SeqVarBlockIterator</span>(seqData, <span class="dt">verbose=</span><span class="ot">FALSE</span>)</span>
+<span id="cb325-12"><a href="mixed-models.html#cb325-12"></a></span>
+<span id="cb325-13"><a href="mixed-models.html#cb325-13"></a><span class="co"># run the single-variant association test</span></span>
+<span id="cb325-14"><a href="mixed-models.html#cb325-14"></a>assoc &lt;-<span class="st"> </span><span class="kw">assocTestSingle</span>(iterator, nullmod)</span></code></pre></div>
 <pre><code>## # of selected samples: 1,126</code></pre>
-<div class="sourceCode" id="cb325"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb325-1"><a href="mixed-models.html#cb325-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(assoc)</span></code></pre></div>
+<div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb327-1"><a href="mixed-models.html#cb327-1"></a><span class="kw">dim</span>(assoc)</span></code></pre></div>
 <pre><code>## [1] 1129   14</code></pre>
-<div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb327-1"><a href="mixed-models.html#cb327-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(assoc)</span></code></pre></div>
-<pre><code>##   variant.id chr     pos allele.index n.obs         freq MAC       Score  Score.SE Score.Stat  Score.pval        Est
-## 1          1   1  970546            1  1126 0.0039964476   9 -0.17384025 0.2592275 -0.6706088 0.502469798  -2.586950
-## 2          2   1  985900            1  1126 0.0492895204 111 -1.55598468 0.8183596 -1.9013460 0.057256708  -2.323363
-## 3          3   1 1025045            1  1126 0.0004440497   1 -0.29433530 0.1029724 -2.8583911 0.004257953 -27.758817
-## 4          4   1 1265550            1  1126 0.0008880995   2 -0.09940909 0.1078116 -0.9220633 0.356495581  -8.552545
-## 5          5   1 1472676            1  1126 0.0071047957  16  0.14878210 0.3468438  0.4289599 0.667952399   1.236752
-## 6          6   1 1735725            1  1126 0.0022202487   5 -0.13567249 0.1982518 -0.6843443 0.493757749  -3.451895
-##     Est.SE          PVE
-## 1 3.857615 0.0004026103
-## 2 1.221957 0.0032364488
-## 3 9.711343 0.0073145856
-## 4 9.275442 0.0007611458
-## 5 2.883142 0.0001647327
-## 6 5.044091 0.0004192719</code></pre>
+<div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb329-1"><a href="mixed-models.html#cb329-1"></a><span class="kw">head</span>(assoc)</span></code></pre></div>
+<pre><code>##   variant.id chr     pos allele.index n.obs         freq MAC       Score
+## 1          1   1  970546            1  1126 0.0039964476   9 -0.17384025
+## 2          2   1  985900            1  1126 0.0492895204 111 -1.55598468
+## 3          3   1 1025045            1  1126 0.0004440497   1 -0.29433530
+## 4          4   1 1265550            1  1126 0.0008880995   2 -0.09940909
+## 5          5   1 1472676            1  1126 0.0071047957  16  0.14878210
+## 6          6   1 1735725            1  1126 0.0022202487   5 -0.13567249
+##    Score.SE Score.Stat  Score.pval        Est   Est.SE          PVE
+## 1 0.2592275 -0.6706088 0.502469798  -2.586950 3.857615 0.0004026103
+## 2 0.8183596 -1.9013460 0.057256708  -2.323363 1.221957 0.0032364488
+## 3 0.1029724 -2.8583911 0.004257953 -27.758817 9.711343 0.0073145856
+## 4 0.1078116 -0.9220633 0.356495581  -8.552545 9.275442 0.0007611458
+## 5 0.3468438  0.4289599 0.667952399   1.236752 2.883142 0.0001647327
+## 6 0.1982518 -0.6843443 0.493757749  -3.451895 5.044091 0.0004192719</code></pre>
 <p>We make the usual QQ plot, filtering to variants with minor allele count (MAC) &gt;= 5.</p>
-<div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb329-1"><a href="mixed-models.html#cb329-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb329-2"><a href="mixed-models.html#cb329-2" aria-hidden="true" tabindex="-1"></a>qqPlot <span class="ot">&lt;-</span> <span class="cf">function</span>(pval) {</span>
-<span id="cb329-3"><a href="mixed-models.html#cb329-3" aria-hidden="true" tabindex="-1"></a>    pval <span class="ot">&lt;-</span> pval[<span class="sc">!</span><span class="fu">is.na</span>(pval)]</span>
-<span id="cb329-4"><a href="mixed-models.html#cb329-4" aria-hidden="true" tabindex="-1"></a>    n <span class="ot">&lt;-</span> <span class="fu">length</span>(pval)</span>
-<span id="cb329-5"><a href="mixed-models.html#cb329-5" aria-hidden="true" tabindex="-1"></a>    x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span>n</span>
-<span id="cb329-6"><a href="mixed-models.html#cb329-6" aria-hidden="true" tabindex="-1"></a>    dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">obs=</span><span class="fu">sort</span>(pval),</span>
-<span id="cb329-7"><a href="mixed-models.html#cb329-7" aria-hidden="true" tabindex="-1"></a>                      <span class="at">exp=</span>x<span class="sc">/</span>n,</span>
-<span id="cb329-8"><a href="mixed-models.html#cb329-8" aria-hidden="true" tabindex="-1"></a>                      <span class="at">upper=</span><span class="fu">qbeta</span>(<span class="fl">0.025</span>, x, <span class="fu">rev</span>(x)),</span>
-<span id="cb329-9"><a href="mixed-models.html#cb329-9" aria-hidden="true" tabindex="-1"></a>                      <span class="at">lower=</span><span class="fu">qbeta</span>(<span class="fl">0.975</span>, x, <span class="fu">rev</span>(x)))</span>
-<span id="cb329-10"><a href="mixed-models.html#cb329-10" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb329-11"><a href="mixed-models.html#cb329-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(<span class="sc">-</span><span class="fu">log10</span>(exp), <span class="sc">-</span><span class="fu">log10</span>(obs))) <span class="sc">+</span></span>
-<span id="cb329-12"><a href="mixed-models.html#cb329-12" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="sc">-</span><span class="fu">log10</span>(exp), <span class="sc">-</span><span class="fu">log10</span>(upper)), <span class="at">color=</span><span class="st">&quot;gray&quot;</span>) <span class="sc">+</span></span>
-<span id="cb329-13"><a href="mixed-models.html#cb329-13" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="sc">-</span><span class="fu">log10</span>(exp), <span class="sc">-</span><span class="fu">log10</span>(lower)), <span class="at">color=</span><span class="st">&quot;gray&quot;</span>) <span class="sc">+</span></span>
-<span id="cb329-14"><a href="mixed-models.html#cb329-14" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb329-15"><a href="mixed-models.html#cb329-15" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_abline</span>(<span class="at">intercept=</span><span class="dv">0</span>, <span class="at">slope=</span><span class="dv">1</span>, <span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
-<span id="cb329-16"><a href="mixed-models.html#cb329-16" aria-hidden="true" tabindex="-1"></a>        <span class="fu">xlab</span>(<span class="fu">expression</span>(<span class="fu">paste</span>(<span class="sc">-</span>log[<span class="dv">10</span>], <span class="st">&quot;(expected P)&quot;</span>))) <span class="sc">+</span></span>
-<span id="cb329-17"><a href="mixed-models.html#cb329-17" aria-hidden="true" tabindex="-1"></a>        <span class="fu">ylab</span>(<span class="fu">expression</span>(<span class="fu">paste</span>(<span class="sc">-</span>log[<span class="dv">10</span>], <span class="st">&quot;(observed P)&quot;</span>))) <span class="sc">+</span></span>
-<span id="cb329-18"><a href="mixed-models.html#cb329-18" aria-hidden="true" tabindex="-1"></a>        <span class="fu">theme_bw</span>()</span>
-<span id="cb329-19"><a href="mixed-models.html#cb329-19" aria-hidden="true" tabindex="-1"></a>}    </span>
-<span id="cb329-20"><a href="mixed-models.html#cb329-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb329-21"><a href="mixed-models.html#cb329-21" aria-hidden="true" tabindex="-1"></a><span class="fu">qqPlot</span>(assoc<span class="sc">$</span>Score.pval[assoc<span class="sc">$</span>MAC <span class="sc">&gt;=</span> <span class="dv">5</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb331"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb331-1"><a href="mixed-models.html#cb331-1"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb331-2"><a href="mixed-models.html#cb331-2"></a>qqPlot &lt;-<span class="st"> </span><span class="cf">function</span>(pval) {</span>
+<span id="cb331-3"><a href="mixed-models.html#cb331-3"></a>    pval &lt;-<span class="st"> </span>pval[<span class="op">!</span><span class="kw">is.na</span>(pval)]</span>
+<span id="cb331-4"><a href="mixed-models.html#cb331-4"></a>    n &lt;-<span class="st"> </span><span class="kw">length</span>(pval)</span>
+<span id="cb331-5"><a href="mixed-models.html#cb331-5"></a>    x &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span>n</span>
+<span id="cb331-6"><a href="mixed-models.html#cb331-6"></a>    dat &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">obs=</span><span class="kw">sort</span>(pval),</span>
+<span id="cb331-7"><a href="mixed-models.html#cb331-7"></a>                      <span class="dt">exp=</span>x<span class="op">/</span>n,</span>
+<span id="cb331-8"><a href="mixed-models.html#cb331-8"></a>                      <span class="dt">upper=</span><span class="kw">qbeta</span>(<span class="fl">0.025</span>, x, <span class="kw">rev</span>(x)),</span>
+<span id="cb331-9"><a href="mixed-models.html#cb331-9"></a>                      <span class="dt">lower=</span><span class="kw">qbeta</span>(<span class="fl">0.975</span>, x, <span class="kw">rev</span>(x)))</span>
+<span id="cb331-10"><a href="mixed-models.html#cb331-10"></a>    </span>
+<span id="cb331-11"><a href="mixed-models.html#cb331-11"></a>    <span class="kw">ggplot</span>(dat, <span class="kw">aes</span>(<span class="op">-</span><span class="kw">log10</span>(exp), <span class="op">-</span><span class="kw">log10</span>(obs))) <span class="op">+</span></span>
+<span id="cb331-12"><a href="mixed-models.html#cb331-12"></a><span class="st">        </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="op">-</span><span class="kw">log10</span>(exp), <span class="op">-</span><span class="kw">log10</span>(upper)), <span class="dt">color=</span><span class="st">&quot;gray&quot;</span>) <span class="op">+</span></span>
+<span id="cb331-13"><a href="mixed-models.html#cb331-13"></a><span class="st">        </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="op">-</span><span class="kw">log10</span>(exp), <span class="op">-</span><span class="kw">log10</span>(lower)), <span class="dt">color=</span><span class="st">&quot;gray&quot;</span>) <span class="op">+</span></span>
+<span id="cb331-14"><a href="mixed-models.html#cb331-14"></a><span class="st">        </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
+<span id="cb331-15"><a href="mixed-models.html#cb331-15"></a><span class="st">        </span><span class="kw">geom_abline</span>(<span class="dt">intercept=</span><span class="dv">0</span>, <span class="dt">slope=</span><span class="dv">1</span>, <span class="dt">color=</span><span class="st">&quot;red&quot;</span>) <span class="op">+</span></span>
+<span id="cb331-16"><a href="mixed-models.html#cb331-16"></a><span class="st">        </span><span class="kw">xlab</span>(<span class="kw">expression</span>(<span class="kw">paste</span>(<span class="op">-</span>log[<span class="dv">10</span>], <span class="st">&quot;(expected P)&quot;</span>))) <span class="op">+</span></span>
+<span id="cb331-17"><a href="mixed-models.html#cb331-17"></a><span class="st">        </span><span class="kw">ylab</span>(<span class="kw">expression</span>(<span class="kw">paste</span>(<span class="op">-</span>log[<span class="dv">10</span>], <span class="st">&quot;(observed P)&quot;</span>))) <span class="op">+</span></span>
+<span id="cb331-18"><a href="mixed-models.html#cb331-18"></a><span class="st">        </span><span class="kw">theme_bw</span>()</span>
+<span id="cb331-19"><a href="mixed-models.html#cb331-19"></a>}    </span>
+<span id="cb331-20"><a href="mixed-models.html#cb331-20"></a></span>
+<span id="cb331-21"><a href="mixed-models.html#cb331-21"></a><span class="kw">qqPlot</span>(assoc<span class="op">$</span>Score.pval[assoc<span class="op">$</span>MAC <span class="op">&gt;=</span><span class="st"> </span><span class="dv">5</span>])</span></code></pre></div>
 <p><img src="_main_files/figure-html/assoc_single_qq_mm-1.png" width="672" /></p>
 <p>Notice that we observe much less inflation than before, when we did not adjust for ancestry and relatedness.</p>
 </div>
@@ -445,15 +455,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Perform a single-variant association test for <code>status</code>. Adjust for sex, age, study, ancestry, and kinship in the model. Don’t forget to consider the <code>family</code> parameter. Make a QQ plot of the p-values for all variants with MAC &gt;= 5.</li>
 </ol>
 <p>The first step is to fit the null model. We include the first 4 PCs as covariates in our model to adjust for ancestry, and we include a random effect proportional to the kinship matrix to adjust for genetic relatedness. Recall that with a binary outcome, we set <code>family = binomial</code> – because we have a random effect, this will fit an approximate logistic mixed model using the <a href="https://www.cell.com/ajhg/fulltext/S0002-9297(16)00063-X">GMMAT method</a>.</p>
-<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="mixed-models.html#cb330-1" aria-hidden="true" tabindex="-1"></a>nullmod.status <span class="ot">&lt;-</span> <span class="fu">fitNullModel</span>(annot, </span>
-<span id="cb330-2"><a href="mixed-models.html#cb330-2" aria-hidden="true" tabindex="-1"></a>                               <span class="at">outcome=</span><span class="st">&quot;status&quot;</span>, </span>
-<span id="cb330-3"><a href="mixed-models.html#cb330-3" aria-hidden="true" tabindex="-1"></a>                               <span class="at">covars=</span><span class="fu">c</span>(<span class="st">&quot;sex&quot;</span>, <span class="st">&quot;age&quot;</span>, <span class="st">&quot;study&quot;</span>, <span class="fu">paste0</span>(<span class="st">&quot;PC&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>)), </span>
-<span id="cb330-4"><a href="mixed-models.html#cb330-4" aria-hidden="true" tabindex="-1"></a>                               <span class="at">cov.mat=</span>kinship, </span>
-<span id="cb330-5"><a href="mixed-models.html#cb330-5" aria-hidden="true" tabindex="-1"></a>                               <span class="at">family =</span> binomial,</span>
-<span id="cb330-6"><a href="mixed-models.html#cb330-6" aria-hidden="true" tabindex="-1"></a>                               <span class="at">verbose=</span><span class="cn">FALSE</span>)</span>
-<span id="cb330-7"><a href="mixed-models.html#cb330-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb330-8"><a href="mixed-models.html#cb330-8" aria-hidden="true" tabindex="-1"></a><span class="co"># description of the model we fit</span></span>
-<span id="cb330-9"><a href="mixed-models.html#cb330-9" aria-hidden="true" tabindex="-1"></a>nullmod.status<span class="sc">$</span>model</span></code></pre></div>
+<div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb332-1"><a href="mixed-models.html#cb332-1"></a>nullmod.status &lt;-<span class="st"> </span><span class="kw">fitNullModel</span>(annot, </span>
+<span id="cb332-2"><a href="mixed-models.html#cb332-2"></a>                               <span class="dt">outcome=</span><span class="st">&quot;status&quot;</span>, </span>
+<span id="cb332-3"><a href="mixed-models.html#cb332-3"></a>                               <span class="dt">covars=</span><span class="kw">c</span>(<span class="st">&quot;sex&quot;</span>, <span class="st">&quot;age&quot;</span>, <span class="st">&quot;study&quot;</span>, <span class="kw">paste0</span>(<span class="st">&quot;PC&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>)), </span>
+<span id="cb332-4"><a href="mixed-models.html#cb332-4"></a>                               <span class="dt">cov.mat=</span>kinship, </span>
+<span id="cb332-5"><a href="mixed-models.html#cb332-5"></a>                               <span class="dt">family =</span> binomial,</span>
+<span id="cb332-6"><a href="mixed-models.html#cb332-6"></a>                               <span class="dt">verbose=</span><span class="ot">FALSE</span>)</span>
+<span id="cb332-7"><a href="mixed-models.html#cb332-7"></a></span>
+<span id="cb332-8"><a href="mixed-models.html#cb332-8"></a><span class="co"># description of the model we fit</span></span>
+<span id="cb332-9"><a href="mixed-models.html#cb332-9"></a>nullmod.status<span class="op">$</span>model</span></code></pre></div>
 <pre><code>## $hetResid
 ## [1] FALSE
 ## 
@@ -471,8 +481,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 
 ## $formula
 ## [1] &quot;status ~ sex + age + study + PC1 + PC2 + PC3 + PC4 + (1|A)&quot;</code></pre>
-<div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb332-1"><a href="mixed-models.html#cb332-1" aria-hidden="true" tabindex="-1"></a><span class="co"># fixed effect regression estimates</span></span>
-<span id="cb332-2"><a href="mixed-models.html#cb332-2" aria-hidden="true" tabindex="-1"></a>nullmod.status<span class="sc">$</span>fixef</span></code></pre></div>
+<div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb334-1"><a href="mixed-models.html#cb334-1"></a><span class="co"># fixed effect regression estimates</span></span>
+<span id="cb334-2"><a href="mixed-models.html#cb334-2"></a>nullmod.status<span class="op">$</span>fixef</span></code></pre></div>
 <pre><code>##                       Est         SE         Stat        pval
 ## (Intercept)  -3.182182913 0.96998026 1.076278e+01 0.001035617
 ## sexM          0.124463598 0.20598679 3.650951e-01 0.545690084
@@ -483,35 +493,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## PC2           5.076675586 3.21042684 2.500537e+00 0.113807493
 ## PC3          -0.236916365 3.45512128 4.701793e-03 0.945332199
 ## PC4           1.946715491 3.41350477 3.252400e-01 0.568475488</code></pre>
-<div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb334-1"><a href="mixed-models.html#cb334-1" aria-hidden="true" tabindex="-1"></a><span class="co"># variance component estimates by group.var</span></span>
-<span id="cb334-2"><a href="mixed-models.html#cb334-2" aria-hidden="true" tabindex="-1"></a>nullmod.status<span class="sc">$</span>varComp</span></code></pre></div>
+<div class="sourceCode" id="cb336"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb336-1"><a href="mixed-models.html#cb336-1"></a><span class="co"># variance component estimates by group.var</span></span>
+<span id="cb336-2"><a href="mixed-models.html#cb336-2"></a>nullmod.status<span class="op">$</span>varComp</span></code></pre></div>
 <pre><code>##       V_A 
 ## 0.2923299</code></pre>
 <p>Now that we have the null model, we perform the single-variant association tests and make the QQ plot the same way as before.</p>
-<div class="sourceCode" id="cb336"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb336-1"><a href="mixed-models.html#cb336-1" aria-hidden="true" tabindex="-1"></a><span class="fu">resetIterator</span>(iterator, <span class="at">verbose=</span><span class="cn">FALSE</span>)</span>
-<span id="cb336-2"><a href="mixed-models.html#cb336-2" aria-hidden="true" tabindex="-1"></a><span class="co"># run the single-variant association test</span></span>
-<span id="cb336-3"><a href="mixed-models.html#cb336-3" aria-hidden="true" tabindex="-1"></a>assoc.status <span class="ot">&lt;-</span> <span class="fu">assocTestSingle</span>(iterator, nullmod.status, <span class="at">test=</span><span class="st">&quot;Score&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb338-1"><a href="mixed-models.html#cb338-1"></a><span class="kw">resetIterator</span>(iterator, <span class="dt">verbose=</span><span class="ot">FALSE</span>)</span>
+<span id="cb338-2"><a href="mixed-models.html#cb338-2"></a><span class="co"># run the single-variant association test</span></span>
+<span id="cb338-3"><a href="mixed-models.html#cb338-3"></a>assoc.status &lt;-<span class="st"> </span><span class="kw">assocTestSingle</span>(iterator, nullmod.status, <span class="dt">test=</span><span class="st">&quot;Score&quot;</span>)</span></code></pre></div>
 <pre><code>## # of selected samples: 1,126</code></pre>
-<div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb338-1"><a href="mixed-models.html#cb338-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(assoc.status)</span></code></pre></div>
+<div class="sourceCode" id="cb340"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb340-1"><a href="mixed-models.html#cb340-1"></a><span class="kw">dim</span>(assoc.status)</span></code></pre></div>
 <pre><code>## [1] 1129   14</code></pre>
-<div class="sourceCode" id="cb340"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb340-1"><a href="mixed-models.html#cb340-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(assoc.status)</span></code></pre></div>
-<pre><code>##   variant.id chr     pos allele.index n.obs         freq MAC      Score  Score.SE Score.Stat Score.pval        Est
-## 1          1   1  970546            1  1126 0.0039964476   9  0.1975748 0.8349756  0.2366235 0.81294892  0.2833897
-## 2          2   1  985900            1  1126 0.0492895204 111 -2.5741449 2.6188824 -0.9829173 0.32564813 -0.3753194
-## 3          3   1 1025045            1  1126 0.0004440497   1 -0.0721219 0.2555958 -0.2821717 0.77781189 -1.1039760
-## 4          4   1 1265550            1  1126 0.0008880995   2  0.7862901 0.4237118  1.8557191 0.06349361  4.3796725
-## 5          5   1 1472676            1  1126 0.0071047957  16  0.6300877 1.0837470  0.5813974 0.56097266  0.5364696
-## 6          6   1 1735725            1  1126 0.0022202487   5 -0.4029747 0.5941659 -0.6782191 0.49763280 -1.1414641
-##      Est.SE          PVE
-## 1 1.1976398 6.097484e-05
-## 2 0.3818423 1.052129e-03
-## 3 3.9124270 8.670854e-05
-## 4 2.3600946 3.750244e-03
-## 5 0.9227246 3.681131e-04
-## 6 1.6830315 5.009278e-04</code></pre>
-<div class="sourceCode" id="cb342"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb342-1"><a href="mixed-models.html#cb342-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qqPlot</span>(assoc.status<span class="sc">$</span>Score.pval[assoc.status<span class="sc">$</span>MAC <span class="sc">&gt;=</span> <span class="dv">5</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb342"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb342-1"><a href="mixed-models.html#cb342-1"></a><span class="kw">head</span>(assoc.status)</span></code></pre></div>
+<pre><code>##   variant.id chr     pos allele.index n.obs         freq MAC      Score
+## 1          1   1  970546            1  1126 0.0039964476   9  0.1975748
+## 2          2   1  985900            1  1126 0.0492895204 111 -2.5741449
+## 3          3   1 1025045            1  1126 0.0004440497   1 -0.0721219
+## 4          4   1 1265550            1  1126 0.0008880995   2  0.7862901
+## 5          5   1 1472676            1  1126 0.0071047957  16  0.6300877
+## 6          6   1 1735725            1  1126 0.0022202487   5 -0.4029747
+##    Score.SE Score.Stat Score.pval        Est    Est.SE          PVE
+## 1 0.8349756  0.2366235 0.81294892  0.2833897 1.1976398 6.097484e-05
+## 2 2.6188824 -0.9829173 0.32564813 -0.3753194 0.3818423 1.052129e-03
+## 3 0.2555958 -0.2821717 0.77781189 -1.1039760 3.9124270 8.670854e-05
+## 4 0.4237118  1.8557191 0.06349361  4.3796725 2.3600946 3.750244e-03
+## 5 1.0837470  0.5813974 0.56097266  0.5364696 0.9227246 3.681131e-04
+## 6 0.5941659 -0.6782191 0.49763280 -1.1414641 1.6830315 5.009278e-04</code></pre>
+<div class="sourceCode" id="cb344"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb344-1"><a href="mixed-models.html#cb344-1"></a><span class="kw">qqPlot</span>(assoc.status<span class="op">$</span>Score.pval[assoc.status<span class="op">$</span>MAC <span class="op">&gt;=</span><span class="st"> </span><span class="dv">5</span>])</span></code></pre></div>
 <p><img src="_main_files/figure-html/exercise_mm_assoc-1.png" width="672" /></p>
-<div class="sourceCode" id="cb343"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb343-1"><a href="mixed-models.html#cb343-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seqClose</span>(seqData)</span></code></pre></div>
+<div class="sourceCode" id="cb345"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb345-1"><a href="mixed-models.html#cb345-1"></a><span class="kw">seqClose</span>(seqData)</span></code></pre></div>
 
 </div>
 </div>
