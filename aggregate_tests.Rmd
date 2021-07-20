@@ -1,10 +1,10 @@
-# Aggregate association tests
+# Annotation informed aggregate association tests
 
 ## Aggregate unit for association testing exercise
 
-Now that we know how to make gene-based variant aggregation units, we can proceed to an association testing exercise. In this exercise, the genic units will include SNPs from all chromosomes (no indels, and not just chromosome 1 as before), each genic unit is expanded to include the set of SNPs falling within a GENCODE-defined gene along with 20 kb flanking regions upstream and downstream of that range, and the positions are in genome build hg19 (so that the annotation positions are consistent with the build used for genotyping data in the workshop). This set of aggregation units is not filtered by CADD score or consequence.
+Now that we know how to make genome annotation informed aggreation units using Annotation Explorer, such as the gene-based variant aggregation units, we can proceed to an association testing exercise. *NOTE : The excercises in this workshop are based on the 1000 genomes dataset mapped to genome build GRCh37/hg19. Because the aggreation units we generated using the Annotation Explorer in the previous section are mapped to GRCh38 and are not based on 1000 genomes data, we will **not** be using them in this section*. Instead, in this excercise we will be using pre-computed aggreation units based on 1000 genomes mapped to GRCh37 so that the annotation positions are consistent with the build used for genotyping data in the workshop. These gene-based units include SNVs from all chromosomes (no indels, and not just chromosome 1 as before). Each genic unit was specified to include the set of SNVs falling within a GENCODE-defined gene boundaries and the 20 kb flanking regions upstream and downstream of that range. This set of aggregation units is not filtered by CADD score or consequence.
 
-As before, the aggregation units are defined in an R dataframe. Each row of the dataframe specifies a variant (chr, pos, ref, alt) and the group identifier (group_id) it is a part of. Multiple rows with different group identifiers can be specified to assign a variant to different groups (i.e., a variant can be assigned to multiple genes).
+The aggregation units are defined in an R dataframe in the format consisent with the output from Annotation Explorer and comptabile with the GENESIS assocation testng workflows. Each row of the dataframe specifies a variant (chr, pos, ref, alt) and the group identifier (group_id) it is a part of. Multiple rows with different group identifiers can be specified to assign a variant to different groups (i.e., a variant can be assigned to multiple genes).
 
 Begin by loading the aggregation units:
 
