@@ -7,7 +7,7 @@ Annotation explorer has an interactive graphical user interface built on high pe
 
 ### Use case 1 
 
-User wants to generate aggregation units for rare variant association testing such that only missense variants which have CADD phred score >20 are grouped by Ensemble gene definitions.
+User wants to generate aggregation units for rare variant association testing such that only missense variants which have `CADD phred score >20` are grouped by Ensemble gene definitions.
 
 ### Use case 2 
 
