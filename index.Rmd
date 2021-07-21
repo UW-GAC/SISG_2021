@@ -63,7 +63,7 @@ NOTE: All times are Pacific Daylight Time (GMT-07:00)
 
 - **Zoom session 8:00-9:45 PDT** - Association tests, Part I
     - **Lecture**
-        - Association tests: Methods and motivation  ([slides](https://drive.google.com/file/d/1i6iVEP97r_nkeOeSMAIm-UKS9wVgaJ0V/view?usp=sharing)) (video coming soon)
+        - Association tests: Methods and motivation  ([slides](https://drive.google.com/file/d/1caziaZ_tp0Brg_Atq0keiImSWx_GujXL/view?usp=sharing)) (video coming soon)
         - GENESIS for association tests  ([slides](https://drive.google.com/file/d/1LPGKgrhFb2Yzty-bTDsX9vlTxifsLcPl/view?usp=sharing)) (video coming soon)
     - **Interactive breakout rooms**
         - Null model ([Tutorial](https://uw-gac.github.io/SISG_2021/association-tests-part-i.html)) ([Exercise](https://uw-gac.github.io/SISG_2021/association-tests-part-i.html#exercise)) ([Solution](https://uw-gac.github.io/SISG_2021/association-tests-part-i.html#solution))
@@ -72,7 +72,7 @@ NOTE: All times are Pacific Daylight Time (GMT-07:00)
         
 - **Zoom session 10:15-11:45 PDT** - Association tests, Part II
     - **Lecture**
-        - Aggregate tests ([slides](https://drive.google.com/file/d/1i6iVEP97r_nkeOeSMAIm-UKS9wVgaJ0V/view?usp=sharing)) (video coming soon)
+        - Multiple variant association tests ([slides](https://drive.google.com/file/d/1XRcn9_Q0akqQkgKAD8DO_Cg4Nlk990gx/view?usp=sharing)) (video coming soon)
     - **Interactive breakout rooms**
         - Sliding window tests ([Tutorial](https://uw-gac.github.io/SISG_2021/association-tests-part-ii.html)) ([Exercise](https://uw-gac.github.io/SISG_2021/association-tests-part-ii.html#exercise-2)) ([Solution](https://uw-gac.github.io/SISG_2021/association-tests-part-ii.html#solution-2))
         - Discussion (video coming soon)
