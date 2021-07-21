@@ -50,7 +50,6 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
@@ -59,6 +58,7 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -202,11 +202,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="8" data-path="variant-annotation.html"><a href="variant-annotation.html"><i class="fa fa-check"></i><b>8</b> Variant annotation</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="variant-annotation.html"><a href="variant-annotation.html#use-case-1"><i class="fa fa-check"></i><b>8.1</b> Use case 1</a></li>
-<li class="chapter" data-level="8.2" data-path="variant-annotation.html"><a href="variant-annotation.html#use-case-2"><i class="fa fa-check"></i><b>8.2</b> Use case 2</a></li>
-<li class="chapter" data-level="8.3" data-path="variant-annotation.html"><a href="variant-annotation.html#use-case-3"><i class="fa fa-check"></i><b>8.3</b> Use case 3</a></li>
-<li class="chapter" data-level="8.4" data-path="variant-annotation.html"><a href="variant-annotation.html#exercise-4"><i class="fa fa-check"></i><b>8.4</b> Exercise</a></li>
-<li class="chapter" data-level="8.5" data-path="variant-annotation.html"><a href="variant-annotation.html#solution-4"><i class="fa fa-check"></i><b>8.5</b> Solution</a></li>
+<li class="chapter" data-level="8.1" data-path="variant-annotation.html"><a href="variant-annotation.html#use-cases"><i class="fa fa-check"></i><b>8.1</b> Use cases</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="variant-annotation.html"><a href="variant-annotation.html#use-case-1"><i class="fa fa-check"></i><b>8.1.1</b> Use case 1</a></li>
+<li class="chapter" data-level="8.1.2" data-path="variant-annotation.html"><a href="variant-annotation.html#use-case-2"><i class="fa fa-check"></i><b>8.1.2</b> Use case 2</a></li>
+<li class="chapter" data-level="8.1.3" data-path="variant-annotation.html"><a href="variant-annotation.html#use-case-3"><i class="fa fa-check"></i><b>8.1.3</b> Use case 3</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="variant-annotation.html"><a href="variant-annotation.html#exercise-4"><i class="fa fa-check"></i><b>8.2</b> Exercise</a></li>
+<li class="chapter" data-level="8.3" data-path="variant-annotation.html"><a href="variant-annotation.html#solution-4"><i class="fa fa-check"></i><b>8.3</b> Solution</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="annotation-informed-aggregate-association-tests.html"><a href="annotation-informed-aggregate-association-tests.html"><i class="fa fa-check"></i><b>9</b> Annotation informed aggregate association tests</a>
 <ul>
@@ -258,29 +261,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="ld-pruning" class="section level2" number="6.1">
 <h2><span class="header-section-number">6.1</span> LD-pruning</h2>
 <p>We generally advise that population structure and relatedness inference be performed using a set of (nearly) independent genetic variants. To find this set of variants, we perform linkage-disequilibrium (LD) pruning on the study sample set. We typically use an LD threshold of <code>r^2 &lt; 0.1</code> to select variants.</p>
-<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="ancestry-and-relatedness-inference.html#cb228-1"></a><span class="kw">library</span>(SeqArray)</span>
-<span id="cb228-2"><a href="ancestry-and-relatedness-inference.html#cb228-2"></a>repo_path &lt;-<span class="st"> &quot;https://github.com/UW-GAC/SISG_2021/raw/master&quot;</span></span>
-<span id="cb228-3"><a href="ancestry-and-relatedness-inference.html#cb228-3"></a></span>
-<span id="cb228-4"><a href="ancestry-and-relatedness-inference.html#cb228-4"></a><span class="co"># use a GDS file with all chromosomes</span></span>
-<span id="cb228-5"><a href="ancestry-and-relatedness-inference.html#cb228-5"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">dir.exists</span>(<span class="st">&quot;data&quot;</span>)) <span class="kw">dir.create</span>(<span class="st">&quot;data&quot;</span>)</span>
-<span id="cb228-6"><a href="ancestry-and-relatedness-inference.html#cb228-6"></a>gdsfile &lt;-<span class="st"> &quot;data/1KG_phase3_subset.gds&quot;</span></span>
-<span id="cb228-7"><a href="ancestry-and-relatedness-inference.html#cb228-7"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">file.exists</span>(gdsfile)) <span class="kw">download.file</span>(<span class="kw">file.path</span>(repo_path, gdsfile), gdsfile)</span>
-<span id="cb228-8"><a href="ancestry-and-relatedness-inference.html#cb228-8"></a>gdsfmt<span class="op">::</span><span class="kw">showfile.gds</span>(<span class="dt">closeall=</span><span class="ot">TRUE</span>) <span class="co"># make sure file is not already open</span></span>
-<span id="cb228-9"><a href="ancestry-and-relatedness-inference.html#cb228-9"></a>gds &lt;-<span class="st"> </span><span class="kw">seqOpen</span>(gdsfile)</span>
-<span id="cb228-10"><a href="ancestry-and-relatedness-inference.html#cb228-10"></a></span>
-<span id="cb228-11"><a href="ancestry-and-relatedness-inference.html#cb228-11"></a><span class="co"># run LD pruning</span></span>
-<span id="cb228-12"><a href="ancestry-and-relatedness-inference.html#cb228-12"></a><span class="kw">library</span>(SNPRelate)</span>
-<span id="cb228-13"><a href="ancestry-and-relatedness-inference.html#cb228-13"></a><span class="kw">set.seed</span>(<span class="dv">100</span>) <span class="co"># LD pruning has a random element; so make this reproducible</span></span>
-<span id="cb228-14"><a href="ancestry-and-relatedness-inference.html#cb228-14"></a>snpset &lt;-<span class="st"> </span><span class="kw">snpgdsLDpruning</span>(gds, </span>
-<span id="cb228-15"><a href="ancestry-and-relatedness-inference.html#cb228-15"></a>                          <span class="dt">method=</span><span class="st">&quot;corr&quot;</span>, </span>
-<span id="cb228-16"><a href="ancestry-and-relatedness-inference.html#cb228-16"></a>                          <span class="dt">slide.max.bp=</span><span class="fl">10e6</span>, </span>
-<span id="cb228-17"><a href="ancestry-and-relatedness-inference.html#cb228-17"></a>                          <span class="dt">ld.threshold=</span><span class="kw">sqrt</span>(<span class="fl">0.1</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="ancestry-and-relatedness-inference.html#cb226-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(SeqArray)</span>
+<span id="cb226-2"><a href="ancestry-and-relatedness-inference.html#cb226-2" aria-hidden="true" tabindex="-1"></a>repo_path <span class="ot">&lt;-</span> <span class="st">&quot;https://github.com/UW-GAC/SISG_2021/raw/master&quot;</span></span>
+<span id="cb226-3"><a href="ancestry-and-relatedness-inference.html#cb226-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb226-4"><a href="ancestry-and-relatedness-inference.html#cb226-4" aria-hidden="true" tabindex="-1"></a><span class="co"># use a GDS file with all chromosomes</span></span>
+<span id="cb226-5"><a href="ancestry-and-relatedness-inference.html#cb226-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">dir.exists</span>(<span class="st">&quot;data&quot;</span>)) <span class="fu">dir.create</span>(<span class="st">&quot;data&quot;</span>)</span>
+<span id="cb226-6"><a href="ancestry-and-relatedness-inference.html#cb226-6" aria-hidden="true" tabindex="-1"></a>gdsfile <span class="ot">&lt;-</span> <span class="st">&quot;data/1KG_phase3_subset.gds&quot;</span></span>
+<span id="cb226-7"><a href="ancestry-and-relatedness-inference.html#cb226-7" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(gdsfile)) <span class="fu">download.file</span>(<span class="fu">file.path</span>(repo_path, gdsfile), gdsfile)</span>
+<span id="cb226-8"><a href="ancestry-and-relatedness-inference.html#cb226-8" aria-hidden="true" tabindex="-1"></a>gdsfmt<span class="sc">::</span><span class="fu">showfile.gds</span>(<span class="at">closeall=</span><span class="cn">TRUE</span>) <span class="co"># make sure file is not already open</span></span>
+<span id="cb226-9"><a href="ancestry-and-relatedness-inference.html#cb226-9" aria-hidden="true" tabindex="-1"></a>gds <span class="ot">&lt;-</span> <span class="fu">seqOpen</span>(gdsfile)</span>
+<span id="cb226-10"><a href="ancestry-and-relatedness-inference.html#cb226-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb226-11"><a href="ancestry-and-relatedness-inference.html#cb226-11" aria-hidden="true" tabindex="-1"></a><span class="co"># run LD pruning</span></span>
+<span id="cb226-12"><a href="ancestry-and-relatedness-inference.html#cb226-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(SNPRelate)</span>
+<span id="cb226-13"><a href="ancestry-and-relatedness-inference.html#cb226-13" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">100</span>) <span class="co"># LD pruning has a random element; so make this reproducible</span></span>
+<span id="cb226-14"><a href="ancestry-and-relatedness-inference.html#cb226-14" aria-hidden="true" tabindex="-1"></a>snpset <span class="ot">&lt;-</span> <span class="fu">snpgdsLDpruning</span>(gds, </span>
+<span id="cb226-15"><a href="ancestry-and-relatedness-inference.html#cb226-15" aria-hidden="true" tabindex="-1"></a>                          <span class="at">method=</span><span class="st">&quot;corr&quot;</span>, </span>
+<span id="cb226-16"><a href="ancestry-and-relatedness-inference.html#cb226-16" aria-hidden="true" tabindex="-1"></a>                          <span class="at">slide.max.bp=</span><span class="fl">10e6</span>, </span>
+<span id="cb226-17"><a href="ancestry-and-relatedness-inference.html#cb226-17" aria-hidden="true" tabindex="-1"></a>                          <span class="at">ld.threshold=</span><span class="fu">sqrt</span>(<span class="fl">0.1</span>))</span></code></pre></div>
 <pre><code>## SNV pruning based on LD:
 ## Excluding 1,120 SNVs on non-autosomes
 ## Calculating allele counts/frequencies ...
 ## 
 [..................................................]  0%, ETC: ---    
-[==================================================] 100%, completed, 1s
+[==================================================] 100%, completed, 0s
 ## # of selected variants: 24,387
 ## Excluding 253 SNVs (monomorphic: TRUE, MAF: NaN, missing rate: NaN)
 ##     # of samples: 1,126
@@ -312,24 +315,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Chromosome 21: 75.09%, 841/1,120
 ## Chromosome 22: 76.52%, 857/1,120
 ## 21,287 markers are selected in total.</code></pre>
-<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="ancestry-and-relatedness-inference.html#cb230-1"></a><span class="co"># how many variants on each chr?</span></span>
-<span id="cb230-2"><a href="ancestry-and-relatedness-inference.html#cb230-2"></a><span class="kw">sapply</span>(snpset, length)</span></code></pre></div>
-<pre><code>##  chr1  chr2  chr3  chr4  chr5  chr6  chr7  chr8  chr9 chr10 chr11 chr12 chr13 
-##  1033  1021  1021  1021  1029   997  1014   997   993   973   972   989   967 
-## chr14 chr15 chr16 chr17 chr18 chr19 chr20 chr21 chr22 
-##   946   942   940   951   946   918   919   841   857</code></pre>
-<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="ancestry-and-relatedness-inference.html#cb232-1"></a><span class="co"># get the full list of LD-pruned variants </span></span>
-<span id="cb232-2"><a href="ancestry-and-relatedness-inference.html#cb232-2"></a>pruned &lt;-<span class="st"> </span><span class="kw">unlist</span>(snpset, <span class="dt">use.names=</span><span class="ot">FALSE</span>)</span>
-<span id="cb232-3"><a href="ancestry-and-relatedness-inference.html#cb232-3"></a><span class="kw">length</span>(pruned)</span></code></pre></div>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="ancestry-and-relatedness-inference.html#cb228-1" aria-hidden="true" tabindex="-1"></a><span class="co"># how many variants on each chr?</span></span>
+<span id="cb228-2"><a href="ancestry-and-relatedness-inference.html#cb228-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(snpset, length)</span></code></pre></div>
+<pre><code>##  chr1  chr2  chr3  chr4  chr5  chr6  chr7  chr8  chr9 chr10 chr11 chr12 chr13 chr14 chr15 chr16 chr17 chr18 chr19 chr20 chr21 chr22 
+##  1033  1021  1021  1021  1029   997  1014   997   993   973   972   989   967   946   942   940   951   946   918   919   841   857</code></pre>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="ancestry-and-relatedness-inference.html#cb230-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get the full list of LD-pruned variants </span></span>
+<span id="cb230-2"><a href="ancestry-and-relatedness-inference.html#cb230-2" aria-hidden="true" tabindex="-1"></a>pruned <span class="ot">&lt;-</span> <span class="fu">unlist</span>(snpset, <span class="at">use.names=</span><span class="cn">FALSE</span>)</span>
+<span id="cb230-3"><a href="ancestry-and-relatedness-inference.html#cb230-3" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(pruned)</span></code></pre></div>
 <pre><code>## [1] 21287</code></pre>
 </div>
 <div id="computing-a-grm" class="section level2" number="6.2">
 <h2><span class="header-section-number">6.2</span> Computing a GRM</h2>
 <p>We can use the <a href="https://github.com/zhengxwen/SNPRelate">SNPRelate package</a> to compute a Genetic Relationship matrix (GRM). A GRM captures genetic relatedness due to both distant ancestry (i.e. population structure) and recent kinship (i.e. family structure) in a single matrix.</p>
 <p>SNPRelate offers several algorithms for computing a GRM, including the commonly-used GCTA <a href="https://www.ncbi.nlm.nih.gov/pubmed/21167468">Yang et al 2011</a>. The most recent algorithm added to the package is “IndivBeta” <a href="https://www.ncbi.nlm.nih.gov/pubmed/28550018">Weir and Goudet 2017</a>.</p>
-<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="ancestry-and-relatedness-inference.html#cb234-1"></a><span class="co"># compute the GRM</span></span>
-<span id="cb234-2"><a href="ancestry-and-relatedness-inference.html#cb234-2"></a><span class="kw">library</span>(SNPRelate)</span>
-<span id="cb234-3"><a href="ancestry-and-relatedness-inference.html#cb234-3"></a>grm &lt;-<span class="st"> </span><span class="kw">snpgdsGRM</span>(gds, <span class="dt">method=</span><span class="st">&quot;GCTA&quot;</span>, <span class="dt">snp.id =</span> pruned)</span></code></pre></div>
+<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="ancestry-and-relatedness-inference.html#cb232-1" aria-hidden="true" tabindex="-1"></a><span class="co"># compute the GRM</span></span>
+<span id="cb232-2"><a href="ancestry-and-relatedness-inference.html#cb232-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(SNPRelate)</span>
+<span id="cb232-3"><a href="ancestry-and-relatedness-inference.html#cb232-3" aria-hidden="true" tabindex="-1"></a>grm <span class="ot">&lt;-</span> <span class="fu">snpgdsGRM</span>(gds, <span class="at">method=</span><span class="st">&quot;GCTA&quot;</span>, <span class="at">snp.id =</span> pruned)</span></code></pre></div>
 <pre><code>## Genetic Relationship Matrix (GRM, GCTA):
 ## Calculating allele counts/frequencies ...
 ## 
@@ -340,17 +341,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##     # of SNVs: 21,287
 ##     using 1 thread
 ## CPU capabilities: Double-Precision SSE2
-## Tue Jul 20 14:19:28 2021    (internal increment: 316)
+## Tue Jul 20 17:41:38 2021    (internal increment: 896)
 ## 
 [..................................................]  0%, ETC: ---        
-[==================================================] 100%, completed, 11s
-## Tue Jul 20 14:19:39 2021    Done.</code></pre>
-<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="ancestry-and-relatedness-inference.html#cb236-1"></a><span class="kw">names</span>(grm)</span></code></pre></div>
+[==================================================] 100%, completed, 4s
+## Tue Jul 20 17:41:42 2021    Done.</code></pre>
+<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="ancestry-and-relatedness-inference.html#cb234-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(grm)</span></code></pre></div>
 <pre><code>## [1] &quot;sample.id&quot; &quot;snp.id&quot;    &quot;method&quot;    &quot;grm&quot;</code></pre>
-<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="ancestry-and-relatedness-inference.html#cb238-1"></a><span class="kw">dim</span>(grm<span class="op">$</span>grm)</span></code></pre></div>
+<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="ancestry-and-relatedness-inference.html#cb236-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(grm<span class="sc">$</span>grm)</span></code></pre></div>
 <pre><code>## [1] 1126 1126</code></pre>
-<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="ancestry-and-relatedness-inference.html#cb240-1"></a><span class="co"># look at the top corner of the matrix</span></span>
-<span id="cb240-2"><a href="ancestry-and-relatedness-inference.html#cb240-2"></a>grm<span class="op">$</span>grm[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="ancestry-and-relatedness-inference.html#cb238-1" aria-hidden="true" tabindex="-1"></a><span class="co"># look at the top corner of the matrix</span></span>
+<span id="cb238-2"><a href="ancestry-and-relatedness-inference.html#cb238-2" aria-hidden="true" tabindex="-1"></a>grm<span class="sc">$</span>grm[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span></code></pre></div>
 <pre><code>##            [,1]       [,2]       [,3]       [,4]       [,5]
 ## [1,] 0.72284858 0.03428003 0.02475889 0.04051960 0.02397084
 ## [2,] 0.03428003 0.74335217 0.02098193 0.02772272 0.02125452
@@ -364,13 +365,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="king" class="section level3" number="6.3.1">
 <h3><span class="header-section-number">6.3.1</span> KING</h3>
 <p>Step 1 is to get initial kinship estimates using <a href="http://www.ncbi.nlm.nih.gov/pubmed/20926424">KING-robust</a>, which is robust to discrete population structure but not ancestry admixture. KING-robust will be able to identify close relatives (e.g. 1st and 2nd degree) reliably, but may identify spurious pairs or miss more distant pairs of relatives in the presence of admixture. KING is available as its own software, but the KING-robust algorithm is also available in SNPRelate.</p>
-<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="ancestry-and-relatedness-inference.html#cb242-1"></a><span class="co"># run KING-robust</span></span>
-<span id="cb242-2"><a href="ancestry-and-relatedness-inference.html#cb242-2"></a>king &lt;-<span class="st"> </span><span class="kw">snpgdsIBDKING</span>(gds, <span class="dt">snp.id=</span>pruned)</span></code></pre></div>
+<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="ancestry-and-relatedness-inference.html#cb240-1" aria-hidden="true" tabindex="-1"></a><span class="co"># run KING-robust</span></span>
+<span id="cb240-2"><a href="ancestry-and-relatedness-inference.html#cb240-2" aria-hidden="true" tabindex="-1"></a>king <span class="ot">&lt;-</span> <span class="fu">snpgdsIBDKING</span>(gds, <span class="at">snp.id=</span>pruned)</span></code></pre></div>
 <pre><code>## IBD analysis (KING method of moment) on genotypes:
 ## Calculating allele counts/frequencies ...
 ## 
 [..................................................]  0%, ETC: ---    
-[==================================================] 100%, completed, 0s
+[==================================================] 100%, completed, 1s
 ## # of selected variants: 21,287
 ##     # of samples: 1,126
 ##     # of SNVs: 21,287
@@ -378,20 +379,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## No family is specified, and all individuals are treated as singletons.
 ## Relationship inference in the presence of population stratification.
 ## CPU capabilities: Double-Precision SSE2
-## Tue Jul 20 14:19:40 2021    (internal increment: 10112)
+## Tue Jul 20 17:41:43 2021    (internal increment: 28672)
 ## 
 [..................................................]  0%, ETC: ---        
-[==================================================] 100%, completed, 3s
-## Tue Jul 20 14:19:43 2021    Done.</code></pre>
-<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="ancestry-and-relatedness-inference.html#cb244-1"></a><span class="kw">names</span>(king)</span></code></pre></div>
+[==================================================] 100%, completed, 1s
+## Tue Jul 20 17:41:44 2021    Done.</code></pre>
+<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="ancestry-and-relatedness-inference.html#cb242-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(king)</span></code></pre></div>
 <pre><code>## [1] &quot;sample.id&quot; &quot;snp.id&quot;    &quot;afreq&quot;     &quot;IBS0&quot;      &quot;kinship&quot;</code></pre>
-<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="ancestry-and-relatedness-inference.html#cb246-1"></a><span class="kw">dim</span>(king<span class="op">$</span>kinship)</span></code></pre></div>
+<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="ancestry-and-relatedness-inference.html#cb244-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(king<span class="sc">$</span>kinship)</span></code></pre></div>
 <pre><code>## [1] 1126 1126</code></pre>
-<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="ancestry-and-relatedness-inference.html#cb248-1"></a>kingMat &lt;-<span class="st"> </span>king<span class="op">$</span>kinship</span>
-<span id="cb248-2"><a href="ancestry-and-relatedness-inference.html#cb248-2"></a><span class="kw">colnames</span>(kingMat) &lt;-<span class="st"> </span><span class="kw">rownames</span>(kingMat) &lt;-<span class="st"> </span>king<span class="op">$</span>sample.id</span>
-<span id="cb248-3"><a href="ancestry-and-relatedness-inference.html#cb248-3"></a></span>
-<span id="cb248-4"><a href="ancestry-and-relatedness-inference.html#cb248-4"></a><span class="co"># look at the top corner of the matrix</span></span>
-<span id="cb248-5"><a href="ancestry-and-relatedness-inference.html#cb248-5"></a>kingMat[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="ancestry-and-relatedness-inference.html#cb246-1" aria-hidden="true" tabindex="-1"></a>kingMat <span class="ot">&lt;-</span> king<span class="sc">$</span>kinship</span>
+<span id="cb246-2"><a href="ancestry-and-relatedness-inference.html#cb246-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(kingMat) <span class="ot">&lt;-</span> <span class="fu">rownames</span>(kingMat) <span class="ot">&lt;-</span> king<span class="sc">$</span>sample.id</span>
+<span id="cb246-3"><a href="ancestry-and-relatedness-inference.html#cb246-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb246-4"><a href="ancestry-and-relatedness-inference.html#cb246-4" aria-hidden="true" tabindex="-1"></a><span class="co"># look at the top corner of the matrix</span></span>
+<span id="cb246-5"><a href="ancestry-and-relatedness-inference.html#cb246-5" aria-hidden="true" tabindex="-1"></a>kingMat[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span></code></pre></div>
 <pre><code>##             HG00096      HG00097     HG00099      HG00100     HG00101
 ## HG00096 0.500000000  0.013295347 0.021206409  0.003261883 0.021668220
 ## HG00097 0.013295347  0.500000000 0.007122507 -0.009021842 0.003561254
@@ -399,8 +400,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## HG00100 0.003261883 -0.009021842 0.037700283  0.500000000 0.016992551
 ## HG00101 0.021668220  0.003561254 0.020028275  0.016992551 0.500000000</code></pre>
 <p>We extract pairwise kinship estimates and IBS0 values (the proportion of variants for which the pair of indivdiuals share 0 alleles identical by state) to plot. We use a hexbin plot to visualize the relatedness for all pairs of samples.</p>
-<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="ancestry-and-relatedness-inference.html#cb250-1"></a>kinship &lt;-<span class="st"> </span><span class="kw">snpgdsIBDSelection</span>(king)</span>
-<span id="cb250-2"><a href="ancestry-and-relatedness-inference.html#cb250-2"></a><span class="kw">head</span>(kinship)</span></code></pre></div>
+<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="ancestry-and-relatedness-inference.html#cb248-1" aria-hidden="true" tabindex="-1"></a>kinship <span class="ot">&lt;-</span> <span class="fu">snpgdsIBDSelection</span>(king)</span>
+<span id="cb248-2"><a href="ancestry-and-relatedness-inference.html#cb248-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(kinship)</span></code></pre></div>
 <pre><code>##       ID1     ID2        IBS0      kinship
 ## 1 HG00096 HG00097 0.007986095  0.013295347
 ## 2 HG00096 HG00099 0.007845164  0.021206409
@@ -408,12 +409,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 4 HG00096 HG00101 0.007939118  0.021668220
 ## 5 HG00096 HG00102 0.008737727 -0.003362152
 ## 6 HG00096 HG00103 0.007939118  0.026241799</code></pre>
-<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="ancestry-and-relatedness-inference.html#cb252-1"></a><span class="kw">library</span>(ggplot2)</span>
-<span id="cb252-2"><a href="ancestry-and-relatedness-inference.html#cb252-2"></a><span class="kw">ggplot</span>(kinship, <span class="kw">aes</span>(IBS0, kinship)) <span class="op">+</span></span>
-<span id="cb252-3"><a href="ancestry-and-relatedness-inference.html#cb252-3"></a><span class="st">    </span><span class="kw">geom_hline</span>(<span class="dt">yintercept=</span><span class="dv">2</span><span class="op">^</span>(<span class="op">-</span><span class="kw">seq</span>(<span class="dv">3</span>,<span class="dv">9</span>,<span class="dv">2</span>)<span class="op">/</span><span class="dv">2</span>), <span class="dt">linetype=</span><span class="st">&quot;dashed&quot;</span>, <span class="dt">color=</span><span class="st">&quot;grey&quot;</span>) <span class="op">+</span></span>
-<span id="cb252-4"><a href="ancestry-and-relatedness-inference.html#cb252-4"></a><span class="st">    </span><span class="kw">geom_hex</span>(<span class="dt">bins =</span> <span class="dv">100</span>) <span class="op">+</span></span>
-<span id="cb252-5"><a href="ancestry-and-relatedness-inference.html#cb252-5"></a><span class="st">    </span><span class="kw">ylab</span>(<span class="st">&quot;kinship estimate&quot;</span>) <span class="op">+</span></span>
-<span id="cb252-6"><a href="ancestry-and-relatedness-inference.html#cb252-6"></a><span class="st">    </span><span class="kw">theme_bw</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="ancestry-and-relatedness-inference.html#cb250-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb250-2"><a href="ancestry-and-relatedness-inference.html#cb250-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(kinship, <span class="fu">aes</span>(IBS0, kinship)) <span class="sc">+</span></span>
+<span id="cb250-3"><a href="ancestry-and-relatedness-inference.html#cb250-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="dv">2</span><span class="sc">^</span>(<span class="sc">-</span><span class="fu">seq</span>(<span class="dv">3</span>,<span class="dv">9</span>,<span class="dv">2</span>)<span class="sc">/</span><span class="dv">2</span>), <span class="at">linetype=</span><span class="st">&quot;dashed&quot;</span>, <span class="at">color=</span><span class="st">&quot;grey&quot;</span>) <span class="sc">+</span></span>
+<span id="cb250-4"><a href="ancestry-and-relatedness-inference.html#cb250-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_hex</span>(<span class="at">bins =</span> <span class="dv">100</span>) <span class="sc">+</span></span>
+<span id="cb250-5"><a href="ancestry-and-relatedness-inference.html#cb250-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">&quot;kinship estimate&quot;</span>) <span class="sc">+</span></span>
+<span id="cb250-6"><a href="ancestry-and-relatedness-inference.html#cb250-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_bw</span>()</span></code></pre></div>
 <p><img src="_main_files/figure-html/king_plot-1.png" width="672" /></p>
 <p>We see a few parent-offspring, full sibling, 2nd degree, and 3rd degree relative pairs. The abundance of negative estimates represent pairs of individuals who have ancestry from different populations – the magnitude of the negative relationship is informative of how different their ancestries are; more on this below.</p>
 </div>
@@ -422,13 +423,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The next step is <a href="http://www.ncbi.nlm.nih.gov/pubmed/25810074">PC-AiR</a>, which provides robust population structure inference in samples with kinship and pedigree structure. PC-AiR is available in the GENESIS package via the function <code>pcair</code>.</p>
 <p>First, PC-AiR partitions the full sample set into a set of mutually unrelated samples that is maximally informative about all ancestries in the sample (i.e. the unrelated set) and their relatives (i.e. the related set). We use a 3rd degree kinship threshold (<code>kin.thresh = 2^(-9/2)</code>), which corresponds to first cousins – this defines anyone less related than first cousins as “unrelated”. We use the negative KING-robust estimates as “ancestry divergence” measures (<code>divMat</code>) to identify pairs of samples with different ancestry – we preferentially select individuals with many negative estimates for the unrelated set to ensure ancestry representation. For now, we also use the KING-robust estimates as our kinship measures (<code>kinMat</code>); more on this below.</p>
 <p>Once the unrelated and related sets are identified, PC-AiR performs a standard Principal Component Analysis (PCA) on the unrelated set of individuals and then projects the relatives onto the PCs. Under the hood, PC-AiR uses the SNPRelate package for efficient PC computation and projection.</p>
-<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="ancestry-and-relatedness-inference.html#cb253-1"></a><span class="co"># run PC-AiR</span></span>
-<span id="cb253-2"><a href="ancestry-and-relatedness-inference.html#cb253-2"></a><span class="kw">library</span>(GENESIS)</span>
-<span id="cb253-3"><a href="ancestry-and-relatedness-inference.html#cb253-3"></a>pca &lt;-<span class="st"> </span><span class="kw">pcair</span>(gds, </span>
-<span id="cb253-4"><a href="ancestry-and-relatedness-inference.html#cb253-4"></a>            <span class="dt">kinobj =</span> kingMat,</span>
-<span id="cb253-5"><a href="ancestry-and-relatedness-inference.html#cb253-5"></a>            <span class="dt">kin.thresh=</span><span class="dv">2</span><span class="op">^</span>(<span class="op">-</span><span class="dv">9</span><span class="op">/</span><span class="dv">2</span>),</span>
-<span id="cb253-6"><a href="ancestry-and-relatedness-inference.html#cb253-6"></a>            <span class="dt">divobj =</span> kingMat,</span>
-<span id="cb253-7"><a href="ancestry-and-relatedness-inference.html#cb253-7"></a>            <span class="dt">div.thresh=</span><span class="op">-</span><span class="dv">2</span><span class="op">^</span>(<span class="op">-</span><span class="dv">9</span><span class="op">/</span><span class="dv">2</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="ancestry-and-relatedness-inference.html#cb251-1" aria-hidden="true" tabindex="-1"></a><span class="co"># run PC-AiR</span></span>
+<span id="cb251-2"><a href="ancestry-and-relatedness-inference.html#cb251-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(GENESIS)</span>
+<span id="cb251-3"><a href="ancestry-and-relatedness-inference.html#cb251-3" aria-hidden="true" tabindex="-1"></a>pca <span class="ot">&lt;-</span> <span class="fu">pcair</span>(gds, </span>
+<span id="cb251-4"><a href="ancestry-and-relatedness-inference.html#cb251-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">kinobj =</span> kingMat,</span>
+<span id="cb251-5"><a href="ancestry-and-relatedness-inference.html#cb251-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">kin.thresh=</span><span class="dv">2</span><span class="sc">^</span>(<span class="sc">-</span><span class="dv">9</span><span class="sc">/</span><span class="dv">2</span>),</span>
+<span id="cb251-6"><a href="ancestry-and-relatedness-inference.html#cb251-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">divobj =</span> kingMat,</span>
+<span id="cb251-7"><a href="ancestry-and-relatedness-inference.html#cb251-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">div.thresh=</span><span class="sc">-</span><span class="dv">2</span><span class="sc">^</span>(<span class="sc">-</span><span class="dv">9</span><span class="sc">/</span><span class="dv">2</span>))</span></code></pre></div>
 <pre><code>## Principal Component Analysis (PCA) on genotypes:
 ## Excluding 1,120 SNVs on non-autosomes
 ## Calculating allele counts/frequencies ...
@@ -442,116 +443,100 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##     using 1 thread
 ##     # of principal components: 32
 ## CPU capabilities: Double-Precision SSE2
-## Tue Jul 20 14:19:52 2021    (internal increment: 340)
+## Tue Jul 20 17:41:45 2021    (internal increment: 972)
 ## 
 [..................................................]  0%, ETC: ---        
-[==================================================] 100%, completed, 12s
-## Tue Jul 20 14:20:04 2021    Begin (eigenvalues and eigenvectors)
-## Tue Jul 20 14:20:05 2021    Done.
+[==================================================] 100%, completed, 4s
+## Tue Jul 20 17:41:49 2021    Begin (eigenvalues and eigenvectors)
+## Tue Jul 20 17:41:49 2021    Done.
 ## SNP Loading:
 ##     # of samples: 1,040
 ##     # of SNPs: 23,779
 ##     using 1 thread
 ##     using the top 32 eigenvectors
-## Tue Jul 20 14:20:05 2021    (internal increment: 2740)
+## Tue Jul 20 17:41:49 2021    (internal increment: 7780)
 ## 
 [..................................................]  0%, ETC: ---        
 [==================================================] 100%, completed, 1s
-## Tue Jul 20 14:20:06 2021    Done.
+## Tue Jul 20 17:41:50 2021    Done.
 ## Sample Loading:
 ##     # of samples: 86
 ##     # of SNPs: 23,779
 ##     using 1 thread
 ##     using the top 32 eigenvectors
-## Tue Jul 20 14:20:06 2021    (internal increment: 33148)
+## Tue Jul 20 17:41:50 2021    (internal increment: 65536)
 ## 
 [..................................................]  0%, ETC: ---        
-[==================================================] 100%, completed, 1s
-## Tue Jul 20 14:20:07 2021    Done.</code></pre>
-<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="ancestry-and-relatedness-inference.html#cb255-1"></a><span class="kw">names</span>(pca)</span></code></pre></div>
-<pre><code>##  [1] &quot;vectors&quot;    &quot;values&quot;     &quot;rels&quot;       &quot;unrels&quot;     &quot;kin.thresh&quot;
-##  [6] &quot;div.thresh&quot; &quot;sample.id&quot;  &quot;nsamp&quot;      &quot;nsnps&quot;      &quot;varprop&quot;   
-## [11] &quot;call&quot;       &quot;method&quot;</code></pre>
-<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="ancestry-and-relatedness-inference.html#cb257-1"></a><span class="co"># the unrelated set of samples</span></span>
-<span id="cb257-2"><a href="ancestry-and-relatedness-inference.html#cb257-2"></a><span class="kw">length</span>(pca<span class="op">$</span>unrels)</span></code></pre></div>
+[==================================================] 100%, completed, 0s
+## Tue Jul 20 17:41:50 2021    Done.</code></pre>
+<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="ancestry-and-relatedness-inference.html#cb253-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(pca)</span></code></pre></div>
+<pre><code>##  [1] &quot;vectors&quot;    &quot;values&quot;     &quot;rels&quot;       &quot;unrels&quot;     &quot;kin.thresh&quot; &quot;div.thresh&quot; &quot;sample.id&quot;  &quot;nsamp&quot;      &quot;nsnps&quot;      &quot;varprop&quot;    &quot;call&quot;       &quot;method&quot;</code></pre>
+<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="ancestry-and-relatedness-inference.html#cb255-1" aria-hidden="true" tabindex="-1"></a><span class="co"># the unrelated set of samples</span></span>
+<span id="cb255-2"><a href="ancestry-and-relatedness-inference.html#cb255-2" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(pca<span class="sc">$</span>unrels)</span></code></pre></div>
 <pre><code>## [1] 1040</code></pre>
-<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="ancestry-and-relatedness-inference.html#cb259-1"></a><span class="kw">head</span>(pca<span class="op">$</span>unrels)</span></code></pre></div>
+<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="ancestry-and-relatedness-inference.html#cb257-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(pca<span class="sc">$</span>unrels)</span></code></pre></div>
 <pre><code>## [1] &quot;HG00096&quot; &quot;HG00097&quot; &quot;HG00099&quot; &quot;HG00100&quot; &quot;HG00101&quot; &quot;HG00102&quot;</code></pre>
-<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="ancestry-and-relatedness-inference.html#cb261-1"></a><span class="co"># the related set of samples</span></span>
-<span id="cb261-2"><a href="ancestry-and-relatedness-inference.html#cb261-2"></a><span class="kw">length</span>(pca<span class="op">$</span>rels)</span></code></pre></div>
+<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="ancestry-and-relatedness-inference.html#cb259-1" aria-hidden="true" tabindex="-1"></a><span class="co"># the related set of samples</span></span>
+<span id="cb259-2"><a href="ancestry-and-relatedness-inference.html#cb259-2" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(pca<span class="sc">$</span>rels)</span></code></pre></div>
 <pre><code>## [1] 86</code></pre>
-<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="ancestry-and-relatedness-inference.html#cb263-1"></a><span class="kw">head</span>(pca<span class="op">$</span>rels)</span></code></pre></div>
+<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="ancestry-and-relatedness-inference.html#cb261-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(pca<span class="sc">$</span>rels)</span></code></pre></div>
 <pre><code>## [1] &quot;NA18553&quot; &quot;NA19010&quot; &quot;HG00240&quot; &quot;HG01958&quot; &quot;NA18974&quot; &quot;NA19720&quot;</code></pre>
-<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="ancestry-and-relatedness-inference.html#cb265-1"></a><span class="co"># extract the top 10 PCs and make a data.frame</span></span>
-<span id="cb265-2"><a href="ancestry-and-relatedness-inference.html#cb265-2"></a>pcs &lt;-<span class="st"> </span><span class="kw">data.frame</span>(pca<span class="op">$</span>vectors[,<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>])</span>
-<span id="cb265-3"><a href="ancestry-and-relatedness-inference.html#cb265-3"></a><span class="kw">colnames</span>(pcs) &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&#39;PC&#39;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</span>
-<span id="cb265-4"><a href="ancestry-and-relatedness-inference.html#cb265-4"></a>pcs<span class="op">$</span>sample.id &lt;-<span class="st"> </span>pca<span class="op">$</span>sample.id</span>
-<span id="cb265-5"><a href="ancestry-and-relatedness-inference.html#cb265-5"></a><span class="kw">dim</span>(pcs)</span></code></pre></div>
+<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="ancestry-and-relatedness-inference.html#cb263-1" aria-hidden="true" tabindex="-1"></a><span class="co"># extract the top 10 PCs and make a data.frame</span></span>
+<span id="cb263-2"><a href="ancestry-and-relatedness-inference.html#cb263-2" aria-hidden="true" tabindex="-1"></a>pcs <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(pca<span class="sc">$</span>vectors[,<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>])</span>
+<span id="cb263-3"><a href="ancestry-and-relatedness-inference.html#cb263-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(pcs) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&#39;PC&#39;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span>
+<span id="cb263-4"><a href="ancestry-and-relatedness-inference.html#cb263-4" aria-hidden="true" tabindex="-1"></a>pcs<span class="sc">$</span>sample.id <span class="ot">&lt;-</span> pca<span class="sc">$</span>sample.id</span>
+<span id="cb263-5"><a href="ancestry-and-relatedness-inference.html#cb263-5" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(pcs)</span></code></pre></div>
 <pre><code>## [1] 1126   11</code></pre>
-<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb267-1"><a href="ancestry-and-relatedness-inference.html#cb267-1"></a><span class="kw">head</span>(pcs)</span></code></pre></div>
-<pre><code>##                 PC1         PC2         PC3          PC4           PC5
-## HG00096 -0.02226416 -0.03706223 0.007784659 -0.006036777 -0.0002494770
-## HG00097 -0.02069118 -0.03316550 0.010648323 -0.006725514  0.0004179001
-## HG00099 -0.02102452 -0.03547247 0.009881201 -0.005776697  0.0005220132
-## HG00100 -0.02120448 -0.04293781 0.014368290 -0.006435646  0.0004269673
-## HG00101 -0.02108916 -0.03594252 0.010240805 -0.003099693  0.0012105916
-## HG00102 -0.02209371 -0.04086700 0.013113725 -0.001004959 -0.0014970887
-##                   PC6         PC7           PC8           PC9          PC10
-## HG00096  0.0008316496 -0.03953455  6.079733e-05  0.0009154511  8.333681e-04
-## HG00097 -0.0005008697 -0.03380661 -1.743989e-03 -0.0012662487 -2.869483e-03
-## HG00099  0.0011478104 -0.03409698  6.145952e-07  0.0010956673 -2.258131e-04
-## HG00100  0.0025670278 -0.04708289  1.140219e-03 -0.0007786959 -8.237878e-04
-## HG00101  0.0028715482 -0.03505874  4.599234e-04  0.0068621094 -1.783242e-03
-## HG00102 -0.0008704542 -0.03083835 -1.097275e-03  0.0030383585  6.466877e-05
-##         sample.id
-## HG00096   HG00096
-## HG00097   HG00097
-## HG00099   HG00099
-## HG00100   HG00100
-## HG00101   HG00101
-## HG00102   HG00102</code></pre>
+<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="ancestry-and-relatedness-inference.html#cb265-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(pcs)</span></code></pre></div>
+<pre><code>##                 PC1         PC2         PC3          PC4           PC5           PC6         PC7           PC8           PC9          PC10 sample.id
+## HG00096 -0.02226416 -0.03706223 0.007784659 -0.006036777 -0.0002494770  0.0008316496 -0.03953455  6.079733e-05  0.0009154511  8.333681e-04   HG00096
+## HG00097 -0.02069118 -0.03316550 0.010648323 -0.006725514  0.0004179001 -0.0005008697 -0.03380661 -1.743989e-03 -0.0012662487 -2.869483e-03   HG00097
+## HG00099 -0.02102452 -0.03547247 0.009881201 -0.005776697  0.0005220132  0.0011478104 -0.03409698  6.145952e-07  0.0010956673 -2.258131e-04   HG00099
+## HG00100 -0.02120448 -0.04293781 0.014368290 -0.006435646  0.0004269673  0.0025670278 -0.04708289  1.140219e-03 -0.0007786959 -8.237878e-04   HG00100
+## HG00101 -0.02108916 -0.03594252 0.010240805 -0.003099693  0.0012105916  0.0028715482 -0.03505874  4.599234e-04  0.0068621094 -1.783242e-03   HG00101
+## HG00102 -0.02209371 -0.04086700 0.013113725 -0.001004959 -0.0014970887 -0.0008704542 -0.03083835 -1.097275e-03  0.0030383585  6.466877e-05   HG00102</code></pre>
 <p>We’d like to determine which PCs are ancestry informative. To do this we look at the PCs in conjunction with population information for the 1000 Genomes samples. This information is stored in an <code>AnnotatedDataFrame</code>. We make a parallel coordinates plot, color-coding by 1000 Genomes population.</p>
-<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb269-1"><a href="ancestry-and-relatedness-inference.html#cb269-1"></a><span class="kw">library</span>(Biobase)</span>
-<span id="cb269-2"><a href="ancestry-and-relatedness-inference.html#cb269-2"></a>sampfile &lt;-<span class="st"> &quot;data/sample_annotation.RData&quot;</span></span>
-<span id="cb269-3"><a href="ancestry-and-relatedness-inference.html#cb269-3"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">file.exists</span>(sampfile)) <span class="kw">download.file</span>(<span class="kw">file.path</span>(repo_path, sampfile), sampfile)</span>
-<span id="cb269-4"><a href="ancestry-and-relatedness-inference.html#cb269-4"></a>annot &lt;-<span class="st"> </span><span class="kw">get</span>(<span class="kw">load</span>(sampfile))</span>
-<span id="cb269-5"><a href="ancestry-and-relatedness-inference.html#cb269-5"></a></span>
-<span id="cb269-6"><a href="ancestry-and-relatedness-inference.html#cb269-6"></a><span class="kw">library</span>(dplyr)</span>
-<span id="cb269-7"><a href="ancestry-and-relatedness-inference.html#cb269-7"></a>annot &lt;-<span class="st"> </span><span class="kw">pData</span>(annot) <span class="op">%&gt;%</span></span>
-<span id="cb269-8"><a href="ancestry-and-relatedness-inference.html#cb269-8"></a><span class="st">        </span>dplyr<span class="op">::</span><span class="kw">select</span>(sample.id, Population)</span>
-<span id="cb269-9"><a href="ancestry-and-relatedness-inference.html#cb269-9"></a>pc.df &lt;-<span class="st"> </span><span class="kw">left_join</span>(pcs, annot, <span class="dt">by=</span><span class="st">&quot;sample.id&quot;</span>)</span>
-<span id="cb269-10"><a href="ancestry-and-relatedness-inference.html#cb269-10"></a></span>
-<span id="cb269-11"><a href="ancestry-and-relatedness-inference.html#cb269-11"></a><span class="kw">library</span>(GGally)</span>
-<span id="cb269-12"><a href="ancestry-and-relatedness-inference.html#cb269-12"></a><span class="kw">library</span>(RColorBrewer)</span>
-<span id="cb269-13"><a href="ancestry-and-relatedness-inference.html#cb269-13"></a>pop.cols &lt;-<span class="st"> </span><span class="kw">setNames</span>(<span class="kw">brewer.pal</span>(<span class="dv">12</span>, <span class="st">&quot;Paired&quot;</span>),</span>
-<span id="cb269-14"><a href="ancestry-and-relatedness-inference.html#cb269-14"></a>                 <span class="kw">c</span>(<span class="st">&quot;ACB&quot;</span>, <span class="st">&quot;ASW&quot;</span>, <span class="st">&quot;CEU&quot;</span>, <span class="st">&quot;GBR&quot;</span>, <span class="st">&quot;CHB&quot;</span>, <span class="st">&quot;JPT&quot;</span>, <span class="st">&quot;CLM&quot;</span>, <span class="st">&quot;MXL&quot;</span>, <span class="st">&quot;LWK&quot;</span>, <span class="st">&quot;YRI&quot;</span>, <span class="st">&quot;GIH&quot;</span>, <span class="st">&quot;PUR&quot;</span>))</span>
-<span id="cb269-15"><a href="ancestry-and-relatedness-inference.html#cb269-15"></a><span class="kw">ggparcoord</span>(pc.df, <span class="dt">columns=</span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dt">groupColumn=</span><span class="st">&quot;Population&quot;</span>, <span class="dt">scale=</span><span class="st">&quot;uniminmax&quot;</span>) <span class="op">+</span></span>
-<span id="cb269-16"><a href="ancestry-and-relatedness-inference.html#cb269-16"></a><span class="st">    </span><span class="kw">scale_color_manual</span>(<span class="dt">values=</span>pop.cols) <span class="op">+</span></span>
-<span id="cb269-17"><a href="ancestry-and-relatedness-inference.html#cb269-17"></a><span class="st">    </span><span class="kw">xlab</span>(<span class="st">&quot;PC&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb267-1"><a href="ancestry-and-relatedness-inference.html#cb267-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Biobase)</span>
+<span id="cb267-2"><a href="ancestry-and-relatedness-inference.html#cb267-2" aria-hidden="true" tabindex="-1"></a>sampfile <span class="ot">&lt;-</span> <span class="st">&quot;data/sample_annotation.RData&quot;</span></span>
+<span id="cb267-3"><a href="ancestry-and-relatedness-inference.html#cb267-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(sampfile)) <span class="fu">download.file</span>(<span class="fu">file.path</span>(repo_path, sampfile), sampfile)</span>
+<span id="cb267-4"><a href="ancestry-and-relatedness-inference.html#cb267-4" aria-hidden="true" tabindex="-1"></a>annot <span class="ot">&lt;-</span> <span class="fu">get</span>(<span class="fu">load</span>(sampfile))</span>
+<span id="cb267-5"><a href="ancestry-and-relatedness-inference.html#cb267-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb267-6"><a href="ancestry-and-relatedness-inference.html#cb267-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb267-7"><a href="ancestry-and-relatedness-inference.html#cb267-7" aria-hidden="true" tabindex="-1"></a>annot <span class="ot">&lt;-</span> <span class="fu">pData</span>(annot) <span class="sc">%&gt;%</span></span>
+<span id="cb267-8"><a href="ancestry-and-relatedness-inference.html#cb267-8" aria-hidden="true" tabindex="-1"></a>        dplyr<span class="sc">::</span><span class="fu">select</span>(sample.id, Population)</span>
+<span id="cb267-9"><a href="ancestry-and-relatedness-inference.html#cb267-9" aria-hidden="true" tabindex="-1"></a>pc.df <span class="ot">&lt;-</span> <span class="fu">left_join</span>(pcs, annot, <span class="at">by=</span><span class="st">&quot;sample.id&quot;</span>)</span>
+<span id="cb267-10"><a href="ancestry-and-relatedness-inference.html#cb267-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb267-11"><a href="ancestry-and-relatedness-inference.html#cb267-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(GGally)</span>
+<span id="cb267-12"><a href="ancestry-and-relatedness-inference.html#cb267-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RColorBrewer)</span>
+<span id="cb267-13"><a href="ancestry-and-relatedness-inference.html#cb267-13" aria-hidden="true" tabindex="-1"></a>pop.cols <span class="ot">&lt;-</span> <span class="fu">setNames</span>(<span class="fu">brewer.pal</span>(<span class="dv">12</span>, <span class="st">&quot;Paired&quot;</span>),</span>
+<span id="cb267-14"><a href="ancestry-and-relatedness-inference.html#cb267-14" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">c</span>(<span class="st">&quot;ACB&quot;</span>, <span class="st">&quot;ASW&quot;</span>, <span class="st">&quot;CEU&quot;</span>, <span class="st">&quot;GBR&quot;</span>, <span class="st">&quot;CHB&quot;</span>, <span class="st">&quot;JPT&quot;</span>, <span class="st">&quot;CLM&quot;</span>, <span class="st">&quot;MXL&quot;</span>, <span class="st">&quot;LWK&quot;</span>, <span class="st">&quot;YRI&quot;</span>, <span class="st">&quot;GIH&quot;</span>, <span class="st">&quot;PUR&quot;</span>))</span>
+<span id="cb267-15"><a href="ancestry-and-relatedness-inference.html#cb267-15" aria-hidden="true" tabindex="-1"></a><span class="fu">ggparcoord</span>(pc.df, <span class="at">columns=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">groupColumn=</span><span class="st">&quot;Population&quot;</span>, <span class="at">scale=</span><span class="st">&quot;uniminmax&quot;</span>) <span class="sc">+</span></span>
+<span id="cb267-16"><a href="ancestry-and-relatedness-inference.html#cb267-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(<span class="at">values=</span>pop.cols) <span class="sc">+</span></span>
+<span id="cb267-17"><a href="ancestry-and-relatedness-inference.html#cb267-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">xlab</span>(<span class="st">&quot;PC&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/pcair1_parcoord-1.png" width="672" /></p>
 </div>
 <div id="pc-relate" class="section level3" number="6.3.3">
 <h3><span class="header-section-number">6.3.3</span> PC-Relate</h3>
 <p>The next step is <a href="http://www.ncbi.nlm.nih.gov/pubmed/26748516">PC-Relate</a>, which provides accurate kinship inference, even in the presence of population structure and ancestry admixture, by conditioning on ancestry informative PCs. As we saw above, the first 4 PCs separate populations in our study, so we condition on PCs 1-4 in our PC-Relate analysis. PC-Relate can be performed using the <code>pcrelate</code> function in GENESIS, which expects a <code>SeqVarIterator</code> object for the genotype data. The <code>training.set</code> argument allows for specification of which samples to use to “learn” the ancestry adjustment – we recommend the unrelated set from the PC-AiR analysis.</p>
 <p>(NOTE: this will take a few minutes to run).</p>
-<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="ancestry-and-relatedness-inference.html#cb270-1"></a><span class="kw">seqResetFilter</span>(gds, <span class="dt">verbose=</span><span class="ot">FALSE</span>)</span>
-<span id="cb270-2"><a href="ancestry-and-relatedness-inference.html#cb270-2"></a><span class="kw">library</span>(SeqVarTools)</span>
-<span id="cb270-3"><a href="ancestry-and-relatedness-inference.html#cb270-3"></a>seqData &lt;-<span class="st"> </span><span class="kw">SeqVarData</span>(gds)</span>
-<span id="cb270-4"><a href="ancestry-and-relatedness-inference.html#cb270-4"></a></span>
-<span id="cb270-5"><a href="ancestry-and-relatedness-inference.html#cb270-5"></a><span class="co"># filter the GDS object to our LD-pruned variants</span></span>
-<span id="cb270-6"><a href="ancestry-and-relatedness-inference.html#cb270-6"></a><span class="kw">seqSetFilter</span>(seqData, <span class="dt">variant.id=</span>pruned)</span></code></pre></div>
+<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="ancestry-and-relatedness-inference.html#cb268-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seqResetFilter</span>(gds, <span class="at">verbose=</span><span class="cn">FALSE</span>)</span>
+<span id="cb268-2"><a href="ancestry-and-relatedness-inference.html#cb268-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(SeqVarTools)</span>
+<span id="cb268-3"><a href="ancestry-and-relatedness-inference.html#cb268-3" aria-hidden="true" tabindex="-1"></a>seqData <span class="ot">&lt;-</span> <span class="fu">SeqVarData</span>(gds)</span>
+<span id="cb268-4"><a href="ancestry-and-relatedness-inference.html#cb268-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb268-5"><a href="ancestry-and-relatedness-inference.html#cb268-5" aria-hidden="true" tabindex="-1"></a><span class="co"># filter the GDS object to our LD-pruned variants</span></span>
+<span id="cb268-6"><a href="ancestry-and-relatedness-inference.html#cb268-6" aria-hidden="true" tabindex="-1"></a><span class="fu">seqSetFilter</span>(seqData, <span class="at">variant.id=</span>pruned)</span></code></pre></div>
 <pre><code>## # of selected variants: 21,287</code></pre>
-<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="ancestry-and-relatedness-inference.html#cb272-1"></a>iterator &lt;-<span class="st"> </span><span class="kw">SeqVarBlockIterator</span>(seqData, <span class="dt">verbose=</span><span class="ot">FALSE</span>)</span>
-<span id="cb272-2"><a href="ancestry-and-relatedness-inference.html#cb272-2"></a></span>
-<span id="cb272-3"><a href="ancestry-and-relatedness-inference.html#cb272-3"></a>pcrel &lt;-<span class="st"> </span><span class="kw">pcrelate</span>(iterator, </span>
-<span id="cb272-4"><a href="ancestry-and-relatedness-inference.html#cb272-4"></a>                  <span class="dt">pcs=</span>pca<span class="op">$</span>vectors[,<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>], </span>
-<span id="cb272-5"><a href="ancestry-and-relatedness-inference.html#cb272-5"></a>                  <span class="dt">training.set=</span>pca<span class="op">$</span>unrels)</span>
-<span id="cb272-6"><a href="ancestry-and-relatedness-inference.html#cb272-6"></a><span class="kw">names</span>(pcrel)</span></code></pre></div>
+<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="ancestry-and-relatedness-inference.html#cb270-1" aria-hidden="true" tabindex="-1"></a>iterator <span class="ot">&lt;-</span> <span class="fu">SeqVarBlockIterator</span>(seqData, <span class="at">verbose=</span><span class="cn">FALSE</span>)</span>
+<span id="cb270-2"><a href="ancestry-and-relatedness-inference.html#cb270-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb270-3"><a href="ancestry-and-relatedness-inference.html#cb270-3" aria-hidden="true" tabindex="-1"></a>pcrel <span class="ot">&lt;-</span> <span class="fu">pcrelate</span>(iterator, </span>
+<span id="cb270-4"><a href="ancestry-and-relatedness-inference.html#cb270-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">pcs=</span>pca<span class="sc">$</span>vectors[,<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>], </span>
+<span id="cb270-5"><a href="ancestry-and-relatedness-inference.html#cb270-5" aria-hidden="true" tabindex="-1"></a>                  <span class="at">training.set=</span>pca<span class="sc">$</span>unrels)</span>
+<span id="cb270-6"><a href="ancestry-and-relatedness-inference.html#cb270-6" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(pcrel)</span></code></pre></div>
 <pre><code>## [1] &quot;kinBtwn&quot; &quot;kinSelf&quot;</code></pre>
-<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="ancestry-and-relatedness-inference.html#cb274-1"></a><span class="co"># relatedness between pairs of individuals</span></span>
-<span id="cb274-2"><a href="ancestry-and-relatedness-inference.html#cb274-2"></a><span class="kw">dim</span>(pcrel<span class="op">$</span>kinBtwn)</span></code></pre></div>
+<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="ancestry-and-relatedness-inference.html#cb272-1" aria-hidden="true" tabindex="-1"></a><span class="co"># relatedness between pairs of individuals</span></span>
+<span id="cb272-2"><a href="ancestry-and-relatedness-inference.html#cb272-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(pcrel<span class="sc">$</span>kinBtwn)</span></code></pre></div>
 <pre><code>## [1] 633375      6</code></pre>
-<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="ancestry-and-relatedness-inference.html#cb276-1"></a><span class="kw">head</span>(pcrel<span class="op">$</span>kinBtwn)</span></code></pre></div>
+<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="ancestry-and-relatedness-inference.html#cb274-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(pcrel<span class="sc">$</span>kinBtwn)</span></code></pre></div>
 <pre><code>##       ID1     ID2          kin        k0          k2 nsnp
 ## 1 HG00096 HG00097 0.0195745605 0.8884407 -0.03326108 4238
 ## 2 HG00096 HG00099 0.0066373621 0.9415895 -0.03186106 4253
@@ -559,10 +544,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 4 HG00096 HG00101 0.0094582260 0.9347343 -0.02743277 4259
 ## 5 HG00096 HG00102 0.0143016544 0.9578218  0.01502844 4219
 ## 6 HG00096 HG00103 0.0168467786 0.9103588 -0.02225413 4252</code></pre>
-<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="ancestry-and-relatedness-inference.html#cb278-1"></a><span class="co"># self-kinship estimates</span></span>
-<span id="cb278-2"><a href="ancestry-and-relatedness-inference.html#cb278-2"></a><span class="kw">dim</span>(pcrel<span class="op">$</span>kinSelf)</span></code></pre></div>
+<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="ancestry-and-relatedness-inference.html#cb276-1" aria-hidden="true" tabindex="-1"></a><span class="co"># self-kinship estimates</span></span>
+<span id="cb276-2"><a href="ancestry-and-relatedness-inference.html#cb276-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(pcrel<span class="sc">$</span>kinSelf)</span></code></pre></div>
 <pre><code>## [1] 1126    3</code></pre>
-<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="ancestry-and-relatedness-inference.html#cb280-1"></a><span class="kw">head</span>(pcrel<span class="op">$</span>kinSelf)</span></code></pre></div>
+<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="ancestry-and-relatedness-inference.html#cb278-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(pcrel<span class="sc">$</span>kinSelf)</span></code></pre></div>
 <pre><code>##        ID            f nsnp
 ## 1 HG00096 -0.010207002 4278
 ## 2 HG00097  0.003093096 4326
@@ -571,20 +556,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 5 HG00101 -0.033837780 4302
 ## 6 HG00102  0.030378865 4264</code></pre>
 <p>We plot the pairwise kinship estimates againts the IBD0 (<code>k0</code>) estimates (the proportion of variants for which the pair of individuals share 0 alleles identical by descent). We use a hexbin plot to visualize the relatedness for all pairs of samples.</p>
-<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="ancestry-and-relatedness-inference.html#cb282-1"></a><span class="kw">ggplot</span>(pcrel<span class="op">$</span>kinBtwn, <span class="kw">aes</span>(k0, kin)) <span class="op">+</span></span>
-<span id="cb282-2"><a href="ancestry-and-relatedness-inference.html#cb282-2"></a><span class="st">    </span><span class="kw">geom_hline</span>(<span class="dt">yintercept=</span><span class="dv">2</span><span class="op">^</span>(<span class="op">-</span><span class="kw">seq</span>(<span class="dv">3</span>,<span class="dv">9</span>,<span class="dv">2</span>)<span class="op">/</span><span class="dv">2</span>), <span class="dt">linetype=</span><span class="st">&quot;dashed&quot;</span>, <span class="dt">color=</span><span class="st">&quot;grey&quot;</span>) <span class="op">+</span></span>
-<span id="cb282-3"><a href="ancestry-and-relatedness-inference.html#cb282-3"></a><span class="st">    </span><span class="kw">geom_hex</span>(<span class="dt">bins =</span> <span class="dv">100</span>) <span class="op">+</span></span>
-<span id="cb282-4"><a href="ancestry-and-relatedness-inference.html#cb282-4"></a><span class="st">    </span><span class="kw">geom_abline</span>(<span class="dt">intercept =</span> <span class="fl">0.25</span>, <span class="dt">slope =</span> <span class="fl">-0.25</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb282-5"><a href="ancestry-and-relatedness-inference.html#cb282-5"></a><span class="st">    </span><span class="kw">ylab</span>(<span class="st">&quot;kinship estimate&quot;</span>) <span class="op">+</span></span>
-<span id="cb282-6"><a href="ancestry-and-relatedness-inference.html#cb282-6"></a><span class="st">    </span><span class="kw">theme_bw</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="ancestry-and-relatedness-inference.html#cb280-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(pcrel<span class="sc">$</span>kinBtwn, <span class="fu">aes</span>(k0, kin)) <span class="sc">+</span></span>
+<span id="cb280-2"><a href="ancestry-and-relatedness-inference.html#cb280-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="dv">2</span><span class="sc">^</span>(<span class="sc">-</span><span class="fu">seq</span>(<span class="dv">3</span>,<span class="dv">9</span>,<span class="dv">2</span>)<span class="sc">/</span><span class="dv">2</span>), <span class="at">linetype=</span><span class="st">&quot;dashed&quot;</span>, <span class="at">color=</span><span class="st">&quot;grey&quot;</span>) <span class="sc">+</span></span>
+<span id="cb280-3"><a href="ancestry-and-relatedness-inference.html#cb280-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_hex</span>(<span class="at">bins =</span> <span class="dv">100</span>) <span class="sc">+</span></span>
+<span id="cb280-4"><a href="ancestry-and-relatedness-inference.html#cb280-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_abline</span>(<span class="at">intercept =</span> <span class="fl">0.25</span>, <span class="at">slope =</span> <span class="sc">-</span><span class="fl">0.25</span>) <span class="sc">+</span> </span>
+<span id="cb280-5"><a href="ancestry-and-relatedness-inference.html#cb280-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">&quot;kinship estimate&quot;</span>) <span class="sc">+</span></span>
+<span id="cb280-6"><a href="ancestry-and-relatedness-inference.html#cb280-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_bw</span>()</span></code></pre></div>
 <p><img src="_main_files/figure-html/pcrelate1_plot-1.png" width="672" /></p>
 <p>We see that the PC-Relate relatedness estimates for unrelated pairs (i.e. kin ~ 0 and k0 ~ 1) are much closer to expectation than those from KING-robust.</p>
 <p>We can use the <code>pcrelateToMatrix</code> function to transform the output into an (n x n) kinship matrix (KM).</p>
-<div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb283-1"><a href="ancestry-and-relatedness-inference.html#cb283-1"></a>pcrelMat &lt;-<span class="st"> </span><span class="kw">pcrelateToMatrix</span>(pcrel, <span class="dt">scaleKin=</span><span class="dv">1</span>, <span class="dt">verbose=</span><span class="ot">FALSE</span>)</span>
-<span id="cb283-2"><a href="ancestry-and-relatedness-inference.html#cb283-2"></a><span class="kw">dim</span>(pcrelMat)</span></code></pre></div>
+<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb281-1"><a href="ancestry-and-relatedness-inference.html#cb281-1" aria-hidden="true" tabindex="-1"></a>pcrelMat <span class="ot">&lt;-</span> <span class="fu">pcrelateToMatrix</span>(pcrel, <span class="at">scaleKin=</span><span class="dv">1</span>, <span class="at">verbose=</span><span class="cn">FALSE</span>)</span>
+<span id="cb281-2"><a href="ancestry-and-relatedness-inference.html#cb281-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(pcrelMat)</span></code></pre></div>
 <pre><code>## [1] 1126 1126</code></pre>
-<div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb285-1"><a href="ancestry-and-relatedness-inference.html#cb285-1"></a><span class="co"># look at the top corner of the matrix</span></span>
-<span id="cb285-2"><a href="ancestry-and-relatedness-inference.html#cb285-2"></a>pcrelMat[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb283-1"><a href="ancestry-and-relatedness-inference.html#cb283-1" aria-hidden="true" tabindex="-1"></a><span class="co"># look at the top corner of the matrix</span></span>
+<span id="cb283-2"><a href="ancestry-and-relatedness-inference.html#cb283-2" aria-hidden="true" tabindex="-1"></a>pcrelMat[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span></code></pre></div>
 <pre><code>## 5 x 5 Matrix of class &quot;dsyMatrix&quot;
 ##              HG00096      HG00097       HG00099      HG00100       HG00101
 ## HG00096 0.4948964992 0.0195745605  0.0066373621 0.0008478914  0.0094582260
@@ -609,21 +594,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Perform a second PC-AiR analysis, this time using the PC-Relate kinship matrix as the kinship estimates (you should still use the KING-robust matrix for the ancestry divergence estimates). How does the unrelated set compare to the first PC-AiR analysis?</li>
 </ol>
 <p>We run the second PC-AiR analysis the same as the first, except using the PC-Relate kinship matrix we created above (<code>pcrelMat</code>) as the input to parameter <code>kinobj</code> – this means that we are using the PC-Relate estimates instead of the KING estimates to identify related pairs of samples. In the solution shown here, we also demonstrate that a <code>SeqVarData</code> object can be used as input, but we need to specify the variants to use in the analysis using the <code>snp.include</code> parameter.</p>
-<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="ancestry-and-relatedness-inference.html#cb287-1"></a><span class="kw">seqResetFilter</span>(seqData)</span></code></pre></div>
+<div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb285-1"><a href="ancestry-and-relatedness-inference.html#cb285-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seqResetFilter</span>(seqData)</span></code></pre></div>
 <pre><code>## # of selected samples: 1,126
 ## # of selected variants: 25,760</code></pre>
-<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb289-1"><a href="ancestry-and-relatedness-inference.html#cb289-1"></a><span class="co"># run PC-AiR</span></span>
-<span id="cb289-2"><a href="ancestry-and-relatedness-inference.html#cb289-2"></a>pca2 &lt;-<span class="st"> </span><span class="kw">pcair</span>(seqData,</span>
-<span id="cb289-3"><a href="ancestry-and-relatedness-inference.html#cb289-3"></a>             <span class="dt">kinobj=</span>pcrelMat, </span>
-<span id="cb289-4"><a href="ancestry-and-relatedness-inference.html#cb289-4"></a>             <span class="dt">kin.thresh=</span><span class="dv">2</span><span class="op">^</span>(<span class="op">-</span><span class="dv">9</span><span class="op">/</span><span class="dv">2</span>),</span>
-<span id="cb289-5"><a href="ancestry-and-relatedness-inference.html#cb289-5"></a>             <span class="dt">divobj=</span>kingMat, </span>
-<span id="cb289-6"><a href="ancestry-and-relatedness-inference.html#cb289-6"></a>             <span class="dt">div.thresh=</span><span class="op">-</span><span class="dv">2</span><span class="op">^</span>(<span class="op">-</span><span class="dv">9</span><span class="op">/</span><span class="dv">2</span>),</span>
-<span id="cb289-7"><a href="ancestry-and-relatedness-inference.html#cb289-7"></a>             <span class="dt">snp.include =</span> pruned)</span></code></pre></div>
+<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="ancestry-and-relatedness-inference.html#cb287-1" aria-hidden="true" tabindex="-1"></a><span class="co"># run PC-AiR</span></span>
+<span id="cb287-2"><a href="ancestry-and-relatedness-inference.html#cb287-2" aria-hidden="true" tabindex="-1"></a>pca2 <span class="ot">&lt;-</span> <span class="fu">pcair</span>(seqData,</span>
+<span id="cb287-3"><a href="ancestry-and-relatedness-inference.html#cb287-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">kinobj=</span>pcrelMat, </span>
+<span id="cb287-4"><a href="ancestry-and-relatedness-inference.html#cb287-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">kin.thresh=</span><span class="dv">2</span><span class="sc">^</span>(<span class="sc">-</span><span class="dv">9</span><span class="sc">/</span><span class="dv">2</span>),</span>
+<span id="cb287-5"><a href="ancestry-and-relatedness-inference.html#cb287-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">divobj=</span>kingMat, </span>
+<span id="cb287-6"><a href="ancestry-and-relatedness-inference.html#cb287-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">div.thresh=</span><span class="sc">-</span><span class="dv">2</span><span class="sc">^</span>(<span class="sc">-</span><span class="dv">9</span><span class="sc">/</span><span class="dv">2</span>),</span>
+<span id="cb287-7"><a href="ancestry-and-relatedness-inference.html#cb287-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">snp.include =</span> pruned)</span></code></pre></div>
 <pre><code>## Principal Component Analysis (PCA) on genotypes:
 ## Calculating allele counts/frequencies ...
 ## 
 [..................................................]  0%, ETC: ---    
-[==================================================] 100%, completed, 1s
+[==================================================] 100%, completed, 0s
 ## # of selected variants: 20,945
 ## Excluding 342 SNVs (monomorphic: TRUE, MAF: NaN, missing rate: NaN)
 ##     # of samples: 1,070
@@ -631,99 +616,97 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##     using 1 thread
 ##     # of principal components: 32
 ## CPU capabilities: Double-Precision SSE2
-## Tue Jul 20 14:31:32 2021    (internal increment: 332)
+## Tue Jul 20 17:45:10 2021    (internal increment: 944)
 ## 
 [..................................................]  0%, ETC: ---        
-[==================================================] 100%, completed, 35s
-## Tue Jul 20 14:32:07 2021    Begin (eigenvalues and eigenvectors)
-## Tue Jul 20 14:32:09 2021    Done.
+[==================================================] 100%, completed, 4s
+## Tue Jul 20 17:45:14 2021    Begin (eigenvalues and eigenvectors)
+## Tue Jul 20 17:45:15 2021    Done.
 ## SNP Loading:
 ##     # of samples: 1,070
 ##     # of SNPs: 20,945
 ##     using 1 thread
 ##     using the top 32 eigenvectors
-## Tue Jul 20 14:32:09 2021    (internal increment: 2664)
+## Tue Jul 20 17:45:15 2021    (internal increment: 7564)
 ## 
 [..................................................]  0%, ETC: ---        
-[==================================================] 100%, completed, 1s
-## Tue Jul 20 14:32:10 2021    Done.
+[==================================================] 100%, completed, 0s
+## Tue Jul 20 17:45:15 2021    Done.
 ## Sample Loading:
 ##     # of samples: 56
 ##     # of SNPs: 20,945
 ##     using 1 thread
 ##     using the top 32 eigenvectors
-## Tue Jul 20 14:32:10 2021    (internal increment: 50904)
+## Tue Jul 20 17:45:15 2021    (internal increment: 65536)
 ## 
 [..................................................]  0%, ETC: ---        
 [==================================================] 100%, completed, 0s
-## Tue Jul 20 14:32:10 2021    Done.</code></pre>
-<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb291-1"><a href="ancestry-and-relatedness-inference.html#cb291-1"></a><span class="kw">names</span>(pca2)</span></code></pre></div>
-<pre><code>##  [1] &quot;vectors&quot;    &quot;values&quot;     &quot;rels&quot;       &quot;unrels&quot;     &quot;kin.thresh&quot;
-##  [6] &quot;div.thresh&quot; &quot;sample.id&quot;  &quot;nsamp&quot;      &quot;nsnps&quot;      &quot;varprop&quot;   
-## [11] &quot;call&quot;       &quot;method&quot;</code></pre>
-<div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb293-1"><a href="ancestry-and-relatedness-inference.html#cb293-1"></a><span class="co"># the unrelated set of samples</span></span>
-<span id="cb293-2"><a href="ancestry-and-relatedness-inference.html#cb293-2"></a><span class="kw">length</span>(pca2<span class="op">$</span>unrels)</span></code></pre></div>
+## Tue Jul 20 17:45:15 2021    Done.</code></pre>
+<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb289-1"><a href="ancestry-and-relatedness-inference.html#cb289-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(pca2)</span></code></pre></div>
+<pre><code>##  [1] &quot;vectors&quot;    &quot;values&quot;     &quot;rels&quot;       &quot;unrels&quot;     &quot;kin.thresh&quot; &quot;div.thresh&quot; &quot;sample.id&quot;  &quot;nsamp&quot;      &quot;nsnps&quot;      &quot;varprop&quot;    &quot;call&quot;       &quot;method&quot;</code></pre>
+<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb291-1"><a href="ancestry-and-relatedness-inference.html#cb291-1" aria-hidden="true" tabindex="-1"></a><span class="co"># the unrelated set of samples</span></span>
+<span id="cb291-2"><a href="ancestry-and-relatedness-inference.html#cb291-2" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(pca2<span class="sc">$</span>unrels)</span></code></pre></div>
 <pre><code>## [1] 1070</code></pre>
-<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb295-1"><a href="ancestry-and-relatedness-inference.html#cb295-1"></a><span class="co"># the related set of samples</span></span>
-<span id="cb295-2"><a href="ancestry-and-relatedness-inference.html#cb295-2"></a><span class="kw">length</span>(pca2<span class="op">$</span>rels)</span></code></pre></div>
+<div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb293-1"><a href="ancestry-and-relatedness-inference.html#cb293-1" aria-hidden="true" tabindex="-1"></a><span class="co"># the related set of samples</span></span>
+<span id="cb293-2"><a href="ancestry-and-relatedness-inference.html#cb293-2" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(pca2<span class="sc">$</span>rels)</span></code></pre></div>
 <pre><code>## [1] 56</code></pre>
-<div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb297-1"><a href="ancestry-and-relatedness-inference.html#cb297-1"></a><span class="co"># extract the top 10 PCs and make a data.frame</span></span>
-<span id="cb297-2"><a href="ancestry-and-relatedness-inference.html#cb297-2"></a>pcs2 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(pca2<span class="op">$</span>vectors[,<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>])</span>
-<span id="cb297-3"><a href="ancestry-and-relatedness-inference.html#cb297-3"></a><span class="kw">colnames</span>(pcs2) &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&#39;PC&#39;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</span>
-<span id="cb297-4"><a href="ancestry-and-relatedness-inference.html#cb297-4"></a>pcs2<span class="op">$</span>sample.id &lt;-<span class="st"> </span>pca2<span class="op">$</span>sample.id</span>
-<span id="cb297-5"><a href="ancestry-and-relatedness-inference.html#cb297-5"></a><span class="kw">dim</span>(pcs2)</span></code></pre></div>
+<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb295-1"><a href="ancestry-and-relatedness-inference.html#cb295-1" aria-hidden="true" tabindex="-1"></a><span class="co"># extract the top 10 PCs and make a data.frame</span></span>
+<span id="cb295-2"><a href="ancestry-and-relatedness-inference.html#cb295-2" aria-hidden="true" tabindex="-1"></a>pcs2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(pca2<span class="sc">$</span>vectors[,<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>])</span>
+<span id="cb295-3"><a href="ancestry-and-relatedness-inference.html#cb295-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(pcs2) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&#39;PC&#39;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span>
+<span id="cb295-4"><a href="ancestry-and-relatedness-inference.html#cb295-4" aria-hidden="true" tabindex="-1"></a>pcs2<span class="sc">$</span>sample.id <span class="ot">&lt;-</span> pca2<span class="sc">$</span>sample.id</span>
+<span id="cb295-5"><a href="ancestry-and-relatedness-inference.html#cb295-5" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(pcs2)</span></code></pre></div>
 <pre><code>## [1] 1126   11</code></pre>
-<div class="sourceCode" id="cb299"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb299-1"><a href="ancestry-and-relatedness-inference.html#cb299-1"></a><span class="kw">save</span>(pcs2, <span class="dt">file=</span><span class="st">&quot;data/pcs.RData&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb297-1"><a href="ancestry-and-relatedness-inference.html#cb297-1" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(pcs2, <span class="at">file=</span><span class="st">&quot;data/pcs.RData&quot;</span>)</span></code></pre></div>
 <p>We see that there are now 1,070 samples in the unrelated set, as opposed to 1,040 in the first PC-AiR analysis. This indicates that KING-robust likely overestimated relatedness for some pairs due to bias from ancestry admixture.</p>
 <ol start="2" style="list-style-type: decimal">
 <li>Make a parallel coordinates plot of the top 10 PC-AiR PCs. How does this compare to the plot from the first iteration? How many PCs seem to reflect ancestry?</li>
 </ol>
 <p>We can reuse the code from above to make the parallel coordinates plot.</p>
-<div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb300-1"><a href="ancestry-and-relatedness-inference.html#cb300-1"></a><span class="kw">library</span>(Biobase)</span>
-<span id="cb300-2"><a href="ancestry-and-relatedness-inference.html#cb300-2"></a>sampfile &lt;-<span class="st"> &quot;data/sample_annotation.RData&quot;</span></span>
-<span id="cb300-3"><a href="ancestry-and-relatedness-inference.html#cb300-3"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">file.exists</span>(sampfile)) <span class="kw">download.file</span>(<span class="kw">file.path</span>(repo_path, sampfile), sampfile)</span>
-<span id="cb300-4"><a href="ancestry-and-relatedness-inference.html#cb300-4"></a>annot &lt;-<span class="st"> </span><span class="kw">get</span>(<span class="kw">load</span>(sampfile))</span>
-<span id="cb300-5"><a href="ancestry-and-relatedness-inference.html#cb300-5"></a></span>
-<span id="cb300-6"><a href="ancestry-and-relatedness-inference.html#cb300-6"></a>pc.df &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(pcs2)</span>
-<span id="cb300-7"><a href="ancestry-and-relatedness-inference.html#cb300-7"></a><span class="kw">names</span>(pc.df) &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="kw">ncol</span>(pcs2)</span>
-<span id="cb300-8"><a href="ancestry-and-relatedness-inference.html#cb300-8"></a>pc.df<span class="op">$</span>sample.id &lt;-<span class="st"> </span><span class="kw">row.names</span>(pcs2)</span>
-<span id="cb300-9"><a href="ancestry-and-relatedness-inference.html#cb300-9"></a></span>
-<span id="cb300-10"><a href="ancestry-and-relatedness-inference.html#cb300-10"></a><span class="kw">library</span>(dplyr)</span>
-<span id="cb300-11"><a href="ancestry-and-relatedness-inference.html#cb300-11"></a>annot &lt;-<span class="st"> </span><span class="kw">pData</span>(annot) <span class="op">%&gt;%</span></span>
-<span id="cb300-12"><a href="ancestry-and-relatedness-inference.html#cb300-12"></a><span class="st">        </span>dplyr<span class="op">::</span><span class="kw">select</span>(sample.id, Population)</span>
-<span id="cb300-13"><a href="ancestry-and-relatedness-inference.html#cb300-13"></a>pc.df &lt;-<span class="st"> </span><span class="kw">left_join</span>(pcs2, annot, <span class="dt">by=</span><span class="st">&quot;sample.id&quot;</span>)</span>
-<span id="cb300-14"><a href="ancestry-and-relatedness-inference.html#cb300-14"></a></span>
-<span id="cb300-15"><a href="ancestry-and-relatedness-inference.html#cb300-15"></a><span class="kw">library</span>(GGally)</span>
-<span id="cb300-16"><a href="ancestry-and-relatedness-inference.html#cb300-16"></a><span class="kw">library</span>(RColorBrewer)</span>
-<span id="cb300-17"><a href="ancestry-and-relatedness-inference.html#cb300-17"></a>pop.cols &lt;-<span class="st"> </span><span class="kw">setNames</span>(<span class="kw">brewer.pal</span>(<span class="dv">12</span>, <span class="st">&quot;Paired&quot;</span>),</span>
-<span id="cb300-18"><a href="ancestry-and-relatedness-inference.html#cb300-18"></a>                 <span class="kw">c</span>(<span class="st">&quot;ACB&quot;</span>, <span class="st">&quot;ASW&quot;</span>, <span class="st">&quot;CEU&quot;</span>, <span class="st">&quot;GBR&quot;</span>, <span class="st">&quot;CHB&quot;</span>, <span class="st">&quot;JPT&quot;</span>, <span class="st">&quot;CLM&quot;</span>, <span class="st">&quot;MXL&quot;</span>, <span class="st">&quot;LWK&quot;</span>, <span class="st">&quot;YRI&quot;</span>, <span class="st">&quot;GIH&quot;</span>, <span class="st">&quot;PUR&quot;</span>))</span>
-<span id="cb300-19"><a href="ancestry-and-relatedness-inference.html#cb300-19"></a><span class="kw">ggparcoord</span>(pc.df, <span class="dt">columns=</span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dt">groupColumn=</span><span class="st">&quot;Population&quot;</span>, <span class="dt">scale=</span><span class="st">&quot;uniminmax&quot;</span>) <span class="op">+</span></span>
-<span id="cb300-20"><a href="ancestry-and-relatedness-inference.html#cb300-20"></a><span class="st">    </span><span class="kw">scale_color_manual</span>(<span class="dt">values=</span>pop.cols) <span class="op">+</span></span>
-<span id="cb300-21"><a href="ancestry-and-relatedness-inference.html#cb300-21"></a><span class="st">    </span><span class="kw">xlab</span>(<span class="st">&quot;PC&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb298"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb298-1"><a href="ancestry-and-relatedness-inference.html#cb298-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Biobase)</span>
+<span id="cb298-2"><a href="ancestry-and-relatedness-inference.html#cb298-2" aria-hidden="true" tabindex="-1"></a>sampfile <span class="ot">&lt;-</span> <span class="st">&quot;data/sample_annotation.RData&quot;</span></span>
+<span id="cb298-3"><a href="ancestry-and-relatedness-inference.html#cb298-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(sampfile)) <span class="fu">download.file</span>(<span class="fu">file.path</span>(repo_path, sampfile), sampfile)</span>
+<span id="cb298-4"><a href="ancestry-and-relatedness-inference.html#cb298-4" aria-hidden="true" tabindex="-1"></a>annot <span class="ot">&lt;-</span> <span class="fu">get</span>(<span class="fu">load</span>(sampfile))</span>
+<span id="cb298-5"><a href="ancestry-and-relatedness-inference.html#cb298-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb298-6"><a href="ancestry-and-relatedness-inference.html#cb298-6" aria-hidden="true" tabindex="-1"></a>pc.df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(pcs2)</span>
+<span id="cb298-7"><a href="ancestry-and-relatedness-inference.html#cb298-7" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(pc.df) <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(pcs2)</span>
+<span id="cb298-8"><a href="ancestry-and-relatedness-inference.html#cb298-8" aria-hidden="true" tabindex="-1"></a>pc.df<span class="sc">$</span>sample.id <span class="ot">&lt;-</span> <span class="fu">row.names</span>(pcs2)</span>
+<span id="cb298-9"><a href="ancestry-and-relatedness-inference.html#cb298-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb298-10"><a href="ancestry-and-relatedness-inference.html#cb298-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb298-11"><a href="ancestry-and-relatedness-inference.html#cb298-11" aria-hidden="true" tabindex="-1"></a>annot <span class="ot">&lt;-</span> <span class="fu">pData</span>(annot) <span class="sc">%&gt;%</span></span>
+<span id="cb298-12"><a href="ancestry-and-relatedness-inference.html#cb298-12" aria-hidden="true" tabindex="-1"></a>        dplyr<span class="sc">::</span><span class="fu">select</span>(sample.id, Population)</span>
+<span id="cb298-13"><a href="ancestry-and-relatedness-inference.html#cb298-13" aria-hidden="true" tabindex="-1"></a>pc.df <span class="ot">&lt;-</span> <span class="fu">left_join</span>(pcs2, annot, <span class="at">by=</span><span class="st">&quot;sample.id&quot;</span>)</span>
+<span id="cb298-14"><a href="ancestry-and-relatedness-inference.html#cb298-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb298-15"><a href="ancestry-and-relatedness-inference.html#cb298-15" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(GGally)</span>
+<span id="cb298-16"><a href="ancestry-and-relatedness-inference.html#cb298-16" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RColorBrewer)</span>
+<span id="cb298-17"><a href="ancestry-and-relatedness-inference.html#cb298-17" aria-hidden="true" tabindex="-1"></a>pop.cols <span class="ot">&lt;-</span> <span class="fu">setNames</span>(<span class="fu">brewer.pal</span>(<span class="dv">12</span>, <span class="st">&quot;Paired&quot;</span>),</span>
+<span id="cb298-18"><a href="ancestry-and-relatedness-inference.html#cb298-18" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">c</span>(<span class="st">&quot;ACB&quot;</span>, <span class="st">&quot;ASW&quot;</span>, <span class="st">&quot;CEU&quot;</span>, <span class="st">&quot;GBR&quot;</span>, <span class="st">&quot;CHB&quot;</span>, <span class="st">&quot;JPT&quot;</span>, <span class="st">&quot;CLM&quot;</span>, <span class="st">&quot;MXL&quot;</span>, <span class="st">&quot;LWK&quot;</span>, <span class="st">&quot;YRI&quot;</span>, <span class="st">&quot;GIH&quot;</span>, <span class="st">&quot;PUR&quot;</span>))</span>
+<span id="cb298-19"><a href="ancestry-and-relatedness-inference.html#cb298-19" aria-hidden="true" tabindex="-1"></a><span class="fu">ggparcoord</span>(pc.df, <span class="at">columns=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">groupColumn=</span><span class="st">&quot;Population&quot;</span>, <span class="at">scale=</span><span class="st">&quot;uniminmax&quot;</span>) <span class="sc">+</span></span>
+<span id="cb298-20"><a href="ancestry-and-relatedness-inference.html#cb298-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(<span class="at">values=</span>pop.cols) <span class="sc">+</span></span>
+<span id="cb298-21"><a href="ancestry-and-relatedness-inference.html#cb298-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">xlab</span>(<span class="st">&quot;PC&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/pcair2_parcoord-1.png" width="672" /></p>
 <p>The plot looks a bit cleaner than the one from the first PC-AiR analysis. Clearly, PCs 1-4 are reflective of ancestry here. In the prior analysis, PC7 also seemed to pick up some component of ancestry.</p>
 <ol start="3" style="list-style-type: decimal">
 <li>Perform a second PC-Relate analysis, this time using the new PC-AiR PCs to adjust for ancestry. Make a hexbin plot of estimated kinship vs IBD0.</li>
 </ol>
 <p>We run the second PC-Relate analysis the same as the first, except using the new PC-AiR PCs that we just generated to adjust for ancestry, and using the new PC-AiR unrelated set as our <code>training.set</code>.</p>
-<div class="sourceCode" id="cb301"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb301-1"><a href="ancestry-and-relatedness-inference.html#cb301-1"></a><span class="co"># filter the GDS object to our LD-pruned variants</span></span>
-<span id="cb301-2"><a href="ancestry-and-relatedness-inference.html#cb301-2"></a><span class="kw">seqSetFilter</span>(seqData, <span class="dt">variant.id=</span>pruned)</span></code></pre></div>
+<div class="sourceCode" id="cb299"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb299-1"><a href="ancestry-and-relatedness-inference.html#cb299-1" aria-hidden="true" tabindex="-1"></a><span class="co"># filter the GDS object to our LD-pruned variants</span></span>
+<span id="cb299-2"><a href="ancestry-and-relatedness-inference.html#cb299-2" aria-hidden="true" tabindex="-1"></a><span class="fu">seqSetFilter</span>(seqData, <span class="at">variant.id=</span>pruned)</span></code></pre></div>
 <pre><code>## # of selected variants: 21,287</code></pre>
-<div class="sourceCode" id="cb303"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb303-1"><a href="ancestry-and-relatedness-inference.html#cb303-1"></a>iterator &lt;-<span class="st"> </span><span class="kw">SeqVarBlockIterator</span>(seqData, <span class="dt">verbose=</span><span class="ot">FALSE</span>)</span>
-<span id="cb303-2"><a href="ancestry-and-relatedness-inference.html#cb303-2"></a></span>
-<span id="cb303-3"><a href="ancestry-and-relatedness-inference.html#cb303-3"></a><span class="co"># run PC-Relate</span></span>
-<span id="cb303-4"><a href="ancestry-and-relatedness-inference.html#cb303-4"></a>pcrel2 &lt;-<span class="st"> </span><span class="kw">pcrelate</span>(iterator, </span>
-<span id="cb303-5"><a href="ancestry-and-relatedness-inference.html#cb303-5"></a>                  <span class="dt">pcs=</span>pca2<span class="op">$</span>vectors[,<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>], </span>
-<span id="cb303-6"><a href="ancestry-and-relatedness-inference.html#cb303-6"></a>                  <span class="dt">training.set=</span>pca2<span class="op">$</span>unrels)</span>
-<span id="cb303-7"><a href="ancestry-and-relatedness-inference.html#cb303-7"></a><span class="kw">save</span>(pcrel2, <span class="dt">file=</span><span class="st">&quot;data/pcrelate_kinship.RData&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb304-1"><a href="ancestry-and-relatedness-inference.html#cb304-1"></a><span class="kw">ggplot</span>(pcrel2<span class="op">$</span>kinBtwn, <span class="kw">aes</span>(k0, kin)) <span class="op">+</span></span>
-<span id="cb304-2"><a href="ancestry-and-relatedness-inference.html#cb304-2"></a><span class="st">    </span><span class="kw">geom_hline</span>(<span class="dt">yintercept=</span><span class="dv">2</span><span class="op">^</span>(<span class="op">-</span><span class="kw">seq</span>(<span class="dv">3</span>,<span class="dv">9</span>,<span class="dv">2</span>)<span class="op">/</span><span class="dv">2</span>), <span class="dt">linetype=</span><span class="st">&quot;dashed&quot;</span>, <span class="dt">color=</span><span class="st">&quot;grey&quot;</span>) <span class="op">+</span></span>
-<span id="cb304-3"><a href="ancestry-and-relatedness-inference.html#cb304-3"></a><span class="st">    </span><span class="kw">geom_hex</span>(<span class="dt">bins =</span> <span class="dv">100</span>) <span class="op">+</span></span>
-<span id="cb304-4"><a href="ancestry-and-relatedness-inference.html#cb304-4"></a><span class="st">    </span><span class="kw">geom_abline</span>(<span class="dt">intercept =</span> <span class="fl">0.25</span>, <span class="dt">slope =</span> <span class="fl">-0.25</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb304-5"><a href="ancestry-and-relatedness-inference.html#cb304-5"></a><span class="st">    </span><span class="kw">ylab</span>(<span class="st">&quot;kinship estimate&quot;</span>) <span class="op">+</span></span>
-<span id="cb304-6"><a href="ancestry-and-relatedness-inference.html#cb304-6"></a><span class="st">    </span><span class="kw">theme_bw</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb301"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb301-1"><a href="ancestry-and-relatedness-inference.html#cb301-1" aria-hidden="true" tabindex="-1"></a>iterator <span class="ot">&lt;-</span> <span class="fu">SeqVarBlockIterator</span>(seqData, <span class="at">verbose=</span><span class="cn">FALSE</span>)</span>
+<span id="cb301-2"><a href="ancestry-and-relatedness-inference.html#cb301-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb301-3"><a href="ancestry-and-relatedness-inference.html#cb301-3" aria-hidden="true" tabindex="-1"></a><span class="co"># run PC-Relate</span></span>
+<span id="cb301-4"><a href="ancestry-and-relatedness-inference.html#cb301-4" aria-hidden="true" tabindex="-1"></a>pcrel2 <span class="ot">&lt;-</span> <span class="fu">pcrelate</span>(iterator, </span>
+<span id="cb301-5"><a href="ancestry-and-relatedness-inference.html#cb301-5" aria-hidden="true" tabindex="-1"></a>                  <span class="at">pcs=</span>pca2<span class="sc">$</span>vectors[,<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>], </span>
+<span id="cb301-6"><a href="ancestry-and-relatedness-inference.html#cb301-6" aria-hidden="true" tabindex="-1"></a>                  <span class="at">training.set=</span>pca2<span class="sc">$</span>unrels)</span>
+<span id="cb301-7"><a href="ancestry-and-relatedness-inference.html#cb301-7" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(pcrel2, <span class="at">file=</span><span class="st">&quot;data/pcrelate_kinship.RData&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb302"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb302-1"><a href="ancestry-and-relatedness-inference.html#cb302-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(pcrel2<span class="sc">$</span>kinBtwn, <span class="fu">aes</span>(k0, kin)) <span class="sc">+</span></span>
+<span id="cb302-2"><a href="ancestry-and-relatedness-inference.html#cb302-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="dv">2</span><span class="sc">^</span>(<span class="sc">-</span><span class="fu">seq</span>(<span class="dv">3</span>,<span class="dv">9</span>,<span class="dv">2</span>)<span class="sc">/</span><span class="dv">2</span>), <span class="at">linetype=</span><span class="st">&quot;dashed&quot;</span>, <span class="at">color=</span><span class="st">&quot;grey&quot;</span>) <span class="sc">+</span></span>
+<span id="cb302-3"><a href="ancestry-and-relatedness-inference.html#cb302-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_hex</span>(<span class="at">bins =</span> <span class="dv">100</span>) <span class="sc">+</span></span>
+<span id="cb302-4"><a href="ancestry-and-relatedness-inference.html#cb302-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_abline</span>(<span class="at">intercept =</span> <span class="fl">0.25</span>, <span class="at">slope =</span> <span class="sc">-</span><span class="fl">0.25</span>) <span class="sc">+</span> </span>
+<span id="cb302-5"><a href="ancestry-and-relatedness-inference.html#cb302-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">&quot;kinship estimate&quot;</span>) <span class="sc">+</span></span>
+<span id="cb302-6"><a href="ancestry-and-relatedness-inference.html#cb302-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_bw</span>()</span></code></pre></div>
 <p><img src="_main_files/figure-html/pcrelate2_plot-1.png" width="672" /></p>
-<div class="sourceCode" id="cb305"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb305-1"><a href="ancestry-and-relatedness-inference.html#cb305-1"></a><span class="kw">seqClose</span>(seqData)</span></code></pre></div>
+<div class="sourceCode" id="cb303"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb303-1"><a href="ancestry-and-relatedness-inference.html#cb303-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seqClose</span>(seqData)</span></code></pre></div>
 
 </div>
 </div>

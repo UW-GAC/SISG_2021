@@ -50,7 +50,6 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
@@ -59,6 +58,7 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -202,11 +202,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="8" data-path="variant-annotation.html"><a href="variant-annotation.html"><i class="fa fa-check"></i><b>8</b> Variant annotation</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="variant-annotation.html"><a href="variant-annotation.html#use-case-1"><i class="fa fa-check"></i><b>8.1</b> Use case 1</a></li>
-<li class="chapter" data-level="8.2" data-path="variant-annotation.html"><a href="variant-annotation.html#use-case-2"><i class="fa fa-check"></i><b>8.2</b> Use case 2</a></li>
-<li class="chapter" data-level="8.3" data-path="variant-annotation.html"><a href="variant-annotation.html#use-case-3"><i class="fa fa-check"></i><b>8.3</b> Use case 3</a></li>
-<li class="chapter" data-level="8.4" data-path="variant-annotation.html"><a href="variant-annotation.html#exercise-4"><i class="fa fa-check"></i><b>8.4</b> Exercise</a></li>
-<li class="chapter" data-level="8.5" data-path="variant-annotation.html"><a href="variant-annotation.html#solution-4"><i class="fa fa-check"></i><b>8.5</b> Solution</a></li>
+<li class="chapter" data-level="8.1" data-path="variant-annotation.html"><a href="variant-annotation.html#use-cases"><i class="fa fa-check"></i><b>8.1</b> Use cases</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="variant-annotation.html"><a href="variant-annotation.html#use-case-1"><i class="fa fa-check"></i><b>8.1.1</b> Use case 1</a></li>
+<li class="chapter" data-level="8.1.2" data-path="variant-annotation.html"><a href="variant-annotation.html#use-case-2"><i class="fa fa-check"></i><b>8.1.2</b> Use case 2</a></li>
+<li class="chapter" data-level="8.1.3" data-path="variant-annotation.html"><a href="variant-annotation.html#use-case-3"><i class="fa fa-check"></i><b>8.1.3</b> Use case 3</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="variant-annotation.html"><a href="variant-annotation.html#exercise-4"><i class="fa fa-check"></i><b>8.2</b> Exercise</a></li>
+<li class="chapter" data-level="8.3" data-path="variant-annotation.html"><a href="variant-annotation.html#solution-4"><i class="fa fa-check"></i><b>8.3</b> Solution</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="annotation-informed-aggregate-association-tests.html"><a href="annotation-informed-aggregate-association-tests.html"><i class="fa fa-check"></i><b>9</b> Annotation informed aggregate association tests</a>
 <ul>
@@ -259,15 +262,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="introduction" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> Introduction</h1>
-<p>This site contains course materials for SISG Module 16: Computational Pipeline for WGS Data, July 21-23, 2021. The Summer Institutes web page can be found here: <a href="https://si.biostat.washington.edu/suminst/sisg2021/modules/SM2116" class="uri">https://si.biostat.washington.edu/suminst/sisg2021/modules/SM2116</a></p>
+<p>This site contains course materials for SISG Module 16: Computational Pipeline for WGS Data, July 21-23, 2021. The official SISG web page can be found <a href="https://si.biostat.washington.edu/suminst/sisg2021/modules/SM2116">here</a> (requires login).</p>
 <p><strong>Lectures</strong></p>
-<p>Slides for lectures are linked below in the schedule. Videos of lectures will be posted afterwards.</p>
-<p><strong>Exercises</strong></p>
-<p>To work through the exercises, log into <a href="https://platform.sb.biodatacatalyst.nhlbi.nih.gov" class="uri">https://platform.sb.biodatacatalyst.nhlbi.nih.gov</a> with your username and password.</p>
+<p>Slides for lectures are linked below in the schedule. All lectures will be given via Zoom, and recordings of lectures will be posted afterwards.</p>
+<p><strong>Zoom</strong></p>
+<p>Link for lectures: <a href="https://washington.zoom.us/j/92319788832" class="uri">https://washington.zoom.us/j/92319788832</a></p>
+<p><strong>Tutorials and Exercises</strong></p>
+<p>To work through the tutorials and exercises, log into <a href="https://platform.sb.biodatacatalyst.nhlbi.nih.gov">NHLBI BioData Catalyst powered by Seven Bridges</a> with your username and password – we will use this platform for all live demonstrations during the course.</p>
+<p>All of the R code and data can also be downloaded from the <a href="https://github.com/UW-GAC/SISG_2021">github repository</a> from which the site is built and run on your local machine after the course has ended. Download the workshop data and exercises: <a href="https://github.com/UW-GAC/SISG_2021/archive/master.zip" class="uri">https://github.com/UW-GAC/SISG_2021/archive/master.zip</a></p>
 <p><strong>Slack</strong></p>
 <p>Join the Slack channel here: <a href="https://uwbiostatisticssisg.slack.com" class="uri">https://uwbiostatisticssisg.slack.com</a></p>
-<p><strong>Data</strong></p>
-<p>Data used is located in the <a href="https://github.com/UW-GAC/SISG_2021">github repository</a> from which the site is built.</p>
 <div id="schedule" class="section level2" number="1.1">
 <h2><span class="header-section-number">1.1</span> Schedule</h2>
 <p>NOTE: All times are Pacific Daylight Time (GMT-07:00)</p>
@@ -277,7 +281,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li><strong>Lecture</strong>
 <ul>
-<li>Introduction (<a href="">slides</a>) (video coming soon)</li>
+<li>Introduction (<a href="https://docs.google.com/presentation/d/1QMS6cSLso9eMl96P7A7OHmkDpN3g1qFyupQE7cOA4Fk/edit#slide=id.p">slides</a>) (video coming soon)</li>
 <li>Using BioData Catalyst for SISG exercises (<a href="https://docs.google.com/document/d/1nLMjNRYffphWl89XVEPbH5NHLbUDW4SK7ikeEcHbixo/edit?usp=sharing">instructions</a>) (video coming soon)</li>
 <li>Sequencing data formats (<a href="https://drive.google.com/file/d/1w_dEobxo6kzloQlIuHW_lUnwkPCYK-RP/view?usp=sharing">slides</a>) (video coming soon)</li>
 <li>Intro to Genomic Data Structure (<a href="https://drive.google.com/file/d/1_p6-peb89ppi54gsDEapRdHcRVaq3IAX/view?usp=sharing">slides</a>) (video coming soon)</li>
@@ -292,7 +296,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li><strong>Lecture</strong>
 <ul>
-<li>Phenotype harmonization (<a href="">slides</a>) (video coming soon)</li>
+<li>Phenotype harmonization (<a href="https://drive.google.com/file/d/10EKUJxTARdX52uMXcnOENBqDwhCcVwW2/view?usp=sharing">slides</a>) (<a href="https://washington.zoom.us/rec/play/HmXkJmH5RllYXyKHIl4wsk9V-kmmGsjJq_xpwyGxtlX556KRhKW5pzFhzmE5ldum9Smsnn_gM15jjDQb.vw8mOGoWcvvTjmtm?continueMode=true&amp;_x_zm_rtaid=Xpghuu1BRGCPDP5pPcewUQ.1626824313252.0dc095a7ea0c036ff2c4222152db4f30&amp;_x_zm_rhtaid=804">pre-recorded lecture</a>)</li>
 </ul></li>
 <li><strong>Interactive breakout rooms</strong>
 <ul>
@@ -307,7 +311,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li><strong>Lecture</strong>
 <ul>
-<li>Association tests: Methods and motivation (<a href="">slides</a>) (video coming soon)</li>
+<li>Association tests: Methods and motivation (<a href="https://drive.google.com/file/d/1i6iVEP97r_nkeOeSMAIm-UKS9wVgaJ0V/view?usp=sharing">slides</a>) (video coming soon)</li>
 <li>GENESIS for association tests (<a href="https://drive.google.com/file/d/1LPGKgrhFb2Yzty-bTDsX9vlTxifsLcPl/view?usp=sharing">slides</a>) (video coming soon)</li>
 </ul></li>
 <li><strong>Interactive breakout rooms</strong>
@@ -321,7 +325,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li><strong>Lecture</strong>
 <ul>
-<li>Aggregate tests (<a href="">slides</a>) (video coming soon)</li>
+<li>Aggregate tests (<a href="https://drive.google.com/file/d/1i6iVEP97r_nkeOeSMAIm-UKS9wVgaJ0V/view?usp=sharing">slides</a>) (video coming soon)</li>
 </ul></li>
 <li><strong>Interactive breakout rooms</strong>
 <ul>
@@ -333,8 +337,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li><strong>Lecture</strong>
 <ul>
-<li>Population structure inference (<a href="">slides</a>) (video coming soon)</li>
-<li>Relatedness inference (<a href="">slides</a>) (video coming soon)</li>
+<li>Population structure inference (<a href="https://drive.google.com/file/d/1fQoaiKu_Ngpc-SzvchCGbaamRV_a1MoT/view?usp=sharing">slides</a>) (video coming soon)</li>
+<li>Relatedness inference (<a href="https://drive.google.com/file/d/1kC_158wmq8vJyRc8eW_N3hJvbXq_1mdy/view?usp=sharing">slides</a>) (video coming soon)</li>
 <li>R packages for ancestry and relatedness (<a href="https://drive.google.com/file/d/1RMHcoe3lrK02tZ2Vy_B7XQEZChSlgpTh/view?usp=sharing">slides</a>) (video coming soon)</li>
 </ul></li>
 <li><strong>Interactive breakout rooms</strong>
@@ -350,7 +354,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li><strong>Lecture</strong>
 <ul>
-<li>Mixed model association testing (<a href="">slides</a>) (video coming soon)</li>
+<li>Mixed model association testing (<a href="https://drive.google.com/file/d/13s5sYnol3hbpCEj6wB-98JjOpS2CmHCn/view?usp=sharing">slides</a>) (video coming soon)</li>
 </ul></li>
 <li><strong>Interactive breakout rooms</strong>
 <ul>
@@ -366,7 +370,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li><strong>Interactive breakout rooms</strong>
 <ul>
-<li>Association testing using variant annotation (<a href="https://uw-gac.github.io/SISG_2021/variant-annotation.html">Tutorial</a>) (<a href="">Exercise</a>) (<a href="">Solution</a>)</li>
+<li>Association testing using variant annotation (<a href="">Tutorial</a>) (<a href="">Exercise</a>) (<a href="">Solution</a>)</li>
 <li>Discussion (video coming soon)</li>
 </ul></li>
 </ul></li>
@@ -379,7 +383,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li><strong>Interactive breakout rooms</strong>
 <ul>
-<li>Running a GWAS workflow (<a href="https://uw-gac.github.io/SISG_2021/exercises-running-a-gwas-workflow.html">Tutorial</a>) (<a href="">Exercise</a>) (<a href="">Solution</a>)</li>
+<li>Running a GWAS workflow (<a href="https://uw-gac.github.io/SISG_2021/running-a-gwas-workflow-on-biodata-catalyst.html">Tutorial</a>)</li>
 <li>Discussion (video coming soon)</li>
 </ul></li>
 </ul></li>
@@ -388,14 +392,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Discussion (video coming soon)</li>
 </ul></li>
 </ul>
-<p>Download the workshop data and exercises: <a href="https://github.com/UW-GAC/SISG_2021/archive/master.zip" class="uri">https://github.com/UW-GAC/SISG_2021/archive/master.zip</a></p>
 </div>
 <div id="r-packages-used" class="section level2" number="1.2">
 <h2><span class="header-section-number">1.2</span> R packages used</h2>
 <ul>
+<li><a href="http://bioconductor.org/packages/release/bioc/html/GENESIS.html">GENESIS</a></li>
 <li><a href="http://bioconductor.org/packages/release/bioc/html/SeqArray.html">SeqArray</a></li>
 <li><a href="http://bioconductor.org/packages/release/bioc/html/SeqVarTools.html">SeqVarTools</a></li>
-<li><a href="http://bioconductor.org/packages/release/bioc/html/GENESIS.html">GENESIS</a></li>
 <li><a href="http://bioconductor.org/packages/release/bioc/html/SNPRelate.html">SNPRelate</a></li>
 <li><a href="https://github.com/UW-GAC/analysis_pipeline/tree/master/TopmedPipeline">TopmedPipeline</a></li>
 <li><a href="https://www.tidyverse.org">tidyverse</a></li>
@@ -404,10 +407,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="resources" class="section level2" number="1.3">
 <h2><span class="header-section-number">1.3</span> Resources</h2>
+<p>NHLBI BioData Catalyst Powered by Seven Bridges</p>
+<ul>
+<li><a href="https://drive.google.com/file/d/1LMlzot2GXPKCRmLH6BtsOi9PxKAoohYT/view?usp=sharing">Getting Started Guide for SISG21 Module 16</a></li>
+</ul>
 <p>If you are new to R, you might find the following material helpful:</p>
 <ul>
 <li><a href="http://faculty.washington.edu/kenrice/rintro/indexSEA15.shtml">Introduction to R</a> materials from SISG Module 3</li>
-<li><a href="http://workbooks.iq.harvard.edu/R/Rgraphics/Rgraphics.html">Graphics with ggplot2</a> tutorial</li>
+<li>Graphics with <a href="https://ggplot2.tidyverse.org/">ggplot2</a></li>
 <li>Data manipulation with <a href="http://dplyr.tidyverse.org/">dplyr</a></li>
 </ul>
 

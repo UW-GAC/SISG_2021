@@ -3,13 +3,15 @@ In this session we will learn how to use [Annotation Explorer](https://platform.
 
 Annotation explorer has interactive graphical user interface built on high performance databases and does not require any programming experience. It currently caps the number of users at a given time and hence we all will not be able to use it live at the same time during the workshop. We request that users perform the hands-on exercises involving Annotation explorer after the workshop is over, at their own convenience. We have provided a [detailed tutorial]( https://docs.google.com/document/d/1_yXemTTYnBzL6Dv4fngojE0T5CAH3Z-CSxj1X5Qq8kI/edit?usp=sharing) and will provide a video recording of the demo for how to perform the following exercises using Annotation Explorer. 
 
-## Use case 1 
+## Use cases 
+
+### Use case 1 
 User wants to generate aggregation units for rare variant association testing such that only missense variants which have CADD phred score >20 are grouped by Ensemble gene definitions
 
-## Use case 2 
+### Use case 2 
 User wants to generate aggregation units for rare variant association testing such that they retain only variants with fathmm_MKL_non_coding_score >0.5 and they are grouped by user-defined genomic co-ordinates (example using ATAC-Seq peaks from the tissue of your choice)
 
-## Use case 3
+### Use case 3
 User wants to explore the annotations for a variant of their interest
 
 ## Exercise

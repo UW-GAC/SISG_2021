@@ -50,7 +50,6 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
@@ -59,6 +58,7 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -202,11 +202,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="8" data-path="variant-annotation.html"><a href="variant-annotation.html"><i class="fa fa-check"></i><b>8</b> Variant annotation</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="variant-annotation.html"><a href="variant-annotation.html#use-case-1"><i class="fa fa-check"></i><b>8.1</b> Use case 1</a></li>
-<li class="chapter" data-level="8.2" data-path="variant-annotation.html"><a href="variant-annotation.html#use-case-2"><i class="fa fa-check"></i><b>8.2</b> Use case 2</a></li>
-<li class="chapter" data-level="8.3" data-path="variant-annotation.html"><a href="variant-annotation.html#use-case-3"><i class="fa fa-check"></i><b>8.3</b> Use case 3</a></li>
-<li class="chapter" data-level="8.4" data-path="variant-annotation.html"><a href="variant-annotation.html#exercise-4"><i class="fa fa-check"></i><b>8.4</b> Exercise</a></li>
-<li class="chapter" data-level="8.5" data-path="variant-annotation.html"><a href="variant-annotation.html#solution-4"><i class="fa fa-check"></i><b>8.5</b> Solution</a></li>
+<li class="chapter" data-level="8.1" data-path="variant-annotation.html"><a href="variant-annotation.html#use-cases"><i class="fa fa-check"></i><b>8.1</b> Use cases</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="variant-annotation.html"><a href="variant-annotation.html#use-case-1"><i class="fa fa-check"></i><b>8.1.1</b> Use case 1</a></li>
+<li class="chapter" data-level="8.1.2" data-path="variant-annotation.html"><a href="variant-annotation.html#use-case-2"><i class="fa fa-check"></i><b>8.1.2</b> Use case 2</a></li>
+<li class="chapter" data-level="8.1.3" data-path="variant-annotation.html"><a href="variant-annotation.html#use-case-3"><i class="fa fa-check"></i><b>8.1.3</b> Use case 3</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="variant-annotation.html"><a href="variant-annotation.html#exercise-4"><i class="fa fa-check"></i><b>8.2</b> Exercise</a></li>
+<li class="chapter" data-level="8.3" data-path="variant-annotation.html"><a href="variant-annotation.html#solution-4"><i class="fa fa-check"></i><b>8.3</b> Solution</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="annotation-informed-aggregate-association-tests.html"><a href="annotation-informed-aggregate-association-tests.html"><i class="fa fa-check"></i><b>9</b> Annotation informed aggregate association tests</a>
 <ul>
@@ -260,13 +263,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Now that we know how to make genome annotation informed aggregation units using Annotation Explorer, such as the gene-based variant aggregation units, we can proceed to an association testing exercise. <em>NOTE : The exercises in this workshop are based on the 1000 genomes dataset mapped to genome build GRCh37/hg19. Because the aggregation units we generated using the Annotation Explorer in the previous section are mapped to GRCh38 and are not based on 1000 genomes data, we will <strong>not</strong> be using them in this section</em>. Instead, in this exercise we will be using pre-computed aggregation units based on 1000 genomes mapped to GRCh37 so that the annotation positions are consistent with the build used for genotyping data in the workshop. These gene-based units include SNVs from all chromosomes (no indels, and not just chromosome 1 as before). Each genic unit was specified to include the set of SNVs falling within a GENCODE-defined gene boundaries and the 20 kb flanking regions upstream and downstream of that range. This set of aggregation units is not filtered by CADD score or consequence.</p>
 <p>The aggregation units are defined in an R dataframe in the format consistent with the output from Annotation Explorer and compatible with the GENESIS association testing workflows. Each row of the dataframe specifies a variant (chr, pos, ref, alt) and the group identifier (group_id) it is a part of. Multiple rows with different group identifiers can be specified to assign a variant to different groups (i.e., a variant can be assigned to multiple genes).</p>
 <p>Begin by loading the aggregation units:</p>
-<div class="sourceCode" id="cb346"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb346-1"><a href="annotation-informed-aggregate-association-tests.html#cb346-1"></a><span class="kw">library</span>(dplyr)</span>
-<span id="cb346-2"><a href="annotation-informed-aggregate-association-tests.html#cb346-2"></a>repo_path &lt;-<span class="st"> &quot;https://github.com/UW-GAC/SISG_2021/raw/master&quot;</span></span>
-<span id="cb346-3"><a href="annotation-informed-aggregate-association-tests.html#cb346-3"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">dir.exists</span>(<span class="st">&quot;data&quot;</span>)) <span class="kw">dir.create</span>(<span class="st">&quot;data&quot;</span>)</span>
-<span id="cb346-4"><a href="annotation-informed-aggregate-association-tests.html#cb346-4"></a>aggfile &lt;-<span class="st"> &quot;data/variants_by_gene.RData&quot;</span></span>
-<span id="cb346-5"><a href="annotation-informed-aggregate-association-tests.html#cb346-5"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">file.exists</span>(aggfile)) <span class="kw">download.file</span>(<span class="kw">file.path</span>(repo_path, aggfile), aggfile)</span>
-<span id="cb346-6"><a href="annotation-informed-aggregate-association-tests.html#cb346-6"></a>aggunit &lt;-<span class="st"> </span><span class="kw">get</span>(<span class="kw">load</span>(aggfile))</span>
-<span id="cb346-7"><a href="annotation-informed-aggregate-association-tests.html#cb346-7"></a><span class="kw">head</span>(aggunit)</span></code></pre></div>
+<div class="sourceCode" id="cb344"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb344-1"><a href="annotation-informed-aggregate-association-tests.html#cb344-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb344-2"><a href="annotation-informed-aggregate-association-tests.html#cb344-2" aria-hidden="true" tabindex="-1"></a>repo_path <span class="ot">&lt;-</span> <span class="st">&quot;https://github.com/UW-GAC/SISG_2021/raw/master&quot;</span></span>
+<span id="cb344-3"><a href="annotation-informed-aggregate-association-tests.html#cb344-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">dir.exists</span>(<span class="st">&quot;data&quot;</span>)) <span class="fu">dir.create</span>(<span class="st">&quot;data&quot;</span>)</span>
+<span id="cb344-4"><a href="annotation-informed-aggregate-association-tests.html#cb344-4" aria-hidden="true" tabindex="-1"></a>aggfile <span class="ot">&lt;-</span> <span class="st">&quot;data/variants_by_gene.RData&quot;</span></span>
+<span id="cb344-5"><a href="annotation-informed-aggregate-association-tests.html#cb344-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(aggfile)) <span class="fu">download.file</span>(<span class="fu">file.path</span>(repo_path, aggfile), aggfile)</span>
+<span id="cb344-6"><a href="annotation-informed-aggregate-association-tests.html#cb344-6" aria-hidden="true" tabindex="-1"></a>aggunit <span class="ot">&lt;-</span> <span class="fu">get</span>(<span class="fu">load</span>(aggfile))</span>
+<span id="cb344-7"><a href="annotation-informed-aggregate-association-tests.html#cb344-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(aggunit)</span></code></pre></div>
 <pre><code>## # A tibble: 6 x 5
 ##   group_id           chr        pos ref   alt  
 ##   &lt;chr&gt;              &lt;fct&gt;    &lt;int&gt; &lt;chr&gt; &lt;chr&gt;
@@ -276,12 +279,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 4 ENSG00000171603.12 1      9788518 G     A    
 ## 5 ENSG00000204624.6  1     11593461 C     T    
 ## 6 ENSG00000270914.1  1     12068870 G     A</code></pre>
-<div class="sourceCode" id="cb348"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb348-1"><a href="annotation-informed-aggregate-association-tests.html#cb348-1"></a><span class="co"># an example of a variant that is present in multiple groups</span></span>
-<span id="cb348-2"><a href="annotation-informed-aggregate-association-tests.html#cb348-2"></a>mult &lt;-<span class="st"> </span>aggunit <span class="op">%&gt;%</span></span>
-<span id="cb348-3"><a href="annotation-informed-aggregate-association-tests.html#cb348-3"></a><span class="st">    </span><span class="kw">group_by</span>(chr, pos) <span class="op">%&gt;%</span></span>
-<span id="cb348-4"><a href="annotation-informed-aggregate-association-tests.html#cb348-4"></a><span class="st">    </span><span class="kw">summarise</span>(<span class="dt">n=</span><span class="kw">n</span>()) <span class="op">%&gt;%</span></span>
-<span id="cb348-5"><a href="annotation-informed-aggregate-association-tests.html#cb348-5"></a><span class="st">    </span><span class="kw">filter</span>(n <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>)</span>
-<span id="cb348-6"><a href="annotation-informed-aggregate-association-tests.html#cb348-6"></a><span class="kw">inner_join</span>(aggunit, mult[<span class="dv">2</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb346"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb346-1"><a href="annotation-informed-aggregate-association-tests.html#cb346-1" aria-hidden="true" tabindex="-1"></a><span class="co"># an example of a variant that is present in multiple groups</span></span>
+<span id="cb346-2"><a href="annotation-informed-aggregate-association-tests.html#cb346-2" aria-hidden="true" tabindex="-1"></a>mult <span class="ot">&lt;-</span> aggunit <span class="sc">%&gt;%</span></span>
+<span id="cb346-3"><a href="annotation-informed-aggregate-association-tests.html#cb346-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(chr, pos) <span class="sc">%&gt;%</span></span>
+<span id="cb346-4"><a href="annotation-informed-aggregate-association-tests.html#cb346-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">n=</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb346-5"><a href="annotation-informed-aggregate-association-tests.html#cb346-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(n <span class="sc">&gt;</span> <span class="dv">1</span>)</span>
+<span id="cb346-6"><a href="annotation-informed-aggregate-association-tests.html#cb346-6" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_join</span>(aggunit, mult[<span class="dv">2</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>])</span></code></pre></div>
 <pre><code>## # A tibble: 2 x 5
 ##   group_id          chr        pos ref   alt  
 ##   &lt;chr&gt;             &lt;fct&gt;    &lt;int&gt; &lt;chr&gt; &lt;chr&gt;
@@ -291,96 +294,87 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="association-testing-with-aggregate-units" class="section level2" number="9.2">
 <h2><span class="header-section-number">9.2</span> Association testing with aggregate units</h2>
 <p>We can run burden and SKAT tests on each of these units using the same <code>assocTestAggregate</code> function we used previously. We define a <code>SeqVarListIterator</code> object where each list element is an aggregate unit. The constructor expects a <code>GRangesList</code>, so we use the TopmedPipeline function <code>aggregateGRangesList</code> to quickly convert our single dataframe to the required format. This function can account for multiallelic variants (the same chromosome, position, and ref, but different alt alleles).</p>
-<div class="sourceCode" id="cb350"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb350-1"><a href="annotation-informed-aggregate-association-tests.html#cb350-1"></a><span class="co"># open the GDS file</span></span>
-<span id="cb350-2"><a href="annotation-informed-aggregate-association-tests.html#cb350-2"></a><span class="kw">library</span>(SeqVarTools)</span>
-<span id="cb350-3"><a href="annotation-informed-aggregate-association-tests.html#cb350-3"></a>gdsfile &lt;-<span class="st"> &quot;data/1KG_phase3_subset_chr1.gds&quot;</span></span>
-<span id="cb350-4"><a href="annotation-informed-aggregate-association-tests.html#cb350-4"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">file.exists</span>(gdsfile)) <span class="kw">download.file</span>(<span class="kw">file.path</span>(repo_path, gdsfile), gdsfile)</span>
-<span id="cb350-5"><a href="annotation-informed-aggregate-association-tests.html#cb350-5"></a>gdsfmt<span class="op">::</span><span class="kw">showfile.gds</span>(<span class="dt">closeall=</span><span class="ot">TRUE</span>) <span class="co"># make sure file is not already open</span></span>
-<span id="cb350-6"><a href="annotation-informed-aggregate-association-tests.html#cb350-6"></a>gds &lt;-<span class="st"> </span><span class="kw">seqOpen</span>(gdsfile)</span>
-<span id="cb350-7"><a href="annotation-informed-aggregate-association-tests.html#cb350-7"></a></span>
-<span id="cb350-8"><a href="annotation-informed-aggregate-association-tests.html#cb350-8"></a><span class="co"># sample annotation file</span></span>
-<span id="cb350-9"><a href="annotation-informed-aggregate-association-tests.html#cb350-9"></a>annotfile &lt;-<span class="st"> &quot;data/sample_phenotype_pcs.RData&quot;</span></span>
-<span id="cb350-10"><a href="annotation-informed-aggregate-association-tests.html#cb350-10"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">file.exists</span>(annotfile)) <span class="kw">download.file</span>(<span class="kw">file.path</span>(repo_path, annotfile), aggfile)</span>
-<span id="cb350-11"><a href="annotation-informed-aggregate-association-tests.html#cb350-11"></a>annot &lt;-<span class="st"> </span><span class="kw">get</span>(<span class="kw">load</span>(annotfile))</span>
-<span id="cb350-12"><a href="annotation-informed-aggregate-association-tests.html#cb350-12"></a></span>
-<span id="cb350-13"><a href="annotation-informed-aggregate-association-tests.html#cb350-13"></a><span class="co"># make the seqVarData object</span></span>
-<span id="cb350-14"><a href="annotation-informed-aggregate-association-tests.html#cb350-14"></a>seqData &lt;-<span class="st"> </span><span class="kw">SeqVarData</span>(gds, <span class="dt">sampleData=</span>annot)</span>
-<span id="cb350-15"><a href="annotation-informed-aggregate-association-tests.html#cb350-15"></a></span>
-<span id="cb350-16"><a href="annotation-informed-aggregate-association-tests.html#cb350-16"></a><span class="co"># subset to chromosome 1</span></span>
-<span id="cb350-17"><a href="annotation-informed-aggregate-association-tests.html#cb350-17"></a>aggunit1 &lt;-<span class="st"> </span><span class="kw">filter</span>(aggunit, chr <span class="op">==</span><span class="st"> </span><span class="dv">1</span>)</span>
-<span id="cb350-18"><a href="annotation-informed-aggregate-association-tests.html#cb350-18"></a></span>
-<span id="cb350-19"><a href="annotation-informed-aggregate-association-tests.html#cb350-19"></a><span class="co"># create the GRangesList object</span></span>
-<span id="cb350-20"><a href="annotation-informed-aggregate-association-tests.html#cb350-20"></a><span class="kw">library</span>(TopmedPipeline)</span>
-<span id="cb350-21"><a href="annotation-informed-aggregate-association-tests.html#cb350-21"></a>aggVarList &lt;-<span class="st"> </span><span class="kw">aggregateGRangesList</span>(aggunit1)</span>
-<span id="cb350-22"><a href="annotation-informed-aggregate-association-tests.html#cb350-22"></a><span class="kw">length</span>(aggVarList)</span></code></pre></div>
+<div class="sourceCode" id="cb348"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb348-1"><a href="annotation-informed-aggregate-association-tests.html#cb348-1" aria-hidden="true" tabindex="-1"></a><span class="co"># open the GDS file</span></span>
+<span id="cb348-2"><a href="annotation-informed-aggregate-association-tests.html#cb348-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(SeqVarTools)</span>
+<span id="cb348-3"><a href="annotation-informed-aggregate-association-tests.html#cb348-3" aria-hidden="true" tabindex="-1"></a>gdsfile <span class="ot">&lt;-</span> <span class="st">&quot;data/1KG_phase3_subset_chr1.gds&quot;</span></span>
+<span id="cb348-4"><a href="annotation-informed-aggregate-association-tests.html#cb348-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(gdsfile)) <span class="fu">download.file</span>(<span class="fu">file.path</span>(repo_path, gdsfile), gdsfile)</span>
+<span id="cb348-5"><a href="annotation-informed-aggregate-association-tests.html#cb348-5" aria-hidden="true" tabindex="-1"></a>gdsfmt<span class="sc">::</span><span class="fu">showfile.gds</span>(<span class="at">closeall=</span><span class="cn">TRUE</span>) <span class="co"># make sure file is not already open</span></span>
+<span id="cb348-6"><a href="annotation-informed-aggregate-association-tests.html#cb348-6" aria-hidden="true" tabindex="-1"></a>gds <span class="ot">&lt;-</span> <span class="fu">seqOpen</span>(gdsfile)</span>
+<span id="cb348-7"><a href="annotation-informed-aggregate-association-tests.html#cb348-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb348-8"><a href="annotation-informed-aggregate-association-tests.html#cb348-8" aria-hidden="true" tabindex="-1"></a><span class="co"># sample annotation file</span></span>
+<span id="cb348-9"><a href="annotation-informed-aggregate-association-tests.html#cb348-9" aria-hidden="true" tabindex="-1"></a>annotfile <span class="ot">&lt;-</span> <span class="st">&quot;data/sample_phenotype_pcs.RData&quot;</span></span>
+<span id="cb348-10"><a href="annotation-informed-aggregate-association-tests.html#cb348-10" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(annotfile)) <span class="fu">download.file</span>(<span class="fu">file.path</span>(repo_path, annotfile), aggfile)</span>
+<span id="cb348-11"><a href="annotation-informed-aggregate-association-tests.html#cb348-11" aria-hidden="true" tabindex="-1"></a>annot <span class="ot">&lt;-</span> <span class="fu">get</span>(<span class="fu">load</span>(annotfile))</span>
+<span id="cb348-12"><a href="annotation-informed-aggregate-association-tests.html#cb348-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb348-13"><a href="annotation-informed-aggregate-association-tests.html#cb348-13" aria-hidden="true" tabindex="-1"></a><span class="co"># make the seqVarData object</span></span>
+<span id="cb348-14"><a href="annotation-informed-aggregate-association-tests.html#cb348-14" aria-hidden="true" tabindex="-1"></a>seqData <span class="ot">&lt;-</span> <span class="fu">SeqVarData</span>(gds, <span class="at">sampleData=</span>annot)</span>
+<span id="cb348-15"><a href="annotation-informed-aggregate-association-tests.html#cb348-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb348-16"><a href="annotation-informed-aggregate-association-tests.html#cb348-16" aria-hidden="true" tabindex="-1"></a><span class="co"># subset to chromosome 1</span></span>
+<span id="cb348-17"><a href="annotation-informed-aggregate-association-tests.html#cb348-17" aria-hidden="true" tabindex="-1"></a>aggunit1 <span class="ot">&lt;-</span> <span class="fu">filter</span>(aggunit, chr <span class="sc">==</span> <span class="dv">1</span>)</span>
+<span id="cb348-18"><a href="annotation-informed-aggregate-association-tests.html#cb348-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb348-19"><a href="annotation-informed-aggregate-association-tests.html#cb348-19" aria-hidden="true" tabindex="-1"></a><span class="co"># create the GRangesList object</span></span>
+<span id="cb348-20"><a href="annotation-informed-aggregate-association-tests.html#cb348-20" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(TopmedPipeline)</span>
+<span id="cb348-21"><a href="annotation-informed-aggregate-association-tests.html#cb348-21" aria-hidden="true" tabindex="-1"></a>aggVarList <span class="ot">&lt;-</span> <span class="fu">aggregateGRangesList</span>(aggunit1)</span>
+<span id="cb348-22"><a href="annotation-informed-aggregate-association-tests.html#cb348-22" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(aggVarList)</span></code></pre></div>
 <pre><code>## [1] 127</code></pre>
-<div class="sourceCode" id="cb352"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb352-1"><a href="annotation-informed-aggregate-association-tests.html#cb352-1"></a><span class="kw">head</span>(<span class="kw">names</span>(aggVarList))</span></code></pre></div>
-<pre><code>## [1] &quot;ENSG00000131591.13&quot; &quot;ENSG00000169962.4&quot;  &quot;ENSG00000205090.4&quot; 
-## [4] &quot;ENSG00000171603.12&quot; &quot;ENSG00000204624.6&quot;  &quot;ENSG00000270914.1&quot;</code></pre>
-<div class="sourceCode" id="cb354"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb354-1"><a href="annotation-informed-aggregate-association-tests.html#cb354-1"></a>aggVarList[[<span class="dv">1</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb350"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb350-1"><a href="annotation-informed-aggregate-association-tests.html#cb350-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">names</span>(aggVarList))</span></code></pre></div>
+<pre><code>## [1] &quot;ENSG00000131591.13&quot; &quot;ENSG00000169962.4&quot;  &quot;ENSG00000205090.4&quot;  &quot;ENSG00000171603.12&quot; &quot;ENSG00000204624.6&quot;  &quot;ENSG00000270914.1&quot;</code></pre>
+<div class="sourceCode" id="cb352"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb352-1"><a href="annotation-informed-aggregate-association-tests.html#cb352-1" aria-hidden="true" tabindex="-1"></a>aggVarList[[<span class="dv">1</span>]]</span></code></pre></div>
 <pre><code>## GRanges object with 1 range and 2 metadata columns:
 ##       seqnames    ranges strand |         ref         alt
 ##          &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;character&gt; &lt;character&gt;
 ##   [1]        1   1025045      * |           C           T
 ##   -------
 ##   seqinfo: 23 sequences from an unspecified genome; no seqlengths</code></pre>
-<div class="sourceCode" id="cb356"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb356-1"><a href="annotation-informed-aggregate-association-tests.html#cb356-1"></a><span class="co"># construct the iterator using the SeqVarListIterator function</span></span>
-<span id="cb356-2"><a href="annotation-informed-aggregate-association-tests.html#cb356-2"></a>iterator &lt;-<span class="st"> </span><span class="kw">SeqVarListIterator</span>(seqData, <span class="dt">variantRanges=</span>aggVarList, <span class="dt">verbose=</span><span class="ot">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb354"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb354-1"><a href="annotation-informed-aggregate-association-tests.html#cb354-1" aria-hidden="true" tabindex="-1"></a><span class="co"># construct the iterator using the SeqVarListIterator function</span></span>
+<span id="cb354-2"><a href="annotation-informed-aggregate-association-tests.html#cb354-2" aria-hidden="true" tabindex="-1"></a>iterator <span class="ot">&lt;-</span> <span class="fu">SeqVarListIterator</span>(seqData, <span class="at">variantRanges=</span>aggVarList, <span class="at">verbose=</span><span class="cn">FALSE</span>)</span></code></pre></div>
 <p>As in the previous section, we must load the null model we fit earlier before running the association test.</p>
-<div class="sourceCode" id="cb357"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb357-1"><a href="annotation-informed-aggregate-association-tests.html#cb357-1"></a><span class="co"># load the null model</span></span>
-<span id="cb357-2"><a href="annotation-informed-aggregate-association-tests.html#cb357-2"></a>nullmodfile &lt;-<span class="st"> &quot;data/null_mixed_model.RData&quot;</span></span>
-<span id="cb357-3"><a href="annotation-informed-aggregate-association-tests.html#cb357-3"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">file.exists</span>(nullmodfile)) <span class="kw">download.file</span>(<span class="kw">file.path</span>(repo_path, nullmodfile), nullmodfile)</span>
-<span id="cb357-4"><a href="annotation-informed-aggregate-association-tests.html#cb357-4"></a>nullmod &lt;-<span class="st"> </span><span class="kw">get</span>(<span class="kw">load</span>(nullmodfile))</span>
-<span id="cb357-5"><a href="annotation-informed-aggregate-association-tests.html#cb357-5"></a></span>
-<span id="cb357-6"><a href="annotation-informed-aggregate-association-tests.html#cb357-6"></a><span class="co"># run the burden test</span></span>
-<span id="cb357-7"><a href="annotation-informed-aggregate-association-tests.html#cb357-7"></a><span class="kw">library</span>(GENESIS)</span>
-<span id="cb357-8"><a href="annotation-informed-aggregate-association-tests.html#cb357-8"></a>assoc &lt;-<span class="st"> </span><span class="kw">assocTestAggregate</span>(iterator, nullmod, <span class="dt">test=</span><span class="st">&quot;Burden&quot;</span>, <span class="dt">AF.max=</span><span class="fl">0.1</span>, <span class="dt">weight.beta=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb355"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb355-1"><a href="annotation-informed-aggregate-association-tests.html#cb355-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load the null model</span></span>
+<span id="cb355-2"><a href="annotation-informed-aggregate-association-tests.html#cb355-2" aria-hidden="true" tabindex="-1"></a>nullmodfile <span class="ot">&lt;-</span> <span class="st">&quot;data/null_mixed_model.RData&quot;</span></span>
+<span id="cb355-3"><a href="annotation-informed-aggregate-association-tests.html#cb355-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(nullmodfile)) <span class="fu">download.file</span>(<span class="fu">file.path</span>(repo_path, nullmodfile), nullmodfile)</span>
+<span id="cb355-4"><a href="annotation-informed-aggregate-association-tests.html#cb355-4" aria-hidden="true" tabindex="-1"></a>nullmod <span class="ot">&lt;-</span> <span class="fu">get</span>(<span class="fu">load</span>(nullmodfile))</span>
+<span id="cb355-5"><a href="annotation-informed-aggregate-association-tests.html#cb355-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb355-6"><a href="annotation-informed-aggregate-association-tests.html#cb355-6" aria-hidden="true" tabindex="-1"></a><span class="co"># run the burden test</span></span>
+<span id="cb355-7"><a href="annotation-informed-aggregate-association-tests.html#cb355-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(GENESIS)</span>
+<span id="cb355-8"><a href="annotation-informed-aggregate-association-tests.html#cb355-8" aria-hidden="true" tabindex="-1"></a>assoc <span class="ot">&lt;-</span> <span class="fu">assocTestAggregate</span>(iterator, nullmod, <span class="at">test=</span><span class="st">&quot;Burden&quot;</span>, <span class="at">AF.max=</span><span class="fl">0.1</span>, <span class="at">weight.beta=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span></code></pre></div>
 <pre><code>## # of selected samples: 1,126</code></pre>
-<div class="sourceCode" id="cb359"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb359-1"><a href="annotation-informed-aggregate-association-tests.html#cb359-1"></a><span class="kw">names</span>(assoc)</span></code></pre></div>
+<div class="sourceCode" id="cb357"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb357-1"><a href="annotation-informed-aggregate-association-tests.html#cb357-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(assoc)</span></code></pre></div>
 <pre><code>## [1] &quot;results&quot;     &quot;variantInfo&quot;</code></pre>
-<div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb361-1"><a href="annotation-informed-aggregate-association-tests.html#cb361-1"></a><span class="kw">head</span>(assoc<span class="op">$</span>results)</span></code></pre></div>
-<pre><code>##                    n.site n.alt n.sample.alt        Score   Score.SE
-## ENSG00000131591.13      1     1            1 -0.294335296 0.10297237
-## ENSG00000169962.4       1     2            2 -0.099409087 0.10781157
-## ENSG00000205090.4       1    16           16  0.148782099 0.34684383
-## ENSG00000171603.12      1     2            2  0.003544954 0.11065596
-## ENSG00000204624.6       1     1            1 -0.023265336 0.07677702
-## ENSG00000270914.1       1    14           14 -0.775650027 0.32814006
-##                     Score.Stat  Score.pval         Est    Est.SE          PVE
-## ENSG00000131591.13 -2.85839107 0.004257953 -27.7588166  9.711343 7.314586e-03
-## ENSG00000169962.4  -0.92206326 0.356495581  -8.5525446  9.275442 7.611458e-04
-## ENSG00000205090.4   0.42895991 0.667952399   1.2367523  2.883142 1.647327e-04
-## ENSG00000171603.12  0.03203582 0.974443489   0.2895083  9.037019 9.187937e-07
-## ENSG00000204624.6  -0.30302476 0.761870996  -3.9468160 13.024731 8.220584e-05
-## ENSG00000270914.1  -2.36377727 0.018089684  -7.2035619  3.047479 5.002183e-03</code></pre>
-<div class="sourceCode" id="cb363"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb363-1"><a href="annotation-informed-aggregate-association-tests.html#cb363-1"></a><span class="kw">head</span>(<span class="kw">names</span>(assoc<span class="op">$</span>variantInfo))</span></code></pre></div>
-<pre><code>## [1] &quot;ENSG00000131591.13&quot; &quot;ENSG00000169962.4&quot;  &quot;ENSG00000205090.4&quot; 
-## [4] &quot;ENSG00000171603.12&quot; &quot;ENSG00000204624.6&quot;  &quot;ENSG00000270914.1&quot;</code></pre>
-<div class="sourceCode" id="cb365"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb365-1"><a href="annotation-informed-aggregate-association-tests.html#cb365-1"></a>assoc<span class="op">$</span>variantInfo[[<span class="dv">3</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb359"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb359-1"><a href="annotation-informed-aggregate-association-tests.html#cb359-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(assoc<span class="sc">$</span>results)</span></code></pre></div>
+<pre><code>##                    n.site n.alt n.sample.alt        Score   Score.SE  Score.Stat  Score.pval         Est    Est.SE          PVE
+## ENSG00000131591.13      1     1            1 -0.294335296 0.10297237 -2.85839107 0.004257953 -27.7588166  9.711343 7.314586e-03
+## ENSG00000169962.4       1     2            2 -0.099409087 0.10781157 -0.92206326 0.356495581  -8.5525446  9.275442 7.611458e-04
+## ENSG00000205090.4       1    16           16  0.148782099 0.34684383  0.42895991 0.667952399   1.2367523  2.883142 1.647327e-04
+## ENSG00000171603.12      1     2            2  0.003544954 0.11065596  0.03203582 0.974443489   0.2895083  9.037019 9.187937e-07
+## ENSG00000204624.6       1     1            1 -0.023265336 0.07677702 -0.30302476 0.761870996  -3.9468160 13.024731 8.220584e-05
+## ENSG00000270914.1       1    14           14 -0.775650027 0.32814006 -2.36377727 0.018089684  -7.2035619  3.047479 5.002183e-03</code></pre>
+<div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb361-1"><a href="annotation-informed-aggregate-association-tests.html#cb361-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">names</span>(assoc<span class="sc">$</span>variantInfo))</span></code></pre></div>
+<pre><code>## [1] &quot;ENSG00000131591.13&quot; &quot;ENSG00000169962.4&quot;  &quot;ENSG00000205090.4&quot;  &quot;ENSG00000171603.12&quot; &quot;ENSG00000204624.6&quot;  &quot;ENSG00000270914.1&quot;</code></pre>
+<div class="sourceCode" id="cb363"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb363-1"><a href="annotation-informed-aggregate-association-tests.html#cb363-1" aria-hidden="true" tabindex="-1"></a>assoc<span class="sc">$</span>variantInfo[[<span class="dv">3</span>]]</span></code></pre></div>
 <pre><code>##   variant.id chr     pos ref alt allele.index n.obs        freq MAC weight
 ## 1          5   1 1472676   T   C            1  1126 0.007104796  16      1</code></pre>
 <p>We can make our usual QQ plot</p>
-<div class="sourceCode" id="cb367"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb367-1"><a href="annotation-informed-aggregate-association-tests.html#cb367-1"></a><span class="kw">library</span>(ggplot2)</span>
-<span id="cb367-2"><a href="annotation-informed-aggregate-association-tests.html#cb367-2"></a>qqPlot &lt;-<span class="st"> </span><span class="cf">function</span>(pval) {</span>
-<span id="cb367-3"><a href="annotation-informed-aggregate-association-tests.html#cb367-3"></a>    pval &lt;-<span class="st"> </span>pval[<span class="op">!</span><span class="kw">is.na</span>(pval)]</span>
-<span id="cb367-4"><a href="annotation-informed-aggregate-association-tests.html#cb367-4"></a>    n &lt;-<span class="st"> </span><span class="kw">length</span>(pval)</span>
-<span id="cb367-5"><a href="annotation-informed-aggregate-association-tests.html#cb367-5"></a>    x &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span>n</span>
-<span id="cb367-6"><a href="annotation-informed-aggregate-association-tests.html#cb367-6"></a>    dat &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">obs=</span><span class="kw">sort</span>(pval),</span>
-<span id="cb367-7"><a href="annotation-informed-aggregate-association-tests.html#cb367-7"></a>                      <span class="dt">exp=</span>x<span class="op">/</span>n,</span>
-<span id="cb367-8"><a href="annotation-informed-aggregate-association-tests.html#cb367-8"></a>                      <span class="dt">upper=</span><span class="kw">qbeta</span>(<span class="fl">0.025</span>, x, <span class="kw">rev</span>(x)),</span>
-<span id="cb367-9"><a href="annotation-informed-aggregate-association-tests.html#cb367-9"></a>                      <span class="dt">lower=</span><span class="kw">qbeta</span>(<span class="fl">0.975</span>, x, <span class="kw">rev</span>(x)))</span>
-<span id="cb367-10"><a href="annotation-informed-aggregate-association-tests.html#cb367-10"></a>    </span>
-<span id="cb367-11"><a href="annotation-informed-aggregate-association-tests.html#cb367-11"></a>    <span class="kw">ggplot</span>(dat, <span class="kw">aes</span>(<span class="op">-</span><span class="kw">log10</span>(exp), <span class="op">-</span><span class="kw">log10</span>(obs))) <span class="op">+</span></span>
-<span id="cb367-12"><a href="annotation-informed-aggregate-association-tests.html#cb367-12"></a><span class="st">        </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="op">-</span><span class="kw">log10</span>(exp), <span class="op">-</span><span class="kw">log10</span>(upper)), <span class="dt">color=</span><span class="st">&quot;gray&quot;</span>) <span class="op">+</span></span>
-<span id="cb367-13"><a href="annotation-informed-aggregate-association-tests.html#cb367-13"></a><span class="st">        </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="op">-</span><span class="kw">log10</span>(exp), <span class="op">-</span><span class="kw">log10</span>(lower)), <span class="dt">color=</span><span class="st">&quot;gray&quot;</span>) <span class="op">+</span></span>
-<span id="cb367-14"><a href="annotation-informed-aggregate-association-tests.html#cb367-14"></a><span class="st">        </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
-<span id="cb367-15"><a href="annotation-informed-aggregate-association-tests.html#cb367-15"></a><span class="st">        </span><span class="kw">geom_abline</span>(<span class="dt">intercept=</span><span class="dv">0</span>, <span class="dt">slope=</span><span class="dv">1</span>, <span class="dt">color=</span><span class="st">&quot;red&quot;</span>) <span class="op">+</span></span>
-<span id="cb367-16"><a href="annotation-informed-aggregate-association-tests.html#cb367-16"></a><span class="st">        </span><span class="kw">xlab</span>(<span class="kw">expression</span>(<span class="kw">paste</span>(<span class="op">-</span>log[<span class="dv">10</span>], <span class="st">&quot;(expected P)&quot;</span>))) <span class="op">+</span></span>
-<span id="cb367-17"><a href="annotation-informed-aggregate-association-tests.html#cb367-17"></a><span class="st">        </span><span class="kw">ylab</span>(<span class="kw">expression</span>(<span class="kw">paste</span>(<span class="op">-</span>log[<span class="dv">10</span>], <span class="st">&quot;(observed P)&quot;</span>))) <span class="op">+</span></span>
-<span id="cb367-18"><a href="annotation-informed-aggregate-association-tests.html#cb367-18"></a><span class="st">        </span><span class="kw">theme_bw</span>()</span>
-<span id="cb367-19"><a href="annotation-informed-aggregate-association-tests.html#cb367-19"></a>}    </span>
-<span id="cb367-20"><a href="annotation-informed-aggregate-association-tests.html#cb367-20"></a></span>
-<span id="cb367-21"><a href="annotation-informed-aggregate-association-tests.html#cb367-21"></a><span class="kw">qqPlot</span>(assoc<span class="op">$</span>results<span class="op">$</span>Score.pval)</span></code></pre></div>
+<div class="sourceCode" id="cb365"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb365-1"><a href="annotation-informed-aggregate-association-tests.html#cb365-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb365-2"><a href="annotation-informed-aggregate-association-tests.html#cb365-2" aria-hidden="true" tabindex="-1"></a>qqPlot <span class="ot">&lt;-</span> <span class="cf">function</span>(pval) {</span>
+<span id="cb365-3"><a href="annotation-informed-aggregate-association-tests.html#cb365-3" aria-hidden="true" tabindex="-1"></a>    pval <span class="ot">&lt;-</span> pval[<span class="sc">!</span><span class="fu">is.na</span>(pval)]</span>
+<span id="cb365-4"><a href="annotation-informed-aggregate-association-tests.html#cb365-4" aria-hidden="true" tabindex="-1"></a>    n <span class="ot">&lt;-</span> <span class="fu">length</span>(pval)</span>
+<span id="cb365-5"><a href="annotation-informed-aggregate-association-tests.html#cb365-5" aria-hidden="true" tabindex="-1"></a>    x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span>n</span>
+<span id="cb365-6"><a href="annotation-informed-aggregate-association-tests.html#cb365-6" aria-hidden="true" tabindex="-1"></a>    dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">obs=</span><span class="fu">sort</span>(pval),</span>
+<span id="cb365-7"><a href="annotation-informed-aggregate-association-tests.html#cb365-7" aria-hidden="true" tabindex="-1"></a>                      <span class="at">exp=</span>x<span class="sc">/</span>n,</span>
+<span id="cb365-8"><a href="annotation-informed-aggregate-association-tests.html#cb365-8" aria-hidden="true" tabindex="-1"></a>                      <span class="at">upper=</span><span class="fu">qbeta</span>(<span class="fl">0.025</span>, x, <span class="fu">rev</span>(x)),</span>
+<span id="cb365-9"><a href="annotation-informed-aggregate-association-tests.html#cb365-9" aria-hidden="true" tabindex="-1"></a>                      <span class="at">lower=</span><span class="fu">qbeta</span>(<span class="fl">0.975</span>, x, <span class="fu">rev</span>(x)))</span>
+<span id="cb365-10"><a href="annotation-informed-aggregate-association-tests.html#cb365-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb365-11"><a href="annotation-informed-aggregate-association-tests.html#cb365-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(<span class="sc">-</span><span class="fu">log10</span>(exp), <span class="sc">-</span><span class="fu">log10</span>(obs))) <span class="sc">+</span></span>
+<span id="cb365-12"><a href="annotation-informed-aggregate-association-tests.html#cb365-12" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="sc">-</span><span class="fu">log10</span>(exp), <span class="sc">-</span><span class="fu">log10</span>(upper)), <span class="at">color=</span><span class="st">&quot;gray&quot;</span>) <span class="sc">+</span></span>
+<span id="cb365-13"><a href="annotation-informed-aggregate-association-tests.html#cb365-13" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="sc">-</span><span class="fu">log10</span>(exp), <span class="sc">-</span><span class="fu">log10</span>(lower)), <span class="at">color=</span><span class="st">&quot;gray&quot;</span>) <span class="sc">+</span></span>
+<span id="cb365-14"><a href="annotation-informed-aggregate-association-tests.html#cb365-14" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb365-15"><a href="annotation-informed-aggregate-association-tests.html#cb365-15" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_abline</span>(<span class="at">intercept=</span><span class="dv">0</span>, <span class="at">slope=</span><span class="dv">1</span>, <span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
+<span id="cb365-16"><a href="annotation-informed-aggregate-association-tests.html#cb365-16" aria-hidden="true" tabindex="-1"></a>        <span class="fu">xlab</span>(<span class="fu">expression</span>(<span class="fu">paste</span>(<span class="sc">-</span>log[<span class="dv">10</span>], <span class="st">&quot;(expected P)&quot;</span>))) <span class="sc">+</span></span>
+<span id="cb365-17"><a href="annotation-informed-aggregate-association-tests.html#cb365-17" aria-hidden="true" tabindex="-1"></a>        <span class="fu">ylab</span>(<span class="fu">expression</span>(<span class="fu">paste</span>(<span class="sc">-</span>log[<span class="dv">10</span>], <span class="st">&quot;(observed P)&quot;</span>))) <span class="sc">+</span></span>
+<span id="cb365-18"><a href="annotation-informed-aggregate-association-tests.html#cb365-18" aria-hidden="true" tabindex="-1"></a>        <span class="fu">theme_bw</span>()</span>
+<span id="cb365-19"><a href="annotation-informed-aggregate-association-tests.html#cb365-19" aria-hidden="true" tabindex="-1"></a>}    </span>
+<span id="cb365-20"><a href="annotation-informed-aggregate-association-tests.html#cb365-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb365-21"><a href="annotation-informed-aggregate-association-tests.html#cb365-21" aria-hidden="true" tabindex="-1"></a><span class="fu">qqPlot</span>(assoc<span class="sc">$</span>results<span class="sc">$</span>Score.pval)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
 </div>
 <div id="exercise-5" class="section level2" number="9.3">
@@ -394,19 +388,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ol style="list-style-type: decimal">
 <li>Since we are working with a subset of the data, many of the genes listed in <code>group_id</code> have a very small number of variants. Create a new set of aggregation units based on position, rather than gene name – create 10 units that are 1MB long and span all of the chr1 variants by using the TopmedPipeline function <code>aggregateGRanges</code>. Run a SKAT test with the Wu weights using those units and a <code>SeqVarRangeIterator</code> object.</li>
 </ol>
-<div class="sourceCode" id="cb368"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb368-1"><a href="annotation-informed-aggregate-association-tests.html#cb368-1"></a><span class="co"># minimum variant position</span></span>
-<span id="cb368-2"><a href="annotation-informed-aggregate-association-tests.html#cb368-2"></a>minp &lt;-<span class="st"> </span><span class="kw">min</span>(aggunit1<span class="op">$</span>pos)</span>
-<span id="cb368-3"><a href="annotation-informed-aggregate-association-tests.html#cb368-3"></a><span class="co"># maximum variant position</span></span>
-<span id="cb368-4"><a href="annotation-informed-aggregate-association-tests.html#cb368-4"></a>maxp &lt;-<span class="st"> </span><span class="kw">max</span>(aggunit1<span class="op">$</span>pos)</span>
-<span id="cb368-5"><a href="annotation-informed-aggregate-association-tests.html#cb368-5"></a></span>
-<span id="cb368-6"><a href="annotation-informed-aggregate-association-tests.html#cb368-6"></a><span class="co"># create a data frame breaking the position range into 10 pieces</span></span>
-<span id="cb368-7"><a href="annotation-informed-aggregate-association-tests.html#cb368-7"></a>aggByPos &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">chr=</span><span class="dv">1</span>,</span>
-<span id="cb368-8"><a href="annotation-informed-aggregate-association-tests.html#cb368-8"></a>                       <span class="dt">start=</span><span class="kw">seq</span>(minp, maxp<span class="fl">-1e6</span>, <span class="dt">length.out=</span><span class="dv">10</span>),</span>
-<span id="cb368-9"><a href="annotation-informed-aggregate-association-tests.html#cb368-9"></a>                       <span class="dt">end=</span><span class="kw">seq</span>(minp<span class="fl">+1e6</span>, maxp, <span class="dt">length.out=</span><span class="dv">10</span>))</span>
-<span id="cb368-10"><a href="annotation-informed-aggregate-association-tests.html#cb368-10"></a>aggByPos<span class="op">$</span>group_id &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(aggByPos)</span>
-<span id="cb368-11"><a href="annotation-informed-aggregate-association-tests.html#cb368-11"></a><span class="kw">dim</span>(aggByPos)</span></code></pre></div>
+<div class="sourceCode" id="cb366"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb366-1"><a href="annotation-informed-aggregate-association-tests.html#cb366-1" aria-hidden="true" tabindex="-1"></a><span class="co"># minimum variant position</span></span>
+<span id="cb366-2"><a href="annotation-informed-aggregate-association-tests.html#cb366-2" aria-hidden="true" tabindex="-1"></a>minp <span class="ot">&lt;-</span> <span class="fu">min</span>(aggunit1<span class="sc">$</span>pos)</span>
+<span id="cb366-3"><a href="annotation-informed-aggregate-association-tests.html#cb366-3" aria-hidden="true" tabindex="-1"></a><span class="co"># maximum variant position</span></span>
+<span id="cb366-4"><a href="annotation-informed-aggregate-association-tests.html#cb366-4" aria-hidden="true" tabindex="-1"></a>maxp <span class="ot">&lt;-</span> <span class="fu">max</span>(aggunit1<span class="sc">$</span>pos)</span>
+<span id="cb366-5"><a href="annotation-informed-aggregate-association-tests.html#cb366-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb366-6"><a href="annotation-informed-aggregate-association-tests.html#cb366-6" aria-hidden="true" tabindex="-1"></a><span class="co"># create a data frame breaking the position range into 10 pieces</span></span>
+<span id="cb366-7"><a href="annotation-informed-aggregate-association-tests.html#cb366-7" aria-hidden="true" tabindex="-1"></a>aggByPos <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">chr=</span><span class="dv">1</span>,</span>
+<span id="cb366-8"><a href="annotation-informed-aggregate-association-tests.html#cb366-8" aria-hidden="true" tabindex="-1"></a>                       <span class="at">start=</span><span class="fu">seq</span>(minp, maxp<span class="fl">-1e6</span>, <span class="at">length.out=</span><span class="dv">10</span>),</span>
+<span id="cb366-9"><a href="annotation-informed-aggregate-association-tests.html#cb366-9" aria-hidden="true" tabindex="-1"></a>                       <span class="at">end=</span><span class="fu">seq</span>(minp<span class="fl">+1e6</span>, maxp, <span class="at">length.out=</span><span class="dv">10</span>))</span>
+<span id="cb366-10"><a href="annotation-informed-aggregate-association-tests.html#cb366-10" aria-hidden="true" tabindex="-1"></a>aggByPos<span class="sc">$</span>group_id <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(aggByPos)</span>
+<span id="cb366-11"><a href="annotation-informed-aggregate-association-tests.html#cb366-11" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(aggByPos)</span></code></pre></div>
 <pre><code>## [1] 10  4</code></pre>
-<div class="sourceCode" id="cb370"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb370-1"><a href="annotation-informed-aggregate-association-tests.html#cb370-1"></a><span class="kw">head</span>(aggByPos)</span></code></pre></div>
+<div class="sourceCode" id="cb368"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb368-1"><a href="annotation-informed-aggregate-association-tests.html#cb368-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(aggByPos)</span></code></pre></div>
 <pre><code>##   chr     start       end group_id
 ## 1   1   1025045   2025045        1
 ## 2   1  28440219  29440219        2
@@ -414,8 +408,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 4   1  83270568  84270568        4
 ## 5   1 110685742 111685742        5
 ## 6   1 138100916 139100916        6</code></pre>
-<div class="sourceCode" id="cb372"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb372-1"><a href="annotation-informed-aggregate-association-tests.html#cb372-1"></a>aggVarList &lt;-<span class="st"> </span><span class="kw">aggregateGRanges</span>(aggByPos)</span>
-<span id="cb372-2"><a href="annotation-informed-aggregate-association-tests.html#cb372-2"></a>aggVarList</span></code></pre></div>
+<div class="sourceCode" id="cb370"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb370-1"><a href="annotation-informed-aggregate-association-tests.html#cb370-1" aria-hidden="true" tabindex="-1"></a>aggVarList <span class="ot">&lt;-</span> <span class="fu">aggregateGRanges</span>(aggByPos)</span>
+<span id="cb370-2"><a href="annotation-informed-aggregate-association-tests.html#cb370-2" aria-hidden="true" tabindex="-1"></a>aggVarList</span></code></pre></div>
 <pre><code>## GRanges object with 10 ranges and 0 metadata columns:
 ##      seqnames              ranges strand
 ##         &lt;Rle&gt;           &lt;IRanges&gt;  &lt;Rle&gt;
@@ -431,15 +425,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   10        1 247761613-248761613      *
 ##   -------
 ##   seqinfo: 1 sequence from an unspecified genome; no seqlengths</code></pre>
-<div class="sourceCode" id="cb374"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb374-1"><a href="annotation-informed-aggregate-association-tests.html#cb374-1"></a><span class="kw">seqResetFilter</span>(seqData, <span class="dt">verbose=</span><span class="ot">FALSE</span>)</span>
-<span id="cb374-2"><a href="annotation-informed-aggregate-association-tests.html#cb374-2"></a>iterator &lt;-<span class="st"> </span><span class="kw">SeqVarRangeIterator</span>(seqData, <span class="dt">variantRanges=</span>aggVarList, <span class="dt">verbose=</span><span class="ot">FALSE</span>)</span>
-<span id="cb374-3"><a href="annotation-informed-aggregate-association-tests.html#cb374-3"></a>assoc &lt;-<span class="st"> </span><span class="kw">assocTestAggregate</span>(iterator, </span>
-<span id="cb374-4"><a href="annotation-informed-aggregate-association-tests.html#cb374-4"></a>                            nullmod, </span>
-<span id="cb374-5"><a href="annotation-informed-aggregate-association-tests.html#cb374-5"></a>                            <span class="dt">test=</span><span class="st">&quot;SKAT&quot;</span>, </span>
-<span id="cb374-6"><a href="annotation-informed-aggregate-association-tests.html#cb374-6"></a>                            <span class="dt">AF.max=</span><span class="fl">0.1</span>, </span>
-<span id="cb374-7"><a href="annotation-informed-aggregate-association-tests.html#cb374-7"></a>                            <span class="dt">weight.beta=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">25</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb372"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb372-1"><a href="annotation-informed-aggregate-association-tests.html#cb372-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seqResetFilter</span>(seqData, <span class="at">verbose=</span><span class="cn">FALSE</span>)</span>
+<span id="cb372-2"><a href="annotation-informed-aggregate-association-tests.html#cb372-2" aria-hidden="true" tabindex="-1"></a>iterator <span class="ot">&lt;-</span> <span class="fu">SeqVarRangeIterator</span>(seqData, <span class="at">variantRanges=</span>aggVarList, <span class="at">verbose=</span><span class="cn">FALSE</span>)</span>
+<span id="cb372-3"><a href="annotation-informed-aggregate-association-tests.html#cb372-3" aria-hidden="true" tabindex="-1"></a>assoc <span class="ot">&lt;-</span> <span class="fu">assocTestAggregate</span>(iterator, </span>
+<span id="cb372-4"><a href="annotation-informed-aggregate-association-tests.html#cb372-4" aria-hidden="true" tabindex="-1"></a>                            nullmod, </span>
+<span id="cb372-5"><a href="annotation-informed-aggregate-association-tests.html#cb372-5" aria-hidden="true" tabindex="-1"></a>                            <span class="at">test=</span><span class="st">&quot;SKAT&quot;</span>, </span>
+<span id="cb372-6"><a href="annotation-informed-aggregate-association-tests.html#cb372-6" aria-hidden="true" tabindex="-1"></a>                            <span class="at">AF.max=</span><span class="fl">0.1</span>, </span>
+<span id="cb372-7"><a href="annotation-informed-aggregate-association-tests.html#cb372-7" aria-hidden="true" tabindex="-1"></a>                            <span class="at">weight.beta=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">25</span>))</span></code></pre></div>
 <pre><code>## # of selected samples: 1,126</code></pre>
-<div class="sourceCode" id="cb376"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb376-1"><a href="annotation-informed-aggregate-association-tests.html#cb376-1"></a>assoc<span class="op">$</span>results</span></code></pre></div>
+<div class="sourceCode" id="cb374"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb374-1"><a href="annotation-informed-aggregate-association-tests.html#cb374-1" aria-hidden="true" tabindex="-1"></a>assoc<span class="sc">$</span>results</span></code></pre></div>
 <pre><code>##    n.site n.alt n.sample.alt         Q      pval err pval.method
 ## 1       4    24           24  79.08763 0.3995046   0 saddlepoint
 ## 2       4   152          137  80.38214 0.4753546   0 saddlepoint
@@ -451,7 +445,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 8       4    18           18  92.32706 0.2701244   0 saddlepoint
 ## 9       6    11           11  29.61999 0.5637511   0 integration
 ## 10      4    33           33 155.50853 0.2035247   0 saddlepoint</code></pre>
-<div class="sourceCode" id="cb378"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb378-1"><a href="annotation-informed-aggregate-association-tests.html#cb378-1"></a><span class="kw">seqClose</span>(seqData)</span></code></pre></div>
+<div class="sourceCode" id="cb376"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb376-1"><a href="annotation-informed-aggregate-association-tests.html#cb376-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seqClose</span>(seqData)</span></code></pre></div>
 
 </div>
 </div>

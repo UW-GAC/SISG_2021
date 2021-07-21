@@ -50,7 +50,6 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
@@ -59,6 +58,7 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -202,11 +202,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="8" data-path="variant-annotation.html"><a href="variant-annotation.html"><i class="fa fa-check"></i><b>8</b> Variant annotation</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="variant-annotation.html"><a href="variant-annotation.html#use-case-1"><i class="fa fa-check"></i><b>8.1</b> Use case 1</a></li>
-<li class="chapter" data-level="8.2" data-path="variant-annotation.html"><a href="variant-annotation.html#use-case-2"><i class="fa fa-check"></i><b>8.2</b> Use case 2</a></li>
-<li class="chapter" data-level="8.3" data-path="variant-annotation.html"><a href="variant-annotation.html#use-case-3"><i class="fa fa-check"></i><b>8.3</b> Use case 3</a></li>
-<li class="chapter" data-level="8.4" data-path="variant-annotation.html"><a href="variant-annotation.html#exercise-4"><i class="fa fa-check"></i><b>8.4</b> Exercise</a></li>
-<li class="chapter" data-level="8.5" data-path="variant-annotation.html"><a href="variant-annotation.html#solution-4"><i class="fa fa-check"></i><b>8.5</b> Solution</a></li>
+<li class="chapter" data-level="8.1" data-path="variant-annotation.html"><a href="variant-annotation.html#use-cases"><i class="fa fa-check"></i><b>8.1</b> Use cases</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="variant-annotation.html"><a href="variant-annotation.html#use-case-1"><i class="fa fa-check"></i><b>8.1.1</b> Use case 1</a></li>
+<li class="chapter" data-level="8.1.2" data-path="variant-annotation.html"><a href="variant-annotation.html#use-case-2"><i class="fa fa-check"></i><b>8.1.2</b> Use case 2</a></li>
+<li class="chapter" data-level="8.1.3" data-path="variant-annotation.html"><a href="variant-annotation.html#use-case-3"><i class="fa fa-check"></i><b>8.1.3</b> Use case 3</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="variant-annotation.html"><a href="variant-annotation.html#exercise-4"><i class="fa fa-check"></i><b>8.2</b> Exercise</a></li>
+<li class="chapter" data-level="8.3" data-path="variant-annotation.html"><a href="variant-annotation.html#solution-4"><i class="fa fa-check"></i><b>8.3</b> Solution</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="annotation-informed-aggregate-association-tests.html"><a href="annotation-informed-aggregate-association-tests.html"><i class="fa fa-check"></i><b>9</b> Annotation informed aggregate association tests</a>
 <ul>
@@ -257,24 +260,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">8</span> Variant annotation</h1>
 <p>In this session we will learn how to use <a href="https://platform.sb.biodatacatalyst.nhlbi.nih.gov/u/biodatacatalyst/annotation-explorer/">Annotation Explorer</a>, an open tool available on NHLBI BioData Catalyst cloud platform that eliminates the challenges of working with very large variant-level annotated datasets. Using Annotation Explorer we will learn how to explore and interactively query variant annotations and integrate them in GWAS analyses. Annotation Explorer can be used pre-association testing, for example to generate annotation informed variant filtering and grouping files for aggregate testing; as well as for post-association testing, for example to explore annotations of variants in a novel GWAS signal. We will execute three representative use cases to demonstrate both pre- and post-GWAS applications. For all the use cases we will be using the open-access dataset<code>TOPMed_freeze5_open</code>, which everyone will have access to.</p>
 <p>Annotation explorer has interactive graphical user interface built on high performance databases and does not require any programming experience. It currently caps the number of users at a given time and hence we all will not be able to use it live at the same time during the workshop. We request that users perform the hands-on exercises involving Annotation explorer after the workshop is over, at their own convenience. We have provided a <a href="https://docs.google.com/document/d/1_yXemTTYnBzL6Dv4fngojE0T5CAH3Z-CSxj1X5Qq8kI/edit?usp=sharing">detailed tutorial</a> and will provide a video recording of the demo for how to perform the following exercises using Annotation Explorer.</p>
-<div id="use-case-1" class="section level2" number="8.1">
-<h2><span class="header-section-number">8.1</span> Use case 1</h2>
+<div id="use-cases" class="section level2" number="8.1">
+<h2><span class="header-section-number">8.1</span> Use cases</h2>
+<div id="use-case-1" class="section level3" number="8.1.1">
+<h3><span class="header-section-number">8.1.1</span> Use case 1</h3>
 <p>User wants to generate aggregation units for rare variant association testing such that only missense variants which have CADD phred score &gt;20 are grouped by Ensemble gene definitions</p>
 </div>
-<div id="use-case-2" class="section level2" number="8.2">
-<h2><span class="header-section-number">8.2</span> Use case 2</h2>
+<div id="use-case-2" class="section level3" number="8.1.2">
+<h3><span class="header-section-number">8.1.2</span> Use case 2</h3>
 <p>User wants to generate aggregation units for rare variant association testing such that they retain only variants with fathmm_MKL_non_coding_score &gt;0.5 and they are grouped by user-defined genomic co-ordinates (example using ATAC-Seq peaks from the tissue of your choice)</p>
 </div>
-<div id="use-case-3" class="section level2" number="8.3">
-<h2><span class="header-section-number">8.3</span> Use case 3</h2>
+<div id="use-case-3" class="section level3" number="8.1.3">
+<h3><span class="header-section-number">8.1.3</span> Use case 3</h3>
 <p>User wants to explore the annotations for a variant of their interest</p>
 </div>
-<div id="exercise-4" class="section level2" number="8.4">
-<h2><span class="header-section-number">8.4</span> Exercise</h2>
+</div>
+<div id="exercise-4" class="section level2" number="8.2">
+<h2><span class="header-section-number">8.2</span> Exercise</h2>
 <p>Generate a new set of aggregation units by setting up the same filtering criteria as in use case 1 but this time use a different CADD phred score cut-off (example 40, 10) and study how that changes plots under the <code>interactive plots</code> tab of Annotation Explorer. For example, how does changing the filtering criteria change the number of aggregation units with no variants. How does the distribution and number of aggregation units in each bin change in the histogram?</p>
 </div>
-<div id="solution-4" class="section level2" number="8.5">
-<h2><span class="header-section-number">8.5</span> Solution</h2>
+<div id="solution-4" class="section level2" number="8.3">
+<h2><span class="header-section-number">8.3</span> Solution</h2>
 <p>In general a more stringent filtering approach will reduce the number of aggregation units which have at least one variant (for example you will see fewer units with no variants at CADD phred cut-off 10 vs 40. The change in the distribution of histogram that shows the total number of aggregation units (Y-axis) in the each of bins with varying variant number ranges (X-axis) depends on the characteristics of the features used for grouping criteria (size of the aggregating regions) and distribution of values of the annotation field used for filtering.</p>
 <p>Sometimes there is not a obvious or recommended cut-off to implement for a annotation field. Playing with varying filtering criteria can help an user visualize its effects on the aggregation unit characteristics and may assist them in choosing a filtering criteria in an informed way</p>
 

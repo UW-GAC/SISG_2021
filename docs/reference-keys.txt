@@ -45,6 +45,7 @@ single-variant-tests
 exercise-3
 solution-3
 variant-annotation
+use-cases
 use-case-1
 use-case-2
 use-case-3
