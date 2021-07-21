@@ -1,4 +1,5 @@
 # Variant annotation
+
 In this session, we will learn how to use [Annotation Explorer](https://platform.sb.biodatacatalyst.nhlbi.nih.gov/u/biodatacatalyst/annotation-explorer/), an open tool available on NHLBI BioData Catalyst cloud platform that eliminates the challenges of working with very large variant-level annotated datasets. Using Annotation Explorer, we will learn how to explore and interactively query variant annotations and integrate them in GWAS analyses. Annotation Explorer can be used pre-association testing -- for example, to generate annotation informed variant filtering and grouping files for aggregate testing -- as well as for post-association testing -- for example, to explore annotations of variants in a novel GWAS signal. We will execute three representative use cases to demonstrate both pre- and post-GWAS applications. For all the use cases, we will be using the open-access dataset `TOPMed_freeze5_open`, which everyone has access to.
 
 Annotation explorer has an interactive graphical user interface built on high performance databases and does not require any programming experience. It currently caps the number of users at a given time, so we will not all be able to use it live at the same time during the workshop. We request that everyone perform the hands-on exercises involving Annotation explorer after the workshop is over, at their own convenience. We have provided a [detailed tutorial]( https://docs.google.com/document/d/1_yXemTTYnBzL6Dv4fngojE0T5CAH3Z-CSxj1X5Qq8kI/edit?usp=sharing) and will provide a video recording of this demo for how to perform the following exercises using Annotation Explorer. 
@@ -19,7 +20,7 @@ User wants to explore the annotations for a variant of their interest.
 
 ## Exercise
 
-1. Generate a new set of aggregation units by setting up the same filtering criteria as in use case 1, but this time use a different CADD phred score cut-off (example: 40, 10) and study how that changes plots under the `interactive plots` tab of Annotation Explorer. For example, how does changing the filtering criteria change the number of aggregation units with no variants? How does the distribution and number of aggregation units in each bin change in the histogram?
+1. Using [Annotation Explorer](https://platform.sb.biodatacatalyst.nhlbi.nih.gov/u/biodatacatalyst/annotation-explorer/), generate a new set of aggregation units by setting up the same filtering criteria as in use case 1, but this time use a different CADD phred score cut-off (example: 40, 10) and study how that changes plots under the `interactive plots` tab of Annotation Explorer. For example, how does changing the filtering criteria change the number of aggregation units with no variants? How does the distribution and number of aggregation units in each bin change in the histogram?
 
 ## Solution
 
