@@ -46,7 +46,7 @@ NOTE: All times are Pacific Daylight Time (GMT-07:00)
     - **Lecture**
         - Introduction ([slides](https://docs.google.com/presentation/d/1QMS6cSLso9eMl96P7A7OHmkDpN3g1qFyupQE7cOA4Fk/edit#slide=id.p)) (video coming soon)
         - Using BioData Catalyst for SISG exercises ([instructions](https://docs.google.com/document/d/1nLMjNRYffphWl89XVEPbH5NHLbUDW4SK7ikeEcHbixo/edit?usp=sharing)) (video coming soon)
-        - Sequencing data formats ([slides](https://drive.google.com/file/d/1w_dEobxo6kzloQlIuHW_lUnwkPCYK-RP/view?usp=sharing)) (video coming soon)
+        - Sequencing data formats ([slides](https://drive.google.com/file/d/1w_dEobxo6kzloQlIuHW_lUnwkPCYK-RP/view?usp=sharing)) ([pre-recorded lecture](https://washington.zoom.us/rec/share/CQBVagbRwvPsP3qn605dQZQWK7oTccn9zdgW5eFGhytDjaF2Hy-ugYWp6xOpBqRo.cF1_c5gy-k5DAoMI?startTime=1626201510000))
         - Intro to Genomic Data Structure  ([slides](https://drive.google.com/file/d/1_p6-peb89ppi54gsDEapRdHcRVaq3IAX/view?usp=sharing)) (video coming soon)
     - **Interactive breakout rooms**
         - GDS format ([Tutorial](https://uw-gac.github.io/SISG_2021/gds-format.html)) ([Exercise](https://uw-gac.github.io/SISG_2021/gds-format.html#exercises)) ([Solution](https://uw-gac.github.io/SISG_2021/gds-format.html#solutions))
