@@ -54,70 +54,6 @@
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
-<style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-</style>
 
 
 </head>
@@ -258,31 +194,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="variant-annotation" class="section level1" number="8">
 <h1><span class="header-section-number">8</span> Variant annotation</h1>
-<p>In this session we will learn how to use <a href="https://platform.sb.biodatacatalyst.nhlbi.nih.gov/u/biodatacatalyst/annotation-explorer/">Annotation Explorer</a>, an open tool available on NHLBI BioData Catalyst cloud platform that eliminates the challenges of working with very large variant-level annotated datasets. Using Annotation Explorer we will learn how to explore and interactively query variant annotations and integrate them in GWAS analyses. Annotation Explorer can be used pre-association testing, for example to generate annotation informed variant filtering and grouping files for aggregate testing; as well as for post-association testing, for example to explore annotations of variants in a novel GWAS signal. We will execute three representative use cases to demonstrate both pre- and post-GWAS applications. For all the use cases we will be using the open-access dataset<code>TOPMed_freeze5_open</code>, which everyone will have access to.</p>
-<p>Annotation explorer has interactive graphical user interface built on high performance databases and does not require any programming experience. It currently caps the number of users at a given time and hence we all will not be able to use it live at the same time during the workshop. We request that users perform the hands-on exercises involving Annotation explorer after the workshop is over, at their own convenience. We have provided a <a href="https://docs.google.com/document/d/1_yXemTTYnBzL6Dv4fngojE0T5CAH3Z-CSxj1X5Qq8kI/edit?usp=sharing">detailed tutorial</a> and will provide a video recording of the demo for how to perform the following exercises using Annotation Explorer.</p>
+<p>In this session, we will learn how to use <a href="https://platform.sb.biodatacatalyst.nhlbi.nih.gov/u/biodatacatalyst/annotation-explorer/">Annotation Explorer</a>, an open tool available on NHLBI BioData Catalyst cloud platform that eliminates the challenges of working with very large variant-level annotated datasets. Using Annotation Explorer, we will learn how to explore and interactively query variant annotations and integrate them in GWAS analyses. Annotation Explorer can be used pre-association testing – for example, to generate annotation informed variant filtering and grouping files for aggregate testing – as well as for post-association testing – for example, to explore annotations of variants in a novel GWAS signal. We will execute three representative use cases to demonstrate both pre- and post-GWAS applications. For all the use cases, we will be using the open-access dataset <code>TOPMed_freeze5_open</code>, which everyone has access to.</p>
+<p>Annotation explorer has an interactive graphical user interface built on high performance databases and does not require any programming experience. It currently caps the number of users at a given time, so we will not all be able to use it live at the same time during the workshop. We request that everyone perform the hands-on exercises involving Annotation explorer after the workshop is over, at their own convenience. We have provided a <a href="https://docs.google.com/document/d/1_yXemTTYnBzL6Dv4fngojE0T5CAH3Z-CSxj1X5Qq8kI/edit?usp=sharing">detailed tutorial</a> and will provide a video recording of this demo for how to perform the following exercises using Annotation Explorer.</p>
 <div id="use-cases" class="section level2" number="8.1">
 <h2><span class="header-section-number">8.1</span> Use cases</h2>
 <div id="use-case-1" class="section level3" number="8.1.1">
 <h3><span class="header-section-number">8.1.1</span> Use case 1</h3>
-<p>User wants to generate aggregation units for rare variant association testing such that only missense variants which have CADD phred score &gt;20 are grouped by Ensemble gene definitions</p>
+<p>User wants to generate aggregation units for rare variant association testing such that only missense variants which have CADD phred score &gt;20 are grouped by Ensemble gene definitions.</p>
 </div>
 <div id="use-case-2" class="section level3" number="8.1.2">
 <h3><span class="header-section-number">8.1.2</span> Use case 2</h3>
-<p>User wants to generate aggregation units for rare variant association testing such that they retain only variants with fathmm_MKL_non_coding_score &gt;0.5 and they are grouped by user-defined genomic co-ordinates (example using ATAC-Seq peaks from the tissue of your choice)</p>
+<p>User wants to generate aggregation units for rare variant association testing such that they retain only variants with <code>fathmm_MKL_non_coding_score &gt; 0.5</code> grouped by user-defined genomic coordinates (for example, using ATAC-Seq peaks from the tissue of your choice).</p>
 </div>
 <div id="use-case-3" class="section level3" number="8.1.3">
 <h3><span class="header-section-number">8.1.3</span> Use case 3</h3>
-<p>User wants to explore the annotations for a variant of their interest</p>
+<p>User wants to explore the annotations for a variant of their interest.</p>
 </div>
 </div>
 <div id="exercise-4" class="section level2" number="8.2">
 <h2><span class="header-section-number">8.2</span> Exercise</h2>
-<p>Generate a new set of aggregation units by setting up the same filtering criteria as in use case 1 but this time use a different CADD phred score cut-off (example 40, 10) and study how that changes plots under the <code>interactive plots</code> tab of Annotation Explorer. For example, how does changing the filtering criteria change the number of aggregation units with no variants. How does the distribution and number of aggregation units in each bin change in the histogram?</p>
+<ol style="list-style-type: decimal">
+<li>Generate a new set of aggregation units by setting up the same filtering criteria as in use case 1, but this time use a different CADD phred score cut-off (example: 40, 10) and study how that changes plots under the <code>interactive plots</code> tab of Annotation Explorer. For example, how does changing the filtering criteria change the number of aggregation units with no variants? How does the distribution and number of aggregation units in each bin change in the histogram?</li>
+</ol>
 </div>
 <div id="solution-4" class="section level2" number="8.3">
 <h2><span class="header-section-number">8.3</span> Solution</h2>
-<p>In general a more stringent filtering approach will reduce the number of aggregation units which have at least one variant (for example you will see fewer units with no variants at CADD phred cut-off 10 vs 40. The change in the distribution of histogram that shows the total number of aggregation units (Y-axis) in the each of bins with varying variant number ranges (X-axis) depends on the characteristics of the features used for grouping criteria (size of the aggregating regions) and distribution of values of the annotation field used for filtering.</p>
-<p>Sometimes there is not a obvious or recommended cut-off to implement for a annotation field. Playing with varying filtering criteria can help an user visualize its effects on the aggregation unit characteristics and may assist them in choosing a filtering criteria in an informed way</p>
+<ol style="list-style-type: decimal">
+<li>In general, a more stringent filtering approach will reduce the number of aggregation units which have at least one variant (for example, you will see fewer units with no variants at CADD phred cut-off 10 vs 40). The change in the histogram that shows the total number of aggregation units (Y-axis) in each of the bins with varying variant number ranges (X-axis) depends on the characteristics of the features used for grouping criteria (size of the aggregating regions) and distribution of values of the annotation field used for filtering.</li>
+</ol>
+<p>Sometimes there is not an obvious or recommended cut-off to implement for an annotation field. Playing with varying filtering criteria can help a user visualize its effects on the aggregation unit characteristics and may assist them in choosing a filtering criteria in an informed way</p>
 
 </div>
 </div>

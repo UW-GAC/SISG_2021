@@ -1,24 +1,29 @@
 # Variant annotation
-In this session we will learn how to use [Annotation Explorer](https://platform.sb.biodatacatalyst.nhlbi.nih.gov/u/biodatacatalyst/annotation-explorer/), an open tool available on NHLBI BioData Catalyst cloud platform that eliminates the challenges of working with very large variant-level annotated datasets. Using Annotation Explorer we will learn how to explore and interactively query variant annotations and integrate them in GWAS analyses. Annotation Explorer can be used pre-association testing, for example to generate annotation informed variant filtering and grouping files for aggregate testing; as well as for post-association testing, for example to explore annotations of variants in a novel GWAS signal.  We will execute three representative use cases to demonstrate both pre- and post-GWAS applications. For all the use cases we will be using the open-access dataset`TOPMed_freeze5_open`, which everyone will have access to.
+In this session, we will learn how to use [Annotation Explorer](https://platform.sb.biodatacatalyst.nhlbi.nih.gov/u/biodatacatalyst/annotation-explorer/), an open tool available on NHLBI BioData Catalyst cloud platform that eliminates the challenges of working with very large variant-level annotated datasets. Using Annotation Explorer, we will learn how to explore and interactively query variant annotations and integrate them in GWAS analyses. Annotation Explorer can be used pre-association testing -- for example, to generate annotation informed variant filtering and grouping files for aggregate testing -- as well as for post-association testing -- for example, to explore annotations of variants in a novel GWAS signal. We will execute three representative use cases to demonstrate both pre- and post-GWAS applications. For all the use cases, we will be using the open-access dataset `TOPMed_freeze5_open`, which everyone has access to.
 
-Annotation explorer has interactive graphical user interface built on high performance databases and does not require any programming experience. It currently caps the number of users at a given time and hence we all will not be able to use it live at the same time during the workshop. We request that users perform the hands-on exercises involving Annotation explorer after the workshop is over, at their own convenience. We have provided a [detailed tutorial]( https://docs.google.com/document/d/1_yXemTTYnBzL6Dv4fngojE0T5CAH3Z-CSxj1X5Qq8kI/edit?usp=sharing) and will provide a video recording of the demo for how to perform the following exercises using Annotation Explorer. 
+Annotation explorer has an interactive graphical user interface built on high performance databases and does not require any programming experience. It currently caps the number of users at a given time, so we will not all be able to use it live at the same time during the workshop. We request that everyone perform the hands-on exercises involving Annotation explorer after the workshop is over, at their own convenience. We have provided a [detailed tutorial]( https://docs.google.com/document/d/1_yXemTTYnBzL6Dv4fngojE0T5CAH3Z-CSxj1X5Qq8kI/edit?usp=sharing) and will provide a video recording of this demo for how to perform the following exercises using Annotation Explorer. 
 
 ## Use cases 
 
 ### Use case 1 
-User wants to generate aggregation units for rare variant association testing such that only missense variants which have CADD phred score >20 are grouped by Ensemble gene definitions
+
+User wants to generate aggregation units for rare variant association testing such that only missense variants which have CADD phred score >20 are grouped by Ensemble gene definitions.
 
 ### Use case 2 
-User wants to generate aggregation units for rare variant association testing such that they retain only variants with fathmm_MKL_non_coding_score >0.5 and they are grouped by user-defined genomic co-ordinates (example using ATAC-Seq peaks from the tissue of your choice)
+
+User wants to generate aggregation units for rare variant association testing such that they retain only variants with `fathmm_MKL_non_coding_score > 0.5` grouped by user-defined genomic coordinates (for example, using ATAC-Seq peaks from the tissue of your choice).
 
 ### Use case 3
-User wants to explore the annotations for a variant of their interest
+
+User wants to explore the annotations for a variant of their interest.
 
 ## Exercise
-Generate a new set of aggregation units by setting up the same filtering criteria as in use case 1 but this time use a different CADD phred score cut-off (example 40, 10) and study how that changes plots under the `interactive plots` tab of Annotation Explorer. For example, how does changing the filtering criteria change the number of aggregation units with no variants. How does the distribution and number of aggregation units in each bin change in the histogram?
+
+1. Generate a new set of aggregation units by setting up the same filtering criteria as in use case 1, but this time use a different CADD phred score cut-off (example: 40, 10) and study how that changes plots under the `interactive plots` tab of Annotation Explorer. For example, how does changing the filtering criteria change the number of aggregation units with no variants? How does the distribution and number of aggregation units in each bin change in the histogram?
 
 ## Solution
-In general a more stringent filtering approach will reduce the number of aggregation units which have at least one variant (for example you will see fewer units with no variants at CADD phred cut-off 10 vs 40. The change in the distribution of histogram that shows the total number of aggregation units (Y-axis) in the each of bins with varying variant number ranges (X-axis) depends on the characteristics of the features used for grouping criteria (size of the aggregating regions) and distribution of values of the annotation field used for filtering. 
 
-Sometimes there is not a obvious or recommended cut-off to implement for a annotation field. Playing with varying filtering criteria can help an user visualize its effects on the aggregation unit characteristics and may assist them in choosing a filtering criteria in an informed way
+1. In general, a more stringent filtering approach will reduce the number of aggregation units which have at least one variant (for example, you will see fewer units with no variants at CADD phred cut-off 10 vs 40). The change in the histogram that shows the total number of aggregation units (Y-axis) in each of the bins with varying variant number ranges (X-axis) depends on the characteristics of the features used for grouping criteria (size of the aggregating regions) and distribution of values of the annotation field used for filtering. 
+
+Sometimes there is not an obvious or recommended cut-off to implement for an annotation field. Playing with varying filtering criteria can help a user visualize its effects on the aggregation unit characteristics and may assist them in choosing a filtering criteria in an informed way
 
