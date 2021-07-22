@@ -1,0 +1,13 @@
+{
+  "Filters": {
+    "Filter_1": {
+      "col": ["fathmm_MKL_non_coding_score"],
+      "annot_type": ["quant"],
+      "filter_type": [">"],
+      "filter_value": ["0.5"]
+    }
+  },
+  "join_query_filter_conditions_by_AND": [true],
+  "selected_vals_annot": ["CHROM", "POS", "REF", "ALT", "fathmm_MKL_non_coding_score"],
+  "selected_vals_chrom": ["chr1"]
+}
