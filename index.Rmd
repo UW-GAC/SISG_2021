@@ -63,7 +63,7 @@ NOTE: All times are Pacific Daylight Time (GMT-07:00)
 
 - **Zoom session 8:00-10:00 PDT** - Association tests, Part I
     - **Lecture**
-        - Association tests: Methods and motivation  ([slides](https://drive.google.com/file/d/1caziaZ_tp0Brg_Atq0keiImSWx_GujXL/view?usp=sharing)) (recorded lecture [part 1](https://washington.zoom.us/rec/play/IwlY1CuA6L36hgMIc2IJ0tc0Hr46DHV-yaUWiwHJ_g5zAqSSIb5Yzfx8BWf1ZyU3EDbVoqI1OMiyo3t0.EZX3Jljiq0Qu8y0H?startTime=1626905686000); [part 2](https://washington.zoom.us/rec/play/fvG0xqcfyH5-54wwhMNeQ2bJ80guxjCcKgNbNUcYtGXDqGOEMBRnk4Ba3ylIRqPbUidMte53f9xvqnwN.DmzuyJhRYHkKzdpo?startTime=1626928021000))
+        - Association tests: Methods and motivation  ([slides](https://drive.google.com/file/d/1caziaZ_tp0Brg_Atq0keiImSWx_GujXL/view?usp=sharing)) ([recorded lecture](https://drive.google.com/file/d/1ifzoM7pPm46EmOG7MbJfOxsrP9UxBMQN/view?usp=sharing))
         - GENESIS for association tests  ([slides](https://drive.google.com/file/d/1LPGKgrhFb2Yzty-bTDsX9vlTxifsLcPl/view?usp=sharing)) (video coming soon)
     - **Interactive breakout rooms**
         - Null model ([Tutorial](https://uw-gac.github.io/SISG_2021/association-tests-part-i.html)) ([Exercise](https://uw-gac.github.io/SISG_2021/association-tests-part-i.html#exercise)) ([Solution](https://uw-gac.github.io/SISG_2021/association-tests-part-i.html#solution))
