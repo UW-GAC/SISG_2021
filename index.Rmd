@@ -97,9 +97,10 @@ NOTE: All times are Pacific Daylight Time (GMT-07:00)
         
 - **Zoom session 9:45-11:30 PDT** - Variant annotation
     - **Lecture**
-        - Variant annotation ([slides]()) (video coming soon)
+        - Variant annotation ([slides](https://drive.google.com/file/d/1tpIKgTjrZGusiy5oAQaVKi7p09rXPuwY/view)) (video coming soon)
+        - Annotation Explorer demo ([video tutorial](https://washington.zoom.us/rec/play/SCBsJ-0t_ZSyam_TTw200McNf1iYL7lNO4pfo5rhHUBM5gkBKJR84G8MpZFubwVaNt-vUHPb9R9LsBe6.uyfMNKweYVrbTGZ_?startTime=1626925096000&_x_zm_rtaid=o0uIJf_zTdK4ieudj_bw8g.1626990248022.746dad5d00053aebfb9a23bfb0c6b258&_x_zm_rhtaid=497)) ([text tutorial](https://docs.google.com/document/d/1_yXemTTYnBzL6Dv4fngojE0T5CAH3Z-CSxj1X5Qq8kI/edit)) ([Exercise](https://uw-gac.github.io/SISG_2021/variant-annotation.html)) ([Solution](https://uw-gac.github.io/SISG_2021/variant-annotation.html#solution-4))
     - **Interactive breakout rooms**
-        - Association testing using variant annotation ([Tutorial]()) ([Exercise]()) ([Solution]())
+        - Association testing using variant annotation ([Tutorial](https://uw-gac.github.io/SISG_2021/annotation-informed-aggregate-association-tests.html)) ([Exercise](https://uw-gac.github.io/SISG_2021/annotation-informed-aggregate-association-tests.html#exercise-5)) ([Solution](https://uw-gac.github.io/SISG_2021/annotation-informed-aggregate-association-tests.html#solution-5))
         - Discussion (video coming soon)
         
 - **Zoom session 12:30-13:45 PDT** - Working in the cloud
