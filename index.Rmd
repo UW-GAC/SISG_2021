@@ -44,20 +44,20 @@ NOTE: All times are Pacific Daylight Time (GMT-07:00)
 
 - **Zoom session 11:30-13:15 PDT** - Introduction and Genomic Data Storage
     - **Lecture**
-        - Introduction ([slides](https://docs.google.com/presentation/d/1QMS6cSLso9eMl96P7A7OHmkDpN3g1qFyupQE7cOA4Fk/edit#slide=id.p)) (video coming soon)
-        - Using BioData Catalyst for SISG exercises ([instructions](https://docs.google.com/document/d/1nLMjNRYffphWl89XVEPbH5NHLbUDW4SK7ikeEcHbixo/edit?usp=sharing)) (video coming soon)
+        - Introduction ([slides](https://docs.google.com/presentation/d/1QMS6cSLso9eMl96P7A7OHmkDpN3g1qFyupQE7cOA4Fk/edit#slide=id.p)) ([recorded lecture](https://drive.google.com/file/d/1cJaxbXCvQyJumyvqWHHdErL2IfEZFiXI/view?usp=sharing))
+        - Using BioData Catalyst for SISG exercises ([instructions](https://docs.google.com/document/d/1nLMjNRYffphWl89XVEPbH5NHLbUDW4SK7ikeEcHbixo/edit?usp=sharing)) ([recorded lecture](https://drive.google.com/file/d/16r0y9P5GfWLHxu9YZoqDeBDy76KWWSOb/view?usp=sharing))
         - Sequencing data formats ([slides](https://drive.google.com/file/d/1w_dEobxo6kzloQlIuHW_lUnwkPCYK-RP/view?usp=sharing)) ([pre-recorded lecture](https://washington.zoom.us/rec/share/CQBVagbRwvPsP3qn605dQZQWK7oTccn9zdgW5eFGhytDjaF2Hy-ugYWp6xOpBqRo.cF1_c5gy-k5DAoMI?startTime=1626201510000))
-        - Intro to Genomic Data Structure  ([slides](https://drive.google.com/file/d/1_p6-peb89ppi54gsDEapRdHcRVaq3IAX/view?usp=sharing)) (video coming soon)
+        - Intro to Genomic Data Structure  ([slides](https://drive.google.com/file/d/1_p6-peb89ppi54gsDEapRdHcRVaq3IAX/view?usp=sharing)) ([recorded lecture](https://drive.google.com/file/d/1s5s5cRSEH3tzWhQ_wk7U7ImPnaOxkhei/view?usp=sharing))
     - **Interactive breakout rooms**
         - GDS format ([Tutorial](https://uw-gac.github.io/SISG_2021/gds-format.html)) ([Exercise](https://uw-gac.github.io/SISG_2021/gds-format.html#exercises)) ([Solution](https://uw-gac.github.io/SISG_2021/gds-format.html#solutions))
-        - Discussion (video coming soon)
+        - Discussion ([video](https://drive.google.com/file/d/1VeQ_Tz5ORJBDO1Hz-5V61FJx9MQXbCwf/view?usp=sharing))
         
 - **Zoom session 13:45-14:30 PDT** - Phenotype harmonization
     - **Lecture**
         - Phenotype harmonization  ([slides](https://drive.google.com/file/d/10EKUJxTARdX52uMXcnOENBqDwhCcVwW2/view?usp=sharing)) ([pre-recorded lecture](https://washington.zoom.us/rec/play/HmXkJmH5RllYXyKHIl4wsk9V-kmmGsjJq_xpwyGxtlX556KRhKW5pzFhzmE5ldum9Smsnn_gM15jjDQb.vw8mOGoWcvvTjmtm?continueMode=true&_x_zm_rtaid=Xpghuu1BRGCPDP5pPcewUQ.1626824313252.0dc095a7ea0c036ff2c4222152db4f30&_x_zm_rhtaid=804))
     - **Interactive breakout rooms**
         - Harmonization in R ([Tutorial](https://uw-gac.github.io/SISG_2021/phenotype-harmonization.html))
-        - Discussion (video coming soon)
+        - Discussion ([video](https://drive.google.com/file/d/11BXy7qnhiCMETbWzJRHmFRRwKqYUJrFe/view?usp=sharing))
 
 **Thursday, July 22**
 
