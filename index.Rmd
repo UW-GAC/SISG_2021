@@ -81,7 +81,7 @@ NOTE: All times are Pacific Daylight Time (GMT-07:00)
     - **Lecture**
         - Population structure inference  ([slides](https://drive.google.com/file/d/1fQoaiKu_Ngpc-SzvchCGbaamRV_a1MoT/view?usp=sharing)) (video coming soon)
         - Relatedness inference  ([slides](https://drive.google.com/file/d/1kC_158wmq8vJyRc8eW_N3hJvbXq_1mdy/view?usp=sharing)) (video coming soon)
-        - R packages for ancestry and relatedness  ([slides](https://drive.google.com/file/d/1RMHcoe3lrK02tZ2Vy_B7XQEZChSlgpTh/view?usp=sharing)) (video coming soon)
+        - Ancestry and relatedness inference with GDS ([slides](https://drive.google.com/file/d/1RMHcoe3lrK02tZ2Vy_B7XQEZChSlgpTh/view?usp=sharing)) (video coming soon)
     - **Interactive breakout rooms**
         - Ancestry and relatedness inference ([Tutorial](https://uw-gac.github.io/SISG_2021/ancestry-and-relatedness-inference.html)) ([Exercises](https://uw-gac.github.io/SISG_2021/ancestry-and-relatedness-inference.html#exercises-1)) ([Solutions](https://uw-gac.github.io/SISG_2021/ancestry-and-relatedness-inference.html#solutions-1))
         - Discussion (video coming soon)
