@@ -1,0 +1,19 @@
+{
+  "Filters": {
+    "Filter_2": {
+      "col": ["CADD_phred"],
+      "annot_type": ["quant"],
+      "filter_type": [">"],
+      "filter_value": ["20"]
+    },
+    "Filter_3": {
+      "col": ["VEP_ensembl_Consequence"],
+      "annot_type": ["qual"],
+      "filter_type": ["contains"],
+      "filter_value": ["missense"]
+    }
+  },
+  "join_query_filter_conditions_by_AND": [true],
+  "selected_vals_annot": ["CHROM", "POS", "REF", "ALT", "VEP_ensembl_Gene_ID", "VEP_ensembl_Consequence", "CADD_phred"],
+  "selected_vals_chrom": ["ALL"]
+}

@@ -1,0 +1,13 @@
+{
+  "Filters": {
+    "Filter_1": {
+      "col": ["rs_dbSNP150"],
+      "annot_type": ["qual"],
+      "filter_type": ["exact_match"],
+      "filter_value": ["rs7606173"]
+    }
+  },
+  "join_query_filter_conditions_by_AND": [true],
+  "selected_vals_annot": ["CHROM", "POS", "REF", "ALT", "rs_dbSNP150", "VEP_ensembl_Gene_Name", "VEP_ensembl_Transcript_ID", "VEP_ensembl_Consequence", "CADD_phred", "MetaSVM_score", "Ensembl_Regulatory_Build_TFBS", "Ensembl_Regulatory_Build_feature_type", "ENCODE_Dnase_cells", "ENCODE_TFBS_score", "ENCODE_Dnase_score"],
+  "selected_vals_chrom": ["chr2"]
+}
