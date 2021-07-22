@@ -46,7 +46,7 @@ NOTE: All times are Pacific Daylight Time (GMT-07:00)
     - **Lecture**
         - Introduction ([slides](https://docs.google.com/presentation/d/1QMS6cSLso9eMl96P7A7OHmkDpN3g1qFyupQE7cOA4Fk/edit#slide=id.p)) ([recorded lecture](https://drive.google.com/file/d/1cJaxbXCvQyJumyvqWHHdErL2IfEZFiXI/view?usp=sharing))
         - Using BioData Catalyst for SISG exercises ([instructions](https://docs.google.com/document/d/1nLMjNRYffphWl89XVEPbH5NHLbUDW4SK7ikeEcHbixo/edit?usp=sharing)) ([recorded lecture](https://drive.google.com/file/d/16r0y9P5GfWLHxu9YZoqDeBDy76KWWSOb/view?usp=sharing))
-        - Sequencing data formats ([slides](https://drive.google.com/file/d/1w_dEobxo6kzloQlIuHW_lUnwkPCYK-RP/view?usp=sharing)) ([pre-recorded lecture](https://washington.zoom.us/rec/share/CQBVagbRwvPsP3qn605dQZQWK7oTccn9zdgW5eFGhytDjaF2Hy-ugYWp6xOpBqRo.cF1_c5gy-k5DAoMI?startTime=1626201510000))
+        - Sequencing data formats ([slides](https://drive.google.com/file/d/1w_dEobxo6kzloQlIuHW_lUnwkPCYK-RP/view?usp=sharing)) ([recorded lecture](https://washington.zoom.us/rec/share/CQBVagbRwvPsP3qn605dQZQWK7oTccn9zdgW5eFGhytDjaF2Hy-ugYWp6xOpBqRo.cF1_c5gy-k5DAoMI?startTime=1626201510000))
         - Intro to Genomic Data Structure  ([slides](https://drive.google.com/file/d/1_p6-peb89ppi54gsDEapRdHcRVaq3IAX/view?usp=sharing)) ([recorded lecture](https://drive.google.com/file/d/1s5s5cRSEH3tzWhQ_wk7U7ImPnaOxkhei/view?usp=sharing))
     - **Interactive breakout rooms**
         - GDS format ([Tutorial](https://uw-gac.github.io/SISG_2021/gds-format.html)) ([Exercise](https://uw-gac.github.io/SISG_2021/gds-format.html#exercises)) ([Solution](https://uw-gac.github.io/SISG_2021/gds-format.html#solutions))
@@ -54,23 +54,23 @@ NOTE: All times are Pacific Daylight Time (GMT-07:00)
         
 - **Zoom session 13:45-14:30 PDT** - Phenotype harmonization
     - **Lecture**
-        - Phenotype harmonization  ([slides](https://drive.google.com/file/d/10EKUJxTARdX52uMXcnOENBqDwhCcVwW2/view?usp=sharing)) ([pre-recorded lecture](https://washington.zoom.us/rec/play/HmXkJmH5RllYXyKHIl4wsk9V-kmmGsjJq_xpwyGxtlX556KRhKW5pzFhzmE5ldum9Smsnn_gM15jjDQb.vw8mOGoWcvvTjmtm?continueMode=true&_x_zm_rtaid=Xpghuu1BRGCPDP5pPcewUQ.1626824313252.0dc095a7ea0c036ff2c4222152db4f30&_x_zm_rhtaid=804))
+        - Phenotype harmonization  ([slides](https://drive.google.com/file/d/10EKUJxTARdX52uMXcnOENBqDwhCcVwW2/view?usp=sharing)) ([recorded lecture](https://washington.zoom.us/rec/play/HmXkJmH5RllYXyKHIl4wsk9V-kmmGsjJq_xpwyGxtlX556KRhKW5pzFhzmE5ldum9Smsnn_gM15jjDQb.vw8mOGoWcvvTjmtm?continueMode=true&_x_zm_rtaid=Xpghuu1BRGCPDP5pPcewUQ.1626824313252.0dc095a7ea0c036ff2c4222152db4f30&_x_zm_rhtaid=804))
     - **Interactive breakout rooms**
         - Harmonization in R ([Tutorial](https://uw-gac.github.io/SISG_2021/phenotype-harmonization.html))
         - Discussion ([video](https://drive.google.com/file/d/11BXy7qnhiCMETbWzJRHmFRRwKqYUJrFe/view?usp=sharing))
 
 **Thursday, July 22**
 
-- **Zoom session 8:00-9:45 PDT** - Association tests, Part I
+- **Zoom session 8:00-10:00 PDT** - Association tests, Part I
     - **Lecture**
-        - Association tests: Methods and motivation  ([slides](https://drive.google.com/file/d/1caziaZ_tp0Brg_Atq0keiImSWx_GujXL/view?usp=sharing)) (video coming soon)
+        - Association tests: Methods and motivation  ([slides](https://drive.google.com/file/d/1caziaZ_tp0Brg_Atq0keiImSWx_GujXL/view?usp=sharing)) (recorded lecture [part 1](https://washington.zoom.us/rec/play/IwlY1CuA6L36hgMIc2IJ0tc0Hr46DHV-yaUWiwHJ_g5zAqSSIb5Yzfx8BWf1ZyU3EDbVoqI1OMiyo3t0.EZX3Jljiq0Qu8y0H?startTime=1626905686000); [part 2](https://washington.zoom.us/rec/play/fvG0xqcfyH5-54wwhMNeQ2bJ80guxjCcKgNbNUcYtGXDqGOEMBRnk4Ba3ylIRqPbUidMte53f9xvqnwN.DmzuyJhRYHkKzdpo?startTime=1626928021000))
         - GENESIS for association tests  ([slides](https://drive.google.com/file/d/1LPGKgrhFb2Yzty-bTDsX9vlTxifsLcPl/view?usp=sharing)) (video coming soon)
     - **Interactive breakout rooms**
         - Null model ([Tutorial](https://uw-gac.github.io/SISG_2021/association-tests-part-i.html)) ([Exercise](https://uw-gac.github.io/SISG_2021/association-tests-part-i.html#exercise)) ([Solution](https://uw-gac.github.io/SISG_2021/association-tests-part-i.html#solution))
         - Single-variant association tests ([Tutorial](https://uw-gac.github.io/SISG_2021/association-tests-part-i.html#single-variant-association-tests)) ([Exercise](https://uw-gac.github.io/SISG_2021/association-tests-part-i.html#exercise-1)) ([Solution](https://uw-gac.github.io/SISG_2021/association-tests-part-i.html#solution-1))
         - Discussion (video coming soon)
         
-- **Zoom session 10:15-11:45 PDT** - Association tests, Part II
+- **Zoom session 10:30-11:45 PDT** - Association tests, Part II
     - **Lecture**
         - Multiple variant association tests ([slides](https://drive.google.com/file/d/1XRcn9_Q0akqQkgKAD8DO_Cg4Nlk990gx/view?usp=sharing)) (video coming soon)
     - **Interactive breakout rooms**
