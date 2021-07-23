@@ -15,7 +15,7 @@ knitr::opts_chunk$set(echo=TRUE, message=FALSE)
 
 # Introduction
 
-This site contains course materials for SISG Module 16: Computational Pipeline for WGS Data, July 21-23, 2021. The official SISG web page can be found [here](https://si.biostat.washington.edu/suminst/sisg2021/modules/SM2116) (requires login).
+This site contains course materials for SISG Module 16: Computational Pipeline for WGS Data, July 21-23, 2021. The official SISG web page can be found [here](https://si.biostat.washington.edu/suminst/sisg2021/modules/SM2116) (requires login) -- **course evaluations and certificates of completion are available via this page.**
 
 **Lectures**
 
