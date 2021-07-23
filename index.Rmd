@@ -105,7 +105,7 @@ NOTE: All times are Pacific Daylight Time (GMT-07:00)
         
 - **Zoom session 12:30-13:45 PDT** - Working in the cloud
     - **Lecture**
-        - Analysis pipelines on the cloud   ([slides]()) (video coming soon)
+        - Analysis pipelines on the cloud   ([slides](https://drive.google.com/file/d/1t3hSRNT8_QQWO_5Xi0mZbf957b_C38o_/view?usp=sharing)) (video coming soon)
         - Running a workflow on BioData Catalyst (video coming soon)
     - **Interactive breakout rooms**
         - Running a GWAS workflow ([Tutorial](https://uw-gac.github.io/SISG_2021/running-a-gwas-workflow-on-biodata-catalyst.html))
