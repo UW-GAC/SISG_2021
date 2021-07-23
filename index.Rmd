@@ -64,27 +64,27 @@ NOTE: All times are Pacific Daylight Time (GMT-07:00)
 - **Zoom session 8:00-10:00 PDT** - Association tests, Part I
     - **Lecture**
         - Association tests: Methods and motivation  ([slides](https://drive.google.com/file/d/1caziaZ_tp0Brg_Atq0keiImSWx_GujXL/view?usp=sharing)) ([recorded lecture](https://drive.google.com/file/d/1ifzoM7pPm46EmOG7MbJfOxsrP9UxBMQN/view?usp=sharing))
-        - GENESIS for association tests  ([slides](https://drive.google.com/file/d/1LPGKgrhFb2Yzty-bTDsX9vlTxifsLcPl/view?usp=sharing)) ([recorded lecture](https://drive.google.com/drive/folders/1D945MXhtw2SBHY9MoZSC3sTT-nMNnR_l))
+        - GENESIS for association tests  ([slides](https://drive.google.com/file/d/1LPGKgrhFb2Yzty-bTDsX9vlTxifsLcPl/view?usp=sharing)) ([recorded lecture](https://drive.google.com/file/d/18LzFw2WfV-LFmsCXM4g5fNTCJtldXhO7/view?usp=sharing))
     - **Interactive breakout rooms**
         - Null model ([Tutorial](https://uw-gac.github.io/SISG_2021/association-tests-part-i.html)) ([Exercise](https://uw-gac.github.io/SISG_2021/association-tests-part-i.html#exercise)) ([Solution](https://uw-gac.github.io/SISG_2021/association-tests-part-i.html#solution))
         - Single-variant association tests ([Tutorial](https://uw-gac.github.io/SISG_2021/association-tests-part-i.html#single-variant-association-tests)) ([Exercise](https://uw-gac.github.io/SISG_2021/association-tests-part-i.html#exercise-1)) ([Solution](https://uw-gac.github.io/SISG_2021/association-tests-part-i.html#solution-1))
-        - Discussion ([video](https://drive.google.com/drive/folders/1D945MXhtw2SBHY9MoZSC3sTT-nMNnR_l))
+        - Discussion ([video](https://drive.google.com/file/d/10036ypnPLM3wKcLSSSvWRCEW69rvJ8CQ/view?usp=sharing))
         
 - **Zoom session 10:30-11:45 PDT** - Association tests, Part II
     - **Lecture**
-        - Multiple variant association tests ([slides](https://drive.google.com/file/d/1XRcn9_Q0akqQkgKAD8DO_Cg4Nlk990gx/view?usp=sharing)) ([recorded lecture](https://drive.google.com/drive/folders/1D945MXhtw2SBHY9MoZSC3sTT-nMNnR_l))
+        - Multiple variant association tests ([slides](https://drive.google.com/file/d/1XRcn9_Q0akqQkgKAD8DO_Cg4Nlk990gx/view?usp=sharing)) ([recorded lecture](https://drive.google.com/file/d/1f2mziHg6bLz7xcPmVrYizpxndr2yCxrv/view?usp=sharing))
     - **Interactive breakout rooms**
         - Sliding window tests ([Tutorial](https://uw-gac.github.io/SISG_2021/association-tests-part-ii.html)) ([Exercise](https://uw-gac.github.io/SISG_2021/association-tests-part-ii.html#exercise-2)) ([Solution](https://uw-gac.github.io/SISG_2021/association-tests-part-ii.html#solution-2))
-        - Discussion ([video](https://drive.google.com/drive/folders/1D945MXhtw2SBHY9MoZSC3sTT-nMNnR_l))
+        - Discussion ([video](https://drive.google.com/file/d/1_QRZkeOYiVMEI4HSUXFf-pjI04LodpEx/view?usp=sharing))
         
 - **Zoom session 12:45-14:30 PDT** - Population Structure and Relatedness
     - **Lecture**
-        - Population structure inference  ([slides](https://drive.google.com/file/d/1fQoaiKu_Ngpc-SzvchCGbaamRV_a1MoT/view?usp=sharing)) ([recorded lecture](https://drive.google.com/drive/folders/1D945MXhtw2SBHY9MoZSC3sTT-nMNnR_l))
-        - Relatedness inference  ([slides](https://drive.google.com/file/d/1kC_158wmq8vJyRc8eW_N3hJvbXq_1mdy/view?usp=sharing)) ([recorded lecture](https://drive.google.com/drive/folders/1D945MXhtw2SBHY9MoZSC3sTT-nMNnR_l))
-        - Ancestry and relatedness inference with GDS ([slides](https://drive.google.com/file/d/1RMHcoe3lrK02tZ2Vy_B7XQEZChSlgpTh/view?usp=sharing)) ([recorded lecture](https://drive.google.com/drive/folders/1D945MXhtw2SBHY9MoZSC3sTT-nMNnR_l))
+        - Population structure inference  ([slides](https://drive.google.com/file/d/1fQoaiKu_Ngpc-SzvchCGbaamRV_a1MoT/view?usp=sharing)) ([recorded lecture](https://drive.google.com/file/d/1B4QPFYCJEyRPUXoEIKkjDbeI0qYlrYZ5/view?usp=sharing))
+        - Relatedness inference  ([slides](https://drive.google.com/file/d/1kC_158wmq8vJyRc8eW_N3hJvbXq_1mdy/view?usp=sharing)) ([recorded lecture](https://drive.google.com/file/d/1uZWhJJDXeq4cs9CiouZAo6mrWsUnm3F0/view?usp=sharing))
+        - Ancestry and relatedness inference with GDS ([slides](https://drive.google.com/file/d/1RMHcoe3lrK02tZ2Vy_B7XQEZChSlgpTh/view?usp=sharing)) ([recorded lecture](https://drive.google.com/file/d/1ktGAzzBwFyD3tOmfA1R8iBthFza3nJOl/view?usp=sharing))
     - **Interactive breakout rooms**
         - Ancestry and relatedness inference ([Tutorial](https://uw-gac.github.io/SISG_2021/ancestry-and-relatedness-inference.html)) ([Exercises](https://uw-gac.github.io/SISG_2021/ancestry-and-relatedness-inference.html#exercises-1)) ([Solutions](https://uw-gac.github.io/SISG_2021/ancestry-and-relatedness-inference.html#solutions-1))
-        - Discussion ([video](https://drive.google.com/drive/folders/1D945MXhtw2SBHY9MoZSC3sTT-nMNnR_l))
+        - Discussion ([video](https://drive.google.com/file/d/1hCki6AGCcU43Rc-nyKUS6PvI7rbTkKHM/view?usp=sharing))
 
 **Friday, July 23**
 
