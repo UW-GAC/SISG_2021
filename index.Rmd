@@ -90,29 +90,29 @@ NOTE: All times are Pacific Daylight Time (GMT-07:00)
 
 - **Zoom session 8:00-9:30 PDT** - Mixed models
     - **Lecture**
-        - Mixed model association testing  ([slides](https://drive.google.com/file/d/13s5sYnol3hbpCEj6wB-98JjOpS2CmHCn/view?usp=sharing)) (video coming soon)
+        - Mixed model association testing  ([slides](https://drive.google.com/file/d/13s5sYnol3hbpCEj6wB-98JjOpS2CmHCn/view?usp=sharing)) ([recorded lecture](https://drive.google.com/file/d/1ukI9Y8_trfdk_NuUjGNcjpIjX2sOlqr4/view?usp=sharing))
     - **Interactive breakout rooms**
         - Mixed models in R ([Tutorial](https://uw-gac.github.io/SISG_2021/mixed-models.html)) ([Exercise](https://uw-gac.github.io/SISG_2021/mixed-models.html#exercise-3)) ([Solution](https://uw-gac.github.io/SISG_2021/mixed-models.html#solution-3))
-        - Discussion (video coming soon)
+        - Discussion ([video](https://drive.google.com/file/d/12cetH1FUjoTPF0e84-P3FBJrYU4EE1cq/view?usp=sharing))
         
 - **Zoom session 9:45-11:30 PDT** - Variant annotation
     - **Lecture**
-        - Variant annotation ([slides](https://drive.google.com/file/d/1tpIKgTjrZGusiy5oAQaVKi7p09rXPuwY/view)) (video coming soon)
+        - Variant annotation ([slides](https://drive.google.com/file/d/1tpIKgTjrZGusiy5oAQaVKi7p09rXPuwY/view)) ([recorded lecture](https://drive.google.com/file/d/1kecws4cMs8zEdbmzLV3YLSSi8JjHcUhG/view?usp=sharing))
         - Annotation Explorer demo ([video tutorial](https://washington.zoom.us/rec/play/SCBsJ-0t_ZSyam_TTw200McNf1iYL7lNO4pfo5rhHUBM5gkBKJR84G8MpZFubwVaNt-vUHPb9R9LsBe6.uyfMNKweYVrbTGZ_?startTime=1626925096000&_x_zm_rtaid=o0uIJf_zTdK4ieudj_bw8g.1626990248022.746dad5d00053aebfb9a23bfb0c6b258&_x_zm_rhtaid=497)) ([text tutorial](https://docs.google.com/document/d/1_yXemTTYnBzL6Dv4fngojE0T5CAH3Z-CSxj1X5Qq8kI/edit)) ([Exercise](https://uw-gac.github.io/SISG_2021/variant-annotation.html)) ([Solution](https://uw-gac.github.io/SISG_2021/variant-annotation.html#solution-4))
     - **Interactive breakout rooms**
         - Association testing using variant annotation ([Tutorial](https://uw-gac.github.io/SISG_2021/annotation-informed-aggregate-association-tests.html)) ([Exercise](https://uw-gac.github.io/SISG_2021/annotation-informed-aggregate-association-tests.html#exercise-5)) ([Solution](https://uw-gac.github.io/SISG_2021/annotation-informed-aggregate-association-tests.html#solution-5))
-        - Discussion (video coming soon)
+        - Discussion ([video](https://drive.google.com/file/d/1Bq12_xhUxTzTLhDcqcRXmu65IcCWRjql/view?usp=sharing))
         
 - **Zoom session 12:30-13:45 PDT** - Working in the cloud
     - **Lecture**
-        - Analysis pipelines on the cloud   ([slides](https://drive.google.com/file/d/1t3hSRNT8_QQWO_5Xi0mZbf957b_C38o_/view?usp=sharing)) (video coming soon)
-        - Running a workflow on BioData Catalyst (video coming soon)
+        - Analysis pipelines on the cloud   ([slides](https://drive.google.com/file/d/1t3hSRNT8_QQWO_5Xi0mZbf957b_C38o_/view?usp=sharing)) ([recorded lecture](https://drive.google.com/file/d/1-hdKVLYcgKEPkJ_9cB7J6sJ45xub8Uph/view?usp=sharing))
+        - Running a workflow on BioData Catalyst ([recorded demo](https://drive.google.com/file/d/15_Bq3Mqe6cUXqX_tGlF46rGV74vJPa46/view?usp=sharing))
     - **Interactive breakout rooms**
         - Running a GWAS workflow ([Tutorial](https://uw-gac.github.io/SISG_2021/running-a-gwas-workflow-on-biodata-catalyst.html))
-        - Discussion (video coming soon)
+        - Discussion ([video](https://drive.google.com/file/d/10qsJJQA5JFfsAX2ixgwbTdJuyVaQQas7/view?usp=sharing))
         
 - **Zoom session 14:00-14:30 PDT** - Open session for questions/advice
-    - Discussion (video coming soon)
+    - Discussion ([video](https://drive.google.com/file/d/1VzvnNovGRWnFsizzwsdf1Nbi4w7Q5xON/view?usp=sharing))
 
 
 ## R packages used
