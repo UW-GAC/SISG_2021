@@ -46,7 +46,7 @@ NOTE: All times are Pacific Daylight Time (GMT-07:00)
     - **Lecture**
         - Introduction ([slides](https://docs.google.com/presentation/d/1QMS6cSLso9eMl96P7A7OHmkDpN3g1qFyupQE7cOA4Fk/edit#slide=id.p)) ([recorded lecture](https://drive.google.com/file/d/1cJaxbXCvQyJumyvqWHHdErL2IfEZFiXI/view?usp=sharing))
         - Using BioData Catalyst for SISG exercises ([instructions](https://docs.google.com/document/d/1nLMjNRYffphWl89XVEPbH5NHLbUDW4SK7ikeEcHbixo/edit?usp=sharing)) ([recorded lecture](https://drive.google.com/file/d/16r0y9P5GfWLHxu9YZoqDeBDy76KWWSOb/view?usp=sharing))
-        - Sequencing data formats ([slides](https://drive.google.com/file/d/1w_dEobxo6kzloQlIuHW_lUnwkPCYK-RP/view?usp=sharing)) ([recorded lecture](https://washington.zoom.us/rec/share/CQBVagbRwvPsP3qn605dQZQWK7oTccn9zdgW5eFGhytDjaF2Hy-ugYWp6xOpBqRo.cF1_c5gy-k5DAoMI?startTime=1626201510000))
+        - Sequencing data formats ([slides](https://drive.google.com/file/d/1w_dEobxo6kzloQlIuHW_lUnwkPCYK-RP/view?usp=sharing)) ([recorded lecture](https://drive.google.com/file/d/1c7bvNRCI7lr1VtYBoYJOoo2vDpWVUoG7/view?usp=sharing))
         - Intro to Genomic Data Structure  ([slides](https://drive.google.com/file/d/1_p6-peb89ppi54gsDEapRdHcRVaq3IAX/view?usp=sharing)) ([recorded lecture](https://drive.google.com/file/d/1s5s5cRSEH3tzWhQ_wk7U7ImPnaOxkhei/view?usp=sharing))
     - **Interactive breakout rooms**
         - GDS format ([Tutorial](https://uw-gac.github.io/SISG_2021/gds-format.html)) ([Exercise](https://uw-gac.github.io/SISG_2021/gds-format.html#exercises)) ([Solution](https://uw-gac.github.io/SISG_2021/gds-format.html#solutions))
@@ -54,7 +54,7 @@ NOTE: All times are Pacific Daylight Time (GMT-07:00)
         
 - **Zoom session 13:45-14:30 PDT** - Phenotype harmonization
     - **Lecture**
-        - Phenotype harmonization  ([slides](https://drive.google.com/file/d/10EKUJxTARdX52uMXcnOENBqDwhCcVwW2/view?usp=sharing)) ([recorded lecture](https://washington.zoom.us/rec/play/HmXkJmH5RllYXyKHIl4wsk9V-kmmGsjJq_xpwyGxtlX556KRhKW5pzFhzmE5ldum9Smsnn_gM15jjDQb.vw8mOGoWcvvTjmtm?continueMode=true&_x_zm_rtaid=Xpghuu1BRGCPDP5pPcewUQ.1626824313252.0dc095a7ea0c036ff2c4222152db4f30&_x_zm_rhtaid=804))
+        - Phenotype harmonization  ([slides](https://drive.google.com/file/d/10EKUJxTARdX52uMXcnOENBqDwhCcVwW2/view?usp=sharing)) ([recorded lecture](https://drive.google.com/file/d/1aW6YE0MeIHVL2GEvpil9ANB-l-kApg9r/view?usp=sharing))
     - **Interactive breakout rooms**
         - Harmonization in R ([Tutorial](https://uw-gac.github.io/SISG_2021/phenotype-harmonization.html))
         - Discussion ([video](https://drive.google.com/file/d/11BXy7qnhiCMETbWzJRHmFRRwKqYUJrFe/view?usp=sharing))
@@ -98,7 +98,7 @@ NOTE: All times are Pacific Daylight Time (GMT-07:00)
 - **Zoom session 9:45-11:30 PDT** - Variant annotation
     - **Lecture**
         - Variant annotation ([slides](https://drive.google.com/file/d/1tpIKgTjrZGusiy5oAQaVKi7p09rXPuwY/view)) ([recorded lecture](https://drive.google.com/file/d/1kecws4cMs8zEdbmzLV3YLSSi8JjHcUhG/view?usp=sharing))
-        - Annotation Explorer demo ([video tutorial](https://washington.zoom.us/rec/play/SCBsJ-0t_ZSyam_TTw200McNf1iYL7lNO4pfo5rhHUBM5gkBKJR84G8MpZFubwVaNt-vUHPb9R9LsBe6.uyfMNKweYVrbTGZ_?startTime=1626925096000&_x_zm_rtaid=o0uIJf_zTdK4ieudj_bw8g.1626990248022.746dad5d00053aebfb9a23bfb0c6b258&_x_zm_rhtaid=497)) ([text tutorial](https://docs.google.com/document/d/1_yXemTTYnBzL6Dv4fngojE0T5CAH3Z-CSxj1X5Qq8kI/edit)) ([Exercise](https://uw-gac.github.io/SISG_2021/variant-annotation.html)) ([Solution](https://uw-gac.github.io/SISG_2021/variant-annotation.html#solution-4))
+        - Annotation Explorer demo ([video tutorial](https://drive.google.com/file/d/1rq4gulALZ8IAjpV2hMzEoE0IK3-7ko9P/view?usp=sharing)) ([text tutorial](https://docs.google.com/document/d/1_yXemTTYnBzL6Dv4fngojE0T5CAH3Z-CSxj1X5Qq8kI/edit)) ([Exercise](https://uw-gac.github.io/SISG_2021/variant-annotation.html)) ([Solution](https://uw-gac.github.io/SISG_2021/variant-annotation.html#solution-4))
     - **Interactive breakout rooms**
         - Association testing using variant annotation ([Tutorial](https://uw-gac.github.io/SISG_2021/annotation-informed-aggregate-association-tests.html)) ([Exercise](https://uw-gac.github.io/SISG_2021/annotation-informed-aggregate-association-tests.html#exercise-5)) ([Solution](https://uw-gac.github.io/SISG_2021/annotation-informed-aggregate-association-tests.html#solution-5))
         - Discussion ([video](https://drive.google.com/file/d/1Bq12_xhUxTzTLhDcqcRXmu65IcCWRjql/view?usp=sharing))
